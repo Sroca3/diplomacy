@@ -52,7 +52,7 @@ public class Diplomacy {
     }
 
     public void beginFirstPhase() {
-        currentPhase = new Phase(unitLocations, mapVariant, mapVariant.getMovementGraph());
+        currentPhase = new Phase(unitLocations, mapVariant, mapVariant.getMovementGraph(), getNextPhaseName());
     }
 
     public void addOrders(Set<Order> orders) {
@@ -73,6 +73,24 @@ public class Diplomacy {
     public void adjudicate() {
         currentPhase.resolve();
         previousPhase = currentPhase;
+        if (previousPhase.getPhaseName() == PhaseName.WINTER) {
+            gameYearCounter += 1;
+        }
+        currentPhase = new Phase(unitLocations, mapVariant, mapVariant.getMovementGraph(), getNextPhaseName());
+    }
+
+    private PhaseName getNextPhaseName() {
+        if (currentPhase != null) {
+            PhaseName phaseName = currentPhase.getPhaseName();
+            if (phaseName == PhaseName.SPRING) {
+                return PhaseName.FALL;
+            } else if (phaseName == PhaseName.FALL) {
+                return PhaseName.WINTER;
+            } else if (phaseName == PhaseName.WINTER) {
+                return PhaseName.SPRING;
+            }
+        }
+        return PhaseName.SPRING;
     }
 
     public Phase getPreviousPhase() {
@@ -158,6 +176,6 @@ public class Diplomacy {
     }
 
     public String getPhaseName() {
-        return "Spring";
+        return currentPhase.getPhaseName().name();
     }
 }

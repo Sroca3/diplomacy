@@ -24,16 +24,18 @@ public class SouthAmericanSupremacyTest {
         diplomacy.beginFirstPhase();
         diplomacy.addOrder(diplomacy.parseOrder("F Salvador move Bahia de Todos os Santos"));
         diplomacy.adjudicate();
+        assertEquals(PhaseName.FALL.toString(), diplomacy.getPhaseName());
     }
 
     @Test
     public void gameInformation() {
         Diplomacy diplomacy = new Diplomacy(SouthAmericanSupremacyMapVariant.getInstance());
         diplomacy.addStandardStartingUnits();
+        diplomacy.beginFirstPhase();
         assertEquals(2L, diplomacy.getSupplyCenterCount(Country.VENEZUELA));
         assertEquals(4L, diplomacy.getSupplyCenterCount(Country.BRASIL));
         assertEquals(2L, diplomacy.getUnitCount(Country.VENEZUELA));
         assertEquals(1835L, diplomacy.getYear());
-        assertEquals("Spring", diplomacy.getPhaseName());
+        assertEquals("SPRING", diplomacy.getPhaseName());
     }
 }

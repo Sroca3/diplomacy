@@ -19,6 +19,7 @@ public class Phase {
     private final Map<Location, Set<Location>> adjacencies;
     private final MapVariant mapVariant;
     private List<Order> orders = new LinkedList<>();
+    private PhaseName phaseName;
 
     public Phase(
         Map<Location, Unit> startingUnitLocations,
@@ -29,6 +30,19 @@ public class Phase {
         this.resultingUnitLocations = new HashMap<>(startingUnitLocations);
         this.adjacencies = adjacencies;
         this.mapVariant = mapVariant;
+    }
+
+    public Phase(
+        Map<Location, Unit> startingUnitLocations,
+        MapVariant mapVariant,
+        Map<Location, Set<Location>> adjacencies,
+        PhaseName phaseName
+    ) {
+        this.startingUnitLocations = Map.copyOf(startingUnitLocations);
+        this.resultingUnitLocations = new HashMap<>(startingUnitLocations);
+        this.adjacencies = adjacencies;
+        this.mapVariant = mapVariant;
+        this.phaseName = phaseName;
     }
 
     public void addOrder(
@@ -268,5 +282,9 @@ public class Phase {
 
     public List<Order> getOrdersByCountry(Country country) {
         return orders.stream().filter(order -> order.getCountry() == country).collect(Collectors.toList());
+    }
+
+    public PhaseName getPhaseName() {
+        return this.phaseName;
     }
 }
