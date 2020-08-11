@@ -7,6 +7,7 @@ import io.github.sroca3.diplomacy.maps.TestMapVariant;
 import io.github.sroca3.diplomacy.maps.TestVariantLocation;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -115,7 +116,7 @@ public class DiplomacyTest {
             FRENCH_ARMY,
             TestVariantLocation.B
         );
-        game.addOrders(Set.of(o1,o2,o3));
+        game.addOrders(List.of(o1,o2,o3));
         game.adjudicate();
         Phase phase = game.getPreviousPhase();
         assertTrue(phase.getOrderById(o1.getId()).getStatus().isResolved());
@@ -151,7 +152,7 @@ public class DiplomacyTest {
             TestVariantLocation.B,
             TestVariantLocation.A
         );
-        game.addOrders(Set.of(o1,o2,o3));
+        game.addOrders(List.of(o1,o2,o3));
         game.adjudicate();
         Phase phase = game.getPreviousPhase();
         assertTrue(phase.getOrderById(o1.getId()).getStatus().isResolved());
@@ -195,7 +196,7 @@ public class DiplomacyTest {
             TestVariantLocation.B,
             TestVariantLocation.A
         );
-        game.addOrders(Set.of(o1,o2,o3, o4));
+        game.addOrders(List.of(o1,o2,o3, o4));
         game.adjudicate();
         Phase phase = game.getPreviousPhase();
         assertTrue(phase.getOrderById(o1.getId()).getStatus().isBounced());
@@ -232,7 +233,7 @@ public class DiplomacyTest {
             TestVariantLocation.B,
             TestVariantLocation.C
         );
-        game.addOrders(Set.of(o1,o2,o3));
+        game.addOrders(List.of(o1,o2,o3));
         game.adjudicate();
         Phase phase = game.getPreviousPhase();
         assertTrue(phase.getOrderById(o1.getId()).getStatus().isResolved());
@@ -276,7 +277,7 @@ public class DiplomacyTest {
             TestVariantLocation.D,
             TestVariantLocation.A
         );
-        game.addOrders(Set.of(o1,o2,o3, o4));
+        game.addOrders(List.of(o1,o2,o3, o4));
         game.adjudicate();
         Phase phase = game.getPreviousPhase();
         assertTrue(phase.getOrderById(o1.getId()).getStatus().isCut());
@@ -313,7 +314,7 @@ public class DiplomacyTest {
             TestVariantLocation.B,
             TestVariantLocation.A
         );
-        game.addOrders(Set.of(o1,o2,o3));
+        game.addOrders(List.of(o1,o2,o3));
         game.adjudicate();
         Phase phase = game.getPreviousPhase();
         assertTrue(phase.getOrderById(o1.getId()).getStatus().isResolved());

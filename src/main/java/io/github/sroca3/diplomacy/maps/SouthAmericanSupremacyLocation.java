@@ -19,7 +19,7 @@ public enum SouthAmericanSupremacyLocation implements Location {
     ARAUNCANIAN(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Ara"),
     AREQUIPA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Are"),
     ARICA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Ari"),
-    ASUNCION(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Asu"),
+    ASUNCION(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Asu", true),
     ATACAMA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Ata"),
     ATLANTIC_OCEAN(new UnitType[]{UnitType.FLEET}, "AtO"),
     BARINAS(new UnitType[]{UnitType.ARMY}, "Bar"),
@@ -39,10 +39,10 @@ public enum SouthAmericanSupremacyLocation implements Location {
     CARTAGENA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Car"),
     CARACAS(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Crc"),
     CHACO(new UnitType[]{UnitType.ARMY}, "Cha"),
-    CONCEPCION(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Con"),
+    CONCEPCION(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Con", true),
     COPIAGO(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Cop"),
     CORDOBA(new UnitType[]{UnitType.ARMY}, "Cor"),
-    CORRIENTES(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Crt"),
+    CORRIENTES(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Crt", true),
     CUMANA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Cum"),
     CUSCO(new UnitType[]{UnitType.ARMY}, "Cus"),
     DUTCH_GUYANA(new UnitType[]{}, "DGu"),
@@ -164,7 +164,7 @@ public enum SouthAmericanSupremacyLocation implements Location {
 
     @Override
     public boolean isSupplyCenter() {
-        return false;
+        return isSupplyCenter;
     }
 
     public String getShortName() {

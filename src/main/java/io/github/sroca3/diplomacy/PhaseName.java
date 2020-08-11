@@ -1,7 +1,9 @@
 package io.github.sroca3.diplomacy;
 
 public enum PhaseName {
-    SPRING,
-    FALL,
-    WINTER
+    SPRING_ORDERS,
+    SPRING_RETREAT,
+    FALL_ORDERS,
+    FALL_RETREAT,
+    WINTER_BUILD
 }

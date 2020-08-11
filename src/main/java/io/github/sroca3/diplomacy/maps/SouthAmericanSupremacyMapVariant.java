@@ -533,13 +533,6 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         graph.get(two).add(one);
     }
 
-    private void addEdge(Location one, Location two) {
-        graph.putIfAbsent(one, new HashSet<>());
-        graph.putIfAbsent(two, new HashSet<>());
-        graph.get(one).add(two);
-        graph.get(two).add(one);
-    }
-
     @Override
     public SortedSet<Country> getCountries() {
         return new TreeSet<>(Set.of(

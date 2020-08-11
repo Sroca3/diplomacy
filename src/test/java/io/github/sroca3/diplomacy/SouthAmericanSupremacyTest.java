@@ -4,11 +4,6 @@ import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyLocation;
 import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyMapVariant;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SouthAmericanSupremacyTest {
@@ -24,7 +19,7 @@ public class SouthAmericanSupremacyTest {
         diplomacy.beginFirstPhase();
         diplomacy.addOrder(diplomacy.parseOrder("F Salvador move Bahia de Todos os Santos"));
         diplomacy.adjudicate();
-        assertEquals(PhaseName.FALL.toString(), diplomacy.getPhaseName());
+        assertEquals(PhaseName.FALL_ORDERS.toString(), diplomacy.getPhaseName());
     }
 
     @Test
@@ -37,5 +32,17 @@ public class SouthAmericanSupremacyTest {
         assertEquals(2L, diplomacy.getUnitCount(Country.VENEZUELA));
         assertEquals(1835L, diplomacy.getYear());
         assertEquals("SPRING", diplomacy.getPhaseName());
+    }
+
+    @Test
+    public void conquerNewTerritories() {
+        Diplomacy diplomacy = new Diplomacy(SouthAmericanSupremacyMapVariant.getInstance());
+        diplomacy.addStandardStartingUnits();
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrder(diplomacy.parseOrder("A Asuncion MOVE Corrientes"));
+        diplomacy.adjudicate();
+        assertEquals(2L, diplomacy.getSupplyCenterCount(Country.PARAGUAY));
+        diplomacy.adjudicate();
+        assertEquals(3L, diplomacy.getSupplyCenterCount(Country.PARAGUAY));
     }
 }

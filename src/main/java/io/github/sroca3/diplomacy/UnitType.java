@@ -11,6 +11,13 @@ public enum UnitType {
         if (Objects.equals(name.toLowerCase(Locale.ENGLISH), ARMY.name().toLowerCase(Locale.ENGLISH)) || name.equalsIgnoreCase("A")) {
             return ARMY;
         }
-        return FLEET;
+        if (Objects.equals(name.toLowerCase(Locale.ENGLISH), FLEET.name().toLowerCase(Locale.ENGLISH)) || name.equalsIgnoreCase("F")) {
+            return FLEET;
+        }
+        return null;
+    }
+
+    public boolean isFleet() {
+        return this == FLEET;
     }
 }

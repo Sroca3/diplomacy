@@ -45,6 +45,10 @@ public class Phase {
         this.phaseName = phaseName;
     }
 
+    public Map<Location, Unit> getResultingUnitLocations() {
+        return resultingUnitLocations;
+    }
+
     public void addOrder(
         Order order
     ) {
@@ -52,7 +56,7 @@ public class Phase {
     }
 
     private Order resolveOrder(Order order) {
-        if (!isOrderForAdjacentLocations(order)) {
+        if (!isOrderForAdjacentLocations(order) && !isConvoyPresent(order)) {
             order.convertIllegalMoveToHold();
         }
         if (order.getStatus().isUnresolved()) {
@@ -67,9 +71,30 @@ public class Phase {
                 case SUPPORT:
                     resolveSupportOrder(order);
                     break;
+                case CONVOY:
+                    resolveConvoyOrder(order);
+                    break;
             }
         }
+
+        if (order.getOrderType().isMove() && order.getStatus().isResolved()) {
+            resultingUnitLocations.remove(order.getCurrentLocation());
+            resultingUnitLocations.put(order.getToLocation(), order.getUnit());
+        }
+
         return order;
+    }
+
+    private void resolveConvoyOrder(Order order) {
+        if (order.getFromLocation().equals(order.getToLocation())) {
+            order.convertIllegalMoveToHold();
+        }
+//        else {
+//            findBy(OrderType.MOVE, order.getToLocation())
+//                .ifPresent(o -> {
+//                    order.resolve();
+//                });
+//        }
     }
 
     private Optional<Order> findBy(OrderType orderType, Location toLocation) {
@@ -93,10 +118,16 @@ public class Phase {
         if (findBy(OrderType.MOVE, order.getCurrentLocation()).isEmpty()) {
             findBy(OrderType.MOVE, order.getFromLocation(), order.getToLocation())
                 .ifPresent(o -> {
-                        o.addSupport();
-                        order.resolve();
+                        if (o.getStatus().isIllegal()) {
+                            order.failed();
+                        } else {
+                            o.addSupport();
+                            order.resolve();
+                        }
                     }
                 );
+        } else if (isDislodged(order)) {
+            order.dislodge();
         } else {
             order.cut();
         }
@@ -111,7 +142,9 @@ public class Phase {
     }
 
     private void resolveMoveOrder(Order order) {
-        if (isDestinationLocationOccupied(order.getToLocation())) {
+        if (order.getFromLocation().equals(order.getToLocation())) {
+            order.convertIllegalMoveToHold();
+        } else if (isDestinationLocationOccupied(order.getToLocation())) {
             calculateStrengthForOrder(order);
             Optional<Order> conflictingOrder = getConflictingOrder(order);
             if (
@@ -135,8 +168,6 @@ public class Phase {
             order.dislodge();
         } else {
             order.resolve();
-            resultingUnitLocations.remove(order.getCurrentLocation());
-            resultingUnitLocations.put(order.getToLocation(), order.getUnit());
         }
     }
 
@@ -161,6 +192,9 @@ public class Phase {
     }
 
     private boolean isConvoyPresent(Order order) {
+        if (order.getUnit().getType().isFleet()) {
+            return false;
+        }
         List<Order> convoyOrders = orders
             .stream()
             .filter(o -> o.getOrderType().isConvoy())
@@ -238,13 +272,22 @@ public class Phase {
     }
 
     private boolean isOrderForAdjacentLocations(Order order) {
-        return adjacent(order.getCurrentLocation(), order.getFromLocation()) &&
-            adjacent(order.getCurrentLocation(), order.getToLocation()) &&
+
+        return adjacent(
+            mapVariant.getMovementGraph(order.getUnit().getType()),
+            order.getCurrentLocation(),
+            order.getFromLocation()
+        ) &&
+            adjacent(
+                mapVariant.getMovementGraph(order.getUnit().getType()),
+                order.getCurrentLocation(),
+                order.getToLocation()
+            ) &&
             order.getToLocation().supports(order.getUnit());
     }
 
-    private boolean adjacent(Location a, Location b) {
-        return adjacencies.get(a).contains(b);
+    private boolean adjacent(Map<Location, Set<Location>> adjacencies, Location a, Location b) {
+        return adjacencies.get(a) != null && adjacencies.get(a).contains(b);
     }
 
     private Order calculateStrengthForOrder(Order order) {
@@ -263,7 +306,6 @@ public class Phase {
     }
 
     public void resolve() {
-
         Map<Location, Order> locationToOrderMap = orders
             .stream()
             .collect(Collectors.toMap(Order::getCurrentLocation, Function.identity()));

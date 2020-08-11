@@ -2,9 +2,13 @@ package io.github.sroca3.diplomacy;
 
 import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyLocation;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -55,7 +59,7 @@ public class Diplomacy {
         currentPhase = new Phase(unitLocations, mapVariant, mapVariant.getMovementGraph(), getNextPhaseName());
     }
 
-    public void addOrders(Set<Order> orders) {
+    public void addOrders(List<Order> orders) {
         orders.forEach(this::addOrder);
     }
 
@@ -72,25 +76,38 @@ public class Diplomacy {
 
     public void adjudicate() {
         currentPhase.resolve();
+        PhaseName nextPhaseName = getNextPhaseName();
+        currentPhase.getResultingUnitLocations().forEach(((location, unit) -> {
+            if (nextPhaseName == PhaseName.FALL_ORDERS && !location.isSupplyCenter()) {
+                locationOwnership.put(location, unit.getCountry());
+            } else if (nextPhaseName == PhaseName.WINTER_BUILD) {
+                locationOwnership.put(location, unit.getCountry());
+            }
+        }));
         previousPhase = currentPhase;
-        if (previousPhase.getPhaseName() == PhaseName.WINTER) {
+        if (previousPhase.getPhaseName() == PhaseName.WINTER_BUILD) {
             gameYearCounter += 1;
         }
-        currentPhase = new Phase(unitLocations, mapVariant, mapVariant.getMovementGraph(), getNextPhaseName());
+        currentPhase = new Phase(
+            currentPhase.getResultingUnitLocations(),
+            mapVariant,
+            mapVariant.getMovementGraph(),
+            nextPhaseName
+        );
     }
 
     private PhaseName getNextPhaseName() {
         if (currentPhase != null) {
             PhaseName phaseName = currentPhase.getPhaseName();
-            if (phaseName == PhaseName.SPRING) {
-                return PhaseName.FALL;
-            } else if (phaseName == PhaseName.FALL) {
-                return PhaseName.WINTER;
-            } else if (phaseName == PhaseName.WINTER) {
-                return PhaseName.SPRING;
+            if (phaseName == PhaseName.SPRING_ORDERS) {
+                return PhaseName.FALL_ORDERS;
+            } else if (phaseName == PhaseName.FALL_ORDERS) {
+                return PhaseName.WINTER_BUILD;
+            } else if (phaseName == PhaseName.WINTER_BUILD) {
+                return PhaseName.SPRING_ORDERS;
             }
         }
-        return PhaseName.SPRING;
+        return PhaseName.SPRING_ORDERS;
     }
 
     public Phase getPreviousPhase() {
@@ -106,6 +123,10 @@ public class Diplomacy {
             } else {
                 locationString = String.join("_", locationString, iterator.next().toUpperCase());
             }
+
+            if ("-".equals(locationString) || UnitType.from(locationString) != null) {
+                locationString = null;
+            }
             location = mapVariant.parseLocation(locationString);
         }
         return location;
@@ -116,12 +137,16 @@ public class Diplomacy {
         Iterator<String> iterator = parts.iterator();
         UnitType unitType = UnitType.from(iterator.next());
         Location currentLocation = getLocation(iterator);
-        OrderType orderType = OrderType.valueOf(iterator.next().toUpperCase(Locale.ENGLISH));
+        String orderTypeString = iterator.next().toUpperCase(Locale.ENGLISH);
+        OrderType orderType = OrderType.from(orderTypeString);
         Location fromLocation;
         Location toLocation;
         if (orderType.isSupport() || orderType.isConvoy()) {
             fromLocation = getLocation(iterator);
             toLocation = getLocation(iterator);
+            if (orderType.isSupport() && toLocation == null) {
+                toLocation = fromLocation;
+            }
         } else {
             fromLocation = currentLocation;
             toLocation = getLocation(iterator);
@@ -131,6 +156,19 @@ public class Diplomacy {
             throw new IllegalArgumentException();
         }
         return new Order(unit, currentLocation, orderType, fromLocation, toLocation);
+    }
+
+    public List<Order> parseOrders(String filename) throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(filename));
+        List<Order> orders = new LinkedList<>();
+        lines.forEach(line -> {
+            try {
+                orders.add(this.parseOrder(line));
+            } catch (Exception e) {
+                System.out.println("Skipping line: " + line);
+            }
+        });
+        return orders;
     }
 
     public void addStandardStartingUnits() {
@@ -164,7 +202,11 @@ public class Diplomacy {
     }
 
     public long getSupplyCenterCount(Country country) {
-        return locationOwnership.entrySet().stream().filter(entry -> entry.getValue().equals(country)).count();
+        return locationOwnership.entrySet()
+                                .stream()
+                                .filter(entry -> entry.getValue().equals(country))
+                                .filter(entry -> entry.getKey().isSupplyCenter())
+                                .count();
     }
 
     public long getUnitCount(Country country) {
