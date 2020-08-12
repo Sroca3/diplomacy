@@ -190,4 +190,66 @@ public class StandardVariantTest {
         List<Order> germanOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.GERMANY);
         assertEquals(OrderStatus.BOUNCED, germanOrders.get(0).getStatus());
     }
+
+    @Test
+    @DisplayName("MOVING WITH UNSPECIFIED COAST WHEN COAST IS NECESSARY")
+    public void testCase6_B_1() {
+        diplomacy.addUnit(StandardVariantLocation.PORTUGAL, new Fleet(Country.FRANCE));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(
+            List.of(
+                diplomacy.parseOrder("F Portugal - Spain")
+            )
+        );
+        diplomacy.adjudicate();
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.ILLEGAL_ORDER_REPLACED_WITH_HOLD, frenchOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("MOVING WITH UNSPECIFIED COAST WHEN COAST IS NOT NECESSARY")
+    public void testCase6_B_2() {
+        diplomacy.addUnit(StandardVariantLocation.GASCONY, new Fleet(Country.FRANCE));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(
+            List.of(
+                diplomacy.parseOrder("F Gascony - Spain")
+            )
+        );
+        diplomacy.adjudicate();
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.RESOLVED, frenchOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("MOVING WITH WRONG COAST WHEN COAST IS NOT NECESSARY")
+    public void testCase6_B_3() {
+        diplomacy.addUnit(StandardVariantLocation.GASCONY, new Fleet(Country.FRANCE));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(
+            List.of(
+                diplomacy.parseOrder("F Gascony - Spain(sc)")
+            )
+        );
+        diplomacy.adjudicate();
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.ILLEGAL_ORDER_REPLACED_WITH_HOLD, frenchOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("SUPPORT TO UNREACHABLE COAST ALLOWED")
+    public void testCase6_B_4() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.GASCONY, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.MARSEILLES, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.WESTERN_MEDITERRANEAN, new Fleet(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_B_4.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.RESOLVED, frenchOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, frenchOrders.get(1).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.BOUNCED, italianOrders.get(0).getStatus());
+    }
 }

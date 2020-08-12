@@ -139,6 +139,7 @@ public class StandardMapVariant implements MapVariant {
         addEdge(armyGraph, StandardVariantLocation.SPAIN, StandardVariantLocation.PORTUGAL);
 
         addEdge(armyGraph, StandardVariantLocation.MARSEILLES, StandardVariantLocation.PIEDMONT);
+        addEdge(armyGraph, StandardVariantLocation.MARSEILLES, StandardVariantLocation.SPAIN);
 
         addEdge(armyGraph, StandardVariantLocation.PIEDMONT, StandardVariantLocation.TYROLIA);
         addEdge(armyGraph, StandardVariantLocation.PIEDMONT, StandardVariantLocation.VENICE);

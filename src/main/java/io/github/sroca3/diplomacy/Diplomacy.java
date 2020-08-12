@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Diplomacy {
 
@@ -132,7 +134,9 @@ public class Diplomacy {
     }
 
     public Order parseOrder(String orderString) {
-        List<String> parts = Arrays.asList(orderString.split("\\s+"));
+        List<String> parts = Arrays.asList(orderString.replace("(", "_")
+                                                      .replace(")", "")
+                                                      .split("\\s+"));
         Iterator<String> iterator = parts.iterator();
         UnitType unitType = UnitType.from(iterator.next());
         Location currentLocation = getLocation(iterator);
@@ -156,6 +160,18 @@ public class Diplomacy {
         Unit unit = unitLocations.get(currentLocation);
         if (unit.getType() != unitType) {
             throw new IllegalArgumentException();
+        }
+
+        // resolve coast if only one exists
+        if (unitType.isFleet() && toLocation.hasCoasts()) {
+            final Location finalToLocation = toLocation;
+            List<Location> coasts = mapVariant.getMovementGraph(UnitType.FLEET).get(fromLocation)
+                                             .stream()
+                                             .filter(location -> finalToLocation.getCoasts().contains(location))
+                .collect(Collectors.toList());
+            if (coasts.size() == 1) {
+                toLocation = coasts.get(0);
+            }
         }
         return new Order(unit, currentLocation, orderType, fromLocation, toLocation);
     }

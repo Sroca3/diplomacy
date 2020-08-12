@@ -105,7 +105,13 @@ public class Phase {
         return orders
             .stream()
             .filter(order -> order.getOrderType() == orderType)
-            .filter(order -> order.getToLocation() == toLocation)
+            .filter(order -> {
+                if (order.getToLocation().getTerritory().hasCoasts()) {
+                    return order.getToLocation().getTerritory().equals(toLocation) ||
+                        order.getToLocation().getTerritory().getCoasts().contains(toLocation);
+                }
+                return order.getToLocation().equals(toLocation);
+            })
             .findAny();
     }
 
@@ -114,7 +120,13 @@ public class Phase {
             .stream()
             .filter(order -> order.getOrderType() == orderType)
             .filter(order -> order.getFromLocation() == fromLocation)
-            .filter(order -> order.getToLocation() == toLocation)
+            .filter(order -> {
+                if (order.getToLocation().getTerritory().hasCoasts()) {
+                    return order.getToLocation().getTerritory().equals(toLocation) ||
+                        order.getToLocation().getTerritory().getCoasts().contains(toLocation);
+                }
+                return order.getToLocation().equals(toLocation);
+            })
             .findAny();
     }
 
@@ -172,11 +184,12 @@ public class Phase {
             order.dislodge();
         } else if (competingMovesExist(order)){
             List<Order> orders = getConflictingOrders(order);
+            calculateStrengthForOrder(order);
             orders
                 .stream()
                 .filter(o -> o.getStrength() >= order.getStrength())
                 .findAny()
-                .ifPresent(o -> order.bounce());
+                .ifPresentOrElse(o -> order.bounce(), order::resolve);
         } else {
             order.resolve();
         }
@@ -185,7 +198,7 @@ public class Phase {
     private boolean competingMovesExist(Order order) {
         return orders
             .stream()
-            .filter(o -> o.getToLocation().equals(order.getToLocation()))
+            .filter(o -> o.getToLocation().getTerritory().equals(order.getToLocation().getTerritory()))
             .filter(o -> o.getOrderType().isMove())
             .count() > 1;
     }
@@ -278,7 +291,13 @@ public class Phase {
         return orders
             .stream()
             .filter(o -> o.getOrderType().isMove())
-            .filter(o -> o.getToLocation().equals(order.getToLocation()))
+            .filter(o -> {
+                if (o.getToLocation().getTerritory().hasCoasts()) {
+                    return o.getToLocation().getTerritory().equals(order.getToLocation()) ||
+                        o.getToLocation().getTerritory().getCoasts().contains(order.getToLocation());
+                }
+                return o.getToLocation().equals(order.getToLocation());
+            })
             .filter(o -> !o.getId().equals(order.getId()))
             .map(this::calculateStrengthForOrder)
             .collect(Collectors.toList());
@@ -301,7 +320,18 @@ public class Phase {
     }
 
     private boolean isOrderForAdjacentLocations(Order order) {
-
+        if (order.getUnit().getType().isFleet() && order.getOrderType().isSupport() && order.getToLocation().getTerritory().hasCoasts()) {
+            return adjacent(
+                mapVariant.getMovementGraph(UnitType.ARMY),
+                order.getCurrentLocation(),
+                order.getFromLocation()
+            ) &&
+                adjacent(
+                    mapVariant.getMovementGraph(UnitType.ARMY),
+                    order.getCurrentLocation(),
+                    order.getToLocation().getTerritory()
+                );
+        }
         return adjacent(
             mapVariant.getMovementGraph(order.getUnit().getType()),
             order.getCurrentLocation(),
@@ -321,9 +351,7 @@ public class Phase {
 
     private Order calculateStrengthForOrder(Order order) {
         orders.forEach(o -> {
-            if (o.getOrderType().isSupport() &&
-                o.getFromLocation().equals(order.getCurrentLocation()) &&
-                o.getToLocation().equals(order.getToLocation())) {
+            if (findBy(OrderType.SUPPORT, o.getFromLocation(), o.getToLocation()).isPresent()) {
                 resolveOrder(o);
             }
         });
