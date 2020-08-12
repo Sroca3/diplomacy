@@ -88,13 +88,17 @@ public class Phase {
     private void resolveConvoyOrder(Order order) {
         if (order.getFromLocation().equals(order.getToLocation())) {
             order.convertIllegalMoveToHold();
+        } else {
+            findBy(OrderType.MOVE, order.getToLocation())
+                .ifPresentOrElse(o -> {
+                    if (o.getStatus().isUnresolved()) {
+                        this.resolveOrder(o);
+                    }
+                    if (o.getStatus().isIllegal()) {
+                        order.convertIllegalMoveToHold();
+                    }
+                }, order::convertIllegalMoveToHold);
         }
-//        else {
-//            findBy(OrderType.MOVE, order.getToLocation())
-//                .ifPresent(o -> {
-//                    order.resolve();
-//                });
-//        }
     }
 
     private Optional<Order> findBy(OrderType orderType, Location toLocation) {
@@ -166,9 +170,24 @@ public class Phase {
             }
         } else if (isDislodged(order)) {
             order.dislodge();
+        } else if (competingMovesExist(order)){
+            List<Order> orders = getConflictingOrders(order);
+            orders
+                .stream()
+                .filter(o -> o.getStrength() >= order.getStrength())
+                .findAny()
+                .ifPresent(o -> order.bounce());
         } else {
             order.resolve();
         }
+    }
+
+    private boolean competingMovesExist(Order order) {
+        return orders
+            .stream()
+            .filter(o -> o.getToLocation().equals(order.getToLocation()))
+            .filter(o -> o.getOrderType().isMove())
+            .count() > 1;
     }
 
     private boolean isDestinationLocationBeingVacated(Order order) {
@@ -253,6 +272,16 @@ public class Phase {
             .filter(o -> o.getToLocation().equals(order.getCurrentLocation()))
             .map(this::calculateStrengthForOrder)
             .findAny();
+    }
+
+    private List<Order> getConflictingOrders(Order order) {
+        return orders
+            .stream()
+            .filter(o -> o.getOrderType().isMove())
+            .filter(o -> o.getToLocation().equals(order.getToLocation()))
+            .filter(o -> !o.getId().equals(order.getId()))
+            .map(this::calculateStrengthForOrder)
+            .collect(Collectors.toList());
     }
 
     private boolean isNotDislodged(Order order) {

@@ -54,7 +54,7 @@ public enum StandardVariantLocation implements Location {
     MARSEILLES(new UnitType[]{UnitType.FLEET}, "Mar", true),
     MID_ATLANTIC_OCEAN(new UnitType[]{UnitType.FLEET}, "MAO"),
     MOSCOW(new UnitType[]{UnitType.FLEET}, "Mos"),
-    MUNICH(new UnitType[]{UnitType.FLEET}, "Mun", true),
+    MUNICH(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Mun", true),
     NAPLES(new UnitType[]{UnitType.FLEET}, "Nap", true),
     NORTH_AFRICA(new UnitType[]{UnitType.FLEET}, "NAf"),
     NORTH_ATLANTIC_OCEAN(new UnitType[]{UnitType.FLEET}, "NAO"),

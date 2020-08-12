@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -144,7 +143,7 @@ public class StandardVariantTest {
         diplomacy.addOrders(orders);
         diplomacy.adjudicate();
         List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
-        assertEquals(OrderStatus.ILLEGAL_ORDER_REPLACED_WITH_HOLD, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.SUPPORT_FAILED, italianOrders.get(0).getStatus());
         assertEquals(OrderStatus.BOUNCED, italianOrders.get(1).getStatus());
         List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
         assertEquals(OrderStatus.RESOLVED, austrianOrders.get(0).getStatus());
@@ -167,5 +166,28 @@ public class StandardVariantTest {
         assertEquals(OrderStatus.BOUNCED, italianOrders.get(0).getStatus());
         List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
         assertEquals(OrderStatus.BOUNCED, austrianOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("BOUNCE OF THREE UNITS")
+    public void testCase6_A_12() {
+        diplomacy.addUnit(StandardVariantLocation.VENICE, new Army(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.VIENNA, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.MUNICH, new Army(Country.GERMANY));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(
+            List.of(
+                diplomacy.parseOrder("A Vienna - Tyrolia"),
+                diplomacy.parseOrder("A Venice - Tyrolia"),
+                diplomacy.parseOrder("A Munich - Tyrolia")
+            )
+        );
+        diplomacy.adjudicate();
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.BOUNCED, italianOrders.get(0).getStatus());
+        List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
+        assertEquals(OrderStatus.BOUNCED, austrianOrders.get(0).getStatus());
+        List<Order> germanOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.GERMANY);
+        assertEquals(OrderStatus.BOUNCED, germanOrders.get(0).getStatus());
     }
 }

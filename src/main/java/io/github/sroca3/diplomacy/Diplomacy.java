@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 public class Diplomacy {
 
@@ -147,6 +146,9 @@ public class Diplomacy {
             if (orderType.isSupport() && toLocation == null) {
                 toLocation = fromLocation;
             }
+        } else if (orderType.isHold()) {
+            fromLocation = currentLocation;
+            toLocation = currentLocation;
         } else {
             fromLocation = currentLocation;
             toLocation = getLocation(iterator);
