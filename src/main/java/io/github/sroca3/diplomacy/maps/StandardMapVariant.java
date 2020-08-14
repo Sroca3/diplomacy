@@ -334,6 +334,7 @@ public class StandardMapVariant implements MapVariant {
         addEdge(fleetGraph, StandardVariantLocation.WESTERN_MEDITERRANEAN, StandardVariantLocation.TUNIS);
         addEdge(fleetGraph, StandardVariantLocation.WESTERN_MEDITERRANEAN, StandardVariantLocation.GULF_OF_LYON);
         addEdge(fleetGraph, StandardVariantLocation.WESTERN_MEDITERRANEAN, StandardVariantLocation.TYRRHENIAN_SEA);
+        addEdge(fleetGraph, StandardVariantLocation.WESTERN_MEDITERRANEAN, StandardVariantLocation.SPAIN_SC);
 
         addEdge(fleetGraph, StandardVariantLocation.GULF_OF_LYON, StandardVariantLocation.SPAIN_SC);
         addEdge(fleetGraph, StandardVariantLocation.GULF_OF_LYON, StandardVariantLocation.MARSEILLES);

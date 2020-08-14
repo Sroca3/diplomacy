@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
@@ -130,15 +131,30 @@ public class Phase {
             .findAny();
     }
 
+    private List<Order> findAllBy(OrderType orderType, Location fromLocation, Location toLocation) {
+        return orders
+            .stream()
+            .filter(order -> order.getOrderType() == orderType)
+            .filter(order -> order.getFromLocation() == fromLocation)
+            .filter(order -> {
+                if (order.getToLocation().getTerritory().hasCoasts()) {
+                    return order.getToLocation().getTerritory().equals(toLocation) ||
+                        order.getToLocation().getTerritory().getCoasts().contains(toLocation);
+                }
+                return order.getToLocation().equals(toLocation);
+            })
+            .collect(Collectors.toList());
+    }
+
     private void resolveSupportOrder(Order order) {
         if (findBy(OrderType.MOVE, order.getCurrentLocation()).isEmpty()) {
             findBy(OrderType.MOVE, order.getFromLocation(), order.getToLocation())
                 .ifPresent(o -> {
-                        if (o.getStatus().isIllegal()) {
-                            order.failed();
-                        } else {
-                            o.addSupport();
-                            order.resolve();
+                    if (o.getStatus().isIllegal()) {
+                        order.failed();
+                    } else {
+                        o.addSupport();
+                        order.resolve();
                         }
                     }
                 );
@@ -189,7 +205,10 @@ public class Phase {
                 .stream()
                 .filter(o -> o.getStrength() >= order.getStrength())
                 .findAny()
-                .ifPresentOrElse(o -> order.bounce(), order::resolve);
+                .ifPresentOrElse(o -> {
+                    order.bounce();
+                    markSupportingUnitsAsFailed(order);
+                }, order::resolve);
         } else {
             order.resolve();
         }
@@ -268,23 +287,20 @@ public class Phase {
     }
 
     private void markSupportingUnitsAsFailed(Order order) {
-        orders.forEach(o -> {
-            if (o.getOrderType().isSupport() &&
-                !o.getStatus().isCut() &&
-                o.getFromLocation().equals(order.getCurrentLocation()) &&
-                o.getToLocation().equals(order.getToLocation())) {
+        findAllBy(OrderType.SUPPORT, order.getCurrentLocation(), order.getToLocation()).forEach(o -> {
+            if (!o.getStatus().isCut()) {
                 o.failed();
             }
         });
     }
 
     private Optional<Order> getConflictingOrder(Order order) {
-        return orders
-            .stream()
-            .filter(o -> o.getOrderType().isMove())
-            .filter(o -> o.getToLocation().equals(order.getCurrentLocation()))
-            .map(this::calculateStrengthForOrder)
-            .findAny();
+        List<Order> orders = getConflictingOrders(order);
+        if (orders.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(orders.get(0));
+        }
     }
 
     private List<Order> getConflictingOrders(Order order) {
@@ -320,28 +336,27 @@ public class Phase {
     }
 
     private boolean isOrderForAdjacentLocations(Order order) {
-        if (order.getUnit().getType().isFleet() && order.getOrderType().isSupport() && order.getToLocation().getTerritory().hasCoasts()) {
-            return adjacent(
-                mapVariant.getMovementGraph(UnitType.ARMY),
-                order.getCurrentLocation(),
-                order.getFromLocation()
-            ) &&
+        if (order.getOrderType().isSupport() && order.getToLocation().hasCoasts()) {
+            findBy(OrderType.MOVE, order.getToLocation()).ifPresent(o -> order.specifyCoast(o.getToLocation()));
+        }
+
+        if (order.getUnit().getType().isFleet()
+            && order.getOrderType().isSupport()
+            && order.getToLocation().getTerritory().hasCoasts()
+        ) {
+            return order.getToLocation().getTerritory().getCoasts().stream().anyMatch(location ->
                 adjacent(
-                    mapVariant.getMovementGraph(UnitType.ARMY),
+                    mapVariant.getMovementGraph(order.getUnit().getType()),
                     order.getCurrentLocation(),
-                    order.getToLocation().getTerritory()
-                );
+                    location
+                )
+            );
         }
         return adjacent(
             mapVariant.getMovementGraph(order.getUnit().getType()),
             order.getCurrentLocation(),
-            order.getFromLocation()
+            order.getToLocation()
         ) &&
-            adjacent(
-                mapVariant.getMovementGraph(order.getUnit().getType()),
-                order.getCurrentLocation(),
-                order.getToLocation()
-            ) &&
             order.getToLocation().supports(order.getUnit());
     }
 
@@ -359,7 +374,11 @@ public class Phase {
     }
 
     private boolean isDestinationLocationOccupied(Location location) {
-        return startingUnitLocations.get(location) != null;
+        Location l = location.getTerritory();
+        return startingUnitLocations.get(l) != null || l.getCoasts()
+                                                        .stream()
+                                                        .map(startingUnitLocations::get)
+                                                        .anyMatch(Objects::nonNull);
     }
 
     public void resolve() {

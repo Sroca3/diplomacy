@@ -11,7 +11,7 @@ public class Order {
     private final OrderType orderType;
     private final Location currentLocation;
     private final Location fromLocation;
-    private final Location toLocation;
+    private Location toLocation;
     private int strength = 1;
     private OrderStatus status = OrderStatus.UNRESOLVED;
 
@@ -170,5 +170,11 @@ public class Order {
 
     public void cut() {
         status = OrderStatus.SUPPORT_CUT;
+    }
+
+    public void specifyCoast(Location location) {
+        if (toLocation.getCoasts().contains(location)) {
+            this.toLocation = location;
+        }
     }
 }

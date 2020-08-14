@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Diplomacy {
@@ -27,6 +27,21 @@ public class Diplomacy {
 
     public Diplomacy(MapVariant mapVariant) {
         this.mapVariant = mapVariant;
+    }
+
+    public Map<Country, String> assignCountries(List<String> playersArg) {
+        List<String> players = new LinkedList<>(playersArg);
+        List<Country> countries = new LinkedList<>(getMapVariant().getCountries());
+        if (players.size() != countries.size()) {
+            throw new IllegalArgumentException("Not enough or too many players for variant. Need " + mapVariant.getCountries()
+                                                                                                               .size() + " players.");
+        }
+        Map<Country, String> assignments = new HashMap<>();
+        while (!countries.isEmpty()) {
+            int index = new Random().nextInt(countries.size());
+            assignments.put(countries.remove(index), players.remove(index));
+        }
+        return assignments;
     }
 
     public MapVariant getMapVariant() {
@@ -120,12 +135,12 @@ public class Diplomacy {
         String locationString = null;
         while (location == null && iterator.hasNext()) {
             if (locationString == null) {
-                locationString = iterator.next().toUpperCase();
+                locationString = iterator.next().replace("-", "_").toUpperCase();
             } else {
                 locationString = String.join("_", locationString, iterator.next().toUpperCase());
             }
 
-            if ("-".equals(locationString) || UnitType.from(locationString) != null) {
+            if ("_".equals(locationString) || UnitType.from(locationString) != null) {
                 locationString = null;
             }
             location = mapVariant.parseLocation(locationString);

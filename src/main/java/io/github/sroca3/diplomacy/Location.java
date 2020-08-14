@@ -6,7 +6,11 @@ import java.util.Set;
 
 public interface Location {
     default boolean supports(Unit unit) {
-        return getSupportedTypes().contains(unit.getType());
+        return supports(unit.getType());
+    }
+
+    default boolean supports(UnitType unitType) {
+        return getSupportedTypes().contains(unitType);
     }
 
     Set<UnitType> getSupportedTypes();

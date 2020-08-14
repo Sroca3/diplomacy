@@ -143,7 +143,7 @@ public class StandardVariantTest {
         diplomacy.addOrders(orders);
         diplomacy.adjudicate();
         List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
-        assertEquals(OrderStatus.SUPPORT_FAILED, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.ILLEGAL_ORDER_REPLACED_WITH_HOLD, italianOrders.get(0).getStatus());
         assertEquals(OrderStatus.BOUNCED, italianOrders.get(1).getStatus());
         List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
         assertEquals(OrderStatus.RESOLVED, austrianOrders.get(0).getStatus());
@@ -251,5 +251,63 @@ public class StandardVariantTest {
         assertEquals(OrderStatus.RESOLVED, frenchOrders.get(1).getStatus());
         List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
         assertEquals(OrderStatus.BOUNCED, italianOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("SUPPORT FROM UNREACHABLE COAST NOT ALLOWED")
+    public void testCase6_B_5() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.MARSEILLES, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.SPAIN_NC, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.GULF_OF_LYON, new Fleet(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_B_5.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.BOUNCED, frenchOrders.get(0).getStatus());
+        assertEquals(OrderStatus.ILLEGAL_ORDER_REPLACED_WITH_HOLD, frenchOrders.get(1).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("SUPPORT CAN BE CUT WITH OTHER COAST")
+    public void testCase6_B_6() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.IRISH_SEA, new Fleet(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.NORTH_ATLANTIC_OCEAN, new Fleet(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.SPAIN_NC, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.MID_ATLANTIC_OCEAN, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.GULF_OF_LYON, new Fleet(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_B_6.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> englishOrder = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ENGLAND);
+        assertEquals(OrderStatus.RESOLVED, englishOrder.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, englishOrder.get(1).getStatus());
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.SUPPORT_CUT, frenchOrders.get(0).getStatus());
+        assertEquals(OrderStatus.DISLODGED, frenchOrders.get(1).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.BOUNCED, italianOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("SUPPORTING WITH UNSPECIFIED COAST")
+    public void testCase6_B_7() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.PORTUGAL, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.MID_ATLANTIC_OCEAN, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.GULF_OF_LYON, new Fleet(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.WESTERN_MEDITERRANEAN, new Fleet(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_B_7.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.SUPPORT_FAILED, frenchOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, frenchOrders.get(1).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.SUPPORT_FAILED, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, italianOrders.get(1).getStatus());
     }
 }
