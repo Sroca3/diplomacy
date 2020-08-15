@@ -102,7 +102,11 @@ public class Order {
     }
 
     public void failed() {
-        status = OrderStatus.SUPPORT_FAILED;
+        if (getOrderType().isSupport()) {
+            status = OrderStatus.SUPPORT_FAILED;
+        } else if (getOrderType().isConvoy() || getOrderType().isMove()) {
+            status = OrderStatus.CONVOY_FAILED;
+        }
     }
 
     @Override

@@ -8,6 +8,7 @@ public enum OrderStatus {
     RESOLVED,
     SUPPORT_CUT,
     SUPPORT_FAILED,
+    CONVOY_FAILED,
     UNRESOLVED;
 
     public boolean isUnresolved() {
@@ -31,7 +32,7 @@ public enum OrderStatus {
     }
 
     public boolean isFailed() {
-        return this == SUPPORT_FAILED;
+        return this == SUPPORT_FAILED || this == CONVOY_FAILED;
     }
 
     public boolean isProcessing() {

@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -153,8 +154,18 @@ public class Diplomacy {
                                                       .replace(")", "")
                                                       .split("\\s+"));
         Iterator<String> iterator = parts.iterator();
-        UnitType unitType = UnitType.from(iterator.next());
+        String firstPart = iterator.next();
+        UnitType unitType = UnitType.from(firstPart);
         Location currentLocation = getLocation(iterator);
+        if ((currentLocation.isCoast() || currentLocation.hasCoasts()) && unitLocations.get(currentLocation) == null) {
+            Optional<Location> location = currentLocation.getTerritory().getCoasts()
+                           .stream()
+            .filter(l -> unitLocations.get(l) != null)
+            .findAny();
+            if (location.isPresent()) {
+                currentLocation = location.get();
+            }
+        }
         String orderTypeString = iterator.next().toUpperCase(Locale.ENGLISH);
         OrderType orderType = OrderType.from(orderTypeString);
         Location fromLocation;
@@ -171,6 +182,11 @@ public class Diplomacy {
         } else {
             fromLocation = currentLocation;
             toLocation = getLocation(iterator);
+        }
+        if (UnitType.ARMY.equals(unitType)) {
+            currentLocation = currentLocation.getTerritory();
+            fromLocation = fromLocation.getTerritory();
+            toLocation = toLocation.getTerritory();
         }
         Unit unit = unitLocations.get(currentLocation);
         if (unit.getType() != unitType) {

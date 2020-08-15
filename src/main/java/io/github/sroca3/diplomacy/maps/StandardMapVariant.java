@@ -98,6 +98,7 @@ public class StandardMapVariant implements MapVariant {
         addEdge(armyGraph, StandardVariantLocation.SERBIA, StandardVariantLocation.BULGARIA);
         addEdge(armyGraph, StandardVariantLocation.SERBIA, StandardVariantLocation.GREECE);
         addEdge(armyGraph, StandardVariantLocation.SERBIA, StandardVariantLocation.ALBANY);
+        addEdge(armyGraph, StandardVariantLocation.SERBIA, StandardVariantLocation.TRIESTE);
 
         addEdge(armyGraph, StandardVariantLocation.ALBANY, StandardVariantLocation.GREECE);
 

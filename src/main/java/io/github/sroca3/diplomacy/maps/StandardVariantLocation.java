@@ -2,6 +2,7 @@ package io.github.sroca3.diplomacy.maps;
 
 import io.github.sroca3.diplomacy.Location;
 import io.github.sroca3.diplomacy.Order;
+import io.github.sroca3.diplomacy.Unit;
 import io.github.sroca3.diplomacy.UnitType;
 
 import java.util.Collections;
@@ -19,7 +20,7 @@ public enum StandardVariantLocation implements Location {
     ADRIATIC_SEA(new UnitType[]{UnitType.FLEET}, "Adr"),
     AEGEAN_SEA(new UnitType[]{UnitType.FLEET}, "Aeg"),
     ALBANY(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Alb"),
-    ANKARA(new UnitType[]{UnitType.FLEET}, "Ank", true),
+    ANKARA(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Ank", true),
     APULIA(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Apu"),
     ARMENIA(new UnitType[]{UnitType.FLEET}, "Arm"),
     BALTIC_SEA(new UnitType[]{UnitType.FLEET}, "Bal"),
@@ -32,17 +33,17 @@ public enum StandardVariantLocation implements Location {
     BUDAPEST(new UnitType[]{UnitType.FLEET}, "Bud", true),
     BULGARIA_EC(new UnitType[]{UnitType.FLEET}, "Bul EC", true),
     BULGARIA_SC(new UnitType[]{UnitType.FLEET}, "Bul SC", true),
-    BULGARIA(new UnitType[]{UnitType.FLEET}, "Bul", true, List.of(BULGARIA_EC, BULGARIA_SC), false),
+    BULGARIA(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Bul", true, List.of(BULGARIA_EC, BULGARIA_SC), false),
     BURGUNDY(new UnitType[]{UnitType.FLEET}, "Bur"),
     CLYDE(new UnitType[]{UnitType.FLEET}, "Cly"),
-    CONSTANTINOPLE(new UnitType[]{UnitType.FLEET}, "Con", true),
+    CONSTANTINOPLE(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Con", true),
     DENMARK(new UnitType[]{UnitType.FLEET}, "Den"),
     EASTERN_MEDITERRANEAN(new UnitType[]{UnitType.FLEET}, "Eas"),
     EDINBURGH(new UnitType[]{UnitType.FLEET}, "Edi", true),
     ENGLISH_CHANNEL(new UnitType[]{UnitType.FLEET}, "ECh"),
     FINLAND(new UnitType[]{UnitType.FLEET}, "Fin"),
     GALICIA(new UnitType[]{UnitType.FLEET}, "Gal"),
-    GASCONY(new UnitType[]{UnitType.FLEET}, "Gas"),
+    GASCONY(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Gas"),
     GREECE(new UnitType[]{UnitType.FLEET}, "Gre", true),
     GULF_OF_BOTHNIA(new UnitType[]{UnitType.FLEET}, "GoB"),
     GULF_OF_LYON(new UnitType[]{UnitType.FLEET}, "GoL"),
@@ -72,14 +73,14 @@ public enum StandardVariantLocation implements Location {
     ROME(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Rom", true),
     RUHR(new UnitType[]{UnitType.FLEET}, "Ruh"),
     RUMANIA(new UnitType[]{UnitType.FLEET}, "Rum", true),
-    SERBIA(new UnitType[]{UnitType.FLEET}, "Ser", true),
+    SERBIA(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Ser", true),
     SEVASTOPOL(new UnitType[]{UnitType.FLEET}, "Sev", true),
     SILESIA(new UnitType[]{UnitType.FLEET}, "Sil"),
     SKAGERRAK(new UnitType[]{UnitType.FLEET}, "Ska"),
-    SMYRNA(new UnitType[]{UnitType.FLEET}, "Smy", true),
+    SMYRNA(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Smy", true),
     SPAIN_NC(new UnitType[]{UnitType.FLEET}, "Spa NC", true),
     SPAIN_SC(new UnitType[]{UnitType.FLEET}, "Spa SC", true),
-    SPAIN(new UnitType[]{UnitType.FLEET}, "Spa", true, List.of(SPAIN_NC, SPAIN_SC), false),
+    SPAIN(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Spa", true, List.of(SPAIN_NC, SPAIN_SC), false),
     ST_PETERSBURG_NC(new UnitType[]{UnitType.FLEET}, "StP NC", true),
     ST_PETERSBURG_SC(new UnitType[]{UnitType.FLEET}, "StP SC", true),
     ST_PETERSBURG(new UnitType[]{UnitType.FLEET}, "StP", true, List.of(ST_PETERSBURG_NC, ST_PETERSBURG_SC), false),

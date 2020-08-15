@@ -310,4 +310,218 @@ public class StandardVariantTest {
         assertEquals(OrderStatus.SUPPORT_FAILED, italianOrders.get(0).getStatus());
         assertEquals(OrderStatus.BOUNCED, italianOrders.get(1).getStatus());
     }
+
+    @Test
+    @DisplayName("SUPPORTING WITH UNSPECIFIED COAST WHEN ONLY ONE COAST IS POSSIBLE")
+    public void testCase6_B_8() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.PORTUGAL, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.GASCONY, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.GULF_OF_LYON, new Fleet(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.WESTERN_MEDITERRANEAN, new Fleet(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_B_8.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.SUPPORT_FAILED, frenchOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, frenchOrders.get(1).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.SUPPORT_FAILED, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, italianOrders.get(1).getStatus());
+    }
+
+    @Test
+    @DisplayName("SUPPORTING WITH WRONG COAST")
+    public void testCase6_B_9() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.PORTUGAL, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.MID_ATLANTIC_OCEAN, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.GULF_OF_LYON, new Fleet(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.WESTERN_MEDITERRANEAN, new Fleet(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_B_9.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.SUPPORT_FAILED, frenchOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, frenchOrders.get(1).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(1).getStatus());
+    }
+
+    @Test
+    @DisplayName("UNIT ORDERED WITH WRONG COAST")
+    public void testCase6_B_10() {
+        diplomacy.addUnit(StandardVariantLocation.SPAIN_SC, new Fleet(Country.FRANCE));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("F Spain(nc) - Gulf of Lyon")
+        ));
+        diplomacy.adjudicate();
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.RESOLVED, frenchOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("COAST CAN NOT BE ORDERED TO CHANGE")
+    public void testCase6_B_11() {
+        diplomacy.addUnit(StandardVariantLocation.SPAIN_NC, new Fleet(Country.FRANCE));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("F Spain(sc) - Gulf of Lyon")
+        ));
+        diplomacy.adjudicate();
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.ILLEGAL_ORDER_REPLACED_WITH_HOLD, frenchOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("ARMY MOVEMENT WITH COASTAL SPECIFICATION")
+    public void testCase6_B_12() {
+        diplomacy.addUnit(StandardVariantLocation.GASCONY, new Army(Country.FRANCE));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("A Gascony - Spain(nc)")
+        ));
+        diplomacy.adjudicate();
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.RESOLVED, frenchOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("COASTAL CRAWL NOT ALLOWED")
+    public void testCase6_B_13() {
+        diplomacy.addUnit(StandardVariantLocation.BULGARIA_SC, new Fleet(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.CONSTANTINOPLE, new Fleet(Country.TURKEY));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("F Bulgaria(sc) - Constantinople"),
+            diplomacy.parseOrder("F Constantinople - Bulgaria(ec)")
+        ));
+        diplomacy.adjudicate();
+        List<Order> turkishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.TURKEY);
+        assertEquals(OrderStatus.BOUNCED, turkishOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, turkishOrders.get(0).getStatus());
+    }
+
+    @Test
+    @Disabled
+    @DisplayName("BUILDING WITH UNSPECIFIED COAST")
+    public void testCase6_B_14() {
+        diplomacy.beginFirstPhase();
+        diplomacy.adjudicate();
+        diplomacy.adjudicate();
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("Build F St Petersburg")
+        ));
+        diplomacy.adjudicate();
+        List<Order> turkishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.TURKEY);
+        assertEquals(OrderStatus.BOUNCED, turkishOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("THREE ARMY CIRCULAR MOVEMENT")
+    public void testCase6_C_1() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.ANKARA, new Fleet(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.CONSTANTINOPLE, new Army(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.SMYRNA, new Army(Country.TURKEY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_C_1.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> turkishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.TURKEY);
+        assertEquals(OrderStatus.RESOLVED, turkishOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, turkishOrders.get(1).getStatus());
+        assertEquals(OrderStatus.RESOLVED, turkishOrders.get(2).getStatus());
+    }
+
+    @Test
+    @DisplayName("THREE ARMY CIRCULAR MOVEMENT WITH SUPPORT")
+    public void testCase6_C_2() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.ANKARA, new Fleet(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.CONSTANTINOPLE, new Army(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.SMYRNA, new Army(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.BULGARIA, new Army(Country.TURKEY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_C_2.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> turkishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.TURKEY);
+        assertEquals(OrderStatus.RESOLVED, turkishOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, turkishOrders.get(1).getStatus());
+        assertEquals(OrderStatus.RESOLVED, turkishOrders.get(2).getStatus());
+        assertEquals(OrderStatus.RESOLVED, turkishOrders.get(3).getStatus());
+    }
+
+    @Test
+    @DisplayName("THREE ARMY CIRCULAR MOVEMENT WITH SUPPORT")
+    public void testCase6_C_3() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.ANKARA, new Fleet(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.CONSTANTINOPLE, new Army(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.SMYRNA, new Army(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.BULGARIA, new Army(Country.TURKEY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_C_3.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> turkishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.TURKEY);
+        assertEquals(OrderStatus.BOUNCED, turkishOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, turkishOrders.get(1).getStatus());
+        assertEquals(OrderStatus.BOUNCED, turkishOrders.get(2).getStatus());
+        assertEquals(OrderStatus.BOUNCED, turkishOrders.get(3).getStatus());
+    }
+
+    @Test
+    @DisplayName("A CIRCULAR MOVEMENT WITH ATTACKED CONVOY")
+    public void testCase6_C_4() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.TRIESTE, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.SERBIA, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.BULGARIA, new Army(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.AEGEAN_SEA, new Fleet(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.IONIAN_SEA, new Fleet(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.ADRIATIC_SEA, new Fleet(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.NAPLES, new Fleet(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_C_4.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
+        assertEquals(OrderStatus.RESOLVED, austrianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, austrianOrders.get(1).getStatus());
+        List<Order> turkishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.TURKEY);
+        assertEquals(OrderStatus.RESOLVED, turkishOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, turkishOrders.get(1).getStatus());
+        assertEquals(OrderStatus.RESOLVED, turkishOrders.get(2).getStatus());
+        assertEquals(OrderStatus.RESOLVED, turkishOrders.get(3).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.BOUNCED, italianOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("A DISRUPTED CIRCULAR MOVEMENT DUE TO DISLODGED CONVOY")
+    public void testCase6_C_5() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.TRIESTE, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.SERBIA, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.BULGARIA, new Army(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.AEGEAN_SEA, new Fleet(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.IONIAN_SEA, new Fleet(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.ADRIATIC_SEA, new Fleet(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.NAPLES, new Fleet(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.TUNIS, new Fleet(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_C_5.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
+        assertEquals(OrderStatus.BOUNCED, austrianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, austrianOrders.get(1).getStatus());
+        List<Order> turkishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.TURKEY);
+        assertEquals(OrderStatus.CONVOY_FAILED, turkishOrders.get(0).getStatus());
+        assertEquals(OrderStatus.CONVOY_FAILED, turkishOrders.get(1).getStatus());
+        assertEquals(OrderStatus.DISLODGED, turkishOrders.get(2).getStatus());
+        assertEquals(OrderStatus.CONVOY_FAILED, turkishOrders.get(3).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(0).getStatus());
+    }
 }

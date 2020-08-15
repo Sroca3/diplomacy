@@ -57,8 +57,11 @@ public class Phase {
     }
 
     private Order resolveOrder(Order order) {
-        if (!isOrderForAdjacentLocations(order) && !isConvoyPresent(order)) {
+        if (!order.getOrderType().isConvoy() && !isOrderForAdjacentLocations(order) && !isConvoyPresent(order)) {
             order.convertIllegalMoveToHold();
+        }
+        if (order.getStatus().isProcessing()) {
+            order.resolve();
         }
         if (order.getStatus().isUnresolved()) {
             order.process();
@@ -131,6 +134,20 @@ public class Phase {
             .findAny();
     }
 
+    private List<Order> findAllBy(OrderType orderType, Location toLocation) {
+        return orders
+            .stream()
+            .filter(order -> order.getOrderType() == orderType)
+            .filter(order -> {
+                if (order.getToLocation().getTerritory().hasCoasts()) {
+                    return order.getToLocation().getTerritory().equals(toLocation) ||
+                        order.getToLocation().getTerritory().getCoasts().contains(toLocation);
+                }
+                return order.getToLocation().equals(toLocation);
+            })
+            .collect(Collectors.toList());
+    }
+
     private List<Order> findAllBy(OrderType orderType, Location fromLocation, Location toLocation) {
         return orders
             .stream()
@@ -152,10 +169,14 @@ public class Phase {
                 .ifPresent(o -> {
                     if (o.getStatus().isIllegal()) {
                         order.failed();
+                    } else if (order.getToLocation().isCoast()
+                        && o.getToLocation().isCoast()
+                        && !order.getToLocation().equals(o.getToLocation())) {
+                        order.failed();
                     } else {
                         o.addSupport();
                         order.resolve();
-                        }
+                    }
                     }
                 );
         } else if (isDislodged(order)) {
@@ -176,6 +197,8 @@ public class Phase {
     private void resolveMoveOrder(Order order) {
         if (order.getFromLocation().equals(order.getToLocation())) {
             order.convertIllegalMoveToHold();
+        } else if (isConvoyPresent(order) && !isConvoySuccessful(order)) {
+            order.failed();
         } else if (isDestinationLocationOccupied(order.getToLocation())) {
             calculateStrengthForOrder(order);
             Optional<Order> conflictingOrder = getConflictingOrder(order);
@@ -188,10 +211,10 @@ public class Phase {
                     )
             ) {
                 order.resolve();
+            } else if (conflictingOrder.isEmpty() && isDestinationLocationBeingVacated(order)) {
+                order.resolve();
             } else if (isDislodged(order)) {
                 order.dislodge();
-            } else if (isDestinationLocationBeingVacated(order)) {
-                order.resolve();
             } else {
                 order.bounce();
                 markSupportingUnitsAsFailed(order);
@@ -233,7 +256,7 @@ public class Phase {
 
         if (vacatingOrder.isPresent()) {
             var vo = vacatingOrder.get();
-            if (vo.getStatus().isProcessing() || vo.getStatus().isResolved()) {
+            if (vo.getStatus().isResolved()) {
                 vacatingOrder.get().resolve();
                 return true;
             }
@@ -246,12 +269,31 @@ public class Phase {
         if (order.getUnit().getType().isFleet()) {
             return false;
         }
+        return orders
+            .stream()
+            .filter(o -> o.getOrderType().isConvoy())
+            .filter(o -> o.getFromLocation().equals(order.getFromLocation()))
+            .filter(o -> o.getToLocation().equals(order.getToLocation()))
+            .findAny().isPresent();
+    }
+
+    private boolean isConvoySuccessful(Order order) {
+        if (order.getUnit().getType().isFleet()) {
+            return false;
+        }
         List<Order> convoyOrders = orders
             .stream()
             .filter(o -> o.getOrderType().isConvoy())
             .filter(o -> o.getFromLocation().equals(order.getFromLocation()))
             .filter(o -> o.getToLocation().equals(order.getToLocation()))
-            .filter(this::isNotDislodged)
+            .filter(o -> {
+                if (this.isNotDislodged(o)) {
+                    return true;
+                } else {
+                    o.dislodge();
+                    return false;
+                }
+            })
             .collect(Collectors.toList());
         if (convoyOrders.isEmpty()) {
             return false;
@@ -259,6 +301,8 @@ public class Phase {
             Set<Location> convoyLocations = convoyOrders.stream().map(Order::getCurrentLocation).collect(Collectors.toSet());
             if (pathExistsForConvoy(order.getFromLocation(), order.getToLocation(), convoyLocations)) {
                 convoyOrders.forEach(Order::resolve);
+            } else {
+                convoyOrders.forEach(Order::failed);
             }
             return convoyOrders.stream().anyMatch(o -> o.getStatus().isResolved());
         }
@@ -270,11 +314,16 @@ public class Phase {
         Set<Location> visitedLocations = new HashSet<>();
         locationQueue.add(start);
         visitedLocations.add(start);
-        while (!locationQueue.isEmpty()) {
+        while (!locationQueue.isEmpty() && !pathExists) {
             var current = locationQueue.remove();
-            if (mapVariant.getMovementGraph(UnitType.FLEET).get(current).contains(end)) {
-                pathExists = true;
-                break;
+            if (current.hasCoasts()) {
+                current.getCoasts().forEach(locationQueue::add);
+                current = locationQueue.remove();
+            } else {
+                if (mapVariant.getMovementGraph(UnitType.FLEET).get(current).contains(end)) {
+                    pathExists = true;
+                    break;
+                }
             }
             for (Location adjacentLocation : adjacencies.get(current)) {
                 if (convoyLocations.contains(adjacentLocation) && !visitedLocations.contains(adjacentLocation)) {
@@ -324,10 +373,8 @@ public class Phase {
     }
 
     private boolean isDislodged(Order order) {
-        Optional<Order> dislodgeOrder = orders
+        Optional<Order> dislodgeOrder = findAllBy(OrderType.MOVE, order.getCurrentLocation())
             .stream()
-            .filter(o -> o.getOrderType().isMove())
-            .filter(o -> o.getToLocation().equals(order.getCurrentLocation()))
             .findAny();
         return dislodgeOrder
             .map(this::calculateStrengthForOrder)
