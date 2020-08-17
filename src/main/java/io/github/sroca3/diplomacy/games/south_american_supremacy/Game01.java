@@ -17,7 +17,7 @@ public class Game01 {
         Diplomacy diplomacy = new Diplomacy(SouthAmericanSupremacyMapVariant.getInstance());
         Map<Country, String> assignments = diplomacy.assignCountries(List.of(
             "AKFD",
-            "Jenny 2.0",
+            "Jordan767",
             "FloridaMan",
             "Don Juan of Austria",
             "VGhost",

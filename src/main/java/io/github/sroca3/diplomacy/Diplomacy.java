@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -34,13 +33,15 @@ public class Diplomacy {
         List<String> players = new LinkedList<>(playersArg);
         List<Country> countries = new LinkedList<>(getMapVariant().getCountries());
         if (players.size() != countries.size()) {
-            throw new IllegalArgumentException("Not enough or too many players for variant. Need " + mapVariant.getCountries()
-                                                                                                               .size() + " players.");
+            throw new IllegalArgumentException("Not enough or too many players for variant. " +
+                "Need " + mapVariant.getCountries().size() + " players.");
         }
         Map<Country, String> assignments = new HashMap<>();
         while (!countries.isEmpty()) {
-            int index = new Random().nextInt(countries.size());
-            assignments.put(countries.remove(index), players.remove(index));
+            assignments.put(
+                countries.remove(new Random().nextInt(countries.size())),
+                players.remove(new Random().nextInt(players.size()))
+            );
         }
         return assignments;
     }
