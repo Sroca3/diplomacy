@@ -1,8 +1,6 @@
 package io.github.sroca3.diplomacy.maps;
 
 import io.github.sroca3.diplomacy.Location;
-import io.github.sroca3.diplomacy.Order;
-import io.github.sroca3.diplomacy.Unit;
 import io.github.sroca3.diplomacy.UnitType;
 
 import java.util.Collections;

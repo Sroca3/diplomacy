@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -23,6 +24,7 @@ public class Diplomacy {
     private final Map<Location, Country> locationOwnership = new HashMap<>();
     private Phase currentPhase;
     private Phase previousPhase;
+    Map<Country, String> playerAssignments;
     private long gameYearCounter;
 
     public Diplomacy(MapVariant mapVariant) {
@@ -36,7 +38,7 @@ public class Diplomacy {
             throw new IllegalArgumentException("Not enough or too many players for variant. " +
                 "Need " + mapVariant.getCountries().size() + " players.");
         }
-        Map<Country, String> assignments = new HashMap<>();
+        Map<Country, String> assignments = new EnumMap<>(Country.class);
         while (!countries.isEmpty()) {
             assignments.put(
                 countries.remove(new Random().nextInt(countries.size())),
@@ -261,6 +263,22 @@ public class Diplomacy {
 
     public long getUnitCount(Country country) {
         return unitLocations.values().stream().filter(unit -> unit.getCountry().equals(country)).count();
+    }
+
+    public long getArmyCount(Country country) {
+        return getUnitCount(country, UnitType.ARMY);
+    }
+
+    public long getFleetCount(Country country) {
+        return getUnitCount(country, UnitType.FLEET);
+    }
+
+    private long getUnitCount(Country country, UnitType unitType) {
+        return unitLocations.values()
+                            .stream()
+                            .filter(unit -> unit.getCountry().equals(country))
+                            .filter(unit -> unit.getType().equals(unitType))
+                            .count();
     }
 
     public long getYear() {

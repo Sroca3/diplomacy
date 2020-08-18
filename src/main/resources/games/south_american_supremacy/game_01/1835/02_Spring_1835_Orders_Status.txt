@@ -1,0 +1,42 @@
+Status
+--------------------------------
+
+CHILE
+2 army units
+1 fleet units
+3 centers
+
+ARGENTINA
+2 army units
+1 fleet units
+3 centers
+
+BOLIVIA
+2 army units
+1 fleet units
+3 centers
+
+BRASIL
+2 army units
+1 fleet units
+3 centers
+
+COLOMBIA
+2 army units
+1 fleet units
+3 centers
+
+PARAGUAY
+2 army units
+1 fleet units
+3 centers
+
+PERU
+2 army units
+1 fleet units
+3 centers
+
+VENEZUELA
+2 army units
+1 fleet units
+3 centers
