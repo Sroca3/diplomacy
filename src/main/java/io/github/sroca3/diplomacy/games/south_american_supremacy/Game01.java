@@ -79,7 +79,7 @@ public class Game01 {
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         g2d.setFont(font);
         fm = g2d.getFontMetrics();
-        g2d.setColor(Color.WHITE);
+        g2d.setColor(Color.BLACK);
         g2d.drawString("Status:", 0, fm.getAscent());
         g2d.drawString("--------------------------------", 0, fm.getAscent() * 2);
         SortedSet<Country> countries = diplomacy.getMapVariant().getCountries();
