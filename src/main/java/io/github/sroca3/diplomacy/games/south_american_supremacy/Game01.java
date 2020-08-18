@@ -49,11 +49,22 @@ public class Game01 {
         diplomacy.addStandardStartingUnits();
         diplomacy.beginFirstPhase();
         generateStatus(diplomacy, "02_Spring_1835_Orders");
+
+
+
+        generateStatus(diplomacy, "Latest", true);
     }
 
     private static void generateStatus(Diplomacy diplomacy, String filePrefix) throws IOException {
+        generateStatus(diplomacy, filePrefix, false);
+    }
+
+    private static void generateStatus(Diplomacy diplomacy, String filePrefix, boolean isLatest) throws IOException {
         SortedSet<Country> countries = diplomacy.getMapVariant().getCountries();
-        File statusFile = Paths.get("src/main/resources/games/south_american_supremacy/game_01/" + diplomacy.getYear() + "/" + filePrefix + "_Status.txt")
+        if(!isLatest) {
+            filePrefix = diplomacy.getYear() + "/" + filePrefix;
+        }
+        File statusFile = Paths.get("src/main/resources/games/south_american_supremacy/game_01/" + filePrefix + "_Status.txt")
                                .toFile();
         if (statusFile.exists()) {
             statusFile.delete();
