@@ -86,9 +86,9 @@ public class Game01 {
         int line = 4;
         for (Country country : countries) {
                 g2d.drawString(country.name(), 0, fm.getAscent() * line++);
-                g2d.drawString(diplomacy.getArmyCount(Country.ARGENTINA) + " army units", 0, fm.getAscent() * line++);
-                g2d.drawString(diplomacy.getFleetCount(Country.ARGENTINA) + " fleet units", 0, fm.getAscent() * line++);
-                g2d.drawString(diplomacy.getSupplyCenterCount(Country.ARGENTINA) + " centers", 0, fm.getAscent() * line++);
+                g2d.drawString(diplomacy.getArmyCount(country) + " army units", 0, fm.getAscent() * line++);
+                g2d.drawString(diplomacy.getFleetCount(country) + " fleet units", 0, fm.getAscent() * line++);
+                g2d.drawString(diplomacy.getSupplyCenterCount(country) + " centers", 0, fm.getAscent() * line++);
                 line++;
         }
         g2d.dispose();
