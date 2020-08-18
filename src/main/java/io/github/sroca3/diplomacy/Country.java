@@ -1,11 +1,19 @@
 package io.github.sroca3.diplomacy;
 
 public enum Country {
+    ARGENTINA,
     AUSTRIA,
+    BOLIVIA,
+    BRASIL,
+    CHILE,
+    COLOMBIA,
     ENGLAND,
     FRANCE,
     GERMANY,
     ITALY,
+    PARAGUAY,
+    PERU,
     RUSSIA,
-    TURKEY, CHILE, ARGENTINA, BOLIVIA, BRASIL, COLOMBIA, PARAGUAY, PERU, VENEZUELA;
+    TURKEY,
+    VENEZUELA;
 }

@@ -1,11 +1,6 @@
 Status
 --------------------------------
 
-CHILE
-2 army units
-1 fleet units
-3 centers
-
 ARGENTINA
 2 army units
 1 fleet units
@@ -17,6 +12,11 @@ BOLIVIA
 3 centers
 
 BRASIL
+2 army units
+1 fleet units
+3 centers
+
+CHILE
 2 army units
 1 fleet units
 3 centers
