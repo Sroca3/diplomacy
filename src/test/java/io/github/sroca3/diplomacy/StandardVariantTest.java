@@ -524,4 +524,44 @@ public class StandardVariantTest {
         assertEquals(OrderStatus.RESOLVED, italianOrders.get(0).getStatus());
         assertEquals(OrderStatus.RESOLVED, italianOrders.get(0).getStatus());
     }
+
+    @Test
+    @DisplayName("TWO ARMIES WITH TWO CONVOYS")
+    public void testCase6_C_6() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.NORTH_SEA, new Fleet(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.LONDON, new Army(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.ENGLISH_CHANNEL, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.BELGIUM, new Army(Country.FRANCE));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_C_6.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> englishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ENGLAND);
+        assertEquals(OrderStatus.RESOLVED, englishOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, englishOrders.get(1).getStatus());
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.RESOLVED, frenchOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, frenchOrders.get(1).getStatus());
+    }
+
+    @Test
+    @DisplayName("DISRUPTED UNIT SWAP")
+    public void testCase6_C_7() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.NORTH_SEA, new Fleet(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.LONDON, new Army(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.ENGLISH_CHANNEL, new Fleet(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.BELGIUM, new Army(Country.FRANCE));
+        diplomacy.addUnit(StandardVariantLocation.BURGUNDY, new Army(Country.FRANCE));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_C_7.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> englishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ENGLAND);
+        assertEquals(OrderStatus.RESOLVED, englishOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, englishOrders.get(1).getStatus());
+        List<Order> frenchOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.FRANCE);
+        assertEquals(OrderStatus.RESOLVED, frenchOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, frenchOrders.get(1).getStatus());
+        assertEquals(OrderStatus.BOUNCED, frenchOrders.get(2).getStatus());
+    }
 }
