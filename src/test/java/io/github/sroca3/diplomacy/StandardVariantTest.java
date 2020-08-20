@@ -564,4 +564,145 @@ public class StandardVariantTest {
         assertEquals(OrderStatus.BOUNCED, frenchOrders.get(1).getStatus());
         assertEquals(OrderStatus.BOUNCED, frenchOrders.get(2).getStatus());
     }
+
+    @Test
+    @DisplayName("SUPPORTED HOLD CAN PREVENT DISLODGEMENT")
+    public void testCase6_D_1() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.ADRIATIC_SEA, new Fleet(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.TRIESTE, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.VENICE, new Army(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.TYROLIA, new Army(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_1.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
+        assertEquals(OrderStatus.SUPPORT_FAILED, austrianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, austrianOrders.get(1).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(1).getStatus());
+    }
+
+    @Test
+    @DisplayName("A MOVE CUTS SUPPORT ON HOLD")
+    public void testCase6_D_2() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.ADRIATIC_SEA, new Fleet(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.TRIESTE, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.VIENNA, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.VENICE, new Army(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.TYROLIA, new Army(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_2.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
+        assertEquals(OrderStatus.RESOLVED, austrianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, austrianOrders.get(1).getStatus());
+        assertEquals(OrderStatus.BOUNCED, austrianOrders.get(2).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.DISLODGED, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.SUPPORT_CUT, italianOrders.get(1).getStatus());
+    }
+
+    @Test
+    @DisplayName("A MOVE CUTS SUPPORT ON MOVE")
+    public void testCase6_D_3() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.ADRIATIC_SEA, new Fleet(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.TRIESTE, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.VENICE, new Army(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.IONIAN_SEA, new Fleet(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_3.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
+        assertEquals(OrderStatus.SUPPORT_CUT, austrianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, austrianOrders.get(1).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, italianOrders.get(1).getStatus());
+    }
+
+    @Test
+    @DisplayName("SUPPORT TO HOLD ON UNIT SUPPORTING A HOLD ALLOWED")
+    public void testCase6_D_4() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.BERLIN, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.KIEL, new Fleet(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.BALTIC_SEA, new Fleet(Country.RUSSIA));
+        diplomacy.addUnit(StandardVariantLocation.PRUSSIA, new Army(Country.RUSSIA));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_4.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> germanOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.GERMANY);
+        assertEquals(OrderStatus.SUPPORT_CUT, germanOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, germanOrders.get(1).getStatus());
+        List<Order> russianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.RUSSIA);
+        assertEquals(OrderStatus.SUPPORT_FAILED, russianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, russianOrders.get(1).getStatus());
+    }
+
+    @Test
+    @DisplayName("SUPPORT TO HOLD ON UNIT SUPPORTING A MOVE ALLOWED")
+    public void testCase6_D_5() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.BERLIN, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.KIEL, new Fleet(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.MUNICH, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.BALTIC_SEA, new Fleet(Country.RUSSIA));
+        diplomacy.addUnit(StandardVariantLocation.PRUSSIA, new Army(Country.RUSSIA));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_5.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> germanOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.GERMANY);
+        assertEquals(OrderStatus.SUPPORT_CUT, germanOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, germanOrders.get(1).getStatus());
+        assertEquals(OrderStatus.RESOLVED, germanOrders.get(2).getStatus());
+        List<Order> russianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.RUSSIA);
+        assertEquals(OrderStatus.SUPPORT_FAILED, russianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, russianOrders.get(1).getStatus());
+    }
+
+    @Test
+    @DisplayName("SUPPORT TO HOLD ON CONVOYING UNIT ALLOWED")
+    public void testCase6_D_6() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.BERLIN, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.BALTIC_SEA, new Fleet(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.PRUSSIA, new Fleet(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.LIVONIA, new Fleet(Country.RUSSIA));
+        diplomacy.addUnit(StandardVariantLocation.GULF_OF_BOTHNIA, new Fleet(Country.RUSSIA));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_6.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> germanOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.GERMANY);
+        assertEquals(OrderStatus.RESOLVED, germanOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, germanOrders.get(1).getStatus());
+        assertEquals(OrderStatus.RESOLVED, germanOrders.get(2).getStatus());
+        List<Order> russianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.RUSSIA);
+        assertEquals(OrderStatus.BOUNCED, russianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.SUPPORT_FAILED, russianOrders.get(1).getStatus());
+    }
+
+    @Test
+    @DisplayName("SUPPORT TO HOLD ON MOVING UNIT NOT ALLOWED")
+    public void testCase6_D_7() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.BALTIC_SEA, new Fleet(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.PRUSSIA, new Fleet(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.FINLAND, new Army(Country.RUSSIA));
+        diplomacy.addUnit(StandardVariantLocation.LIVONIA, new Fleet(Country.RUSSIA));
+        diplomacy.addUnit(StandardVariantLocation.GULF_OF_BOTHNIA, new Fleet(Country.RUSSIA));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_7.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> germanOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.GERMANY);
+        assertEquals(OrderStatus.DISLODGED, germanOrders.get(0).getStatus());
+        assertEquals(OrderStatus.ILLEGAL_ORDER_REPLACED_WITH_HOLD, germanOrders.get(1).getStatus());
+        List<Order> russianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.RUSSIA);
+        assertEquals(OrderStatus.RESOLVED, russianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, russianOrders.get(1).getStatus());
+        assertEquals(OrderStatus.BOUNCED, russianOrders.get(2).getStatus());
+    }
 }

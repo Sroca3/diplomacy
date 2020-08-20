@@ -119,6 +119,14 @@ public class Phase {
             .findAny();
     }
 
+    private Optional<Order> findByTypeAndCurrentLocation(OrderType orderType, Location currentLocation) {
+        return orders
+            .stream()
+            .filter(order -> order.getOrderType() == orderType)
+            .filter(order -> order.getCurrentLocation() == currentLocation)
+            .findAny();
+    }
+
     private Optional<Order> findBy(OrderType orderType, Location fromLocation, Location toLocation) {
         return orders
             .stream()
@@ -179,10 +187,33 @@ public class Phase {
                     }
                     }
                 );
+            findBy(OrderType.HOLD, order.getFromLocation(), order.getToLocation())
+                .ifPresent(o -> {
+                    o.addSupport();
+                    order.resolve();
+                });
+            findByTypeAndCurrentLocation(OrderType.SUPPORT, order.getToLocation())
+                .ifPresent(o -> {
+                    if (order.getFromLocation() == o.getCurrentLocation()) {
+                        o.addSupport();
+                        order.resolve();
+                    }
+                });
+            findByTypeAndCurrentLocation(OrderType.CONVOY, order.getToLocation())
+                .ifPresent(o -> {
+                    if (order.getFromLocation() == order.getToLocation()) {
+                        o.addSupport();
+                        order.resolve();
+                    }
+                });
         } else if (isDislodged(order)) {
             order.dislodge();
         } else {
             order.cut();
+        }
+
+        if (order.getStatus().isProcessing()) {
+            order.convertIllegalMoveToHold();
         }
     }
 
@@ -210,7 +241,36 @@ public class Phase {
                             order.getStrength() > conflictingOrder.get().getStrength()
                     )
             ) {
-                order.resolve();
+                findBy(OrderType.HOLD, order.getToLocation())
+                    .ifPresentOrElse(o -> {
+                        calculateStrengthForOrder(o);
+                        if (o.getStrength() >= order.getStrength()) {
+                            order.bounce();
+                            markSupportingUnitsAsFailed(order);
+                        } else {
+                            order.resolve();
+                        }
+                    }, order::resolve);
+                findByTypeAndCurrentLocation(OrderType.SUPPORT, order.getToLocation())
+                    .ifPresent(o -> {
+                        calculateStrengthForOrder(o);
+                        if (o.getStrength() >= order.getStrength()) {
+                            order.bounce();
+                            markSupportingUnitsAsFailed(order);
+                        } else {
+                            order.resolve();
+                        }
+                    });
+                findByTypeAndCurrentLocation(OrderType.CONVOY, order.getToLocation())
+                    .ifPresent(o -> {
+                        calculateStrengthForOrder(o);
+                        if (o.getStrength() >= order.getStrength()) {
+                            order.bounce();
+                            markSupportingUnitsAsFailed(order);
+                        } else {
+                            order.resolve();
+                        }
+                    });
             } else if (conflictingOrder.isEmpty() && isDestinationLocationBeingVacated(order)) {
                 order.resolve();
             } else if (isDislodged(order)) {
@@ -337,7 +397,7 @@ public class Phase {
 
     private void markSupportingUnitsAsFailed(Order order) {
         findAllBy(OrderType.SUPPORT, order.getCurrentLocation(), order.getToLocation()).forEach(o -> {
-            if (!o.getStatus().isCut()) {
+            if (!o.getStatus().isCut() && !o.getStatus().isIllegal()) {
                 o.failed();
             }
         });
@@ -373,6 +433,7 @@ public class Phase {
     }
 
     private boolean isDislodged(Order order) {
+        calculateStrengthForOrder(order);
         Optional<Order> dislodgeOrder = findAllBy(OrderType.MOVE, order.getCurrentLocation())
             .stream()
             .findAny();
@@ -412,11 +473,15 @@ public class Phase {
     }
 
     private Order calculateStrengthForOrder(Order order) {
-        orders.forEach(o -> {
-            if (findBy(OrderType.SUPPORT, o.getFromLocation(), o.getToLocation()).isPresent()) {
-                resolveOrder(o);
-            }
-        });
+        if (order.getOrderType().isSupport() || order.getOrderType().isConvoy()) {
+            findAllBy(
+                OrderType.SUPPORT,
+                order.getCurrentLocation(),
+                order.getCurrentLocation()
+            ).forEach(this::resolveOrder);
+        } else {
+            findAllBy(OrderType.SUPPORT, order.getFromLocation(), order.getToLocation()).forEach(this::resolveOrder);
+        }
         return order;
     }
 
