@@ -59,6 +59,9 @@ public class Phase {
     private Order resolveOrder(Order order) {
         if (!order.getOrderType().isConvoy() && !isOrderForAdjacentLocations(order) && !isConvoyPresent(order)) {
             order.convertIllegalMoveToHold();
+            if (isDislodged(order)) {
+                order.dislodge();
+            }
         }
         if (order.getStatus().isProcessing()) {
             order.resolve();

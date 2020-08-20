@@ -705,4 +705,25 @@ public class StandardVariantTest {
         assertEquals(OrderStatus.RESOLVED, russianOrders.get(1).getStatus());
         assertEquals(OrderStatus.BOUNCED, russianOrders.get(2).getStatus());
     }
+
+    @Test
+    @DisplayName("FAILED CONVOY CAN NOT RECEIVE HOLD SUPPORT")
+    public void testCase6_D_8() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.IONIAN_SEA, new Fleet(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.SERBIA, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.ALBANIA, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.GREECE, new Army(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.BULGARIA, new Army(Country.TURKEY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_8.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
+        assertEquals(OrderStatus.RESOLVED, austrianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, austrianOrders.get(1).getStatus());
+        assertEquals(OrderStatus.RESOLVED, austrianOrders.get(2).getStatus());
+        List<Order> turkishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.TURKEY);
+        assertEquals(OrderStatus.DISLODGED, turkishOrders.get(0).getStatus());
+        assertEquals(OrderStatus.ILLEGAL_ORDER_REPLACED_WITH_HOLD, turkishOrders.get(1).getStatus());
+    }
 }

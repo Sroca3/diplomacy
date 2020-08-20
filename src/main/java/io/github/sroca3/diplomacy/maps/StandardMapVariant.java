@@ -97,10 +97,10 @@ public class StandardMapVariant implements MapVariant {
 
         addEdge(armyGraph, StandardVariantLocation.SERBIA, StandardVariantLocation.BULGARIA);
         addEdge(armyGraph, StandardVariantLocation.SERBIA, StandardVariantLocation.GREECE);
-        addEdge(armyGraph, StandardVariantLocation.SERBIA, StandardVariantLocation.ALBANY);
+        addEdge(armyGraph, StandardVariantLocation.SERBIA, StandardVariantLocation.ALBANIA);
         addEdge(armyGraph, StandardVariantLocation.SERBIA, StandardVariantLocation.TRIESTE);
 
-        addEdge(armyGraph, StandardVariantLocation.ALBANY, StandardVariantLocation.GREECE);
+        addEdge(armyGraph, StandardVariantLocation.ALBANIA, StandardVariantLocation.GREECE);
 
         addEdge(armyGraph, StandardVariantLocation.BULGARIA, StandardVariantLocation.GREECE);
         addEdge(armyGraph, StandardVariantLocation.BULGARIA, StandardVariantLocation.CONSTANTINOPLE);
@@ -308,9 +308,9 @@ public class StandardMapVariant implements MapVariant {
 
         addEdge(fleetGraph, StandardVariantLocation.VENICE, StandardVariantLocation.TRIESTE);
 
-        addEdge(fleetGraph, StandardVariantLocation.TRIESTE, StandardVariantLocation.ALBANY);
+        addEdge(fleetGraph, StandardVariantLocation.TRIESTE, StandardVariantLocation.ALBANIA);
 
-        addEdge(fleetGraph, StandardVariantLocation.ALBANY, StandardVariantLocation.GREECE);
+        addEdge(fleetGraph, StandardVariantLocation.ALBANIA, StandardVariantLocation.GREECE);
 
         addEdge(fleetGraph, StandardVariantLocation.GREECE, StandardVariantLocation.BULGARIA_SC);
 
@@ -353,7 +353,7 @@ public class StandardMapVariant implements MapVariant {
         addEdge(fleetGraph, StandardVariantLocation.IONIAN_SEA, StandardVariantLocation.NAPLES);
         addEdge(fleetGraph, StandardVariantLocation.IONIAN_SEA, StandardVariantLocation.APULIA);
         addEdge(fleetGraph, StandardVariantLocation.IONIAN_SEA, StandardVariantLocation.ADRIATIC_SEA);
-        addEdge(fleetGraph, StandardVariantLocation.IONIAN_SEA, StandardVariantLocation.ALBANY);
+        addEdge(fleetGraph, StandardVariantLocation.IONIAN_SEA, StandardVariantLocation.ALBANIA);
         addEdge(fleetGraph, StandardVariantLocation.IONIAN_SEA, StandardVariantLocation.GREECE);
         addEdge(fleetGraph, StandardVariantLocation.IONIAN_SEA, StandardVariantLocation.AEGEAN_SEA);
         addEdge(fleetGraph, StandardVariantLocation.IONIAN_SEA, StandardVariantLocation.EASTERN_MEDITERRANEAN);
@@ -361,7 +361,7 @@ public class StandardMapVariant implements MapVariant {
         addEdge(fleetGraph, StandardVariantLocation.ADRIATIC_SEA, StandardVariantLocation.APULIA);
         addEdge(fleetGraph, StandardVariantLocation.ADRIATIC_SEA, StandardVariantLocation.VENICE);
         addEdge(fleetGraph, StandardVariantLocation.ADRIATIC_SEA, StandardVariantLocation.TRIESTE);
-        addEdge(fleetGraph, StandardVariantLocation.ADRIATIC_SEA, StandardVariantLocation.ALBANY);
+        addEdge(fleetGraph, StandardVariantLocation.ADRIATIC_SEA, StandardVariantLocation.ALBANIA);
 
         addEdge(fleetGraph, StandardVariantLocation.AEGEAN_SEA, StandardVariantLocation.GREECE);
         addEdge(fleetGraph, StandardVariantLocation.AEGEAN_SEA, StandardVariantLocation.BULGARIA_SC);

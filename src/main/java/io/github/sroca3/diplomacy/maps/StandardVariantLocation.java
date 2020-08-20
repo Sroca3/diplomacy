@@ -17,7 +17,7 @@ public enum StandardVariantLocation implements Location {
 
     ADRIATIC_SEA(new UnitType[]{UnitType.FLEET}, "Adr"),
     AEGEAN_SEA(new UnitType[]{UnitType.FLEET}, "Aeg"),
-    ALBANY(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Alb"),
+    ALBANIA(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Alb"),
     ANKARA(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Ank", true),
     APULIA(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Apu"),
     ARMENIA(new UnitType[]{UnitType.FLEET}, "Arm"),
@@ -42,7 +42,7 @@ public enum StandardVariantLocation implements Location {
     FINLAND(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Fin"),
     GALICIA(new UnitType[]{UnitType.FLEET}, "Gal"),
     GASCONY(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Gas"),
-    GREECE(new UnitType[]{UnitType.FLEET}, "Gre", true),
+    GREECE(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Gre", true),
     GULF_OF_BOTHNIA(new UnitType[]{UnitType.FLEET}, "GoB"),
     GULF_OF_LYON(new UnitType[]{UnitType.FLEET}, "GoL"),
     HELGOLAND_BIGHT(new UnitType[]{UnitType.FLEET}, "Hel"),
