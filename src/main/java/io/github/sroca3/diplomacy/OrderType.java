@@ -10,7 +10,8 @@ public enum OrderType {
     CONVOY(Set.of("convoys")),
     HOLD,
     MOVE(Set.of("-")),
-    SUPPORT(Set.of("supports"));
+    SUPPORT(Set.of("supports")),
+    RETREAT();
 
     private static final Map<String, OrderType> NAMES_MAPPING = new HashMap<>();
 
@@ -33,7 +34,10 @@ public enum OrderType {
         this.alternateNames = alternateNames;
     }
 
-    public static OrderType from(String name) {
+    public static OrderType from(String name, PhaseName phaseName) {
+        if (phaseName.isRetreatPhase() && name.equalsIgnoreCase("-")) {
+            return RETREAT;
+        }
         return NAMES_MAPPING.get(name.toLowerCase(Locale.ENGLISH));
     }
 
@@ -55,5 +59,9 @@ public enum OrderType {
 
     public Set<String> getAlternateNames() {
         return alternateNames;
+    }
+
+    public boolean isRetreat() {
+        return this == RETREAT;
     }
 }

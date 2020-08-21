@@ -50,6 +50,10 @@ public class Phase {
         return resultingUnitLocations;
     }
 
+    public List<Order> getOrders() {
+        return List.copyOf(orders);
+    }
+
     public void addOrder(
         Order order
     ) {
@@ -81,15 +85,30 @@ public class Phase {
                 case CONVOY:
                     resolveConvoyOrder(order);
                     break;
+                case RETREAT:
+                    resolveRetreatOrder(order);
+                    break;
             }
         }
 
-        if (order.getOrderType().isMove() && order.getStatus().isResolved()) {
+        if (order.getOrderType().isMove() || order.getOrderType().isRetreat() && order.getStatus().isResolved()) {
             resultingUnitLocations.remove(order.getCurrentLocation());
             resultingUnitLocations.put(order.getToLocation(), order.getUnit());
         }
 
+        if (order.getOrderType().isRetreat() && order.getStatus().isBounced()) {
+            resultingUnitLocations.remove(order.getCurrentLocation());
+        }
+
         return order;
+    }
+
+    private void resolveRetreatOrder(Order order) {
+        if (competingRetreatExists(order)) {
+            order.bounce();
+        } else {
+            order.resolve();
+        }
     }
 
     private void resolveConvoyOrder(Order order) {
@@ -119,6 +138,13 @@ public class Phase {
                 }
                 return order.getToLocation().equals(toLocation);
             })
+            .findAny();
+    }
+
+    private Optional<Order> findByCurrentLocation(Location currentLocation) {
+        return orders
+            .stream()
+            .filter(order -> order.getCurrentLocation() == currentLocation)
             .findAny();
     }
 
@@ -174,6 +200,15 @@ public class Phase {
             .collect(Collectors.toList());
     }
 
+    private void addSupport(Order order, Order supportOrder) {
+        findByCurrentLocation(order.getToLocation())
+            .ifPresentOrElse(o -> {
+                if (!(order.getOrderType().isMove() && o.getCountry().equals(supportOrder.getCountry()))) {
+                    order.addSupport();
+                }
+            }, order::addSupport);
+    }
+
     private void resolveSupportOrder(Order order) {
         if (findBy(OrderType.MOVE, order.getCurrentLocation()).isEmpty()) {
             findBy(OrderType.MOVE, order.getFromLocation(), order.getToLocation())
@@ -185,27 +220,27 @@ public class Phase {
                         && !order.getToLocation().equals(o.getToLocation())) {
                         order.failed();
                     } else {
-                        o.addSupport();
+                        addSupport(o, order);
                         order.resolve();
                     }
                     }
                 );
             findBy(OrderType.HOLD, order.getFromLocation(), order.getToLocation())
                 .ifPresent(o -> {
-                    o.addSupport();
+                    addSupport(o, order);
                     order.resolve();
                 });
             findByTypeAndCurrentLocation(OrderType.SUPPORT, order.getToLocation())
                 .ifPresent(o -> {
                     if (order.getFromLocation() == o.getCurrentLocation()) {
-                        o.addSupport();
+                        addSupport(o, order);
                         order.resolve();
                     }
                 });
             findByTypeAndCurrentLocation(OrderType.CONVOY, order.getToLocation())
                 .ifPresent(o -> {
                     if (order.getFromLocation() == order.getToLocation()) {
-                        o.addSupport();
+                        addSupport(o, order);
                         order.resolve();
                     }
                 });
@@ -247,7 +282,7 @@ public class Phase {
                 findBy(OrderType.HOLD, order.getToLocation())
                     .ifPresentOrElse(o -> {
                         calculateStrengthForOrder(o);
-                        if (o.getStrength() >= order.getStrength()) {
+                        if (o.getStrength() >= order.getStrength() || o.getCountry().equals(order.getCountry())) {
                             order.bounce();
                             markSupportingUnitsAsFailed(order);
                         } else {
@@ -272,6 +307,13 @@ public class Phase {
                             markSupportingUnitsAsFailed(order);
                         } else {
                             order.resolve();
+                        }
+                    });
+                findByTypeAndCurrentLocation(OrderType.MOVE, order.getToLocation())
+                    .ifPresent(o -> {
+                        if (o.getStatus().isBounced() && o.getCountry().equals(order.getCountry())) {
+                            order.bounce();
+                            markSupportingUnitsAsFailed(order);
                         }
                     });
             } else if (conflictingOrder.isEmpty() && isDestinationLocationBeingVacated(order)) {
@@ -306,6 +348,14 @@ public class Phase {
             .filter(o -> o.getToLocation().getTerritory().equals(order.getToLocation().getTerritory()))
             .filter(o -> o.getOrderType().isMove())
             .count() > 1;
+    }
+
+    private boolean competingRetreatExists(Order order) {
+        return orders
+            .stream()
+            .filter(o -> o.getToLocation().getTerritory().equals(order.getToLocation().getTerritory()))
+            .filter(o -> o.getOrderType().isRetreat())
+            .count() > 0;
     }
 
     private boolean isDestinationLocationBeingVacated(Order order) {
@@ -442,6 +492,7 @@ public class Phase {
             .findAny();
         return dislodgeOrder
             .map(this::calculateStrengthForOrder)
+            .filter(o -> !o.getCountry().equals(order.getCountry()))
             .filter(o -> o.getStrength() > order.getStrength())
             .isPresent();
     }
@@ -501,10 +552,13 @@ public class Phase {
             .stream()
             .collect(Collectors.toMap(Order::getCurrentLocation, Function.identity()));
         startingUnitLocations.keySet().forEach(location -> {
-            if (locationToOrderMap.get(location) == null) {
+            if (getPhaseName().isOrderPhase() && locationToOrderMap.get(location) == null) {
                 addOrder(new Order(startingUnitLocations.get(location), location));
             }
         });
+        if (getPhaseName().isRetreatPhase()) {
+            orders.removeAll(orders.stream().filter(o -> !o.getOrderType().isRetreat()).collect(Collectors.toList()));
+        }
         orders.forEach(this::resolveOrder);
         orders.forEach(o -> System.out.println(o.getDescription()));
     }

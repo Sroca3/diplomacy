@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -117,11 +118,22 @@ public class Diplomacy {
     }
 
     private PhaseName getNextPhaseName() {
+        boolean retreatsPresent = getCurrentPhase() != null && getCurrentPhase()
+            .getOrders()
+            .stream()
+            .filter(o -> o.getStatus().isDislodged())
+            .anyMatch(obj -> true);
         if (currentPhase != null) {
             PhaseName phaseName = currentPhase.getPhaseName();
             if (phaseName == PhaseName.SPRING_ORDERS) {
+                if (retreatsPresent) {
+                    return PhaseName.SPRING_RETREAT;
+                }
                 return PhaseName.FALL_ORDERS;
             } else if (phaseName == PhaseName.FALL_ORDERS) {
+                if (retreatsPresent) {
+                    return PhaseName.FALL_RETREAT;
+                }
                 return PhaseName.WINTER_BUILD;
             } else if (phaseName == PhaseName.WINTER_BUILD) {
                 return PhaseName.SPRING_ORDERS;
@@ -170,7 +182,7 @@ public class Diplomacy {
             }
         }
         String orderTypeString = iterator.next().toUpperCase(Locale.ENGLISH);
-        OrderType orderType = OrderType.from(orderTypeString);
+        OrderType orderType = OrderType.from(orderTypeString, currentPhase.getPhaseName());
         Location fromLocation;
         Location toLocation;
         if (orderType.isSupport() || orderType.isConvoy()) {
@@ -224,33 +236,7 @@ public class Diplomacy {
     }
 
     public void addStandardStartingUnits() {
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.SALTA, new Army(Country.ARGENTINA));
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.CORDOBA, new Army(Country.ARGENTINA));
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.BUENOS_AIRES, new Fleet(Country.ARGENTINA));
-
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.ANTOFAGASTA, new Fleet(Country.BOLIVIA));
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.LA_PAZ, new Army(Country.BOLIVIA));
-
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.SALVADOR, new Fleet(Country.BRASIL));
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.SAO_PAULO, new Fleet(Country.BRASIL));
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.RIO_DE_JANEIRO, new Army(Country.BRASIL));
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.MANAUS, new Army(Country.BRASIL));
-
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.VALPARAISO, new Fleet(Country.CHILE));
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.SANTIAGO, new Army(Country.CHILE));
-
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.CARTAGENA, new Fleet(Country.COLOMBIA));
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.CALI, new Fleet(Country.COLOMBIA));
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.BOGOTA, new Army(Country.COLOMBIA));
-
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.ASUNCION, new Army(Country.PARAGUAY));
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.CONCEPCION, new Army(Country.PARAGUAY));
-
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.LIMA, new Fleet(Country.PERU));
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.TRUJILLO, new Army(Country.PERU));
-
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.CARACAS, new Fleet(Country.VENEZUELA));
-        addUnitAndClaimLocation(SouthAmericanSupremacyLocation.MARACAIBO, new Army(Country.VENEZUELA));
+        mapVariant.getStartingUnits().forEach(this::addUnitAndClaimLocation);
     }
 
     public long getSupplyCenterCount(Country country) {

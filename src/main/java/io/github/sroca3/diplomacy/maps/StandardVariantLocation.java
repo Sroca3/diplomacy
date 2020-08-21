@@ -93,7 +93,7 @@ public enum StandardVariantLocation implements Location {
     VENICE(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Ven", true),
     VIENNA(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Vie", true),
     WALES(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Wal"),
-    WARSAW(new UnitType[]{UnitType.FLEET}, "War", true),
+    WARSAW(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "War", true),
     WESTERN_MEDITERRANEAN(new UnitType[]{UnitType.FLEET}, "Wes"),
     YORKSHIRE(new UnitType[]{UnitType.FLEET, UnitType.ARMY}, "Yor");
 

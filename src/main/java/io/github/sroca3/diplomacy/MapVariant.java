@@ -1,5 +1,6 @@
 package io.github.sroca3.diplomacy;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
@@ -14,4 +15,8 @@ public interface MapVariant {
     Map<Location, Set<Location>> getMovementGraph(UnitType unitType);
 
     long getStartingYear();
+
+    default Map<Location, Unit> getStartingUnits() {
+        return Collections.emptyMap();
+    }
 }

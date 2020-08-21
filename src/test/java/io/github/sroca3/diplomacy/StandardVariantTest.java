@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class StandardVariantTest {
 
@@ -726,4 +727,137 @@ public class StandardVariantTest {
         assertEquals(OrderStatus.DISLODGED, turkishOrders.get(0).getStatus());
         assertEquals(OrderStatus.ILLEGAL_ORDER_REPLACED_WITH_HOLD, turkishOrders.get(1).getStatus());
     }
+
+    @Test
+    @DisplayName("SUPPORT TO MOVE ON HOLDING UNIT NOT ALLOWED")
+    public void testCase6_D_9() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.VENICE, new Army(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.TYROLIA, new Army(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.ALBANIA, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.TRIESTE, new Army(Country.AUSTRIA));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_9.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
+        assertEquals(OrderStatus.ILLEGAL_ORDER_REPLACED_WITH_HOLD, austrianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.DISLODGED, austrianOrders.get(1).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(1).getStatus());
+    }
+
+    @Test
+    @DisplayName("SELF DISLODGMENT PROHIBITED")
+    public void testCase6_D_10() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.BERLIN, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.KIEL, new Fleet(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.MUNICH, new Army(Country.GERMANY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_10.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> germanOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.GERMANY);
+        assertEquals(OrderStatus.RESOLVED, germanOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, germanOrders.get(1).getStatus());
+        assertEquals(OrderStatus.SUPPORT_FAILED, germanOrders.get(2).getStatus());
+    }
+
+    @Test
+    @DisplayName("NO SELF DISLODGMENT OF RETURNING UNIT")
+    public void testCase6_D_11() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.BERLIN, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.KIEL, new Fleet(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.MUNICH, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.WARSAW, new Army(Country.RUSSIA));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_11.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> germanOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.GERMANY);
+        assertEquals(OrderStatus.BOUNCED, germanOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, germanOrders.get(1).getStatus());
+        assertEquals(OrderStatus.SUPPORT_FAILED, germanOrders.get(2).getStatus());
+        List<Order> russianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.RUSSIA);
+        assertEquals(OrderStatus.BOUNCED, russianOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("SUPPORTING A FOREIGN UNIT TO DISLODGE OWN UNIT PROHIBITED")
+    public void testCase6_D_12() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.TRIESTE, new Fleet(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.VIENNA, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.VENICE, new Army(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_12.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
+        assertEquals(OrderStatus.RESOLVED, austrianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.SUPPORT_FAILED, austrianOrders.get(1).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.BOUNCED, italianOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("SUPPORTING A FOREIGN UNIT TO DISLODGE A RETURNING OWN UNIT PROHIBITED")
+    public void testCase6_D_13() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.TRIESTE, new Fleet(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.VIENNA, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.VENICE, new Army(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.APULIA, new Fleet(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_D_13.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
+        assertEquals(OrderStatus.BOUNCED, austrianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.SUPPORT_FAILED, austrianOrders.get(1).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.BOUNCED, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, italianOrders.get(1).getStatus());
+    }
+
+    @Test
+    @DisplayName("NO SUPPORTS DURING RETREAT")
+    public void testCase6_H_1() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.TRIESTE, new Fleet(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.SERBIA, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.GREECE, new Fleet(Country.TURKEY));
+        diplomacy.addUnit(StandardVariantLocation.VENICE, new Army(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.TYROLIA, new Army(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.IONIAN_SEA, new Fleet(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.AEGEAN_SEA, new Fleet(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        List<Order> orders = diplomacy.parseOrders("src/test/resources/test-cases/6_H_1.txt");
+        diplomacy.addOrders(orders);
+        diplomacy.adjudicate();
+        List<Order> austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
+        assertEquals(OrderStatus.DISLODGED, austrianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, austrianOrders.get(1).getStatus());
+        List<Order> turkishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.TURKEY);
+        assertEquals(OrderStatus.DISLODGED, turkishOrders.get(0).getStatus());
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(1).getStatus());
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(2).getStatus());
+        assertEquals(OrderStatus.RESOLVED, italianOrders.get(3).getStatus());
+
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("F Trieste - Albania"),
+            diplomacy.parseOrder("A Serbia Supports F Trieste - Albania"),
+            diplomacy.parseOrder("F Greece - Albania")
+        ));
+        diplomacy.adjudicate();
+        austrianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.AUSTRIA);
+        assertEquals(1, austrianOrders.size());
+        assertEquals(OrderStatus.BOUNCED, austrianOrders.get(0).getStatus());
+        turkishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.TURKEY);
+        assertEquals(1, turkishOrders.size());
+        assertEquals(OrderStatus.BOUNCED, turkishOrders.get(0).getStatus());
+        assertNull(diplomacy.getCurrentPhase().getResultingUnitLocations().get(StandardVariantLocation.TRIESTE));
+        assertNull(diplomacy.getCurrentPhase().getResultingUnitLocations().get(StandardVariantLocation.GREECE));
+    }
+
+
 }

@@ -5,5 +5,17 @@ public enum PhaseName {
     SPRING_RETREAT,
     FALL_ORDERS,
     FALL_RETREAT,
-    WINTER_BUILD
+    WINTER_BUILD;
+
+    public boolean isOrderPhase() {
+        return this == SPRING_ORDERS || this == FALL_ORDERS;
+    }
+
+    public boolean isRetreatPhase() {
+        return this == SPRING_RETREAT || this == FALL_RETREAT;
+    }
+
+    public boolean isBuildPhase() {
+        return this == WINTER_BUILD;
+    }
 }

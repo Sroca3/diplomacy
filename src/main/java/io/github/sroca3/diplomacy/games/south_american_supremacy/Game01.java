@@ -2,6 +2,7 @@ package io.github.sroca3.diplomacy.games.south_american_supremacy;
 
 import io.github.sroca3.diplomacy.Country;
 import io.github.sroca3.diplomacy.Diplomacy;
+import io.github.sroca3.diplomacy.Order;
 import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyMapVariant;
 
 import javax.imageio.ImageIO;
@@ -53,56 +54,45 @@ public class Game01 {
         diplomacy.beginFirstPhase();
         generateStatus(diplomacy, "02_Spring_1835_Orders");
 
-        /*
-           Because font metrics is based on a graphics context, we need to create
-           a small, temporary image so we can ascertain the width and height
-           of the final image
-         */
-        BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = img.createGraphics();
-        Font font = new Font("Arial", Font.PLAIN, 12);
-        g2d.setFont(font);
-        FontMetrics fm = g2d.getFontMetrics();
-        int width = fm.stringWidth("--------------------------------");
-        int height = fm.getHeight()*diplomacy.getMapVariant().getCountries().size() * 5;
-        g2d.dispose();
-
-        img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        g2d = img.createGraphics();
-        g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
-        g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
-        g2d.setFont(font);
-        fm = g2d.getFontMetrics();
-        g2d.setColor(Color.BLACK);
-        g2d.drawString("Status:", 0, fm.getAscent());
-        g2d.drawString("--------------------------------", 0, fm.getAscent() * 2);
-        SortedSet<Country> countries = diplomacy.getMapVariant().getCountries();
-        int line = 4;
-        for (Country country : countries) {
-                g2d.drawString(country.name(), 0, fm.getAscent() * line++);
-                g2d.drawString(diplomacy.getArmyCount(country) + " army units", 0, fm.getAscent() * line++);
-                g2d.drawString(diplomacy.getFleetCount(country) + " fleet units", 0, fm.getAscent() * line++);
-                g2d.drawString(diplomacy.getSupplyCenterCount(country) + " centers", 0, fm.getAscent() * line++);
-                line++;
-        }
-        g2d.dispose();
-        try {
-            ImageIO.write(img, "png", new File("src/main/resources/games/south_american_supremacy/game_01/Latest_Status.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        diplomacy.parseOrders("src/main/resources/games/south_american_supremacy/game_01/1835/03_Spring_1835_Orders.txt");
+        diplomacy.adjudicate();
+        generateResults(diplomacy, "04_Spring_1835_Orders");
 
         generateStatus(diplomacy, "Latest", true);
     }
 
+
+
     private static void generateStatus(Diplomacy diplomacy, String filePrefix) throws IOException {
         generateStatus(diplomacy, filePrefix, false);
+    }
+
+    private static void generateResults(Diplomacy diplomacy, String filePrefix) throws IOException {
+        SortedSet<Country> countries = diplomacy.getMapVariant().getCountries();
+        filePrefix = diplomacy.getYear() + "/" + filePrefix;
+        File resultsFile = Paths.get("src/main/resources/games/south_american_supremacy/game_01/" + filePrefix + "_Results.txt")
+                               .toFile();
+        if (resultsFile.exists()) {
+            resultsFile.delete();
+        }
+        resultsFile.createNewFile();
+        try (FileWriter writer = new FileWriter(resultsFile)) {
+            writer.write("Results\n");
+            writer.write("--------------------------------\n");
+            countries.forEach(
+                country -> {
+                    try {
+                        writer.write("\n");
+                        writer.write(country.name() + ":\n");
+                        for (Order order : diplomacy.getPreviousPhase().getOrdersByCountry(country)) {
+                            writer.write(order.getDescription() + "\n");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            );
+        }
     }
 
     private static void generateStatus(Diplomacy diplomacy, String filePrefix, boolean isLatest) throws IOException {
