@@ -172,7 +172,7 @@ public enum StandardVariantLocation implements Location {
 
     @Override
     public String getName() {
-        return null;
+        return name();
     }
 
     @Override

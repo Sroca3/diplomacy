@@ -20,19 +20,8 @@ public class Phase {
     private final Map<Location, Unit> resultingUnitLocations;
     private final Map<Location, Set<Location>> adjacencies;
     private final MapVariant mapVariant;
-    private List<Order> orders = new LinkedList<>();
-    private PhaseName phaseName;
-
-    public Phase(
-        Map<Location, Unit> startingUnitLocations,
-        MapVariant mapVariant,
-        Map<Location, Set<Location>> adjacencies
-    ) {
-        this.startingUnitLocations = Map.copyOf(startingUnitLocations);
-        this.resultingUnitLocations = new HashMap<>(startingUnitLocations);
-        this.adjacencies = adjacencies;
-        this.mapVariant = mapVariant;
-    }
+    private final List<Order> orders = new LinkedList<>();
+    private final PhaseName phaseName;
 
     public Phase(
         Map<Location, Unit> startingUnitLocations,
@@ -328,9 +317,8 @@ public class Phase {
         } else if (isDislodged(order)) {
             order.dislodge();
         } else if (competingMovesExist(order)){
-            List<Order> orders = getConflictingOrders(order);
             calculateStrengthForOrder(order);
-            orders
+            getConflictingOrders(order)
                 .stream()
                 .filter(o -> o.getStrength() >= order.getStrength())
                 .findAny()
@@ -355,8 +343,7 @@ public class Phase {
         return orders
             .stream()
             .filter(o -> o.getToLocation().getTerritory().equals(order.getToLocation().getTerritory()))
-            .filter(o -> o.getOrderType().isRetreat())
-            .count() > 0;
+            .anyMatch(o -> o.getOrderType().isRetreat());
     }
 
     private boolean isDestinationLocationBeingVacated(Order order) {
@@ -387,8 +374,7 @@ public class Phase {
             .stream()
             .filter(o -> o.getOrderType().isConvoy())
             .filter(o -> o.getFromLocation().equals(order.getFromLocation()))
-            .filter(o -> o.getToLocation().equals(order.getToLocation()))
-            .findAny().isPresent();
+            .anyMatch(o -> o.getToLocation().equals(order.getToLocation()));
     }
 
     private boolean isConvoySuccessful(Order order) {
@@ -571,7 +557,6 @@ public class Phase {
     public List<Order> getOrdersByCountry(Country country) {
         return orders.stream()
                      .filter(order -> order.getCountry() == country)
-                     .sorted(Comparator.comparing(o -> o.getCurrentLocation().getName()))
                      .collect(Collectors.toList());
     }
 

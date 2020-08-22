@@ -5,20 +5,19 @@ import io.github.sroca3.diplomacy.Diplomacy;
 import io.github.sroca3.diplomacy.Order;
 import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyMapVariant;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
+import java.util.stream.Collectors;
 
 public class Game01 {
     public static void main(String... args) throws IOException {
@@ -33,7 +32,7 @@ public class Game01 {
             "Antigonos",
             "RolynTrotter"
         ));
-        ;
+
         File countryAssignments =
             Paths.get("src/main/resources/games/south_american_supremacy/game_01/country_assignments.txt").toFile()
         ;
@@ -53,14 +52,16 @@ public class Game01 {
                            });
             }
         } else {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(countryAssignments));
-            // Skip preamble
-            bufferedReader.readLine();
-            Map<Country, String> playerAssignments = new HashMap<>();
-            for (Country country: diplomacy.getMapVariant().getCountries()) {
-                String line = bufferedReader.readLine();
-                String player = line.substring(line.lastIndexOf(" to ") + 4);
-                playerAssignments.put(country, player);
+            Map<Country, String> playerAssignments;
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(countryAssignments))) {
+                // Skip preamble
+                bufferedReader.readLine();
+                playerAssignments = new EnumMap<>(Country.class);
+                for (Country country : diplomacy.getMapVariant().getCountries()) {
+                    String line = bufferedReader.readLine();
+                    String player = line.substring(line.lastIndexOf(" to ") + 4);
+                    playerAssignments.put(country, player);
+                }
             }
             diplomacy.setPlayerAssignments(playerAssignments);
         }
@@ -87,7 +88,7 @@ public class Game01 {
         File resultsFile = Paths.get("src/main/resources/games/south_american_supremacy/game_01/" + filePrefix + "_Results.txt")
                                .toFile();
         if (resultsFile.exists()) {
-            resultsFile.delete();
+            Files.delete(resultsFile.toPath());
         }
         resultsFile.createNewFile();
         try (FileWriter writer = new FileWriter(resultsFile)) {
@@ -98,7 +99,12 @@ public class Game01 {
                     try {
                         writer.write("\n");
                         writer.write(country.name() + " (" + diplomacy.getPlayer(country) + "):\n");
-                        for (Order order : diplomacy.getPreviousPhase().getOrdersByCountry(country)) {
+                        for (Order order : diplomacy.getPreviousPhase()
+                                                    .getOrdersByCountry(country)
+                                                    .stream()
+                                                    .sorted(Comparator.comparing(o -> o.getCurrentLocation().getName()))
+                                                    .collect(
+                                                        Collectors.toList())) {
                             writer.write(order.getDescription() + "\n");
                         }
                     } catch (IOException e) {
@@ -117,7 +123,7 @@ public class Game01 {
         File statusFile = Paths.get("src/main/resources/games/south_american_supremacy/game_01/" + filePrefix + "_Status.txt")
                                .toFile();
         if (statusFile.exists()) {
-            statusFile.delete();
+            Files.delete(statusFile.toPath());
         }
         statusFile.createNewFile();
         try (FileWriter writer = new FileWriter(statusFile)) {
