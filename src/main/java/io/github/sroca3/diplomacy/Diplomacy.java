@@ -46,7 +46,16 @@ public class Diplomacy {
                 players.remove(new Random().nextInt(players.size()))
             );
         }
+        playerAssignments = assignments;
         return assignments;
+    }
+
+    public void setPlayerAssignments(Map<Country, String> playerAssignments) {
+        this.playerAssignments = playerAssignments;
+    }
+
+    public String getPlayer(Country country) {
+        return playerAssignments.get(country);
     }
 
     public MapVariant getMapVariant() {

@@ -1,38 +1,38 @@
 Results
 --------------------------------
 
-ARGENTINA:
-Army Salta Hold -> Resolved
+ARGENTINA (AKFD):
 Fleet Buenos Aires Hold -> Resolved
 Army Cordoba Hold -> Resolved
+Army Salta Hold -> Resolved
 
-BOLIVIA:
-Army La Paz Hold -> Resolved
+BOLIVIA (FloridaMan):
 Fleet Antofagasta Hold -> Resolved
+Army La Paz Hold -> Resolved
 
-BRASIL:
-Fleet Sao Paulo Hold -> Resolved
-Army Rio de Janeiro Hold -> Resolved
+BRASIL (VGhost):
 Army Manaus Hold -> Resolved
+Army Rio de Janeiro Hold -> Resolved
 Fleet Salvador Hold -> Resolved
+Fleet Sao Paulo Hold -> Resolved
 
-CHILE:
-Fleet Valparaiso Hold -> Resolved
+CHILE (Jordan767):
 Army Santiago Hold -> Resolved
+Fleet Valparaiso Hold -> Resolved
 
-COLOMBIA:
-Fleet Cartagena Hold -> Resolved
+COLOMBIA (Antigonos):
 Army Bogota Hold -> Resolved
 Fleet Cali Hold -> Resolved
+Fleet Cartagena Hold -> Resolved
 
-PARAGUAY:
+PARAGUAY (RolynTrotter):
 Army Asuncion Hold -> Resolved
 Army Concepcion Hold -> Resolved
 
-PERU:
-Army Trujillo Hold -> Resolved
+PERU (Don Juan of Austria):
 Fleet Lima Hold -> Resolved
+Army Trujillo Hold -> Resolved
 
-VENEZUELA:
+VENEZUELA (bratsffl):
 Fleet Caracas Hold -> Resolved
 Army Maracaibo Hold -> Resolved

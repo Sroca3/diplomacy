@@ -1,5 +1,6 @@
 package io.github.sroca3.diplomacy;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -568,7 +569,10 @@ public class Phase {
     }
 
     public List<Order> getOrdersByCountry(Country country) {
-        return orders.stream().filter(order -> order.getCountry() == country).collect(Collectors.toList());
+        return orders.stream()
+                     .filter(order -> order.getCountry() == country)
+                     .sorted(Comparator.comparing(o -> o.getCurrentLocation().getName()))
+                     .collect(Collectors.toList());
     }
 
     public PhaseName getPhaseName() {

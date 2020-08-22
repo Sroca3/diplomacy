@@ -8,11 +8,14 @@ import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyMapVariant;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
@@ -49,6 +52,17 @@ public class Game01 {
                                }
                            });
             }
+        } else {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(countryAssignments));
+            // Skip preamble
+            bufferedReader.readLine();
+            Map<Country, String> playerAssignments = new HashMap<>();
+            for (Country country: diplomacy.getMapVariant().getCountries()) {
+                String line = bufferedReader.readLine();
+                String player = line.substring(line.lastIndexOf(" to ") + 4);
+                playerAssignments.put(country, player);
+            }
+            diplomacy.setPlayerAssignments(playerAssignments);
         }
         diplomacy.addStandardStartingUnits();
         diplomacy.beginFirstPhase();
@@ -83,7 +97,7 @@ public class Game01 {
                 country -> {
                     try {
                         writer.write("\n");
-                        writer.write(country.name() + ":\n");
+                        writer.write(country.name() + " (" + diplomacy.getPlayer(country) + "):\n");
                         for (Order order : diplomacy.getPreviousPhase().getOrdersByCountry(country)) {
                             writer.write(order.getDescription() + "\n");
                         }
@@ -114,6 +128,7 @@ public class Game01 {
                     try {
                         writer.write("\n");
                         writer.write(country.name() + "\n");
+                        writer.write("(" + diplomacy.getPlayer(country) + ")\n");
                         writer.write(diplomacy.getArmyCount(Country.ARGENTINA) + " army units\n");
                         writer.write(diplomacy.getFleetCount(Country.ARGENTINA) + " fleet units\n");
                         writer.write(diplomacy.getSupplyCenterCount(Country.ARGENTINA) + " centers\n");
