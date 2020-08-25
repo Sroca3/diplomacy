@@ -1,12 +1,13 @@
 package io.github.sroca3.diplomacy;
 
+import io.github.sroca3.diplomacy.exceptions.CountryOrderMismatchException;
 import io.github.sroca3.diplomacy.exceptions.LocationNotFoundException;
 import io.github.sroca3.diplomacy.exceptions.OrderTypeParseException;
 import io.github.sroca3.diplomacy.exceptions.UnitTypeMismatchException;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,6 +16,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
@@ -25,9 +27,11 @@ import java.util.stream.Collectors;
 
 public class Diplomacy {
 
-    private static final String UNIT_TYPE_REGEX_STRING = "(?i)^(ARMY|FLEET|A|F) ";
+    private static final String UNIT_TYPE_REGEX_STRING = "^(ARMY|FLEET|A|F) ";
     private static final Pattern UNIT_TYPE_REGEX = Pattern.compile(UNIT_TYPE_REGEX_STRING);
-    private static final String ORDER_TYPE_REGEX_STRING = "(?i) (MOVE TO |MOVES TO |HOLD|-> |- |TO |MOVE |RETREAT |SUPPORT |CONVOY |CONVOYS |SUPPORTS )";
+    private static final String UNIT_TYPE_REGEX_FOR_BUILD_STRING = " (ARMY|FLEET|A|F) ";
+    private static final Pattern UNIT_TYPE_FOR_BUILD_REGEX = Pattern.compile(UNIT_TYPE_REGEX_FOR_BUILD_STRING);
+    private static final String ORDER_TYPE_REGEX_STRING = " (MOVE TO |MOVES TO |HOLD|-> |- |TO |MOVE |RETREAT |SUPPORT |CONVOY |CONVOYS |SUPPORTS )";
     private static final Pattern ORDER_TYPE_REGEX = Pattern.compile(ORDER_TYPE_REGEX_STRING);
     private final MapVariant mapVariant;
     private final Set<RuleVariant> ruleVariants;
@@ -182,10 +186,35 @@ public class Diplomacy {
                        .orElse(null);
     }
 
-    public Order parseOrder(String orderString) {
-        Matcher orderTypeMatcher = ORDER_TYPE_REGEX.matcher(String.copyValueOf(orderString.toCharArray()));
-        Matcher unitTypeMatcher = UNIT_TYPE_REGEX.matcher(String.copyValueOf(orderString.toCharArray()));
-        String[] parts = RegExUtils.removeFirst(orderString, UNIT_TYPE_REGEX_STRING).split(ORDER_TYPE_REGEX_STRING);
+    public Order parseOrder(final String orderInput, @Nonnull final Country country) {
+        String order = orderInput.toUpperCase(Locale.ENGLISH);
+        if (order.startsWith("BUILD")) {
+            Matcher unitTypeMatcher = UNIT_TYPE_REGEX.matcher(String.copyValueOf(order.toCharArray()));
+            Location currentLocation = parseLocation(RegExUtils.removeFirst(
+                order.substring(5),
+                UNIT_TYPE_REGEX_FOR_BUILD_STRING
+            ));
+            if (unitTypeMatcher.find()) {
+                UnitType unitType = UnitType.from(unitTypeMatcher.group());
+                if (UnitType.ARMY.equals(unitType)) {
+                    return new Order(new Army(country), currentLocation, OrderType.BUILD);
+                } else {
+                    return new Order(new Fleet(country), currentLocation, OrderType.BUILD);
+                }
+            }
+        }
+        Order o = this.parseOrder(orderInput);
+        if (!country.equals(o.getUnit().getCountry())) {
+            throw new CountryOrderMismatchException();
+        }
+        return o;
+    }
+
+    public Order parseOrder(final String orderInput) {
+        String order = orderInput.toUpperCase(Locale.ENGLISH);
+        Matcher orderTypeMatcher = ORDER_TYPE_REGEX.matcher(String.copyValueOf(order.toCharArray()));
+        Matcher unitTypeMatcher = UNIT_TYPE_REGEX.matcher(String.copyValueOf(order.toCharArray()));
+        String[] parts = RegExUtils.removeFirst(order, UNIT_TYPE_REGEX_STRING).split(ORDER_TYPE_REGEX_STRING);
         OrderType orderType;
         if (orderTypeMatcher.find()) {
             orderType = OrderType.from(orderTypeMatcher.group().trim(), currentPhase.getPhaseName());
@@ -261,11 +290,16 @@ public class Diplomacy {
     public List<Order> parseOrders(String filename) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(filename));
         List<Order> orders = new LinkedList<>();
-        lines.forEach(line -> {
-            if (!StringUtils.isBlank(line) && !line.contains(":")) {
-                orders.add(this.parseOrder(line));
+        Country country = null;
+        for (String line : lines) {
+            if (!StringUtils.isBlank(line)) {
+                if (line.contains(":")) {
+                    country = Country.valueOf(line.strip().substring(0, line.length() - 1).toUpperCase(Locale.ENGLISH));
+                } else {
+                    orders.add(this.parseOrder(line, country));
+                }
             }
-        });
+        }
         return orders;
     }
 

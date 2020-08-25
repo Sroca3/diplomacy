@@ -16,7 +16,11 @@ public class Order {
     private OrderStatus status = OrderStatus.UNRESOLVED;
 
     public Order(Unit unit, Location currentLocation) {
-        this(unit, currentLocation, OrderType.HOLD, currentLocation, currentLocation);
+        this(unit, currentLocation, OrderType.HOLD);
+    }
+
+    public Order(Unit unit, Location currentLocation, OrderType orderType) {
+        this(unit, currentLocation, orderType, currentLocation, currentLocation);
     }
 
     public Order(Unit unit, Location currentLocation, OrderType orderType, Location fromLocation, Location toLocation) {

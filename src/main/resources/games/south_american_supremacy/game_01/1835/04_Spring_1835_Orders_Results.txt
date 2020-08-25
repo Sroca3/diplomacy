@@ -11,10 +11,10 @@ Fleet Antofagasta MOVE Bahia de Arica -> Resolved
 Army La Paz MOVE Potosi -> Resolved
 
 BRASIL (VGhost):
-Army Manaus MOVE Amazonas -> Resolved
+Army Manaus MOVE Mato Grosso -> Resolved
 Army Rio de Janeiro MOVE Sao Paulo -> Resolved
 Fleet Salvador MOVE Bahia Sao Marcos -> Resolved
-Fleet Sao Paulo MOVE Rio Grande do Sul -> Resolved
+Fleet Sao Paulo MOVE Bahia de Sao Sebastao -> Resolved
 
 CHILE (Jordan767):
 Army Santiago MOVE Arauncanian -> Resolved

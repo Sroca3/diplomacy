@@ -11,7 +11,8 @@ public enum OrderType {
     HOLD,
     MOVE(Set.of("-", "->", "to", "move to", "moves to")),
     SUPPORT(Set.of("supports")),
-    RETREAT();
+    RETREAT,
+    BUILD;
 
     private static final Map<String, OrderType> NAMES_MAPPING = new HashMap<>();
 

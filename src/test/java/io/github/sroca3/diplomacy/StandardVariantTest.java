@@ -1,5 +1,6 @@
 package io.github.sroca3.diplomacy;
 
+import io.github.sroca3.diplomacy.exceptions.CountryOrderMismatchException;
 import io.github.sroca3.diplomacy.maps.StandardMapVariant;
 import io.github.sroca3.diplomacy.maps.StandardVariantLocation;
 import org.junit.jupiter.api.Disabled;
@@ -8,10 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StandardVariantTest {
 
@@ -86,10 +87,14 @@ public class StandardVariantTest {
     }
 
     @Test
-    @Disabled
     @DisplayName("ORDERING A UNIT OF ANOTHER COUNTRY")
-    public void testCase6_A_6() throws IOException {
-        // TODO
+    public void testCase6_A_6() {
+        diplomacy.addUnit(StandardVariantLocation.LONDON, new Fleet(Country.ENGLAND));
+        diplomacy.beginFirstPhase();
+        assertThrows(
+            CountryOrderMismatchException.class,
+            () -> diplomacy.parseOrders("src/test/resources/test-cases/6_A_6.txt")
+        );
     }
 
     @Test
@@ -863,6 +868,10 @@ public class StandardVariantTest {
     @Test
     @DisplayName("TOO MANY BUILD ORDERS")
     public void testCase6_I_1() {
-
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("Build A Warsaw"),
+            diplomacy.parseOrder("Build A Kiel"),
+            diplomacy.parseOrder("Build A Munich")
+        ));
     }
 }

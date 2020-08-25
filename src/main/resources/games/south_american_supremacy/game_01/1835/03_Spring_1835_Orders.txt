@@ -8,8 +8,8 @@ F Antofagasta to Bahia de Arica
 A La Paz to Potosi
 
 Brasil:
-A Manaus -> Amazonas
-F Sao Paulo -> Rio Grande do Sul
+A Manaus -> Mato Grosso
+F Sao Paulo -> Bahia de Sao Sebastao
 A Rio de Janeiro -> Sao Paulo
 F Salvador -> Bahia Sao Marcos
 
