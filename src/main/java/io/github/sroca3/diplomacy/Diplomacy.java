@@ -1,26 +1,36 @@
 package io.github.sroca3.diplomacy;
 
-import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyLocation;
+import io.github.sroca3.diplomacy.exceptions.LocationNotFoundException;
+import io.github.sroca3.diplomacy.exceptions.OrderTypeParseException;
+import io.github.sroca3.diplomacy.exceptions.UnitTypeMismatchException;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.RegExUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Diplomacy {
 
+    private static final String UNIT_TYPE_REGEX_STRING = "(?i)^(ARMY|FLEET|A|F) ";
+    private static final Pattern UNIT_TYPE_REGEX = Pattern.compile(UNIT_TYPE_REGEX_STRING);
+    private static final String ORDER_TYPE_REGEX_STRING = "(?i) (MOVE TO |MOVES TO |HOLD|-> |- |TO |MOVE |RETREAT |SUPPORT |CONVOY |CONVOYS |SUPPORTS )";
+    private static final Pattern ORDER_TYPE_REGEX = Pattern.compile(ORDER_TYPE_REGEX_STRING);
     private final MapVariant mapVariant;
+    private final Set<RuleVariant> ruleVariants;
     private final Map<Location, Unit> unitLocations = new HashMap<>();
     private final Map<Location, Country> locationOwnership = new HashMap<>();
     private Phase currentPhase;
@@ -29,7 +39,12 @@ public class Diplomacy {
     private long gameYearCounter;
 
     public Diplomacy(MapVariant mapVariant) {
+        this(mapVariant, Collections.emptySet());
+    }
+
+    public Diplomacy(MapVariant mapVariant, Set<RuleVariant> ruleVariants) {
         this.mapVariant = mapVariant;
+        this.ruleVariants = Set.copyOf(ruleVariants);
     }
 
     public Map<Country, String> assignCountries(List<String> playersArg) {
@@ -155,48 +170,56 @@ public class Diplomacy {
         return previousPhase;
     }
 
-    private Location getLocation(Iterator<String> iterator) {
-        Location location = null;
-        String locationString = null;
-        while (location == null && iterator.hasNext()) {
-            if (locationString == null) {
-                locationString = iterator.next().replace("-", "_").toUpperCase();
-            } else {
-                locationString = String.join("_", locationString, iterator.next().toUpperCase());
-            }
-
-            if ("_".equals(locationString) || UnitType.from(locationString) != null) {
-                locationString = null;
-            }
-            location = mapVariant.parseLocation(locationString);
-        }
-        return location;
+    private Location parseLocation(String locationString) {
+        return Optional.ofNullable(locationString)
+                       .map(String::toUpperCase)
+                       .map(String::trim)
+                       .map(l -> l.replace("-", "_"))
+                       .map(l -> l.replace(" ", "_"))
+                       .map(l -> l.replace("(", "_"))
+                       .map(l -> l.replace(")", ""))
+                       .map(mapVariant::parseLocation)
+                       .orElse(null);
     }
 
     public Order parseOrder(String orderString) {
-        List<String> parts = Arrays.asList(orderString.replace("(", "_")
-                                                      .replace(")", "")
-                                                      .split("\\s+"));
-        Iterator<String> iterator = parts.iterator();
-        String firstPart = iterator.next();
-        UnitType unitType = UnitType.from(firstPart);
-        Location currentLocation = getLocation(iterator);
+        Matcher orderTypeMatcher = ORDER_TYPE_REGEX.matcher(String.copyValueOf(orderString.toCharArray()));
+        Matcher unitTypeMatcher = UNIT_TYPE_REGEX.matcher(String.copyValueOf(orderString.toCharArray()));
+        String[] parts = RegExUtils.removeFirst(orderString, UNIT_TYPE_REGEX_STRING).split(ORDER_TYPE_REGEX_STRING);
+        OrderType orderType;
+        if (orderTypeMatcher.find()) {
+            orderType = OrderType.from(orderTypeMatcher.group().trim(), currentPhase.getPhaseName());
+        } else {
+            throw new OrderTypeParseException();
+        }
+        Location currentLocation = Optional.ofNullable(parseLocation(parts[0]))
+                                           .orElseThrow(LocationNotFoundException::new);
+        UnitType unitType;
+        if (unitTypeMatcher.find()) {
+            unitType = UnitType.from(unitTypeMatcher.group().trim());
+        } else {
+            unitType = unitLocations.get(currentLocation).getType();
+        }
         if ((currentLocation.isCoast() || currentLocation.hasCoasts()) && unitLocations.get(currentLocation) == null) {
             Optional<Location> location = currentLocation.getTerritory().getCoasts()
-                           .stream()
-            .filter(l -> unitLocations.get(l) != null)
-            .findAny();
+                                                         .stream()
+                                                         .filter(l -> unitLocations.get(l) != null)
+                                                         .findAny();
             if (location.isPresent()) {
                 currentLocation = location.get();
             }
         }
-        String orderTypeString = iterator.next().toUpperCase(Locale.ENGLISH);
-        OrderType orderType = OrderType.from(orderTypeString, currentPhase.getPhaseName());
         Location fromLocation;
         Location toLocation;
         if (orderType.isSupport() || orderType.isConvoy()) {
-            fromLocation = getLocation(iterator);
-            toLocation = getLocation(iterator);
+            fromLocation = Optional.ofNullable(parseLocation(RegExUtils.removeFirst(parts[1], UNIT_TYPE_REGEX_STRING)))
+                                   .orElseThrow(LocationNotFoundException::new);
+            if (parts.length > 2) {
+                toLocation = Optional.ofNullable(parseLocation(parts[2]))
+                                     .orElseThrow(LocationNotFoundException::new);
+            } else {
+                toLocation = fromLocation;
+            }
             if (orderType.isSupport() && toLocation == null) {
                 toLocation = fromLocation;
             }
@@ -205,7 +228,11 @@ public class Diplomacy {
             toLocation = currentLocation;
         } else {
             fromLocation = currentLocation;
-            toLocation = getLocation(iterator);
+            toLocation = Optional.ofNullable(parseLocation(parts[1]))
+                                 .orElseThrow(LocationNotFoundException::new);
+        }
+        if (fromLocation == null) {
+            throw new LocationNotFoundException();
         }
         if (UnitType.ARMY.equals(unitType)) {
             currentLocation = currentLocation.getTerritory();
@@ -214,7 +241,7 @@ public class Diplomacy {
         }
         Unit unit = unitLocations.get(currentLocation);
         if (unit.getType() != unitType) {
-            throw new IllegalArgumentException();
+            throw new UnitTypeMismatchException();
         }
 
         // resolve coast if only one exists
@@ -235,10 +262,8 @@ public class Diplomacy {
         List<String> lines = Files.readAllLines(Paths.get(filename));
         List<Order> orders = new LinkedList<>();
         lines.forEach(line -> {
-            try {
+            if (!StringUtils.isBlank(line) && !line.contains(":")) {
                 orders.add(this.parseOrder(line));
-            } catch (Exception e) {
-                System.out.println("Skipping line: " + line);
             }
         });
         return orders;

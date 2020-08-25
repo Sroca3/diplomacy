@@ -1,5 +1,6 @@
 package io.github.sroca3.diplomacy;
 
+import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -31,7 +32,7 @@ public interface Location {
         return false;
     }
 
-    default Location getTerritory() {
+    @Nonnull default Location getTerritory() {
         return this;
     }
 }

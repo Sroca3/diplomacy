@@ -8,6 +8,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -167,12 +168,9 @@ public enum SouthAmericanSupremacyLocation implements Location {
     }
 
     public static Location findByName(String name) {
-        Location l = FULL_NAMES_MAPPING.get(name.toUpperCase(Locale.ENGLISH));
+        Location l = FULL_NAMES_MAPPING.get(Optional.ofNullable(name).orElse("").toUpperCase(Locale.ENGLISH));
         if (l == null) {
             return findByShortName(name);
-        }
-        if (l == null){
-            throw new IllegalArgumentException();
         }
         return l;
     }

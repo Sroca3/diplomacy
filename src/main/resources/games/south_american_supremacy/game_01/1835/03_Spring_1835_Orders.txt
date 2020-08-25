@@ -1,0 +1,35 @@
+Argentina:
+A Salta Hold
+A Cordoba - San Miguel de Tucuman
+F Buenos Aires - Bahia Blanca
+
+Bolivia:
+F Antofagasta to Bahia de Arica
+A La Paz to Potosi
+
+Brasil:
+A Manaus -> Amazonas
+F Sao Paulo -> Rio Grande do Sul
+A Rio de Janeiro -> Sao Paulo
+F Salvador -> Bahia Sao Marcos
+
+Chile:
+F Val - GdG
+A San - Ara
+
+Colombia:
+Fleet Cali Move to Bahia Sechura
+Fleet Cartagena Move to Golfo de Darien
+Army Bogota Move to Cali
+
+Paraguay:
+A Concepcion move Parana
+A Asuncion move Corrientes
+
+Peru:
+Army Trujillo moves to Iquitos
+Fleet Lima moves to Nazca Sea
+
+Venezuela:
+F Crc move Cum
+A Mar move Bar

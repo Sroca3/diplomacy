@@ -1,8 +1,11 @@
 package io.github.sroca3.diplomacy.maps;
 
+import io.github.sroca3.diplomacy.Army;
 import io.github.sroca3.diplomacy.Country;
+import io.github.sroca3.diplomacy.Fleet;
 import io.github.sroca3.diplomacy.Location;
 import io.github.sroca3.diplomacy.MapVariant;
+import io.github.sroca3.diplomacy.Unit;
 import io.github.sroca3.diplomacy.UnitType;
 
 import java.util.HashMap;
@@ -20,8 +23,42 @@ public class StandardMapVariant implements MapVariant {
         new HashMap<>()
     );
     private static final StandardMapVariant INSTANCE = new StandardMapVariant();
+
     public static MapVariant getInstance() {
         return INSTANCE;
+    }
+
+    private static final Map<Location, Unit> startingUnits = new HashMap<>();
+
+    static {
+        startingUnits.put(StandardVariantLocation.MOSCOW, new Army(Country.RUSSIA));
+        startingUnits.put(StandardVariantLocation.WARSAW, new Army(Country.RUSSIA));
+        startingUnits.put(StandardVariantLocation.SEVASTOPOL, new Fleet(Country.RUSSIA));
+        startingUnits.put(StandardVariantLocation.ST_PETERSBURG_SC, new Fleet(Country.RUSSIA));
+
+        startingUnits.put(StandardVariantLocation.ANKARA, new Fleet(Country.TURKEY));
+        startingUnits.put(StandardVariantLocation.CONSTANTINOPLE, new Army(Country.TURKEY));
+        startingUnits.put(StandardVariantLocation.SMYRNA, new Army(Country.TURKEY));
+
+        startingUnits.put(StandardVariantLocation.EDINBURGH, new Fleet(Country.ENGLAND));
+        startingUnits.put(StandardVariantLocation.LIVERPOOL, new Army(Country.ENGLAND));
+        startingUnits.put(StandardVariantLocation.LONDON, new Fleet(Country.ENGLAND));
+
+        startingUnits.put(StandardVariantLocation.BREST, new Fleet(Country.FRANCE));
+        startingUnits.put(StandardVariantLocation.PARIS, new Army(Country.FRANCE));
+        startingUnits.put(StandardVariantLocation.MARSEILLES, new Army(Country.FRANCE));
+
+        startingUnits.put(StandardVariantLocation.KIEL, new Fleet(Country.GERMANY));
+        startingUnits.put(StandardVariantLocation.BERLIN, new Army(Country.GERMANY));
+        startingUnits.put(StandardVariantLocation.MUNICH, new Army(Country.GERMANY));
+
+        startingUnits.put(StandardVariantLocation.VENICE, new Army(Country.ITALY));
+        startingUnits.put(StandardVariantLocation.ROME, new Army(Country.ITALY));
+        startingUnits.put(StandardVariantLocation.NAPLES, new Fleet(Country.ITALY));
+
+        startingUnits.put(StandardVariantLocation.VIENNA, new Army(Country.AUSTRIA));
+        startingUnits.put(StandardVariantLocation.BUDAPEST, new Army(Country.AUSTRIA));
+        startingUnits.put(StandardVariantLocation.TRIESTE, new Fleet(Country.AUSTRIA));
     }
 
     public StandardMapVariant() {
@@ -419,6 +456,11 @@ public class StandardMapVariant implements MapVariant {
 
     @Override
     public long getStartingYear() {
-        return 0;
+        return 1901;
+    }
+
+    @Override
+    public Map<Location, Unit> getStartingUnits() {
+        return startingUnits;
     }
 }

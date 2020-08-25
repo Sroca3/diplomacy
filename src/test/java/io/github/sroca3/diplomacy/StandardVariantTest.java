@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -859,5 +860,9 @@ public class StandardVariantTest {
         assertNull(diplomacy.getCurrentPhase().getResultingUnitLocations().get(StandardVariantLocation.GREECE));
     }
 
+    @Test
+    @DisplayName("TOO MANY BUILD ORDERS")
+    public void testCase6_I_1() {
 
+    }
 }

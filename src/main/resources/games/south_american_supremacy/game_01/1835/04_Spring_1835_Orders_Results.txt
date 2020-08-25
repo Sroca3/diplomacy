@@ -2,37 +2,37 @@ Results
 --------------------------------
 
 ARGENTINA (AKFD):
-Fleet Buenos Aires Hold -> Resolved
-Army Cordoba Hold -> Resolved
-Army Salta Hold -> Resolved
+Fleet Buenos Aires MOVE Bahia Blanca -> Resolved
+Army Cordoba MOVE San Miguel de Tucuman -> Resolved
+Army Salta HOLD -> Resolved
 
 BOLIVIA (FloridaMan):
-Fleet Antofagasta Hold -> Resolved
-Army La Paz Hold -> Resolved
+Fleet Antofagasta MOVE Bahia de Arica -> Resolved
+Army La Paz MOVE Potosi -> Resolved
 
 BRASIL (VGhost):
-Army Manaus Hold -> Resolved
-Army Rio de Janeiro Hold -> Resolved
-Fleet Salvador Hold -> Resolved
-Fleet Sao Paulo Hold -> Resolved
+Army Manaus MOVE Amazonas -> Resolved
+Army Rio de Janeiro MOVE Sao Paulo -> Resolved
+Fleet Salvador MOVE Bahia Sao Marcos -> Resolved
+Fleet Sao Paulo MOVE Rio Grande do Sul -> Resolved
 
 CHILE (Jordan767):
-Army Santiago Hold -> Resolved
-Fleet Valparaiso Hold -> Resolved
+Army Santiago MOVE Arauncanian -> Resolved
+Fleet Valparaiso MOVE Golfo de Guafo -> Resolved
 
 COLOMBIA (Antigonos):
-Army Bogota Hold -> Resolved
-Fleet Cali Hold -> Resolved
-Fleet Cartagena Hold -> Resolved
+Army Bogota MOVE Cali -> Resolved
+Fleet Cali MOVE Bahia Sechura -> Resolved
+Fleet Cartagena MOVE Golfo de Darien -> Resolved
 
 PARAGUAY (RolynTrotter):
-Army Asuncion Hold -> Resolved
-Army Concepcion Hold -> Resolved
+Army Asuncion MOVE Corrientes -> Resolved
+Army Concepcion MOVE Parana -> Resolved
 
 PERU (Don Juan of Austria):
-Fleet Lima Hold -> Resolved
-Army Trujillo Hold -> Resolved
+Fleet Lima MOVE Nazca Sea -> Resolved
+Army Trujillo MOVE Iquitos -> Resolved
 
 VENEZUELA (bratsffl):
-Fleet Caracas Hold -> Resolved
-Army Maracaibo Hold -> Resolved
+Fleet Caracas MOVE Cumana -> Resolved
+Army Maracaibo MOVE Barinas -> Resolved

@@ -130,7 +130,7 @@ public class Order {
             " ",
             lowercaseAndCapitalize(getUnit().getType().name()),
             capitalizeEach(currentLocation.toString()),
-            lowercaseAndCapitalize(orderType.name())
+            orderType.name()
         );
         if (getOrderType().isMove()) {
             description = String.join(" ", description, capitalizeEach(toLocation.toString()));

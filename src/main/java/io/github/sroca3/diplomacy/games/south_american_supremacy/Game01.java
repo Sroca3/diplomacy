@@ -69,14 +69,14 @@ public class Game01 {
         diplomacy.beginFirstPhase();
         generateStatus(diplomacy, "02_Spring_1835_Orders");
 
-        diplomacy.parseOrders("src/main/resources/games/south_american_supremacy/game_01/1835/03_Spring_1835_Orders.txt");
+       try{ diplomacy.addOrders(diplomacy.parseOrders("src/main/resources/games/south_american_supremacy/game_01/1835/03_Spring_1835_Orders.txt"));} catch (Exception e) {
+           e.printStackTrace();
+       }
         diplomacy.adjudicate();
         generateResults(diplomacy, "04_Spring_1835_Orders");
 
         generateStatus(diplomacy, "Latest", true);
     }
-
-
 
     private static void generateStatus(Diplomacy diplomacy, String filePrefix) throws IOException {
         generateStatus(diplomacy, filePrefix, false);
