@@ -9,112 +9,111 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum SouthAmericanSupremacyLocation implements Location {
 
-    AMAZONAS(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Ama"),
-    ANGOSTURA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Ang", true),
-    ANTOFAGASTA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Ant", true),
-    AQUIRIS(new UnitType[]{UnitType.ARMY}, "Aqu", true),
-    ARAUNCANIAN(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Ara"),
-    AREQUIPA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Are"),
-    ARICA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Ari", true),
-    ASUNCION(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Asu", true),
-    ATACAMA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Ata"),
-    ATLANTIC_OCEAN(new UnitType[]{UnitType.FLEET}, "AtO"),
-    BARINAS(new UnitType[]{UnitType.ARMY}, "Bar"),
-    BUENOS_AIRES(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "BAs", true),
-    BAHIA_DE_ARICA(new UnitType[]{UnitType.FLEET}, "Bda"),
-    BOCA_DE_NAVIOS(new UnitType[]{UnitType.FLEET}, "BdN"),
-    BAHIA_DE_PARANAGUA(new UnitType[]{UnitType.FLEET}, "BdP"),
-    BRITISH_GUYANA(new UnitType[]{}, "BGu"),
-    BAHIA_BLANCA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "BhB"),
-    BOGOTA(new UnitType[]{UnitType.ARMY}, "Bog", true),
-    BAHIA_SECHURA(new UnitType[]{UnitType.FLEET}, "BSc"),
-    BAHIA_SAO_MARCOS(new UnitType[]{UnitType.FLEET}, "BSM"),
-    BAHIA_DE_SAO_SEBASTAO(new UnitType[]{UnitType.FLEET}, "BSS"),
-    BAHIA_DE_TODOS_OS_SANTOS(new UnitType[]{UnitType.FLEET}, "BTS"),
-    CALI(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Cal", true),
-    CANELOS(new UnitType[]{UnitType.ARMY}, "Can"),
-    CARTAGENA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Car", true),
-    CARACAS(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Crc", true),
-    CHACO(new UnitType[]{UnitType.ARMY}, "Cha"),
-    CONCEPCION(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Con", true),
-    COPIAGO(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Cop"),
-    CORDOBA(new UnitType[]{UnitType.ARMY}, "Cor", true),
-    CORRIENTES(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Crt", true),
-    CUMANA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Cum", true),
-    CUSCO(new UnitType[]{UnitType.ARMY}, "Cus"),
-    DUTCH_GUYANA(new UnitType[]{}, "DGu"),
-    DRAKE_PASSAGE(new UnitType[]{UnitType.FLEET}, "DrP"),
-    FORMOSA(new UnitType[]{UnitType.ARMY}, "For"),
-    FRENCH_GUYANA(new UnitType[]{}, "FGu"),
-    ISLAS_GALAPAGOS(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Gal", true, false),
-    GOLFO_DE_DARIEN(new UnitType[]{UnitType.FLEET}, "GDa"),
-    GOLFO_DE_GUAFO(new UnitType[]{UnitType.FLEET}, "GdG"),
-    GOIAS(new UnitType[]{UnitType.ARMY}, "Goi"),
-    GUAPORE(new UnitType[]{UnitType.ARMY}, "Gpe"),
-    GOLFO_DE_PANAMA(new UnitType[]{UnitType.FLEET}, "GPn"),
-    GOLFO_DE_PARIA(new UnitType[]{UnitType.FLEET}, "GPr"),
-    GOLFO_DE_SAN_JORGE(new UnitType[]{UnitType.FLEET}, "GSJ"),
-    GUAYAQUIL(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Gua"),
-    IQUITOS(new UnitType[]{UnitType.ARMY}, "Iqu", true),
-    ISLAS_JUAN_FERNANDEZ(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Jua", true, false),
-    LA_PAZ(new UnitType[]{UnitType.ARMY}, "LaP", true),
-    LIMA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Lim", true),
-    LLANOS(new UnitType[]{UnitType.ARMY}, "Lla"),
-    MATO_GROSSO(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "MaG"),
-    ISLAS_MALVINAS(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Mal", true),
-    MANAUS(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Man", true),
-    MARACAIBO(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Mar", true),
-    MEDELLIN(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Med"),
-    MENDOZA(new UnitType[]{UnitType.ARMY}, "Men"),
-    MINAS_GERAIS(new UnitType[]{UnitType.ARMY}, "MiG"),
-    MISIONES(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Mis"),
-    MONTEVIDEO(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Mon", true),
-    MARANHAO(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Mrh", true),
-    NAZCA_SEA(new UnitType[]{UnitType.FLEET}, "NaS"),
-    ORINOCO(new UnitType[]{UnitType.ARMY}, "Ori"),
-    PANTANAL(new UnitType[]{UnitType.ARMY}, "Pan"),
-    PARA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Par"),
-    PUNTA_ARENAS(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "PAs", true),
-    PATAGONIA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Pat", true),
-    PERNAMBUCO(new UnitType[]{UnitType.ARMY}, "Per"),
-    PIURA(new UnitType[]{UnitType.ARMY}, "Piu"),
-    PANAMA_NC(new UnitType[]{UnitType.FLEET}, "Pnm NC"),
-    PANAMA_SC(new UnitType[]{UnitType.FLEET}, "Pnm SC"),
-    PANAMA(new UnitType[]{UnitType.ARMY}, "Pnm", true, false, List.of(PANAMA_NC, PANAMA_SC)),
-    POPAYAN(new UnitType[]{UnitType.ARMY}, "Pop"),
-    POTOSI(new UnitType[]{UnitType.ARMY}, "Pot"),
-    PARANA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Prn", true),
-    QUITO(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Qui", true),
-    RIO_BRANCO(new UnitType[]{UnitType.ARMY}, "RBr"),
-    RIO_DE_LA_PLATA(new UnitType[]{UnitType.FLEET}, "RdP"),
-    RIBERALTA(new UnitType[]{UnitType.ARMY}, "Rib"),
-    RIO_DE_JANEIRO(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Rio", true),
-    RIO_GRANDE_DO_SUL(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "RGS", true),
-    ROSARIO(new UnitType[]{UnitType.ARMY}, "Ros"),
-    SANTA_FE(new UnitType[]{UnitType.ARMY}, "SaF"),
-    SALTA(new UnitType[]{UnitType.ARMY}, "Sal", true),
-    SANTA_MARTA(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "SaM"),
-    SANTIAGO(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "San", true),
-    SAO_PAULO(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "SaP", true),
-    SCOTIA_SEA(new UnitType[]{UnitType.ARMY}, "ScS"),
-    SANTA_CRUZ(new UnitType[]{UnitType.ARMY}, "SCz", true),
-    SALVADOR(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Slv", true),
-    STRAITS_OF_MAGELLAN(new UnitType[]{UnitType.ARMY}, "SoM"),
-    SOUTH_ATLANTIC_OCEAN(new UnitType[]{UnitType.FLEET}, "SAO"),
-    SOUTH_PACIFIC_OCEAN(new UnitType[]{UnitType.ARMY}, "SPO"),
-    TIERRA_DEL_FUEGO(new UnitType[]{}, "TdF"),
-    TRUJILLO(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Tru", true),
-    SAN_MIGUEL_DE_TUCUMAN(new UnitType[]{UnitType.ARMY}, "Tuc", true),
-    VALPARAISO(new UnitType[]{UnitType.ARMY, UnitType.FLEET}, "Val", true),
-    VERAGUA_NC(new UnitType[]{UnitType.FLEET}, "Ver NC"),
-    VERAGUA_SC(new UnitType[]{UnitType.FLEET}, "Ver SC"),
-    VERAGUA(new UnitType[]{UnitType.ARMY}, "Ver", false, false, List.of(VERAGUA_NC, VERAGUA_SC));
+    AMAZONAS(LocationType.COASTAL_LAND, "Ama"),
+    ANGOSTURA(LocationType.COASTAL_LAND, "Ang", true),
+    ANTOFAGASTA(LocationType.COASTAL_LAND, "Ant", true),
+    AQUIRIS(LocationType.LAND, "Aqu", true),
+    ARAUNCANIAN(LocationType.COASTAL_LAND, "Ara"),
+    AREQUIPA(LocationType.COASTAL_LAND, "Are"),
+    ARICA(LocationType.COASTAL_LAND, "Ari", true),
+    ASUNCION(LocationType.COASTAL_LAND, "Asu", true),
+    ATACAMA(LocationType.COASTAL_LAND, "Ata"),
+    ATLANTIC_OCEAN(LocationType.SEA, "AtO"),
+    BARINAS(LocationType.LAND, "Bar"),
+    BUENOS_AIRES(LocationType.COASTAL_LAND, "BAs", true),
+    BAHIA_DE_ARICA(LocationType.SEA, "Bda"),
+    BOCA_DE_NAVIOS(LocationType.SEA, "BdN"),
+    BAHIA_DE_PARANAGUA(LocationType.SEA, "BdP"),
+    BRITISH_GUYANA(LocationType.IMPASSABLE, "BGu"),
+    BAHIA_BLANCA(LocationType.COASTAL_LAND, "BhB"),
+    BOGOTA(LocationType.LAND, "Bog", true),
+    BAHIA_SECHURA(LocationType.SEA, "BSc"),
+    BAHIA_SAO_MARCOS(LocationType.SEA, "BSM"),
+    BAHIA_DE_SAO_SEBASTAO(LocationType.SEA, "BSS"),
+    BAHIA_DE_TODOS_OS_SANTOS(LocationType.SEA, "BTS"),
+    CALI(LocationType.COASTAL_LAND, "Cal", true),
+    CANELOS(LocationType.LAND, "Can"),
+    CARTAGENA(LocationType.COASTAL_LAND, "Car", true),
+    CARACAS(LocationType.COASTAL_LAND, "Crc", true),
+    CHACO(LocationType.LAND, "Cha"),
+    CONCEPCION(LocationType.COASTAL_LAND, "Con", true),
+    COPIAGO(LocationType.COASTAL_LAND, "Cop"),
+    CORDOBA(LocationType.LAND, "Cor", true),
+    CORRIENTES(LocationType.COASTAL_LAND, "Crt", true),
+    CUMANA(LocationType.COASTAL_LAND, "Cum", true),
+    CUSCO(LocationType.LAND, "Cus"),
+    DUTCH_GUYANA(LocationType.IMPASSABLE, "DGu"),
+    DRAKE_PASSAGE(LocationType.SEA, "DrP"),
+    FORMOSA(LocationType.LAND, "For"),
+    FRENCH_GUYANA(LocationType.IMPASSABLE, "FGu"),
+    ISLAS_GALAPAGOS(LocationType.COASTAL_LAND, "Gal", true, false),
+    GOLFO_DE_DARIEN(LocationType.SEA, "GDa"),
+    GOLFO_DE_GUAFO(LocationType.SEA, "GdG"),
+    GOIAS(LocationType.LAND, "Goi"),
+    GUAPORE(LocationType.LAND, "Gpe"),
+    GOLFO_DE_PANAMA(LocationType.SEA, "GPn"),
+    GOLFO_DE_PARIA(LocationType.SEA, "GPr"),
+    GOLFO_DE_SAN_JORGE(LocationType.SEA, "GSJ"),
+    GUAYAQUIL(LocationType.COASTAL_LAND, "Gua"),
+    IQUITOS(LocationType.LAND, "Iqu", true),
+    ISLAS_JUAN_FERNANDEZ(LocationType.COASTAL_LAND, "Jua", true, false),
+    LA_PAZ(LocationType.LAND, "LaP", true),
+    LIMA(LocationType.COASTAL_LAND, "Lim", true),
+    LLANOS(LocationType.LAND, "Lla"),
+    MATO_GROSSO(LocationType.COASTAL_LAND, "MaG"),
+    ISLAS_MALVINAS(LocationType.COASTAL_LAND, "Mal", true),
+    MANAUS(LocationType.COASTAL_LAND, "Man", true),
+    MARACAIBO(LocationType.COASTAL_LAND, "Mar", true),
+    MEDELLIN(LocationType.COASTAL_LAND, "Med"),
+    MENDOZA(LocationType.LAND, "Men"),
+    MINAS_GERAIS(LocationType.LAND, "MiG"),
+    MISIONES(LocationType.COASTAL_LAND, "Mis"),
+    MONTEVIDEO(LocationType.COASTAL_LAND, "Mon", true),
+    MARANHAO(LocationType.COASTAL_LAND, "Mrh", true),
+    NAZCA_SEA(LocationType.SEA, "NaS"),
+    ORINOCO(LocationType.LAND, "Ori"),
+    PANTANAL(LocationType.LAND, "Pan"),
+    PARA(LocationType.COASTAL_LAND, "Par"),
+    PUNTA_ARENAS(LocationType.COASTAL_LAND, "PAs", true),
+    PATAGONIA(LocationType.COASTAL_LAND, "Pat", true),
+    PERNAMBUCO(LocationType.LAND, "Per"),
+    PIURA(LocationType.LAND, "Piu"),
+    PANAMA_NC(LocationType.SEA, "Pnm NC"),
+    PANAMA_SC(LocationType.SEA, "Pnm SC"),
+    PANAMA(LocationType.LAND, "Pnm", true, false, List.of(PANAMA_NC, PANAMA_SC)),
+    POPAYAN(LocationType.LAND, "Pop"),
+    POTOSI(LocationType.LAND, "Pot"),
+    PARANA(LocationType.COASTAL_LAND, "Prn", true),
+    QUITO(LocationType.COASTAL_LAND, "Qui", true),
+    RIO_BRANCO(LocationType.LAND, "RBr"),
+    RIO_DE_LA_PLATA(LocationType.SEA, "RdP"),
+    RIBERALTA(LocationType.LAND, "Rib"),
+    RIO_DE_JANEIRO(LocationType.COASTAL_LAND, "Rio", true),
+    RIO_GRANDE_DO_SUL(LocationType.COASTAL_LAND, "RGS", true),
+    ROSARIO(LocationType.LAND, "Ros"),
+    SANTA_FE(LocationType.LAND, "SaF"),
+    SALTA(LocationType.LAND, "Sal", true),
+    SANTA_MARTA(LocationType.COASTAL_LAND, "SaM"),
+    SANTIAGO(LocationType.COASTAL_LAND, "San", true),
+    SAO_PAULO(LocationType.COASTAL_LAND, "SaP", true),
+    SCOTIA_SEA(LocationType.LAND, "ScS"),
+    SANTA_CRUZ(LocationType.LAND, "SCz", true),
+    SALVADOR(LocationType.COASTAL_LAND, "Slv", true),
+    STRAITS_OF_MAGELLAN(LocationType.LAND, "SoM"),
+    SOUTH_ATLANTIC_OCEAN(LocationType.SEA, "SAO"),
+    SOUTH_PACIFIC_OCEAN(LocationType.LAND, "SPO"),
+    TIERRA_DEL_FUEGO(LocationType.IMPASSABLE, "TdF"),
+    TRUJILLO(LocationType.COASTAL_LAND, "Tru", true),
+    SAN_MIGUEL_DE_TUCUMAN(LocationType.LAND, "Tuc", true),
+    VALPARAISO(LocationType.COASTAL_LAND, "Val", true),
+    VERAGUA_NC(LocationType.SEA, "Ver NC"),
+    VERAGUA_SC(LocationType.SEA, "Ver SC"),
+    VERAGUA(LocationType.LAND, "Ver", false, false, List.of(VERAGUA_NC, VERAGUA_SC));
 
     private static final Map<String, SouthAmericanSupremacyLocation> FULL_NAMES_MAPPING =
         EnumSet.allOf(SouthAmericanSupremacyLocation.class).stream()
@@ -124,43 +123,43 @@ public enum SouthAmericanSupremacyLocation implements Location {
         EnumSet.allOf(SouthAmericanSupremacyLocation.class).stream()
                .collect(Collectors.toMap(s -> s.shortName.toUpperCase(Locale.ENGLISH), Function.identity()));
 
-    private final Set<UnitType> unitTypes;
+    private final LocationType locationType;
     private final String shortName;
     private final boolean supportsConvoy;
     private final boolean isSupplyCenter;
     private final List<Location> coasts;
 
-    SouthAmericanSupremacyLocation(UnitType[] unitTypes, String shortName) {
+    SouthAmericanSupremacyLocation(LocationType locationType, String shortName) {
         this(
-            unitTypes,
+            locationType,
             shortName,
             false,
-            unitTypes.length == 1 && unitTypes[0] == UnitType.FLEET,
+            locationType.supportsConvoy(),
             Collections.emptyList()
         );
     }
 
-    SouthAmericanSupremacyLocation(UnitType[] unitTypes, String shortName, boolean isSupplyCenter) {
-        this(unitTypes, shortName, isSupplyCenter, false, Collections.emptyList());
+    SouthAmericanSupremacyLocation(LocationType locationType, String shortName, boolean isSupplyCenter) {
+        this(locationType, shortName, isSupplyCenter, false, Collections.emptyList());
     }
 
     SouthAmericanSupremacyLocation(
-        UnitType[] unitTypes,
+        LocationType locationType,
         String shortName,
         boolean isSupplyCenter,
         boolean supportsConvoy
     ) {
-        this(unitTypes, shortName, isSupplyCenter, supportsConvoy, Collections.emptyList());
+        this(locationType, shortName, isSupplyCenter, supportsConvoy, Collections.emptyList());
     }
 
     SouthAmericanSupremacyLocation(
-        UnitType[] unitTypes,
+        LocationType locationType,
         String shortName,
         boolean isSupplyCenter,
         boolean supportsConvoy,
         List<Location> coasts
     ) {
-        this.unitTypes = Set.of(unitTypes);
+        this.locationType = locationType;
         this.shortName = shortName;
         this.isSupplyCenter = isSupplyCenter;
         this.supportsConvoy = supportsConvoy;
@@ -180,8 +179,8 @@ public enum SouthAmericanSupremacyLocation implements Location {
     }
 
     @Override
-    public Set<UnitType> getSupportedTypes() {
-        return unitTypes;
+    public boolean supports(UnitType unitType) {
+        return locationType.supports(unitType);
     }
 
     @Override

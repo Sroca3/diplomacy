@@ -1,6 +1,5 @@
 package io.github.sroca3.diplomacy;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -22,18 +21,21 @@ public class Phase {
     private final MapVariant mapVariant;
     private final List<Order> orders = new LinkedList<>();
     private final PhaseName phaseName;
+    private final Map<Location, Country> locationOwnership = new HashMap<>();
 
     public Phase(
         Map<Location, Unit> startingUnitLocations,
         MapVariant mapVariant,
         Map<Location, Set<Location>> adjacencies,
-        PhaseName phaseName
+        PhaseName phaseName,
+        final Map<Location, Country> locationOwnership
     ) {
         this.startingUnitLocations = Map.copyOf(startingUnitLocations);
         this.resultingUnitLocations = new HashMap<>(startingUnitLocations);
         this.adjacencies = adjacencies;
         this.mapVariant = mapVariant;
         this.phaseName = phaseName;
+        this.locationOwnership.putAll(locationOwnership);
     }
 
     public Map<Location, Unit> getResultingUnitLocations() {
@@ -51,7 +53,9 @@ public class Phase {
     }
 
     private Order resolveOrder(Order order) {
-        if (!order.getOrderType().isConvoy() && !isOrderForAdjacentLocations(order) && !isConvoyPresent(order)) {
+        if (!order.getOrderType().isBuild() && !order.getOrderType()
+                                                     .isConvoy() && !isOrderForAdjacentLocations(order) && !isConvoyPresent(
+            order)) {
             order.convertIllegalMoveToHold();
             if (isDislodged(order)) {
                 order.dislodge();
@@ -78,6 +82,9 @@ public class Phase {
                 case RETREAT:
                     resolveRetreatOrder(order);
                     break;
+                case BUILD:
+                    resolveBuildOrder(order);
+                    break;
             }
         }
 
@@ -91,6 +98,35 @@ public class Phase {
         }
 
         return order;
+    }
+
+    public long getSupplyCenterCount(Country country) {
+        return locationOwnership.entrySet()
+                                .stream()
+                                .filter(entry -> entry.getValue().equals(country))
+                                .filter(entry -> entry.getKey().isSupplyCenter())
+                                .count();
+    }
+
+    public long getUnitCount(Country country) {
+        return startingUnitLocations.values().stream().filter(unit -> unit.getCountry().equals(country)).count();
+    }
+
+    private void resolveBuildOrder(Order order) {
+        if (mapVariant.getHomeCenters()
+                      .get(order.getCurrentLocation())
+                      .equals(order.getCountry())
+            && getSupplyCenterCount(order.getCountry()) > getUnitCount(order.getCountry())
+            + orders.stream()
+                    .filter(o -> o.getCountry().equals(order.getCountry()))
+                    .filter(o -> o.getStatus().isResolved())
+                    .count()
+            && order.getCurrentLocation().supports(order.getUnit())
+            && startingUnitLocations.get(order.getCurrentLocation()) == null) {
+            order.resolve();
+        } else {
+            order.failed();
+        }
     }
 
     private void resolveRetreatOrder(Order order) {
@@ -538,11 +574,13 @@ public class Phase {
         Map<Location, Order> locationToOrderMap = orders
             .stream()
             .collect(Collectors.toMap(Order::getCurrentLocation, Function.identity()));
-        startingUnitLocations.keySet().forEach(location -> {
-            if (getPhaseName().isOrderPhase() && locationToOrderMap.get(location) == null) {
-                addOrder(new Order(startingUnitLocations.get(location), location));
-            }
-        });
+        if (phaseName.isOrderPhase()) {
+            startingUnitLocations.keySet().forEach(location -> {
+                if (getPhaseName().isOrderPhase() && locationToOrderMap.get(location) == null) {
+                    addOrder(new Order(startingUnitLocations.get(location), location));
+                }
+            });
+        }
         if (getPhaseName().isRetreatPhase()) {
             orders.removeAll(orders.stream().filter(o -> !o.getOrderType().isRetreat()).collect(Collectors.toList()));
         }

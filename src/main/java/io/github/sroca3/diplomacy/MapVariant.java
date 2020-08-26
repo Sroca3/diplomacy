@@ -19,4 +19,8 @@ public interface MapVariant {
     default Map<Location, Unit> getStartingUnits() {
         return Collections.emptyMap();
     }
+
+    default Map<Location, Country> getHomeCenters() {
+        return Collections.emptyMap();
+    }
 }

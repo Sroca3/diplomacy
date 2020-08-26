@@ -94,7 +94,11 @@ public class Diplomacy {
             throw new IllegalArgumentException("Unit does not correspond to country available for map variant.");
         }
         if (!location.supports(unit)) {
-            throw new IllegalArgumentException("Territory does not support unit type.");
+            throw new IllegalArgumentException(String.format(
+                "Territory, %s, does not support unit type, %s.",
+                location.getName(),
+                unit.getType().name()
+            ));
         }
         unitLocations.put(location, unit);
     }
@@ -105,7 +109,11 @@ public class Diplomacy {
     }
 
     public void beginFirstPhase() {
-        currentPhase = new Phase(unitLocations, mapVariant, mapVariant.getMovementGraph(), getNextPhaseName());
+        currentPhase = new Phase(unitLocations, mapVariant, mapVariant.getMovementGraph(), getNextPhaseName(), locationOwnership);
+    }
+
+    public void setCurrentPhase(Phase currentPhase) {
+        this.currentPhase = currentPhase;
     }
 
     public void addOrders(List<Order> orders) {
@@ -113,7 +121,9 @@ public class Diplomacy {
     }
 
     public void addOrder(Order order) {
-        validateUnitOwnership(order.getCountry(), order.getCurrentLocation());
+        if (!order.getOrderType().isBuild()) {
+            validateUnitOwnership(order.getCountry(), order.getCurrentLocation());
+        }
         currentPhase.addOrder(new Order(order));
     }
 
@@ -141,7 +151,8 @@ public class Diplomacy {
             currentPhase.getResultingUnitLocations(),
             mapVariant,
             mapVariant.getMovementGraph(),
-            nextPhaseName
+            nextPhaseName,
+            locationOwnership
         );
     }
 
@@ -189,11 +200,11 @@ public class Diplomacy {
     public Order parseOrder(final String orderInput, @Nonnull final Country country) {
         String order = orderInput.toUpperCase(Locale.ENGLISH);
         if (order.startsWith("BUILD")) {
-            Matcher unitTypeMatcher = UNIT_TYPE_REGEX.matcher(String.copyValueOf(order.toCharArray()));
+            Matcher unitTypeMatcher = UNIT_TYPE_FOR_BUILD_REGEX.matcher(String.copyValueOf(order.toCharArray()));
             Location currentLocation = parseLocation(RegExUtils.removeFirst(
                 order.substring(5),
                 UNIT_TYPE_REGEX_FOR_BUILD_STRING
-            ));
+            ).trim());
             if (unitTypeMatcher.find()) {
                 UnitType unitType = UnitType.from(unitTypeMatcher.group());
                 if (UnitType.ARMY.equals(unitType)) {
@@ -294,7 +305,7 @@ public class Diplomacy {
         for (String line : lines) {
             if (!StringUtils.isBlank(line)) {
                 if (line.contains(":")) {
-                    country = Country.valueOf(line.strip().substring(0, line.length() - 1).toUpperCase(Locale.ENGLISH));
+                    country = Country.valueOf(line.replaceAll(":", "").trim().toUpperCase(Locale.ENGLISH));
                 } else {
                     orders.add(this.parseOrder(line, country));
                 }

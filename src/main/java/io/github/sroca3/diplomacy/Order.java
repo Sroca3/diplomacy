@@ -110,6 +110,8 @@ public class Order {
             status = OrderStatus.SUPPORT_FAILED;
         } else if (getOrderType().isConvoy() || getOrderType().isMove()) {
             status = OrderStatus.CONVOY_FAILED;
+        } else if (getOrderType().isBuild()) {
+            status = OrderStatus.BUILD_FAILED;
         }
     }
 

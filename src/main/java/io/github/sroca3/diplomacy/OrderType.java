@@ -65,4 +65,8 @@ public enum OrderType {
     public boolean isRetreat() {
         return this == RETREAT;
     }
+
+    public boolean isBuild() {
+        return this == BUILD;
+    }
 }

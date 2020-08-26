@@ -8,7 +8,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -868,10 +870,58 @@ public class StandardVariantTest {
     @Test
     @DisplayName("TOO MANY BUILD ORDERS")
     public void testCase6_I_1() {
+        diplomacy.addStandardStartingUnits();
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(List.of(diplomacy.parseOrder("F Kiel Move Holland")));
+        diplomacy.adjudicate();
+        diplomacy.adjudicate();
         diplomacy.addOrders(List.of(
-            diplomacy.parseOrder("Build A Warsaw"),
-            diplomacy.parseOrder("Build A Kiel"),
-            diplomacy.parseOrder("Build A Munich")
+            diplomacy.parseOrder("Build A Warsaw", Country.GERMANY),
+            diplomacy.parseOrder("Build A Kiel", Country.GERMANY),
+            diplomacy.parseOrder("Build A Munich", Country.GERMANY)
         ));
+        diplomacy.adjudicate();
+        List<Order> germanOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.GERMANY);
+        assertEquals(OrderStatus.BUILD_FAILED, germanOrders.get(0).getStatus());
+        assertEquals(OrderStatus.RESOLVED, germanOrders.get(1).getStatus());
+        assertEquals(OrderStatus.BUILD_FAILED, germanOrders.get(2).getStatus());
+    }
+
+    @Test
+    @DisplayName("FLEETS CAN NOT BE BUILT IN LAND AREAS")
+    public void testCase6_I_2() {
+        diplomacy.addStandardStartingUnits();
+        diplomacy.setCurrentPhase(new Phase(
+            new HashMap<>(),
+            diplomacy.getMapVariant(),
+            diplomacy.getMapVariant().getMovementGraph(),
+            PhaseName.WINTER_BUILD,
+            Map.of(StandardVariantLocation.MOSCOW, Country.RUSSIA)));
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("Build F Moscow", Country.RUSSIA)
+        ));
+        diplomacy.adjudicate();
+        List<Order> russianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.RUSSIA);
+        assertEquals(OrderStatus.BUILD_FAILED, russianOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("SUPPLY CENTER MUST BE EMPTY FOR BUILDING")
+    public void testCase6_I_3() {
+        diplomacy.addStandardStartingUnits();
+        diplomacy.addUnit(StandardVariantLocation.BERLIN, new Army(Country.GERMANY));
+        diplomacy.setCurrentPhase(new Phase(
+            Map.of(StandardVariantLocation.BERLIN, new Army(Country.GERMANY)),
+            diplomacy.getMapVariant(),
+            diplomacy.getMapVariant().getMovementGraph(),
+            PhaseName.WINTER_BUILD,
+            Map.of(StandardVariantLocation.BERLIN, Country.GERMANY,
+            StandardVariantLocation.KIEL, Country.GERMANY)));
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("Build A Berlin", Country.GERMANY)
+        ));
+        diplomacy.adjudicate();
+        List<Order> germanOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.GERMANY);
+        assertEquals(OrderStatus.BUILD_FAILED, germanOrders.get(0).getStatus());
     }
 }

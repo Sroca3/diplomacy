@@ -10,11 +10,7 @@ public interface Location {
         return supports(unit.getType());
     }
 
-    default boolean supports(UnitType unitType) {
-        return getSupportedTypes().contains(unitType);
-    }
-
-    Set<UnitType> getSupportedTypes();
+    boolean supports(UnitType unitType);
 
     String getName();
 

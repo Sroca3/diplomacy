@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class StandardMapVariant implements MapVariant {
     private static final Map<UnitType, Map<Location, Set<Location>>> graphs = Map.of(
@@ -462,5 +463,12 @@ public class StandardMapVariant implements MapVariant {
     @Override
     public Map<Location, Unit> getStartingUnits() {
         return startingUnits;
+    }
+
+    @Override
+    public Map<Location, Country> getHomeCenters() {
+        return startingUnits.entrySet()
+                            .stream()
+                            .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().getCountry()));
     }
 }

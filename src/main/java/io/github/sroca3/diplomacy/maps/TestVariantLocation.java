@@ -3,34 +3,21 @@ package io.github.sroca3.diplomacy.maps;
 import io.github.sroca3.diplomacy.Location;
 import io.github.sroca3.diplomacy.UnitType;
 
-import java.util.Set;
-
 public enum TestVariantLocation implements Location {
-    A(new UnitType[]{UnitType.ARMY, UnitType.FLEET}),
-    B(new UnitType[]{UnitType.ARMY, UnitType.FLEET}),
-    C(new UnitType[]{UnitType.FLEET}),
-    D(new UnitType[]{UnitType.FLEET});
+    A(LocationType.COASTAL_LAND),
+    B(LocationType.COASTAL_LAND),
+    C(LocationType.SEA),
+    D(LocationType.SEA);
 
-    private final Set<UnitType> unitTypes;
-    private boolean supportsConvoy;
+    private final LocationType locationType;
 
-    TestVariantLocation(UnitType[] unitTypes) {
-        this.unitTypes = Set.of(unitTypes);
-        if (unitTypes.length == 1 && unitTypes[0] == UnitType.ARMY) {
-            supportsConvoy = false;
-        } else {
-            supportsConvoy = true;
-        }
-    }
-
-    TestVariantLocation(UnitType[] unitTypes, boolean supportsConvoy) {
-        this.unitTypes = Set.of(unitTypes);
-        this.supportsConvoy = supportsConvoy;
+    TestVariantLocation(LocationType locationType) {
+        this.locationType = locationType;
     }
 
     @Override
-    public Set<UnitType> getSupportedTypes() {
-        return unitTypes;
+    public boolean supports(UnitType unitType) {
+        return locationType.supports(unitType);
     }
 
     @Override
