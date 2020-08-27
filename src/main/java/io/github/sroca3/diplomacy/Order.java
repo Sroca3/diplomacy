@@ -187,4 +187,12 @@ public class Order {
             this.toLocation = location;
         }
     }
+
+    public void markAsIllegal() {
+        status = OrderStatus.ILLEGAL;
+    }
+
+    public void disband() {
+        status = OrderStatus.DISBANDED;
+    }
 }

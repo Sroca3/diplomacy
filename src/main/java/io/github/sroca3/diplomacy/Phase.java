@@ -1,5 +1,6 @@
 package io.github.sroca3.diplomacy;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -22,7 +23,7 @@ public class Phase {
     private final List<Order> orders = new LinkedList<>();
     private final PhaseName phaseName;
     private final Map<Location, Country> locationOwnership = new HashMap<>();
-
+    private final Map<Location, Order> dislodgedUnitLocations = new HashMap<>();
     public Phase(
         Map<Location, Unit> startingUnitLocations,
         MapVariant mapVariant,
@@ -30,12 +31,23 @@ public class Phase {
         PhaseName phaseName,
         final Map<Location, Country> locationOwnership
     ) {
+        this(startingUnitLocations, mapVariant, adjacencies, phaseName, locationOwnership, Collections.emptyMap());
+    }
+    public Phase(
+        Map<Location, Unit> startingUnitLocations,
+        MapVariant mapVariant,
+        Map<Location, Set<Location>> adjacencies,
+        PhaseName phaseName,
+        final Map<Location, Country> locationOwnership,
+        final Map<Location, Order> dislodgedUnitLocations
+    ) {
         this.startingUnitLocations = Map.copyOf(startingUnitLocations);
         this.resultingUnitLocations = new HashMap<>(startingUnitLocations);
         this.adjacencies = adjacencies;
         this.mapVariant = mapVariant;
         this.phaseName = phaseName;
         this.locationOwnership.putAll(locationOwnership);
+        this.dislodgedUnitLocations.putAll(dislodgedUnitLocations);
     }
 
     public Map<Location, Unit> getResultingUnitLocations() {
@@ -129,10 +141,20 @@ public class Phase {
         }
     }
 
+    private boolean unitRetreatingTowardsAttacker(Order order) {
+        return Optional.ofNullable(dislodgedUnitLocations.get(order.getCurrentLocation()))
+                .filter(o -> Objects.equals(order.getToLocation(), o.getFromLocation()))
+                .isPresent();
+    }
+
     private void resolveRetreatOrder(Order order) {
-        if (competingRetreatExists(order)) {
+        if (!dislodgedUnitLocations.containsKey(order.getCurrentLocation())){
+            order.markAsIllegal();
+        } else if (competingRetreatExists(order)) {
             order.bounce();
-        } else {
+        } else if (unitRetreatingTowardsAttacker(order)){
+            order.disband();
+        }else {
             order.resolve();
         }
     }
@@ -378,6 +400,7 @@ public class Phase {
     private boolean competingRetreatExists(Order order) {
         return orders
             .stream()
+            .filter(o -> o.getId() != order.getId())
             .filter(o -> o.getToLocation().getTerritory().equals(order.getToLocation().getTerritory()))
             .anyMatch(o -> o.getOrderType().isRetreat());
     }
@@ -512,11 +535,12 @@ public class Phase {
         calculateStrengthForOrder(order);
         Optional<Order> dislodgeOrder = findAllBy(OrderType.MOVE, order.getCurrentLocation())
             .stream()
-            .findAny();
-        return dislodgeOrder
             .map(this::calculateStrengthForOrder)
             .filter(o -> !o.getCountry().equals(order.getCountry()))
             .filter(o -> o.getStrength() > order.getStrength())
+            .findAny();
+        dislodgeOrder.ifPresent(o -> dislodgedUnitLocations.put(order.getCurrentLocation(), o));
+         return dislodgeOrder
             .isPresent();
     }
 
@@ -600,5 +624,9 @@ public class Phase {
 
     public PhaseName getPhaseName() {
         return this.phaseName;
+    }
+
+    public Map<Location, Order> getDislodgedInfo() {
+        return dislodgedUnitLocations;
     }
 }

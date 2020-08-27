@@ -3,7 +3,9 @@ package io.github.sroca3.diplomacy;
 public enum OrderStatus {
     BOUNCED,
     BUILD_FAILED,
+    DISBANDED,
     DISLODGED,
+    ILLEGAL,
     ILLEGAL_ORDER_REPLACED_WITH_HOLD,
     PROCESSING,
     RESOLVED,

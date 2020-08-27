@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -865,6 +866,50 @@ public class StandardVariantTest {
         assertEquals(OrderStatus.BOUNCED, turkishOrders.get(0).getStatus());
         assertNull(diplomacy.getCurrentPhase().getResultingUnitLocations().get(StandardVariantLocation.TRIESTE));
         assertNull(diplomacy.getCurrentPhase().getResultingUnitLocations().get(StandardVariantLocation.GREECE));
+    }
+
+    @Test
+    @DisplayName("NO OTHER MOVES DURING RETREAT")
+    public void testCase6_H_4() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.NORTH_SEA, new Fleet(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.HOLLAND, new Army(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.KIEL, new Fleet(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.RUHR, new Army(Country.GERMANY));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(diplomacy.parseOrders("src/test/resources/test-cases/6_H_4.txt"));
+        diplomacy.adjudicate();
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("A Holland - Belgium", Country.ENGLAND),
+            diplomacy.parseOrder("F North Sea - Norwegian Sea", Country.ENGLAND)
+        ));
+        diplomacy.adjudicate();
+        List<Order> englishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ENGLAND);
+        assertEquals(OrderStatus.RESOLVED, englishOrders.get(0).getStatus());
+        assertEquals(OrderStatus.ILLEGAL, englishOrders.get(1).getStatus());
+        assertNotNull(diplomacy.getPreviousPhase().getResultingUnitLocations().get(StandardVariantLocation.BELGIUM));
+    }
+
+    @Test
+    @DisplayName("A UNIT MAY NOT RETREAT TO THE AREA FROM WHICH IT IS ATTACKED")
+    public void testCase6_H_5() {
+        diplomacy.addUnit(StandardVariantLocation.CONSTANTINOPLE, new Fleet(Country.RUSSIA));
+        diplomacy.addUnit(StandardVariantLocation.BLACK_SEA, new Fleet(Country.RUSSIA));
+        diplomacy.addUnit(StandardVariantLocation.ANKARA, new Fleet(Country.TURKEY));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("F Constantinople Supports F Black Sea - Ankara", Country.RUSSIA),
+            diplomacy.parseOrder("F Black Sea - Ankara", Country.RUSSIA),
+            diplomacy.parseOrder("F Ankara Hold", Country.TURKEY)
+        ));
+        diplomacy.adjudicate();
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("F Ankara - Black Sea", Country.TURKEY)
+        ));
+        diplomacy.adjudicate();
+        List<Order> englishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.TURKEY);
+        assertEquals(OrderStatus.DISBANDED, englishOrders.get(0).getStatus());
+        Unit unit = diplomacy.getPreviousPhase().getResultingUnitLocations().get(StandardVariantLocation.ANKARA);
+        assertEquals(Country.RUSSIA, unit.getCountry());
     }
 
     @Test

@@ -69,7 +69,7 @@ public enum StandardVariantLocation implements Location {
     PORTUGAL(LocationType.SEA, "Por", true),
     PRUSSIA(LocationType.COASTAL_LAND, "Pru"),
     ROME(LocationType.COASTAL_LAND, "Rom", true),
-    RUHR(LocationType.SEA, "Ruh"),
+    RUHR(LocationType.LAND, "Ruh"),
     RUMANIA(LocationType.SEA, "Rum", true),
     SERBIA(LocationType.COASTAL_LAND, "Ser", true),
     SEVASTOPOL(LocationType.SEA, "Sev", true),
