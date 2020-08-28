@@ -105,7 +105,7 @@ public class Diplomacy {
 
     public void addUnitAndClaimLocation(Location location, Unit unit) {
         addUnit(location, unit);
-        locationOwnership.put(location, unit.getCountry());
+        locationOwnership.put(location.getTerritory(), unit.getCountry());
     }
 
     public void beginFirstPhase() {
@@ -138,9 +138,9 @@ public class Diplomacy {
         PhaseName nextPhaseName = getNextPhaseName();
         currentPhase.getResultingUnitLocations().forEach(((location, unit) -> {
             if (nextPhaseName == PhaseName.FALL_ORDERS && !location.isSupplyCenter()) {
-                locationOwnership.put(location, unit.getCountry());
+                locationOwnership.put(location.getTerritory(), unit.getCountry());
             } else if (nextPhaseName == PhaseName.WINTER_BUILD) {
-                locationOwnership.put(location, unit.getCountry());
+                locationOwnership.put(location.getTerritory(), unit.getCountry());
             }
         }));
         previousPhase = currentPhase;

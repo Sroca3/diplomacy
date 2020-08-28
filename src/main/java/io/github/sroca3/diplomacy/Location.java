@@ -17,7 +17,7 @@ public interface Location {
     boolean isSupplyCenter();
 
     default boolean hasCoasts() {
-        return false;
+        return !getCoasts().isEmpty();
     }
 
     default List<Location> getCoasts() {

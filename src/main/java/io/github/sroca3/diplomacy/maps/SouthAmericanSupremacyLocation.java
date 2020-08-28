@@ -3,8 +3,10 @@ package io.github.sroca3.diplomacy.maps;
 import io.github.sroca3.diplomacy.Location;
 import io.github.sroca3.diplomacy.UnitType;
 
+import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -115,6 +117,16 @@ public enum SouthAmericanSupremacyLocation implements Location {
     VERAGUA_SC(LocationType.SEA, "Ver SC"),
     VERAGUA(LocationType.LAND, "Ver", false, false, List.of(VERAGUA_NC, VERAGUA_SC));
 
+    private static final Map<Location, Location> coastToParent = new HashMap<>();
+
+    static {
+        EnumSet.allOf(SouthAmericanSupremacyLocation.class).stream()
+               .filter(SouthAmericanSupremacyLocation::hasCoasts)
+               .forEach(location -> {
+                   location.getCoasts().forEach(coast -> coastToParent.put(coast, location));
+               });
+    }
+
     private static final Map<String, SouthAmericanSupremacyLocation> FULL_NAMES_MAPPING =
         EnumSet.allOf(SouthAmericanSupremacyLocation.class).stream()
                .collect(Collectors.toMap(s -> s.name(), Function.identity()));
@@ -195,5 +207,25 @@ public enum SouthAmericanSupremacyLocation implements Location {
 
     public String getShortName() {
         return shortName;
+    }
+
+    @Override
+    public boolean isCoast() {
+        return locationType.equals(LocationType.COAST);
+    }
+
+    @Override
+    public List<Location> getCoasts() {
+        return coasts;
+    }
+
+    @Override
+    public @Nonnull
+    Location getTerritory() {
+        if (isCoast()) {
+            return coastToParent.get(this);
+        } else  {
+            return this;
+        }
     }
 }

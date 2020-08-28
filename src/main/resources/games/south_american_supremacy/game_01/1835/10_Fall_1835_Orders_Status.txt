@@ -29,7 +29,7 @@ COLOMBIA
 (Antigonos)
 1 army units
 2 fleet units
-5 centers
+6 centers
 
 PARAGUAY
 (RolynTrotter)
