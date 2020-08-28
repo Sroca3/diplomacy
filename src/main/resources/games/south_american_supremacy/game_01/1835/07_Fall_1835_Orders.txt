@@ -1,0 +1,35 @@
+Argentina:
+A Salta Hold
+A San Miguel de Tucuman Hold
+F Bahia Blanca - Patagonia
+
+Bolivia:
+Bahia de Arica to Arica
+Potosi holds
+
+Brasil:
+A Mato Grosso -> Maranhao
+F Bahia Sao Marcos -> Bahia de Todos os Santos
+A Sao Paulo -> Rio Grande do Sul
+F Bahia de Sao Sebastao -> Bahia de Paranagua
+
+Chile:
+F Golfo de Guafo - Islas Juan Fernandez
+A Arauncanian - Punta Arenas
+
+Colombia:
+Fleet Bahia Sechura  Move to Islas Galapagos
+Fleet Golfo de Darien Move to Panama(NC)
+Army Cali Move to Quito
+
+Paraguay:
+A Parana move Sao Paulo
+A Corrientes hold
+
+Peru:
+Army Iquitos holds
+Fleet Nazca Sea moves to Lima
+
+Venezuela:
+F Cum Hold
+A Bar move Ang

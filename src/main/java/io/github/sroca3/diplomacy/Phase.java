@@ -111,7 +111,7 @@ public class Phase {
             }
         }
 
-        if (order.getOrderType().isMove() || order.getOrderType().isRetreat() && order.getStatus().isResolved()) {
+        if ((order.getOrderType().isMove() || order.getOrderType().isRetreat()) && order.getStatus().isResolved()) {
             resultingUnitLocations.remove(order.getCurrentLocation());
             resultingUnitLocations.put(order.getToLocation(), order.getUnit());
         }

@@ -67,6 +67,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(armyGraph, SouthAmericanSupremacyLocation.PARANA, SouthAmericanSupremacyLocation.ASUNCION);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.PARANA, SouthAmericanSupremacyLocation.CONCEPCION);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.PARANA, SouthAmericanSupremacyLocation.MISIONES);
+        addEdge(armyGraph, SouthAmericanSupremacyLocation.PARANA, SouthAmericanSupremacyLocation.SAO_PAULO);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.PARANA, SouthAmericanSupremacyLocation.RIO_GRANDE_DO_SUL);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.PARANA, SouthAmericanSupremacyLocation.PANTANAL);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.RIO_DE_JANEIRO, SouthAmericanSupremacyLocation.SALVADOR);
@@ -324,6 +325,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(armyGraph, SouthAmericanSupremacyLocation.BARINAS, SouthAmericanSupremacyLocation.MARACAIBO);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.BARINAS, SouthAmericanSupremacyLocation.CARACAS);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.BARINAS, SouthAmericanSupremacyLocation.LLANOS);
+        addEdge(armyGraph, SouthAmericanSupremacyLocation.BARINAS, SouthAmericanSupremacyLocation.ANGOSTURA);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.BARINAS, SouthAmericanSupremacyLocation.ORINOCO);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.SANTA_FE, SouthAmericanSupremacyLocation.CORRIENTES);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.SANTA_FE, SouthAmericanSupremacyLocation.MISIONES);

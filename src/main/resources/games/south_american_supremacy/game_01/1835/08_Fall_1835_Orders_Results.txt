@@ -1,0 +1,38 @@
+Results
+--------------------------------
+
+ARGENTINA (AKFD):
+Fleet Bahia Blanca MOVE Patagonia -> Resolved
+Army Salta HOLD -> Resolved
+Army San Miguel de Tucuman HOLD -> Resolved
+
+BOLIVIA (FloridaMan):
+Fleet Bahia de Arica MOVE Arica -> Resolved
+Army Potosi HOLD -> Resolved
+
+BRASIL (VGhost):
+Fleet Bahia de Sao Sebastao MOVE Bahia de Paranagua -> Resolved
+Fleet Bahia Sao Marcos MOVE Bahia de Todos os Santos -> Resolved
+Army Mato Grosso MOVE Maranhao -> Resolved
+Army Sao Paulo MOVE Rio Grande do Sul -> Resolved
+
+CHILE (Jordan767):
+Army Arauncanian MOVE Punta Arenas -> Resolved
+Fleet Golfo de Guafo MOVE Islas Juan Fernandez -> Resolved
+
+COLOMBIA (Antigonos):
+Fleet Bahia Sechura MOVE Islas Galapagos -> Resolved
+Army Cali MOVE Quito -> Resolved
+Fleet Golfo de Darien MOVE Panama nc -> Resolved
+
+PARAGUAY (RolynTrotter):
+Army Corrientes HOLD -> Resolved
+Army Parana MOVE Sao Paulo -> Resolved
+
+PERU (Don Juan of Austria):
+Army Iquitos HOLD -> Resolved
+Fleet Nazca Sea MOVE Lima -> Resolved
+
+VENEZUELA (bratsffl):
+Army Barinas MOVE Angostura -> Resolved
+Fleet Cumana HOLD -> Resolved

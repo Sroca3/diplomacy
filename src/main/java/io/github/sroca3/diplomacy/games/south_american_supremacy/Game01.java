@@ -75,6 +75,13 @@ public class Game01 {
         diplomacy.adjudicate();
         generateResults(diplomacy, "04_Spring_1835_Orders");
 
+        try{ diplomacy.addOrders(diplomacy.parseOrders("src/main/resources/games/south_american_supremacy/game_01/1835/07_Fall_1835_Orders.txt"));} catch (Exception e) {
+            e.printStackTrace();
+        }
+        diplomacy.adjudicate();
+        generateResults(diplomacy, "08_Fall_1835_Orders");
+        generateStatus(diplomacy, "10_Fall_1835_Orders");
+
         generateStatus(diplomacy, "Latest", true);
     }
 

@@ -156,6 +156,8 @@ public class Diplomacy {
             previousPhase.getDislodgedInfo(),
             previousPhase.getContestedLocations()
         );
+        unitLocations.clear();
+        unitLocations.putAll(currentPhase.getResultingUnitLocations());
     }
 
     private PhaseName getNextPhaseName() {
@@ -235,7 +237,7 @@ public class Diplomacy {
             throw new OrderTypeParseException();
         }
         Location currentLocation = Optional.ofNullable(parseLocation(parts[0]))
-                                           .orElseThrow(LocationNotFoundException::new);
+                                           .orElseThrow(() -> new LocationNotFoundException(parts[0]));
         UnitType unitType;
         if (unitTypeMatcher.find()) {
             unitType = UnitType.from(unitTypeMatcher.group().trim());
@@ -255,10 +257,10 @@ public class Diplomacy {
         Location toLocation;
         if (orderType.isSupport() || orderType.isConvoy()) {
             fromLocation = Optional.ofNullable(parseLocation(RegExUtils.removeFirst(parts[1], UNIT_TYPE_REGEX_STRING)))
-                                   .orElseThrow(LocationNotFoundException::new);
+                                   .orElseThrow(() -> new LocationNotFoundException(parts[1]));
             if (parts.length > 2) {
                 toLocation = Optional.ofNullable(parseLocation(parts[2]))
-                                     .orElseThrow(LocationNotFoundException::new);
+                                     .orElseThrow(() -> new LocationNotFoundException(parts[2]));
             } else {
                 toLocation = fromLocation;
             }
@@ -271,10 +273,10 @@ public class Diplomacy {
         } else {
             fromLocation = currentLocation;
             toLocation = Optional.ofNullable(parseLocation(parts[1]))
-                                 .orElseThrow(LocationNotFoundException::new);
+                                 .orElseThrow(() -> new LocationNotFoundException(parts[1]));
         }
         if (fromLocation == null) {
-            throw new LocationNotFoundException();
+            throw new LocationNotFoundException("");
         }
         if (UnitType.ARMY.equals(unitType)) {
             currentLocation = currentLocation.getTerritory();
