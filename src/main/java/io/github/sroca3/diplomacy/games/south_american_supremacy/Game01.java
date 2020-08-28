@@ -142,9 +142,9 @@ public class Game01 {
                         writer.write("\n");
                         writer.write(country.name() + "\n");
                         writer.write("(" + diplomacy.getPlayer(country) + ")\n");
-                        writer.write(diplomacy.getArmyCount(Country.ARGENTINA) + " army units\n");
-                        writer.write(diplomacy.getFleetCount(Country.ARGENTINA) + " fleet units\n");
-                        writer.write(diplomacy.getSupplyCenterCount(Country.ARGENTINA) + " centers\n");
+                        writer.write(diplomacy.getArmyCount(country) + " army units\n");
+                        writer.write(diplomacy.getFleetCount(country) + " fleet units\n");
+                        writer.write(diplomacy.getSupplyCenterCount(country) + " centers\n");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

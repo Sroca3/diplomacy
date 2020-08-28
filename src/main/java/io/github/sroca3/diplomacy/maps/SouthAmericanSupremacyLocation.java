@@ -87,7 +87,7 @@ public enum SouthAmericanSupremacyLocation implements Location {
     PANAMA_SC(LocationType.COAST, "Pnm SC"),
     PANAMA(LocationType.LAND, "Pnm", true, false, List.of(PANAMA_NC, PANAMA_SC)),
     POPAYAN(LocationType.LAND, "Pop"),
-    POTOSI(LocationType.LAND, "Pot"),
+    POTOSI(LocationType.LAND, "Pot", true),
     PARANA(LocationType.COASTAL_LAND, "Prn", true),
     QUITO(LocationType.COASTAL_LAND, "Qui", true),
     RIO_BRANCO(LocationType.LAND, "RBr"),

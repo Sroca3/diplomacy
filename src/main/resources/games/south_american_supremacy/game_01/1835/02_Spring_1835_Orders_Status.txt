@@ -9,42 +9,42 @@ ARGENTINA
 
 BOLIVIA
 (FloridaMan)
-2 army units
+1 army units
 1 fleet units
-3 centers
+2 centers
 
 BRASIL
 (VGhost)
 2 army units
-1 fleet units
-3 centers
+2 fleet units
+4 centers
 
 CHILE
 (Jordan767)
-2 army units
+1 army units
 1 fleet units
-3 centers
+2 centers
 
 COLOMBIA
 (Antigonos)
-2 army units
-1 fleet units
+1 army units
+2 fleet units
 3 centers
 
 PARAGUAY
 (RolynTrotter)
 2 army units
-1 fleet units
-3 centers
+0 fleet units
+2 centers
 
 PERU
 (Don Juan of Austria)
-2 army units
+1 army units
 1 fleet units
-3 centers
+2 centers
 
 VENEZUELA
 (bratsffl)
-2 army units
+1 army units
 1 fleet units
-3 centers
+2 centers
