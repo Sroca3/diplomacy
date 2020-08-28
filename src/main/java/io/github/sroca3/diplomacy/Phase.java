@@ -24,6 +24,7 @@ public class Phase {
     private final PhaseName phaseName;
     private final Map<Location, Country> locationOwnership = new HashMap<>();
     private final Map<Location, Order> dislodgedUnitLocations = new HashMap<>();
+    private final Set<Location> contestedLocations = new HashSet<>();
     public Phase(
         Map<Location, Unit> startingUnitLocations,
         MapVariant mapVariant,
@@ -31,7 +32,15 @@ public class Phase {
         PhaseName phaseName,
         final Map<Location, Country> locationOwnership
     ) {
-        this(startingUnitLocations, mapVariant, adjacencies, phaseName, locationOwnership, Collections.emptyMap());
+        this(
+            startingUnitLocations,
+            mapVariant,
+            adjacencies,
+            phaseName,
+            locationOwnership,
+            Collections.emptyMap(),
+            Collections.emptySet()
+        );
     }
     public Phase(
         Map<Location, Unit> startingUnitLocations,
@@ -39,7 +48,8 @@ public class Phase {
         Map<Location, Set<Location>> adjacencies,
         PhaseName phaseName,
         final Map<Location, Country> locationOwnership,
-        final Map<Location, Order> dislodgedUnitLocations
+        final Map<Location, Order> dislodgedUnitLocations,
+        final Set<Location> contestedLocations
     ) {
         this.startingUnitLocations = Map.copyOf(startingUnitLocations);
         this.resultingUnitLocations = new HashMap<>(startingUnitLocations);
@@ -48,6 +58,7 @@ public class Phase {
         this.phaseName = phaseName;
         this.locationOwnership.putAll(locationOwnership);
         this.dislodgedUnitLocations.putAll(dislodgedUnitLocations);
+        this.contestedLocations.addAll(contestedLocations);
     }
 
     public Map<Location, Unit> getResultingUnitLocations() {
@@ -125,7 +136,9 @@ public class Phase {
     }
 
     private void resolveBuildOrder(Order order) {
-        if (mapVariant.getHomeCenters()
+        if (!order.getCurrentLocation().supports(order.getUnit())) {
+            order.failed();
+        } else if (mapVariant.getHomeCenters()
                       .get(order.getCurrentLocation())
                       .equals(order.getCountry())
             && getSupplyCenterCount(order.getCountry()) > getUnitCount(order.getCountry())
@@ -151,8 +164,8 @@ public class Phase {
         if (!dislodgedUnitLocations.containsKey(order.getCurrentLocation())){
             order.markAsIllegal();
         } else if (competingRetreatExists(order)) {
-            order.bounce();
-        } else if (unitRetreatingTowardsAttacker(order)){
+            bounce(order);
+        } else if (unitRetreatingTowardsAttacker(order) || contestedLocations.contains(order.getToLocation())){
             order.disband();
         }else {
             order.resolve();
@@ -331,8 +344,7 @@ public class Phase {
                     .ifPresentOrElse(o -> {
                         calculateStrengthForOrder(o);
                         if (o.getStrength() >= order.getStrength() || o.getCountry().equals(order.getCountry())) {
-                            order.bounce();
-                            markSupportingUnitsAsFailed(order);
+                            bounce(order);
                         } else {
                             order.resolve();
                         }
@@ -341,8 +353,7 @@ public class Phase {
                     .ifPresent(o -> {
                         calculateStrengthForOrder(o);
                         if (o.getStrength() >= order.getStrength()) {
-                            order.bounce();
-                            markSupportingUnitsAsFailed(order);
+                            bounce(order);
                         } else {
                             order.resolve();
                         }
@@ -351,8 +362,7 @@ public class Phase {
                     .ifPresent(o -> {
                         calculateStrengthForOrder(o);
                         if (o.getStrength() >= order.getStrength()) {
-                            order.bounce();
-                            markSupportingUnitsAsFailed(order);
+                            bounce(order);
                         } else {
                             order.resolve();
                         }
@@ -360,8 +370,7 @@ public class Phase {
                 findByTypeAndCurrentLocation(OrderType.MOVE, order.getToLocation())
                     .ifPresent(o -> {
                         if (o.getStatus().isBounced() && o.getCountry().equals(order.getCountry())) {
-                            order.bounce();
-                            markSupportingUnitsAsFailed(order);
+                            bounce(order);
                         }
                     });
             } else if (conflictingOrder.isEmpty() && isDestinationLocationBeingVacated(order)) {
@@ -369,8 +378,7 @@ public class Phase {
             } else if (isDislodged(order)) {
                 order.dislodge();
             } else {
-                order.bounce();
-                markSupportingUnitsAsFailed(order);
+                bounce(order);
             }
         } else if (isDislodged(order)) {
             order.dislodge();
@@ -381,8 +389,7 @@ public class Phase {
                 .filter(o -> o.getStrength() >= order.getStrength())
                 .findAny()
                 .ifPresentOrElse(o -> {
-                    order.bounce();
-                    markSupportingUnitsAsFailed(order);
+                    bounce(order);
                 }, order::resolve);
         } else {
             order.resolve();
@@ -586,6 +593,12 @@ public class Phase {
         return order;
     }
 
+    private void bounce(Order order) {
+        order.bounce();
+        contestedLocations.add(order.getToLocation());
+        markSupportingUnitsAsFailed(order);
+    }
+    
     private boolean isDestinationLocationOccupied(Location location) {
         Location l = location.getTerritory();
         return startingUnitLocations.get(l) != null || l.getCoasts()
@@ -628,5 +641,9 @@ public class Phase {
 
     public Map<Location, Order> getDislodgedInfo() {
         return dislodgedUnitLocations;
+    }
+
+    public Set<Location> getContestedLocations() {
+        return contestedLocations;
     }
 }

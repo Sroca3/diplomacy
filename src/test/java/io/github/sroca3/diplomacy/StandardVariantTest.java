@@ -415,18 +415,17 @@ public class StandardVariantTest {
     }
 
     @Test
-    @Disabled
     @DisplayName("BUILDING WITH UNSPECIFIED COAST")
     public void testCase6_B_14() {
         diplomacy.beginFirstPhase();
         diplomacy.adjudicate();
         diplomacy.adjudicate();
         diplomacy.addOrders(List.of(
-            diplomacy.parseOrder("Build F St Petersburg")
+            diplomacy.parseOrder("Build F St Petersburg", Country.RUSSIA)
         ));
         diplomacy.adjudicate();
-        List<Order> turkishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.TURKEY);
-        assertEquals(OrderStatus.BOUNCED, turkishOrders.get(0).getStatus());
+        List<Order> russianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.RUSSIA);
+        assertEquals(OrderStatus.BUILD_FAILED, russianOrders.get(0).getStatus());
     }
 
     @Test
@@ -910,6 +909,95 @@ public class StandardVariantTest {
         assertEquals(OrderStatus.DISBANDED, englishOrders.get(0).getStatus());
         Unit unit = diplomacy.getPreviousPhase().getResultingUnitLocations().get(StandardVariantLocation.ANKARA);
         assertEquals(Country.RUSSIA, unit.getCountry());
+    }
+
+    @Test
+    @DisplayName("UNIT MAY NOT RETREAT TO A CONTESTED AREA")
+    public void testCase6_H_6() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.BUDAPEST, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.TRIESTE, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.MUNICH, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.SILESIA, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.VIENNA, new Army(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(diplomacy.parseOrders("src/test/resources/test-cases/6_H_6.txt"));
+        diplomacy.adjudicate();
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("A Vienna - Bohemia", Country.ITALY)
+        ));
+        diplomacy.adjudicate();
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.DISBANDED, italianOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("MULTIPLE RETREAT TO SAME AREA WILL DISBAND UNITS")
+    public void testCase6_H_7() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.BUDAPEST, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.TRIESTE, new Army(Country.AUSTRIA));
+        diplomacy.addUnit(StandardVariantLocation.MUNICH, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.SILESIA, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.VIENNA, new Army(Country.ITALY));
+        diplomacy.addUnit(StandardVariantLocation.BOHEMIA, new Army(Country.ITALY));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(diplomacy.parseOrders("src/test/resources/test-cases/6_H_7.txt"));
+        diplomacy.adjudicate();
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("A Bohemia - Tyrolia", Country.ITALY),
+            diplomacy.parseOrder("A Vienna - Tyrolia", Country.ITALY)
+        ));
+        diplomacy.adjudicate();
+        List<Order> italianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ITALY);
+        assertEquals(OrderStatus.BOUNCED, italianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, italianOrders.get(1).getStatus());
+    }
+
+    @Test
+    @DisplayName("TRIPLE RETREAT TO SAME AREA WILL DISBAND UNITS")
+    public void testCase6_H_8() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.LIVERPOOL, new Army(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.YORKSHIRE, new Fleet(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.NORWAY, new Fleet(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.KIEL, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.RUHR, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.EDINBURGH, new Fleet(Country.RUSSIA));
+        diplomacy.addUnit(StandardVariantLocation.SWEDEN, new Army(Country.RUSSIA));
+        diplomacy.addUnit(StandardVariantLocation.FINLAND, new Army(Country.RUSSIA));
+        diplomacy.addUnit(StandardVariantLocation.HOLLAND, new Fleet(Country.RUSSIA));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(diplomacy.parseOrders("src/test/resources/test-cases/6_H_8.txt"));
+        diplomacy.adjudicate();
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("F Norway - North Sea", Country.ENGLAND),
+            diplomacy.parseOrder("F Edinburgh - North Sea", Country.RUSSIA),
+            diplomacy.parseOrder("F Holland - North Sea", Country.RUSSIA)
+        ));
+        diplomacy.adjudicate();
+        List<Order> russianOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.RUSSIA);
+        assertEquals(OrderStatus.BOUNCED, russianOrders.get(0).getStatus());
+        assertEquals(OrderStatus.BOUNCED, russianOrders.get(1).getStatus());
+        List<Order> englishOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.ENGLAND);
+        assertEquals(OrderStatus.BOUNCED, englishOrders.get(0).getStatus());
+    }
+
+    @Test
+    @DisplayName("DISLODGED UNIT WILL NOT MAKE ATTACKERS AREA CONTESTED")
+    public void testCase6_H_9() throws IOException {
+        diplomacy.addUnit(StandardVariantLocation.HELGOLAND_BIGHT, new Fleet(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.DENMARK, new Fleet(Country.ENGLAND));
+        diplomacy.addUnit(StandardVariantLocation.BERLIN, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.KIEL, new Fleet(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.SILESIA, new Army(Country.GERMANY));
+        diplomacy.addUnit(StandardVariantLocation.PRUSSIA, new Army(Country.RUSSIA));
+        diplomacy.beginFirstPhase();
+        diplomacy.addOrders(diplomacy.parseOrders("src/test/resources/test-cases/6_H_9.txt"));
+        diplomacy.adjudicate();
+        diplomacy.addOrders(List.of(
+            diplomacy.parseOrder("F Kiel - Berlin", Country.GERMANY)
+        ));
+        diplomacy.adjudicate();
+        List<Order> germanOrders = diplomacy.getPreviousPhase().getOrdersByCountry(Country.GERMANY);
+        assertEquals(OrderStatus.RESOLVED, germanOrders.get(0).getStatus());
     }
 
     @Test

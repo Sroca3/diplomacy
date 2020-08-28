@@ -153,7 +153,8 @@ public class Diplomacy {
             mapVariant.getMovementGraph(),
             nextPhaseName,
             locationOwnership,
-            previousPhase.getDislodgedInfo()
+            previousPhase.getDislodgedInfo(),
+            previousPhase.getContestedLocations()
         );
     }
 

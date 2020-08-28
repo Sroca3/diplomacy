@@ -122,6 +122,7 @@ public class StandardMapVariant implements MapVariant {
         addEdge(armyGraph, StandardVariantLocation.VIENNA, StandardVariantLocation.TYROLIA);
         addEdge(armyGraph, StandardVariantLocation.VIENNA, StandardVariantLocation.TRIESTE);
         addEdge(armyGraph, StandardVariantLocation.VIENNA, StandardVariantLocation.BUDAPEST);
+        addEdge(armyGraph, StandardVariantLocation.VIENNA, StandardVariantLocation.BOHEMIA);
 
         addEdge(armyGraph, StandardVariantLocation.BUDAPEST, StandardVariantLocation.TRIESTE);
         addEdge(armyGraph, StandardVariantLocation.BUDAPEST, StandardVariantLocation.RUMANIA);
@@ -226,6 +227,7 @@ public class StandardMapVariant implements MapVariant {
 
         addEdge(fleetGraph, StandardVariantLocation.NORWAY, StandardVariantLocation.SWEDEN);
         addEdge(fleetGraph, StandardVariantLocation.NORWAY, StandardVariantLocation.NORWEGIAN_SEA);
+        addEdge(fleetGraph, StandardVariantLocation.NORWAY, StandardVariantLocation.NORTH_SEA);
 
         addEdge(fleetGraph, StandardVariantLocation.NORWEGIAN_SEA, StandardVariantLocation.NORTH_ATLANTIC_OCEAN);
         addEdge(fleetGraph, StandardVariantLocation.NORWEGIAN_SEA, StandardVariantLocation.CLYDE);
