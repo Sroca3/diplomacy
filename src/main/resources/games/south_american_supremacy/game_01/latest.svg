@@ -11,7 +11,7 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    inkscape:export-ydpi="96"
    inkscape:export-xdpi="96"
-   inkscape:export-filename="C:\Users\StephenRoca\Documents\diplomacy\src\main\resources\games\south_american_supremacy\game_01\1835\10_Winter_1835_Build.png.png"
+   inkscape:export-filename="C:\Users\StephenRoca\Documents\diplomacy\src\main\resources\games\south_american_supremacy\game_01\1836\01_Spring_1836_Orders.png"
    inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
    sodipodi:docname="latest.svg"
    id="svg11619"
@@ -1348,8 +1348,8 @@
      inkscape:window-maximized="1"
      inkscape:window-y="-9"
      inkscape:window-x="-9"
-     inkscape:cy="443.51853"
-     inkscape:cx="390.73366"
+     inkscape:cy="574.2252"
+     inkscape:cx="374.59704"
      inkscape:zoom="1.2394165"
      inkscape:snap-global="false"
      showgrid="false"
@@ -4945,7 +4945,6 @@
     </g>
   </g>
   <g
-     sodipodi:insensitive="true"
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Arrows"
@@ -5043,16 +5042,16 @@
        style="display:inline;fill:none;stroke:#000000;stroke-width:1.40851;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers stroke fill" />
     <ellipse
        style="display:inline;fill:none;stroke:#000000;stroke-width:1.40851;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers stroke fill"
-       id="path3062-6-5-4-1-7-1-7-8-3-1-1-7-1-7-0"
-       cx="263.02701"
-       cy="779.39899"
+       id="path3062-6-5-4-1-7-1-7-8-3-1-1-7-1-7-1"
+       cx="147.78676"
+       cy="342.09647"
        rx="23.142145"
        ry="15.678955" />
     <ellipse
        style="display:inline;fill:none;stroke:#000000;stroke-width:1.40851;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers stroke fill"
-       id="path3062-6-5-4-1-7-1-7-8-3-1-1-7-1-7-1"
-       cx="192.16248"
-       cy="289.65244"
+       id="path3062-6-5-4-1-7-1-7-8-3-1-1-7-1-7-4"
+       cx="258.186"
+       cy="684.19287"
        rx="23.142145"
        ry="15.678955" />
   </g>
