@@ -75,12 +75,25 @@ public class Game01 {
         diplomacy.adjudicate();
         generateResults(diplomacy, "04_Spring_1835_Orders");
 
-        try{ diplomacy.addOrders(diplomacy.parseOrders("src/main/resources/games/south_american_supremacy/game_01/1835/07_Fall_1835_Orders.txt"));} catch (Exception e) {
+        try {
+            diplomacy.addOrders(diplomacy.parseOrders(
+                "src/main/resources/games/south_american_supremacy/game_01/1835/07_Fall_1835_Orders.txt"));
+        } catch (Exception e) {
             e.printStackTrace();
         }
         diplomacy.adjudicate();
         generateResults(diplomacy, "08_Fall_1835_Orders");
         generateStatus(diplomacy, "10_Fall_1835_Orders");
+
+        try {
+            diplomacy.addOrders(diplomacy.parseOrders(
+                "src/main/resources/games/south_american_supremacy/game_01/1835/12_Winter_1835_Build.txt"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        diplomacy.adjudicate();
+        generateResults(diplomacy, "13_Winter_1835_Build");
+        generateStatus(diplomacy, "14_Winter_1835_Build");
 
         generateStatus(diplomacy, "Latest", true);
     }
@@ -91,9 +104,13 @@ public class Game01 {
 
     private static void generateResults(Diplomacy diplomacy, String filePrefix) throws IOException {
         SortedSet<Country> countries = diplomacy.getMapVariant().getCountries();
-        filePrefix = diplomacy.getYear() + "/" + filePrefix;
+        if (diplomacy.getPreviousPhase() != null && diplomacy.getPreviousPhase().getPhaseName().isBuildPhase()) {
+            filePrefix = (diplomacy.getYear() - 1) + "/" + filePrefix;
+        } else {
+            filePrefix = diplomacy.getYear() + "/" + filePrefix;
+        }
         File resultsFile = Paths.get("src/main/resources/games/south_american_supremacy/game_01/" + filePrefix + "_Results.txt")
-                               .toFile();
+                                .toFile();
         if (resultsFile.exists()) {
             Files.delete(resultsFile.toPath());
         }
@@ -125,7 +142,11 @@ public class Game01 {
     private static void generateStatus(Diplomacy diplomacy, String filePrefix, boolean isLatest) throws IOException {
         SortedSet<Country> countries = diplomacy.getMapVariant().getCountries();
         if(!isLatest) {
-            filePrefix = diplomacy.getYear() + "/" + filePrefix;
+            if (diplomacy.getPreviousPhase() != null && diplomacy.getPreviousPhase().getPhaseName().isBuildPhase()) {
+                filePrefix = (diplomacy.getYear() - 1) + "/" + filePrefix;
+            } else {
+                filePrefix = diplomacy.getYear() + "/" + filePrefix;
+            }
         }
         File statusFile = Paths.get("src/main/resources/games/south_american_supremacy/game_01/" + filePrefix + "_Status.txt")
                                .toFile();

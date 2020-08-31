@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class SouthAmericanSupremacyMapVariant implements MapVariant {
     private static final Map<Location, Set<Location>> armyGraph = new HashMap<>();
@@ -674,6 +675,11 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         startingUnits.put(SouthAmericanSupremacyLocation.CARACAS, new Fleet(Country.VENEZUELA));
         startingUnits.put(SouthAmericanSupremacyLocation.MARACAIBO, new Army(Country.VENEZUELA));
         return startingUnits;
+    }
+
+    @Override
+    public Map<Location, Country> getHomeCenters() {
+        return getStartingUnits().entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().getCountry()));
     }
 
     @Override

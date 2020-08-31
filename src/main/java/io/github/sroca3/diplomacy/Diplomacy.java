@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
@@ -210,7 +211,7 @@ public class Diplomacy {
                 UNIT_TYPE_REGEX_FOR_BUILD_STRING
             ).trim());
             if (unitTypeMatcher.find()) {
-                UnitType unitType = UnitType.from(unitTypeMatcher.group());
+                UnitType unitType = UnitType.from(unitTypeMatcher.group().trim());
                 if (UnitType.ARMY.equals(unitType)) {
                     return new Order(new Army(country), currentLocation, OrderType.BUILD);
                 } else {
@@ -311,7 +312,7 @@ public class Diplomacy {
                 if (line.contains(":")) {
                     country = Country.valueOf(line.replaceAll(":", "").trim().toUpperCase(Locale.ENGLISH));
                 } else {
-                    orders.add(this.parseOrder(line, country));
+                    orders.add(this.parseOrder(line, Objects.requireNonNull(country)));
                 }
             }
         }

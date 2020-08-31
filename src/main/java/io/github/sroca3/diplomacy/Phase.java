@@ -120,6 +120,10 @@ public class Phase {
             resultingUnitLocations.remove(order.getCurrentLocation());
         }
 
+        if (order.getOrderType().isBuild() && order.getStatus().isResolved()) {
+            resultingUnitLocations.put(order.getCurrentLocation(), order.getUnit());
+        }
+
         return order;
     }
 
@@ -146,7 +150,6 @@ public class Phase {
                     .filter(o -> o.getCountry().equals(order.getCountry()))
                     .filter(o -> o.getStatus().isResolved())
                     .count()
-            && order.getCurrentLocation().supports(order.getUnit())
             && startingUnitLocations.get(order.getCurrentLocation()) == null) {
             order.resolve();
         } else {

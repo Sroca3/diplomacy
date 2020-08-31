@@ -1,0 +1,30 @@
+Argentina:
+Build A Cordoba
+Build F Buenos Aires
+
+Bolivia:
+Build Fleet Antofagasta
+Build Army La Paz
+
+Brasil:
+Build A Rio de Janeiro
+
+Chile:
+Build F Val
+Build A San
+
+Colombia:
+Build Army Cali
+Build Army Cartagena
+Build Army Bogota
+
+Paraguay:
+build A Concepcion
+build A Asuncion
+
+Peru:
+Build army Trujillo
+
+Venezuela:
+Build F Crc
+Build F Mar

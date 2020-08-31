@@ -1,0 +1,33 @@
+Results
+--------------------------------
+
+ARGENTINA (AKFD):
+BUILD Fleet Buenos Aires -> Resolved
+BUILD Army Cordoba -> Resolved
+
+BOLIVIA (FloridaMan):
+BUILD Fleet Antofagasta -> Resolved
+BUILD Army La Paz -> Resolved
+
+BRASIL (VGhost):
+BUILD Army Rio de Janeiro -> Resolved
+
+CHILE (Jordan767):
+BUILD Army Santiago -> Resolved
+BUILD Fleet Valparaiso -> Resolved
+
+COLOMBIA (Antigonos):
+BUILD Army Bogota -> Resolved
+BUILD Army Cali -> Resolved
+BUILD Army Cartagena -> Resolved
+
+PARAGUAY (RolynTrotter):
+BUILD Army Asuncion -> Resolved
+BUILD Army Concepcion -> Resolved
+
+PERU (Don Juan of Austria):
+BUILD Army Trujillo -> Resolved
+
+VENEZUELA (bratsffl):
+BUILD Fleet Caracas -> Resolved
+BUILD Fleet Maracaibo -> Resolved

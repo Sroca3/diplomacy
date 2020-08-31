@@ -142,6 +142,13 @@ public class Order {
             description = String.join(" ", description, capitalizeEach(toLocation.toString()));
         } else if (getOrderType().isSupport() && fromLocation == toLocation) {
             description = String.join(" ", description, capitalizeEach(fromLocation.toString()), "to hold");
+        } else if (getOrderType().isBuild()) {
+            description = String.join(
+                " ",
+                orderType.name(),
+                lowercaseAndCapitalize(getUnit().getType().name()),
+                capitalizeEach(currentLocation.toString())
+            );
         } else if (!getOrderType().isHold()) {
             description = String.join(
                 " ",
@@ -151,6 +158,7 @@ public class Order {
                 capitalizeEach(toLocation.toString())
             );
         }
+
         if (!getStatus().isUnresolved()) {
             description = String.join(" -> ", description, lowercaseAndCapitalize(status.name()));
         }
