@@ -95,12 +95,19 @@ public class Game01 {
         diplomacy.adjudicate();
         generateResults(diplomacy, "13_Winter_1835_Build");
         generateStatus(diplomacy, "14_Winter_1835_Build");
-        
+
         parseOrders(diplomacy, "1836/03_Spring_1836_Orders");
         diplomacy.adjudicate();
         generateStatus(diplomacy, "02_Spring_1836_Orders");
         generateResults(diplomacy, "04_Spring_1836_Orders");
 
+        generateStatus(diplomacy, "07_Spring_1836_Retreat");
+
+        parseOrders(diplomacy, "1836/08_Spring_1836_Retreat");
+        diplomacy.adjudicate();
+        generateResults(diplomacy, "09_Spring_1836_Retreat");
+
+        generateStatus(diplomacy, "12_Fall_1836_Orders");
 
         generateStatus(diplomacy, "Latest", true);
         processOrdersAndGenerateArtifacts(diplomacy);
@@ -144,19 +151,23 @@ public class Game01 {
             countries.forEach(
                 country -> {
                     try {
-                        writer.write("\n");
-                        writer.write(country.name() + " (" + diplomacy.getPlayer(country) + "):\n");
-                        for (Order order : diplomacy.getPreviousPhase()
-                                                    .getOrdersByCountry(country)
-                                                    .stream()
-                                                    .sorted(Comparator.comparing(o -> o.getCurrentLocation().getName()))
-                                                    .collect(
-                                                        Collectors.toList())) {
-                            writer.write(order.getDescription() + "\n");
+                        if (!diplomacy.getPreviousPhase().getOrdersByCountry(country).isEmpty()) {
+                            writer.write("\n");
+                            writer.write(country.name() + " (" + diplomacy.getPlayer(country) + "):\n");
+                            for (Order order : diplomacy.getPreviousPhase()
+                                                        .getOrdersByCountry(country)
+                                                        .stream()
+                                                        .sorted(Comparator.comparing(o -> o.getCurrentLocation()
+                                                                                           .getName()))
+                                                        .collect(
+                                                            Collectors.toList())) {
+                                writer.write(order.getDescription() + "\n");
+                            }
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                 }
             );
         }

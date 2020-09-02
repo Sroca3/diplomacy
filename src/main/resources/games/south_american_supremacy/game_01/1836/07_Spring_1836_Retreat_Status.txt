@@ -15,7 +15,7 @@ BOLIVIA
 
 BRASIL
 (VGhost)
-2 army units
+3 army units
 2 fleet units
 5 centers
 
@@ -33,7 +33,7 @@ COLOMBIA
 
 PARAGUAY
 (RolynTrotter)
-4 army units
+3 army units
 0 fleet units
 4 centers
 

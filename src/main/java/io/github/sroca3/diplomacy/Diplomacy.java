@@ -122,7 +122,7 @@ public class Diplomacy {
     }
 
     public void addOrder(Order order) {
-        if (!order.getOrderType().isBuild()) {
+        if (!order.getOrderType().isBuild() && !order.getOrderType().isRetreat()) {
             validateUnitOwnership(order.getCountry(), order.getCurrentLocation());
         }
         currentPhase.addOrder(new Order(order));
@@ -291,6 +291,9 @@ public class Diplomacy {
             toLocation = toLocation.getTerritory();
         }
         Unit unit = unitLocations.get(currentLocation);
+        if (currentPhase.getPhaseName().isRetreatPhase()) {
+            unit = getPreviousPhase().getStartingUnitLocations().get(currentLocation);
+        }
         if (unit.getType() != unitType) {
             throw new UnitTypeMismatchException();
         }

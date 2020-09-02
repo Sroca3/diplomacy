@@ -61,6 +61,10 @@ public class Phase {
         this.contestedLocations.addAll(contestedLocations);
     }
 
+    public Map<Location, Unit> getStartingUnitLocations() {
+        return startingUnitLocations;
+    }
+
     public Map<Location, Unit> getResultingUnitLocations() {
         return resultingUnitLocations;
     }
@@ -550,8 +554,7 @@ public class Phase {
             .filter(o -> o.getStrength() > order.getStrength())
             .findAny();
         dislodgeOrder.ifPresent(o -> dislodgedUnitLocations.put(order.getCurrentLocation(), o));
-         return dislodgeOrder
-            .isPresent();
+        return dislodgeOrder.isPresent();
     }
 
     private boolean isOrderForAdjacentLocations(Order order) {
