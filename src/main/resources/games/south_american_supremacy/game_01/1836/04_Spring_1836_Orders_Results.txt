@@ -1,0 +1,53 @@
+Results
+--------------------------------
+
+ARGENTINA (AKFD):
+Fleet Buenos Aires MOVE Rio de la Plata -> Resolved
+Army Cordoba MOVE Santa fe -> Resolved
+Fleet Patagonia MOVE Golfo de San Jorge -> Resolved
+Army Salta HOLD -> Resolved
+Army San Miguel de Tucuman HOLD -> Resolved
+
+BOLIVIA (FloridaMan):
+Fleet Antofagasta MOVE Bahia de Arica -> Resolved
+Fleet Arica HOLD -> Resolved
+Army La Paz MOVE Santa Cruz -> Resolved
+Army Potosi HOLD -> Resolved
+
+BRASIL (VGhost):
+Fleet Bahia de Paranagua MOVE Rio Grande do Sul -> Resolved
+Fleet Bahia de Todos os Santos HOLD -> Resolved
+Army Maranhao MOVE Goias -> Bounced
+Army Rio de Janeiro SUPPORT Rio Grande do Sul to Sao Paulo -> Resolved
+Army Rio Grande do Sul MOVE Sao Paulo -> Resolved
+
+CHILE (Jordan767):
+Fleet Islas Juan Fernandez MOVE Drake Passage -> Resolved
+Army Punta Arenas MOVE Patagonia -> Resolved
+Army Santiago MOVE Mendoza -> Resolved
+Fleet Valparaiso MOVE Santiago -> Resolved
+
+COLOMBIA (Antigonos):
+Army Bogota MOVE Popayan -> Resolved
+Army Cali MOVE Canelos -> Bounced
+Army Cartagena MOVE Bogota -> Resolved
+Fleet Islas Galapagos MOVE Nazca Sea -> Bounced
+Fleet Panama nc MOVE Golfo de Darien -> Resolved
+Army Quito MOVE Guayaquil -> Resolved
+
+PARAGUAY (RolynTrotter):
+Army Asuncion MOVE Misiones -> Resolved
+Army Concepcion MOVE Parana -> Resolved
+Army Corrientes MOVE San Miguel de Tucuman -> Bounced
+Army Sao Paulo MOVE Goias -> Dislodged
+
+PERU (Don Juan of Austria):
+Army Iquitos MOVE Canelos -> Bounced
+Fleet Lima MOVE Nazca Sea -> Bounced
+Army Trujillo MOVE Iquitos -> Bounced
+
+VENEZUELA (bratsffl):
+Army Angostura MOVE Rio Branco -> Resolved
+Fleet Caracas MOVE Golfo de Paria -> Resolved
+Fleet Cumana MOVE Boca de Navios -> Resolved
+Fleet Maracaibo MOVE Caracas -> Resolved

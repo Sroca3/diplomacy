@@ -4,6 +4,7 @@ import io.github.sroca3.diplomacy.Country;
 import io.github.sroca3.diplomacy.Diplomacy;
 import io.github.sroca3.diplomacy.Order;
 import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyMapVariant;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -94,8 +95,30 @@ public class Game01 {
         diplomacy.adjudicate();
         generateResults(diplomacy, "13_Winter_1835_Build");
         generateStatus(diplomacy, "14_Winter_1835_Build");
+        
+        parseOrders(diplomacy, "1836/03_Spring_1836_Orders");
+        diplomacy.adjudicate();
+        generateStatus(diplomacy, "02_Spring_1836_Orders");
+        generateResults(diplomacy, "04_Spring_1836_Orders");
+
 
         generateStatus(diplomacy, "Latest", true);
+        processOrdersAndGenerateArtifacts(diplomacy);
+    }
+
+    private static void parseOrders(Diplomacy diplomacy, String filename) {
+        try {
+            diplomacy.addOrders(diplomacy.parseOrders(
+                "src/main/resources/games/south_american_supremacy/game_01/" + filename + ".txt"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void processOrdersAndGenerateArtifacts(Diplomacy diplomacy) {
+        int counter = 2;
+        System.out.println(StringUtils.leftPad(String.valueOf(counter), 2, '0'));
+        System.out.println(String.join(" ", StringUtils.leftPad(String.valueOf(counter), 2, '0'), diplomacy.getPhaseDescription()).replace(" ", "_"));
     }
 
     private static void generateStatus(Diplomacy diplomacy, String filePrefix) throws IOException {

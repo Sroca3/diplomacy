@@ -1,0 +1,50 @@
+Argentina:
+F Patagonia - Golfo de San Jorge
+F Buenos Aires - Rio de la Plata
+A Cordoba - Santa Fe
+A San Miguel de Tucuman Hold
+A Salta Hold
+
+Bolivia:
+Arica holds
+Antofagasta to Bahia de Arica
+La Paz to Santa Cruz
+Potosi holds
+
+Brasil:
+A Maranhao - Goias
+A Rio Grande do Sul - Sao Paulo
+A Rio de Janeiro S A Rio Grande do Sul - Sao Paulo
+F Bahia de Paranagua - Rio Grande do Sul
+F Bahia de Todos os Santos H
+
+Chile:
+F Val - San
+A San - Men
+A PAs - Pat
+F Jua - DrP
+
+Colombia:
+Fleet Panama(NC) Move to Golfo de Darien
+Army Cartagena Move to Bogota
+Army Bogota Move to Popayan
+Army Cali Move to Canelos
+Army Quito Move to Guayaquil
+Fleet Islas Galapagos Move to Nazca Sea
+
+Paraguay:
+A Sao Paulo move Goias
+A Concepcion move Parana
+A Asuncion move Misiones
+A Corrientes move San Miguel de Tucuman
+
+Peru:
+Iquitos moves to Canelos
+Trujillo moves to Iquitos
+Lima moves to Nazca sea
+
+Venezuela:
+F Caracas move Golfo de Paria
+F Maracaibo move Caracas
+F Cumana move Boca de Navios
+A Angostura move Rio Branco

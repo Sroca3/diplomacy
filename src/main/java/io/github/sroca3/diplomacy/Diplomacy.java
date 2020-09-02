@@ -32,7 +32,7 @@ public class Diplomacy {
     private static final Pattern UNIT_TYPE_REGEX = Pattern.compile(UNIT_TYPE_REGEX_STRING);
     private static final String UNIT_TYPE_REGEX_FOR_BUILD_STRING = " (ARMY|FLEET|A|F) ";
     private static final Pattern UNIT_TYPE_FOR_BUILD_REGEX = Pattern.compile(UNIT_TYPE_REGEX_FOR_BUILD_STRING);
-    private static final String ORDER_TYPE_REGEX_STRING = " (MOVE TO |MOVES TO |HOLD|-> |- |TO |MOVE |RETREAT |SUPPORT |CONVOY |CONVOYS |SUPPORTS )";
+    private static final String ORDER_TYPE_REGEX_STRING = " (MOVE TO |MOVES TO |HOLD|-> |- |TO |MOVE |RETREAT |SUPPORT |CONVOY |CONVOYS |SUPPORTS |S |H)";
     private static final Pattern ORDER_TYPE_REGEX = Pattern.compile(ORDER_TYPE_REGEX_STRING);
     private final MapVariant mapVariant;
     private final Set<RuleVariant> ruleVariants;
@@ -184,6 +184,12 @@ public class Diplomacy {
             }
         }
         return PhaseName.SPRING_ORDERS;
+    }
+
+    public String getPhaseDescription() {
+        PhaseName phaseName = currentPhase.getPhaseName();
+        String[] phaseParts = phaseName.name().toLowerCase(Locale.ENGLISH).split("_");
+        return String.join(" ", StringUtils.capitalize(phaseParts[0]), String.valueOf(getYear()), StringUtils.capitalize(phaseParts[1]));
     }
 
     public Phase getPreviousPhase() {
