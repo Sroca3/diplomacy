@@ -1,10 +1,15 @@
 package io.github.sroca3.diplomacy;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -16,6 +21,7 @@ import java.util.stream.Collectors;
 
 public class Phase {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(Phase.class);
     private final Map<Location, Unit> startingUnitLocations;
     private final Map<Location, Unit> resultingUnitLocations;
     private final Map<Location, Set<Location>> adjacencies;
@@ -25,12 +31,14 @@ public class Phase {
     private final Map<Location, Country> locationOwnership = new HashMap<>();
     private final Map<Location, Order> dislodgedUnitLocations = new HashMap<>();
     private final Set<Location> contestedLocations = new HashSet<>();
+    private final long year;
     public Phase(
         Map<Location, Unit> startingUnitLocations,
         MapVariant mapVariant,
         Map<Location, Set<Location>> adjacencies,
         PhaseName phaseName,
-        final Map<Location, Country> locationOwnership
+        final Map<Location, Country> locationOwnership,
+        long year
     ) {
         this(
             startingUnitLocations,
@@ -39,17 +47,19 @@ public class Phase {
             phaseName,
             locationOwnership,
             Collections.emptyMap(),
-            Collections.emptySet()
+            Collections.emptySet(),
+            year
         );
     }
     public Phase(
-        Map<Location, Unit> startingUnitLocations,
-        MapVariant mapVariant,
-        Map<Location, Set<Location>> adjacencies,
-        PhaseName phaseName,
+        final Map<Location, Unit> startingUnitLocations,
+        final MapVariant mapVariant,
+        final Map<Location, Set<Location>> adjacencies,
+        final PhaseName phaseName,
         final Map<Location, Country> locationOwnership,
         final Map<Location, Order> dislodgedUnitLocations,
-        final Set<Location> contestedLocations
+        final Set<Location> contestedLocations,
+        final long year
     ) {
         this.startingUnitLocations = Map.copyOf(startingUnitLocations);
         this.resultingUnitLocations = new HashMap<>(startingUnitLocations);
@@ -59,6 +69,13 @@ public class Phase {
         this.locationOwnership.putAll(locationOwnership);
         this.dislodgedUnitLocations.putAll(dislodgedUnitLocations);
         this.contestedLocations.addAll(contestedLocations);
+        this.year = year;
+    }
+
+    public String getPhaseDescription() {
+        PhaseName phaseName = getPhaseName();
+        String[] phaseParts = phaseName.name().toLowerCase(Locale.ENGLISH).split("_");
+        return String.join(" ", StringUtils.capitalize(phaseParts[0]), String.valueOf(year), StringUtils.capitalize(phaseParts[1]));
     }
 
     public Map<Location, Unit> getStartingUnitLocations() {
@@ -628,7 +645,7 @@ public class Phase {
             orders.removeAll(orders.stream().filter(o -> !o.getOrderType().isRetreat()).collect(Collectors.toList()));
         }
         orders.forEach(this::resolveOrder);
-        orders.forEach(o -> System.out.println(o.getDescription()));
+        orders.forEach(o -> LOGGER.debug(o.getDescription()));
     }
 
     public Order getOrderById(UUID id) {

@@ -110,7 +110,11 @@ public class Diplomacy {
     }
 
     public void beginFirstPhase() {
-        currentPhase = new Phase(unitLocations, mapVariant, mapVariant.getMovementGraph(), getNextPhaseName(), locationOwnership);
+        currentPhase = new Phase(unitLocations, mapVariant, mapVariant.getMovementGraph(), getNextPhaseName(), locationOwnership, getYear());
+    }
+
+    public boolean isFirstPhase() {
+        return previousPhase == null;
     }
 
     public void setCurrentPhase(Phase currentPhase) {
@@ -155,7 +159,8 @@ public class Diplomacy {
             nextPhaseName,
             locationOwnership,
             previousPhase.getDislodgedInfo(),
-            previousPhase.getContestedLocations()
+            previousPhase.getContestedLocations(),
+            getYear()
         );
         unitLocations.clear();
         unitLocations.putAll(currentPhase.getResultingUnitLocations());
@@ -169,12 +174,12 @@ public class Diplomacy {
             .anyMatch(obj -> true);
         if (currentPhase != null) {
             PhaseName phaseName = currentPhase.getPhaseName();
-            if (phaseName == PhaseName.SPRING_ORDERS) {
+            if (phaseName == PhaseName.SPRING_ORDERS || phaseName.isSpringRetreat()) {
                 if (retreatsPresent) {
                     return PhaseName.SPRING_RETREAT;
                 }
                 return PhaseName.FALL_ORDERS;
-            } else if (phaseName == PhaseName.FALL_ORDERS) {
+            } else if (phaseName == PhaseName.FALL_ORDERS || phaseName.isFallRetreat()) {
                 if (retreatsPresent) {
                     return PhaseName.FALL_RETREAT;
                 }

@@ -18,4 +18,12 @@ public enum PhaseName {
     public boolean isBuildPhase() {
         return this == WINTER_BUILD;
     }
+
+    public boolean isSpringRetreat() {
+        return SPRING_RETREAT.equals(this);
+    }
+
+    public boolean isFallRetreat() {
+        return FALL_RETREAT.equals(this);
+    }
 }
