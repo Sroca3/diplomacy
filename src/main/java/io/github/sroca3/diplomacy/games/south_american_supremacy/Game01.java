@@ -73,48 +73,6 @@ public class Game01 {
         }
         diplomacy.addStandardStartingUnits();
         diplomacy.beginFirstPhase();
-//        generateStatus(diplomacy, "02_Spring_1835_Orders");
-//
-//       try{ diplomacy.addOrders(diplomacy.parseOrders("src/main/resources/games/south_american_supremacy/game_01/1835/03_Spring_1835_Orders.txt"));} catch (Exception e) {
-//           e.printStackTrace();
-//       }
-//        diplomacy.adjudicate();
-//        generateResults(diplomacy, "04_Spring_1835_Orders");
-//
-//        try {
-//            diplomacy.addOrders(diplomacy.parseOrders(
-//                "src/main/resources/games/south_american_supremacy/game_01/1835/07_Fall_1835_Orders.txt"));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        diplomacy.adjudicate();
-//        generateResults(diplomacy, "08_Fall_1835_Orders");
-//        generateStatus(diplomacy, "10_Fall_1835_Orders");
-//
-//        try {
-//            diplomacy.addOrders(diplomacy.parseOrders(
-//                "src/main/resources/games/south_american_supremacy/game_01/1835/12_Winter_1835_Build.txt"));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        diplomacy.adjudicate();
-//        generateResults(diplomacy, "13_Winter_1835_Build");
-//        generateStatus(diplomacy, "14_Winter_1835_Build");
-//
-//        parseOrders(diplomacy, "1836/03_Spring_1836_Orders");
-//        diplomacy.adjudicate();
-//        generateStatus(diplomacy, "02_Spring_1836_Orders");
-//        generateResults(diplomacy, "04_Spring_1836_Orders");
-//
-//        generateStatus(diplomacy, "07_Spring_1836_Retreat");
-//
-//        parseOrders(diplomacy, "1836/08_Spring_1836_Retreat");
-//        diplomacy.adjudicate();
-//        generateResults(diplomacy, "09_Spring_1836_Retreat");
-//
-//        generateStatus(diplomacy, "12_Fall_1836_Orders");
-//
-//        generateStatus(diplomacy, "Latest", true);
         processOrdersAndGenerateArtifacts(diplomacy);
     }
 
@@ -147,7 +105,17 @@ public class Game01 {
             generateStatus(diplomacy, getFileName(diplomacy, counter));
         }
         counter++;
-        String fileWithPath = String.join(File.separator, "src", "main", "resources", "games", "south_american_supremacy", "game_01", String.valueOf(diplomacy.getYear()), getFileName(diplomacy, counter) + ".txt" );
+        String fileWithPath = String.join(
+            File.separator,
+            "src",
+            "main",
+            "resources",
+            "games",
+            "south_american_supremacy",
+            "game_01",
+            String.valueOf(diplomacy.getYear()),
+            getFileName(diplomacy, counter) + ".txt"
+        );
 
         while (Paths.get(fileWithPath).toFile().exists()) {
             parseOrders(diplomacy, getFileName(diplomacy, counter));
@@ -164,7 +132,17 @@ public class Game01 {
             counter++;
             generateStatus(diplomacy, getFileName(diplomacy, counter));
             counter++;
-            fileWithPath = String.join(File.separator, "src", "main", "resources", "games", "south_american_supremacy", "game_01", String.valueOf(diplomacy.getYear()), getFileName(diplomacy, counter) + ".txt" );
+            fileWithPath = String.join(
+                File.separator,
+                "src",
+                "main",
+                "resources",
+                "games",
+                "south_american_supremacy",
+                "game_01",
+                String.valueOf(diplomacy.getYear()),
+                getFileName(diplomacy, counter) + ".txt"
+            );
         }
     }
 
