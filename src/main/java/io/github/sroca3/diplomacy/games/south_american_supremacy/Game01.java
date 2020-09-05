@@ -186,7 +186,7 @@ public class Game01 {
         }
         resultsFile.createNewFile();
         try (FileWriter writer = new FileWriter(resultsFile)) {
-            writer.write("Results\n");
+            writer.write(diplomacy.getPreviousPhase().getPhaseDescription() + " Results\n");
             writer.write("--------------------------------\n");
             countries.forEach(
                 country -> {
@@ -216,11 +216,7 @@ public class Game01 {
     private static void generateStatus(Diplomacy diplomacy, String filePrefix, boolean isLatest) throws IOException {
         SortedSet<Country> countries = diplomacy.getMapVariant().getCountries();
         if(!isLatest) {
-//            if (diplomacy.getPreviousPhase() != null && diplomacy.getPreviousPhase().getPhaseName().isBuildPhase()) {
-//                filePrefix = (diplomacy.getYear() - 1) + "/" + filePrefix;
-//            } else {
                 filePrefix = diplomacy.getYear() + "/" + filePrefix;
-//            }
         }
         File statusFile = Paths.get("src/main/resources/games/south_american_supremacy/game_01/" + filePrefix + "_Status.txt")
                                .toFile();
@@ -229,7 +225,7 @@ public class Game01 {
         }
         statusFile.createNewFile();
         try (FileWriter writer = new FileWriter(statusFile)) {
-            writer.write("Status\n");
+            writer.write(diplomacy.getPhaseDescription() + " Status\n");
             writer.write("--------------------------------\n");
             countries.forEach(
                 country -> {
