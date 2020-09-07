@@ -160,7 +160,7 @@ public class Order {
         }
 
         if (!getStatus().isUnresolved()) {
-            description = String.join(" -> ", description, lowercaseAndCapitalize(status.name()));
+            description = String.join(" -> ", description, status.getDescription());
         }
         return description;
     }

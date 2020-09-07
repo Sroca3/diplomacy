@@ -6,6 +6,8 @@ import io.github.sroca3.diplomacy.exceptions.OrderTypeParseException;
 import io.github.sroca3.diplomacy.exceptions.UnitTypeMismatchException;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -28,11 +30,12 @@ import java.util.stream.Collectors;
 
 public class Diplomacy {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(Diplomacy.class);
     private static final String UNIT_TYPE_REGEX_STRING = "^(ARMY|FLEET|A|F) ";
     private static final Pattern UNIT_TYPE_REGEX = Pattern.compile(UNIT_TYPE_REGEX_STRING);
     private static final String UNIT_TYPE_REGEX_FOR_BUILD_STRING = " (ARMY|FLEET|A|F) ";
     private static final Pattern UNIT_TYPE_FOR_BUILD_REGEX = Pattern.compile(UNIT_TYPE_REGEX_FOR_BUILD_STRING);
-    private static final String ORDER_TYPE_REGEX_STRING = " (MOVE TO |MOVES TO |HOLD|-> |- |TO |MOVE |RETREAT |SUPPORT |CONVOY |CONVOYS |SUPPORTS |S |H)";
+    private static final String ORDER_TYPE_REGEX_STRING = " (MOVE TO |MOVES TO |HOLD$|-> |- |TO |MOVE |RETREAT |SUPPORT |CONVOY |CONVOYS |SUPPORTS |S |H$)";
     private static final Pattern ORDER_TYPE_REGEX = Pattern.compile(ORDER_TYPE_REGEX_STRING);
     private final MapVariant mapVariant;
     private final Set<RuleVariant> ruleVariants;
@@ -296,6 +299,9 @@ public class Diplomacy {
             toLocation = toLocation.getTerritory();
         }
         Unit unit = unitLocations.get(currentLocation);
+        if (unit == null) {
+            LOGGER.error("Could not find unit in location: {}", currentLocation);
+        }
         if (currentPhase.getPhaseName().isRetreatPhase()) {
             unit = getPreviousPhase().getStartingUnitLocations().get(currentLocation);
         }

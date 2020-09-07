@@ -1029,7 +1029,8 @@ public class StandardVariantTest {
             diplomacy.getMapVariant(),
             diplomacy.getMapVariant().getMovementGraph(),
             PhaseName.WINTER_BUILD,
-            Map.of(StandardVariantLocation.MOSCOW, Country.RUSSIA)));
+            Map.of(StandardVariantLocation.MOSCOW, Country.RUSSIA),
+            1835));
         diplomacy.addOrders(List.of(
             diplomacy.parseOrder("Build F Moscow", Country.RUSSIA)
         ));
@@ -1049,7 +1050,9 @@ public class StandardVariantTest {
             diplomacy.getMapVariant().getMovementGraph(),
             PhaseName.WINTER_BUILD,
             Map.of(StandardVariantLocation.BERLIN, Country.GERMANY,
-            StandardVariantLocation.KIEL, Country.GERMANY)));
+            StandardVariantLocation.KIEL, Country.GERMANY),
+            1835
+            ));
         diplomacy.addOrders(List.of(
             diplomacy.parseOrder("Build A Berlin", Country.GERMANY)
         ));

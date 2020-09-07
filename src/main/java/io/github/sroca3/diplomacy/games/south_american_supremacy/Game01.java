@@ -4,9 +4,14 @@ import io.github.sroca3.diplomacy.Country;
 import io.github.sroca3.diplomacy.Diplomacy;
 import io.github.sroca3.diplomacy.Order;
 import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyMapVariant;
+import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
+import org.apache.batik.anim.dom.SVGDOMImplementation;
+import org.apache.batik.util.XMLResourceDescriptor;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -42,6 +47,9 @@ public class Game01 {
         File countryAssignments =
             Paths.get("src/main/resources/games/south_american_supremacy/game_01/country_assignments.txt").toFile()
         ;
+//        String parser = XMLResourceDescriptor.getXMLParserClassName();
+//        SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory( parser );
+//        Document document = factory.createDocument( "src/main/resources/games/south_american_supremacy/game_01/latest.svg" );
         boolean assign = countryAssignments.createNewFile();
         if (assign) {
             try (FileWriter writer = new FileWriter(countryAssignments)) {

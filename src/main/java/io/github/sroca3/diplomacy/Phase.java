@@ -132,19 +132,6 @@ public class Phase {
             }
         }
 
-        if ((order.getOrderType().isMove() || order.getOrderType().isRetreat()) && order.getStatus().isResolved()) {
-            resultingUnitLocations.remove(order.getCurrentLocation());
-            resultingUnitLocations.put(order.getToLocation(), order.getUnit());
-        }
-
-        if (order.getOrderType().isRetreat() && order.getStatus().isBounced()) {
-            resultingUnitLocations.remove(order.getCurrentLocation());
-        }
-
-        if (order.getOrderType().isBuild() && order.getStatus().isResolved()) {
-            resultingUnitLocations.put(order.getCurrentLocation(), order.getUnit());
-        }
-
         return order;
     }
 
@@ -425,6 +412,7 @@ public class Phase {
             .stream()
             .filter(o -> o.getToLocation().getTerritory().equals(order.getToLocation().getTerritory()))
             .filter(o -> o.getOrderType().isMove())
+            .filter(o -> !o.getStatus().isIllegal())
             .count() > 1;
     }
 
@@ -645,7 +633,31 @@ public class Phase {
             orders.removeAll(orders.stream().filter(o -> !o.getOrderType().isRetreat()).collect(Collectors.toList()));
         }
         orders.forEach(this::resolveOrder);
+        orders.forEach(this::updateLocations);
         orders.forEach(o -> LOGGER.debug(o.getDescription()));
+    }
+
+    private void updateLocations(Order order) {
+        if (order.getOrderType().isMove() && order.getStatus().isResolved()) {
+            Unit unit = resultingUnitLocations.get(order.getCurrentLocation());
+            if (unit != null && unit.getId().equals(order.getUnit().getId())) {
+                resultingUnitLocations.remove(order.getCurrentLocation());
+            }
+            resultingUnitLocations.put(order.getToLocation(), order.getUnit());
+        }
+
+        if (order.getOrderType().isRetreat() && order.getStatus().isBounced()) {
+            resultingUnitLocations.remove(order.getCurrentLocation());
+        }
+
+        if (order.getOrderType().isRetreat() && order.getStatus().isResolved()) {
+            resultingUnitLocations.put(order.getToLocation(), order.getUnit());
+        }
+
+        if (order.getOrderType().isBuild() && order.getStatus().isResolved()) {
+            LOGGER.debug("Build unit in {}", order.getCurrentLocation());
+            resultingUnitLocations.put(order.getCurrentLocation(), order.getUnit());
+        }
     }
 
     public Order getOrderById(UUID id) {

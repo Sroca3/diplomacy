@@ -1,18 +1,24 @@
 package io.github.sroca3.diplomacy;
 
 public enum OrderStatus {
-    BOUNCED,
-    BUILD_FAILED,
-    DISBANDED,
-    DISLODGED,
-    ILLEGAL,
-    ILLEGAL_ORDER_REPLACED_WITH_HOLD,
-    PROCESSING,
-    RESOLVED,
-    SUPPORT_CUT,
-    SUPPORT_FAILED,
-    CONVOY_FAILED,
-    UNRESOLVED;
+    BOUNCED("Bounced"),
+    BUILD_FAILED("Build Failed"),
+    DISBANDED("Disbanded"),
+    DISLODGED("Dislodged"),
+    ILLEGAL("Illegal"),
+    ILLEGAL_ORDER_REPLACED_WITH_HOLD("Illegal order replaced with Hold"),
+    PROCESSING("Processing"),
+    RESOLVED("Resolved"),
+    SUPPORT_CUT("Support cut"),
+    SUPPORT_FAILED("Support failed"),
+    CONVOY_FAILED("Convoy failed"),
+    UNRESOLVED("Unresolved");
+
+    private final String description;
+
+    OrderStatus(String description) {
+        this.description = description;
+    }
 
     public boolean isUnresolved() {
         return this == UNRESOLVED;
@@ -44,5 +50,9 @@ public enum OrderStatus {
 
     public boolean isCut() {
         return this == SUPPORT_CUT;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
