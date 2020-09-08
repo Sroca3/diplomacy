@@ -11,8 +11,9 @@ public enum OrderType {
     HOLD(Set.of("h", "holds")),
     MOVE(Set.of("-", "->", "to", "move to", "moves to")),
     SUPPORT(Set.of("supports", "s")),
-    RETREAT,
-    BUILD;
+    RETREAT(Set.of("r")),
+    BUILD,
+    DISBAND(Set.of("destroy", "remove"));
 
     private static final Map<String, OrderType> NAMES_MAPPING = new HashMap<>();
 
@@ -68,5 +69,9 @@ public enum OrderType {
 
     public boolean isBuild() {
         return this == BUILD;
+    }
+
+    public boolean isDisband() {
+        return this == DISBAND;
     }
 }

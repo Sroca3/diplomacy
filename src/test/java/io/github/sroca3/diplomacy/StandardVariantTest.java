@@ -3,7 +3,6 @@ package io.github.sroca3.diplomacy;
 import io.github.sroca3.diplomacy.exceptions.CountryOrderMismatchException;
 import io.github.sroca3.diplomacy.maps.StandardMapVariant;
 import io.github.sroca3.diplomacy.maps.StandardVariantLocation;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

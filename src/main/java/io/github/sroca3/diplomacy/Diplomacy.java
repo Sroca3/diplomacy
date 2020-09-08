@@ -35,7 +35,7 @@ public class Diplomacy {
     private static final Pattern UNIT_TYPE_REGEX = Pattern.compile(UNIT_TYPE_REGEX_STRING);
     private static final String UNIT_TYPE_REGEX_FOR_BUILD_STRING = " (ARMY|FLEET|A|F) ";
     private static final Pattern UNIT_TYPE_FOR_BUILD_REGEX = Pattern.compile(UNIT_TYPE_REGEX_FOR_BUILD_STRING);
-    private static final String ORDER_TYPE_REGEX_STRING = " (MOVE TO |MOVES TO |HOLD$|HOLDS$|-> |- |TO |MOVE |RETREAT |SUPPORT |CONVOY |CONVOYS |SUPPORTS |S |H$)";
+    private static final String ORDER_TYPE_REGEX_STRING = "( R |^BUILD |^DISBAND |^DESTROY |^REMOVE | MOVE TO | MOVES TO | HOLD$| HOLDS$| -> | - | TO | MOVE | RETREAT | SUPPORT | CONVOY | CONVOYS | SUPPORTS | S | H$)";
     private static final Pattern ORDER_TYPE_REGEX = Pattern.compile(ORDER_TYPE_REGEX_STRING);
     private final MapVariant mapVariant;
     private final Set<RuleVariant> ruleVariants;
@@ -129,7 +129,7 @@ public class Diplomacy {
     }
 
     public void addOrder(Order order) {
-        if (!order.getOrderType().isBuild() && !order.getOrderType().isRetreat()) {
+        if (!order.getOrderType().isBuild() && !order.getOrderType().isRetreat() && !order.getOrderType().isDisband()) {
             validateUnitOwnership(order.getCountry(), order.getCurrentLocation());
         }
         currentPhase.addOrder(new Order(order));
@@ -251,7 +251,7 @@ public class Diplomacy {
         } else {
             throw new OrderTypeParseException();
         }
-        Location currentLocation = Optional.ofNullable(parseLocation(parts[0]))
+        Location currentLocation = Optional.ofNullable(parseLocation(parts[orderType.isDisband() ? 1 : 0]))
                                            .orElseThrow(() -> new LocationNotFoundException(parts[0]));
         UnitType unitType;
         if (unitTypeMatcher.find()) {
@@ -282,7 +282,7 @@ public class Diplomacy {
             if (orderType.isSupport() && toLocation == null) {
                 toLocation = fromLocation;
             }
-        } else if (orderType.isHold()) {
+        } else if (orderType.isHold() || orderType.isDisband()) {
             fromLocation = currentLocation;
             toLocation = currentLocation;
         } else {
@@ -305,7 +305,7 @@ public class Diplomacy {
         if (currentPhase.getPhaseName().isRetreatPhase()) {
             unit = getPreviousPhase().getStartingUnitLocations().get(currentLocation);
         }
-        if (unit.getType() != unitType) {
+        if (unit.getType() != unitType && !orderType.isDisband()) {
             throw new UnitTypeMismatchException();
         }
 

@@ -129,10 +129,17 @@ public class Phase {
                 case BUILD:
                     resolveBuildOrder(order);
                     break;
+                case DISBAND:
+                    resolveDisbandOrder(order);
+                    break;
             }
         }
 
         return order;
+    }
+
+    private void resolveDisbandOrder(Order order) {
+        order.resolve();
     }
 
     public long getSupplyCenterCount(Country country) {
@@ -657,6 +664,10 @@ public class Phase {
         if (order.getOrderType().isBuild() && order.getStatus().isResolved()) {
             LOGGER.debug("Build unit in {}", order.getCurrentLocation());
             resultingUnitLocations.put(order.getCurrentLocation(), order.getUnit());
+        }
+
+        if (order.getOrderType().isDisband() && phaseName.isBuildPhase()) {
+            resultingUnitLocations.remove(order.getCurrentLocation());
         }
     }
 
