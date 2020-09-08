@@ -1,11 +1,17 @@
 package io.github.sroca3.diplomacy.games.south_american_supremacy;
 
+import com.helger.css.ECSSVersion;
+import com.helger.css.decl.CSSExpression;
+import com.helger.css.reader.CSSReaderDeclarationList;
+import com.helger.css.writer.CSSWriterSettings;
 import io.github.sroca3.diplomacy.Country;
 import io.github.sroca3.diplomacy.Diplomacy;
 import io.github.sroca3.diplomacy.Order;
 import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyMapVariant;
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
 import org.apache.batik.anim.dom.SVGDOMImplementation;
+import org.apache.batik.svggen.SVGGraphics2D;
+import org.apache.batik.svggen.SVGGraphics2DIOException;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -15,9 +21,14 @@ import org.w3c.dom.Document;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Comparator;
@@ -50,6 +61,21 @@ public class Game01 {
 //        String parser = XMLResourceDescriptor.getXMLParserClassName();
 //        SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory( parser );
 //        Document document = factory.createDocument( "src/main/resources/games/south_american_supremacy/game_01/latest.svg" );
+//        var x =CSSReaderDeclarationList.readFromString(document.getElementById("path1306").getAttribute("style"), ECSSVersion.CSS30);
+//        x.getDeclarationOfPropertyName("fill").setExpression(CSSExpression.createSimple("url(#Peru)"));
+//        document.getElementById("path1306").setAttribute("style", x.getAsCSSString(new CSSWriterSettings(ECSSVersion.CSS30, true)));
+//        LOGGER.error(x.getAsCSSString(new CSSWriterSettings(ECSSVersion.CSS30, true)));
+//        SVGGraphics2D graphics = new SVGGraphics2D(document);
+//
+//        try (Writer out = new OutputStreamWriter(new FileOutputStream("src/main/resources/games/south_american_supremacy/game_01/latest.svg"), "UTF-8")) {
+//            graphics.stream(document.getDocumentElement(), out, true, false);
+//        } catch (UnsupportedEncodingException | FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (SVGGraphics2DIOException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         boolean assign = countryAssignments.createNewFile();
         if (assign) {
             try (FileWriter writer = new FileWriter(countryAssignments)) {

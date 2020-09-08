@@ -1,0 +1,53 @@
+Fall 1836 Orders Results
+--------------------------------
+
+ARGENTINA (AKFD):
+Fleet Golfo de San Jorge MOVE Islas Malvinas -> Resolved
+Fleet Rio de la Plata SUPPORT Misiones to Rio Grande do Sul -> Resolved
+Army Salta MOVE San Miguel de Tucuman -> Resolved
+Army Santa fe MOVE Montevideo -> Resolved
+Army San Miguel de Tucuman MOVE Cordoba -> Resolved
+
+BOLIVIA (FloridaMan):
+Fleet Arica MOVE Bahia de Arica -> Resolved
+Fleet Bahia de Arica MOVE Nazca Sea -> Resolved
+Army Potosi MOVE Salta -> Resolved
+Army Santa Cruz HOLD -> Resolved
+
+BRASIL (VGhost):
+Fleet Bahia de Todos os Santos MOVE Salvador -> Resolved
+Army Maranhao HOLD -> Resolved
+Army Rio de Janeiro SUPPORT Sao Paulo to hold -> Resolved
+Fleet Rio Grande do Sul SUPPORT Sao Paulo to hold -> Dislodged
+Army Sao Paulo HOLD -> Resolved
+
+CHILE (Jordan767):
+Fleet Drake Passage MOVE Punta Arenas -> Resolved
+Army Mendoza MOVE Rosario -> Resolved
+Army Patagonia SUPPORT Drake Passage to Punta Arenas -> Resolved
+Fleet Santiago MOVE Drake Passage -> Resolved
+
+COLOMBIA (Antigonos):
+Army Bogota MOVE Cartagena -> Resolved
+Army Cali MOVE Canelos -> Resolved
+Fleet Golfo de Darien MOVE Maracaibo -> Bounced
+Army Guayaquil SUPPORT Cali to Canelos -> Resolved
+Fleet Islas Galapagos MOVE Nazca Sea -> Bounced
+Army Popayan MOVE Iquitos -> Bounced
+
+PARAGUAY (RolynTrotter):
+Army Corrientes MOVE Misiones -> Resolved
+Army Minas Gerais MOVE Sao Paulo -> Bounced
+Army Misiones MOVE Rio Grande do Sul -> Resolved
+Army Parana SUPPORT Minas Gerais to Sao Paulo -> Support failed
+
+PERU (Don Juan of Austria):
+Army Iquitos MOVE Aquiris -> Resolved
+Fleet Lima SUPPORT Bahia de Arica to Nazca Sea -> Resolved
+Army Trujillo MOVE Iquitos -> Bounced
+
+VENEZUELA (bratsffl):
+Fleet Boca de Navios HOLD -> Resolved
+Fleet Caracas MOVE Maracaibo -> Bounced
+Fleet Golfo de Paria MOVE Caracas -> Bounced
+Army Rio Branco MOVE Manaus -> Resolved

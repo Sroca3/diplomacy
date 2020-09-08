@@ -8,7 +8,7 @@ import java.util.Set;
 
 public enum OrderType {
     CONVOY(Set.of("convoys")),
-    HOLD(Set.of("h")),
+    HOLD(Set.of("h", "holds")),
     MOVE(Set.of("-", "->", "to", "move to", "moves to")),
     SUPPORT(Set.of("supports", "s")),
     RETREAT,
