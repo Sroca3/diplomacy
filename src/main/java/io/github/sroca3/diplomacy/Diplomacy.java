@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 public class Diplomacy {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Diplomacy.class);
-    private static final String UNIT_TYPE_REGEX_STRING = "^(ARMY|FLEET|A|F) ";
+    private static final String UNIT_TYPE_REGEX_STRING = "(ARMY|FLEET| A | F\\b|^A |^F )";
     private static final Pattern UNIT_TYPE_REGEX = Pattern.compile(UNIT_TYPE_REGEX_STRING);
     private static final String UNIT_TYPE_REGEX_FOR_BUILD_STRING = " (ARMY|FLEET|A|F) ";
     private static final Pattern UNIT_TYPE_FOR_BUILD_REGEX = Pattern.compile(UNIT_TYPE_REGEX_FOR_BUILD_STRING);
@@ -252,7 +252,7 @@ public class Diplomacy {
             throw new OrderTypeParseException();
         }
         Location currentLocation = Optional.ofNullable(parseLocation(parts[orderType.isDisband() ? 1 : 0]))
-                                           .orElseThrow(() -> new LocationNotFoundException(parts[0]));
+                                           .orElseThrow(() -> new LocationNotFoundException(parts[0], orderInput));
         UnitType unitType;
         if (unitTypeMatcher.find()) {
             unitType = UnitType.from(unitTypeMatcher.group().trim());
@@ -272,10 +272,10 @@ public class Diplomacy {
         Location toLocation;
         if (orderType.isSupport() || orderType.isConvoy()) {
             fromLocation = Optional.ofNullable(parseLocation(RegExUtils.removeFirst(parts[1], UNIT_TYPE_REGEX_STRING)))
-                                   .orElseThrow(() -> new LocationNotFoundException(parts[1]));
+                                   .orElseThrow(() -> new LocationNotFoundException(parts[1], orderInput));
             if (parts.length > 2) {
                 toLocation = Optional.ofNullable(parseLocation(parts[2]))
-                                     .orElseThrow(() -> new LocationNotFoundException(parts[2]));
+                                     .orElseThrow(() -> new LocationNotFoundException(parts[2], orderInput));
             } else {
                 toLocation = fromLocation;
             }
@@ -288,10 +288,10 @@ public class Diplomacy {
         } else {
             fromLocation = currentLocation;
             toLocation = Optional.ofNullable(parseLocation(parts[1]))
-                                 .orElseThrow(() -> new LocationNotFoundException(parts[1]));
+                                 .orElseThrow(() -> new LocationNotFoundException(parts[1], orderInput));
         }
         if (fromLocation == null) {
-            throw new LocationNotFoundException("");
+            throw new LocationNotFoundException("", orderInput);
         }
         if (UnitType.ARMY.equals(unitType)) {
             currentLocation = currentLocation.getTerritory();

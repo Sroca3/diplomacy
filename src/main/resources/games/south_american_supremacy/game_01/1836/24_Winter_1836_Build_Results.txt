@@ -1,0 +1,18 @@
+Winter 1836 Build Results
+--------------------------------
+
+BOLIVIA (FloridaMan):
+BUILD Army Antofagasta -> Resolved
+BUILD Army La Paz -> Resolved
+
+BRASIL (VGhost):
+DISBAND Fleet Bahia de Paranagua -> Resolved
+
+CHILE (Jordan767):
+BUILD Army Santiago -> Resolved
+
+PARAGUAY (RolynTrotter):
+BUILD Army Concepcion -> Resolved
+
+VENEZUELA (bratsffl):
+BUILD Army Maracaibo -> Resolved

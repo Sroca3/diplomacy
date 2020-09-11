@@ -1,0 +1,21 @@
+Argentina:
+
+Bolivia:
+Build Army La Paz
+Build Army Antofagasta
+
+Brasil:
+Disband F Bahia de Paranagua
+
+Chile:
+Build A San
+
+Colombia:
+
+Paraguay:
+Build A Concepcion
+
+Peru:
+
+Venezuela:
+Build A Maracaibo

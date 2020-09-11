@@ -142,7 +142,7 @@ public class Order {
             description = String.join(" ", description, capitalizeEach(toLocation.toString()));
         } else if (getOrderType().isSupport() && fromLocation == toLocation) {
             description = String.join(" ", description, capitalizeEach(fromLocation.toString()), "to hold");
-        } else if (getOrderType().isBuild()) {
+        } else if (getOrderType().isBuild() || getOrderType().isDisband()) {
             description = String.join(
                 " ",
                 orderType.name(),
