@@ -1,0 +1,53 @@
+Argentina:
+A San Miguel de Tucuman - Salta
+A Cordoba H
+A Montevideo - Buenos Aires
+F Rio de la Plata - Montevideo
+F Islas Malvinas - Golfo de San Jorge
+
+Bolivia:
+Antofagasta to Copiapo
+La Paz to Cusco
+Santa Cruz holds
+Nazca Sea to Piura
+Bahia de Arica to Nazca Sea
+
+Brasil:
+A Sao Paulo -> Minas Gerais
+A Rio de Janeiro S A Sao Paulo -> Minas Gerais
+F Salvador H
+A Maranhao -> Goias
+
+Chile:
+A San - Men
+A Ros S San - Men
+F DrP - SoM
+F PAs - GSJ
+A Pat - BhB
+
+Colombia:
+Fleet Golfo de Darien Convoy Army Maracaibo to Para
+Army Cartagena Move to Bogota
+Army Popayan Move to Amazonas
+Army Canelos Move to Popayan
+Army Guayaquil Move to Canelos
+Fleet Islas Galapagos Move to Bahia Sechura
+
+Paraguay:
+Minas Gerais move Rio de Janeiro
+Rio Grande do Sul support Parana move Sao Paulo
+Parana move Sao Paulo
+Concepcion move Pantanal
+Misiones support Rio Grande do Sul hold
+
+Peru:
+Fleet Lima Hold
+Trujillo supports Nazca sea to Piura
+Aquiris moves to Iquitos
+
+Venezuela:
+Army Maracaibo Hold
+Army Manaus move Mato Grosso
+Fleet Boca de Navios move Para
+Fleet Caracas support Fleet Golfo de Paria move Golfo de Darien
+Fleet Golfo de Paria move Golfo de Darien

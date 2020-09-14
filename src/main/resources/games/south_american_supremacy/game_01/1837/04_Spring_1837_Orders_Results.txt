@@ -1,0 +1,57 @@
+Spring 1837 Orders Results
+--------------------------------
+
+ARGENTINA (AKFD):
+Army Cordoba HOLD -> Resolved
+Fleet Islas Malvinas MOVE Golfo de San Jorge -> Bounced
+Army Montevideo MOVE Buenos Aires -> Resolved
+Fleet Rio de la Plata MOVE Montevideo -> Resolved
+Army San Miguel de Tucuman MOVE Salta -> Bounced
+
+BOLIVIA (FloridaMan):
+Army Antofagasta MOVE Copiapo -> Resolved
+Fleet Bahia de Arica MOVE Nazca Sea -> Resolved
+Army La Paz MOVE Cusco -> Resolved
+Fleet Nazca Sea MOVE Piura -> Resolved
+Army Salta HOLD -> Resolved
+Army Santa Cruz HOLD -> Resolved
+
+BRASIL (VGhost):
+Army Maranhao MOVE Goias -> Resolved
+Army Rio de Janeiro SUPPORT Sao Paulo to Minas Gerais -> Resolved
+Fleet Salvador HOLD -> Resolved
+Army Sao Paulo MOVE Minas Gerais -> Dislodged
+
+CHILE (Jordan767):
+Fleet Drake Passage MOVE Straits of Magellan -> Resolved
+Army Patagonia MOVE Bahia Blanca -> Resolved
+Fleet Punta Arenas MOVE Golfo de San Jorge -> Bounced
+Army Rosario SUPPORT Santiago to Mendoza -> Resolved
+Army Santiago MOVE Mendoza -> Resolved
+
+COLOMBIA (Antigonos):
+Army Canelos MOVE Popayan -> Resolved
+Army Cartagena MOVE Bogota -> Resolved
+Fleet Golfo de Darien CONVOY Maracaibo to Para -> Processing
+Army Guayaquil MOVE Canelos -> Resolved
+Fleet Islas Galapagos MOVE Bahia Sechura -> Resolved
+Army Popayan MOVE Amazonas -> Resolved
+
+PARAGUAY (RolynTrotter):
+Army Concepcion MOVE Pantanal -> Resolved
+Army Minas Gerais MOVE Rio de Janeiro -> Bounced
+Army Misiones SUPPORT Rio Grande do Sul to hold -> Resolved
+Army Parana MOVE Sao Paulo -> Resolved
+Army Rio Grande do Sul SUPPORT Parana to Sao Paulo -> Resolved
+
+PERU (Don Juan of Austria):
+Army Aquiris MOVE Iquitos -> Resolved
+Fleet Lima HOLD -> Resolved
+Army Trujillo SUPPORT Nazca Sea to Piura -> Resolved
+
+VENEZUELA (bratsffl):
+Fleet Boca de Navios MOVE Para -> Resolved
+Fleet Caracas SUPPORT Golfo de Paria to Golfo de Darien -> Resolved
+Fleet Golfo de Paria MOVE Golfo de Darien -> Resolved
+Army Manaus MOVE Mato Grosso -> Resolved
+Army Maracaibo HOLD -> Resolved

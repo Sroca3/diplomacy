@@ -44,8 +44,8 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         );
         addEdge(armyGraph, SouthAmericanSupremacyLocation.CORDOBA, SouthAmericanSupremacyLocation.MENDOZA);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.CORDOBA, SouthAmericanSupremacyLocation.SANTA_FE);
-        addEdge(armyGraph, SouthAmericanSupremacyLocation.COPIAGO, SouthAmericanSupremacyLocation.VALPARAISO);
-        addEdge(armyGraph, SouthAmericanSupremacyLocation.COPIAGO, SouthAmericanSupremacyLocation.ANTOFAGASTA);
+        addEdge(armyGraph, SouthAmericanSupremacyLocation.COPIAPO, SouthAmericanSupremacyLocation.VALPARAISO);
+        addEdge(armyGraph, SouthAmericanSupremacyLocation.COPIAPO, SouthAmericanSupremacyLocation.ANTOFAGASTA);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.CORRIENTES, SouthAmericanSupremacyLocation.ASUNCION);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.CORRIENTES, SouthAmericanSupremacyLocation.FORMOSA);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.CORRIENTES, SouthAmericanSupremacyLocation.MISIONES);
@@ -273,7 +273,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(armyGraph, SouthAmericanSupremacyLocation.LLANOS, SouthAmericanSupremacyLocation.SANTA_MARTA);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.LLANOS, SouthAmericanSupremacyLocation.BARINAS);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.LLANOS, SouthAmericanSupremacyLocation.ORINOCO);
-        addEdge(armyGraph, SouthAmericanSupremacyLocation.ANTOFAGASTA, SouthAmericanSupremacyLocation.COPIAGO);
+        addEdge(armyGraph, SouthAmericanSupremacyLocation.ANTOFAGASTA, SouthAmericanSupremacyLocation.COPIAPO);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.ANTOFAGASTA, SouthAmericanSupremacyLocation.POTOSI);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.ANTOFAGASTA, SouthAmericanSupremacyLocation.ATACAMA);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.MENDOZA, SouthAmericanSupremacyLocation.CORDOBA);
@@ -311,7 +311,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
             SouthAmericanSupremacyLocation.SANTA_FE
         );
         addEdge(armyGraph, SouthAmericanSupremacyLocation.VALPARAISO, SouthAmericanSupremacyLocation.SANTIAGO);
-        addEdge(armyGraph, SouthAmericanSupremacyLocation.VALPARAISO, SouthAmericanSupremacyLocation.COPIAGO);
+        addEdge(armyGraph, SouthAmericanSupremacyLocation.VALPARAISO, SouthAmericanSupremacyLocation.COPIAPO);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.ORINOCO, SouthAmericanSupremacyLocation.AMAZONAS);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.ORINOCO, SouthAmericanSupremacyLocation.POPAYAN);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.ORINOCO, SouthAmericanSupremacyLocation.BARINAS);
@@ -447,6 +447,10 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.DRAKE_PASSAGE, SouthAmericanSupremacyLocation.ARAUNCANIAN);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.DRAKE_PASSAGE, SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.DRAKE_PASSAGE, SouthAmericanSupremacyLocation.PUNTA_ARENAS);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.STRAITS_OF_MAGELLAN, SouthAmericanSupremacyLocation.DRAKE_PASSAGE);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.STRAITS_OF_MAGELLAN, SouthAmericanSupremacyLocation.PUNTA_ARENAS);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.STRAITS_OF_MAGELLAN, SouthAmericanSupremacyLocation.GOLFO_DE_SAN_JORGE);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.STRAITS_OF_MAGELLAN, SouthAmericanSupremacyLocation.SCOTIA_SEA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.BAHIA_DE_ARICA, SouthAmericanSupremacyLocation.ANTOFAGASTA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.BAHIA_DE_ARICA, SouthAmericanSupremacyLocation.NAZCA_SEA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.BAHIA_DE_ARICA, SouthAmericanSupremacyLocation.ARICA);
@@ -463,11 +467,11 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.SANTA_MARTA, SouthAmericanSupremacyLocation.MARACAIBO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.SANTA_MARTA, SouthAmericanSupremacyLocation.CARTAGENA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.SANTA_MARTA, SouthAmericanSupremacyLocation.GOLFO_DE_DARIEN);
-        addEdge(fleetGraph, SouthAmericanSupremacyLocation.ANTOFAGASTA, SouthAmericanSupremacyLocation.COPIAGO);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.ANTOFAGASTA, SouthAmericanSupremacyLocation.COPIAPO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.ANTOFAGASTA, SouthAmericanSupremacyLocation.ATACAMA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.ANTOFAGASTA, SouthAmericanSupremacyLocation.BAHIA_DE_ARICA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.ANTOFAGASTA, SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO);
-        addEdge(fleetGraph, SouthAmericanSupremacyLocation.VALPARAISO, SouthAmericanSupremacyLocation.COPIAGO);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.VALPARAISO, SouthAmericanSupremacyLocation.COPIAPO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.VALPARAISO, SouthAmericanSupremacyLocation.SANTIAGO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.VALPARAISO, SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.CARACAS, SouthAmericanSupremacyLocation.MARACAIBO);
@@ -518,6 +522,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.NAZCA_SEA, SouthAmericanSupremacyLocation.BAHIA_SECHURA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.NAZCA_SEA, SouthAmericanSupremacyLocation.ISLAS_GALAPAGOS);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.NAZCA_SEA, SouthAmericanSupremacyLocation.LIMA);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.NAZCA_SEA, SouthAmericanSupremacyLocation.PIURA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.NAZCA_SEA, SouthAmericanSupremacyLocation.BAHIA_DE_ARICA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.PUNTA_ARENAS, SouthAmericanSupremacyLocation.ARAUNCANIAN);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.ARICA, SouthAmericanSupremacyLocation.AREQUIPA);
@@ -540,9 +545,9 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.ASUNCION, SouthAmericanSupremacyLocation.CORRIENTES);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.ASUNCION, SouthAmericanSupremacyLocation.MISIONES);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.ASUNCION, SouthAmericanSupremacyLocation.CONCEPCION);
-        addEdge(fleetGraph, SouthAmericanSupremacyLocation.COPIAGO, SouthAmericanSupremacyLocation.ANTOFAGASTA);
-        addEdge(fleetGraph, SouthAmericanSupremacyLocation.COPIAGO, SouthAmericanSupremacyLocation.VALPARAISO);
-        addEdge(fleetGraph, SouthAmericanSupremacyLocation.COPIAGO, SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.COPIAPO, SouthAmericanSupremacyLocation.ANTOFAGASTA);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.COPIAPO, SouthAmericanSupremacyLocation.VALPARAISO);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.COPIAPO, SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.PATAGONIA, SouthAmericanSupremacyLocation.BAHIA_BLANCA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.PATAGONIA, SouthAmericanSupremacyLocation.ARAUNCANIAN);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.PATAGONIA, SouthAmericanSupremacyLocation.GOLFO_DE_SAN_JORGE);
@@ -572,6 +577,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.GOLFO_DE_SAN_JORGE, SouthAmericanSupremacyLocation.PATAGONIA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.GOLFO_DE_SAN_JORGE, SouthAmericanSupremacyLocation.RIO_DE_LA_PLATA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.GOLFO_DE_SAN_JORGE, SouthAmericanSupremacyLocation.ISLAS_MALVINAS);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.GOLFO_DE_SAN_JORGE, SouthAmericanSupremacyLocation.PUNTA_ARENAS);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.CORRIENTES, SouthAmericanSupremacyLocation.ASUNCION);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.CORRIENTES, SouthAmericanSupremacyLocation.MISIONES);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO, SouthAmericanSupremacyLocation.ANTOFAGASTA);
@@ -581,7 +587,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
             SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO,
             SouthAmericanSupremacyLocation.ISLAS_JUAN_FERNANDEZ
         );
-        addEdge(fleetGraph, SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO, SouthAmericanSupremacyLocation.COPIAGO);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO, SouthAmericanSupremacyLocation.COPIAPO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO, SouthAmericanSupremacyLocation.SANTIAGO);
         addEdge(
             fleetGraph,

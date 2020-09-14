@@ -326,7 +326,13 @@ public class Phase {
         } else if (isDislodged(order)) {
             order.dislodge();
         } else {
-            order.cut();
+            findBy(OrderType.MOVE, order.getCurrentLocation()).ifPresent(o -> {
+                if (o.getCurrentLocation().equals(order.getToLocation())) {
+                    order.resolve();
+                } else {
+                    order.cut();
+                }
+            });
         }
 
         if (order.getStatus().isProcessing()) {
