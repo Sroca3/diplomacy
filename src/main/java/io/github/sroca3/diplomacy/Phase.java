@@ -51,6 +51,7 @@ public class Phase {
             year
         );
     }
+
     public Phase(
         final Map<Location, Unit> startingUnitLocations,
         final MapVariant mapVariant,
@@ -103,6 +104,7 @@ public class Phase {
             order.convertIllegalMoveToHold();
             if (isDislodged(order)) {
                 order.dislodge();
+                dislodgedUnitLocations.put(order.getCurrentLocation(), order);
             }
         }
         if (order.getStatus().isProcessing()) {
@@ -203,6 +205,14 @@ public class Phase {
                         order.convertIllegalMoveToHold();
                     }
                 }, order::convertIllegalMoveToHold);
+        }
+
+        if (order.getStatus().isProcessing()) {
+            order.convertIllegalMoveToHold();
+            if (isDislodged(order)) {
+                order.dislodge();
+                dislodgedUnitLocations.put(order.getCurrentLocation(), order);
+            }
         }
     }
 
@@ -325,9 +335,11 @@ public class Phase {
                 });
         } else if (isDislodged(order)) {
             order.dislodge();
+            dislodgedUnitLocations.put(order.getCurrentLocation(), order);
         } else {
             findBy(OrderType.MOVE, order.getCurrentLocation()).ifPresent(o -> {
                 if (o.getCurrentLocation().equals(order.getToLocation())) {
+                    findBy(OrderType.MOVE, order.getToLocation()).ifPresent(o2 -> addSupport(o2, order));
                     order.resolve();
                 } else {
                     order.cut();
@@ -343,6 +355,7 @@ public class Phase {
     private void resolveHoldOrder(Order order) {
         if (isDislodged(order)) {
             order.dislodge();
+            dislodgedUnitLocations.put(order.getCurrentLocation(), order);
         } else {
             order.resolve();
         }
@@ -401,11 +414,13 @@ public class Phase {
                 order.resolve();
             } else if (isDislodged(order)) {
                 order.dislodge();
+                dislodgedUnitLocations.put(order.getCurrentLocation(), order);
             } else {
                 bounce(order);
             }
         } else if (isDislodged(order)) {
             order.dislodge();
+            dislodgedUnitLocations.put(order.getCurrentLocation(), order);
         } else if (competingMovesExist(order)){
             calculateStrengthForOrder(order);
             getConflictingOrders(order)
@@ -571,7 +586,7 @@ public class Phase {
             .filter(o -> !o.getCountry().equals(order.getCountry()))
             .filter(o -> o.getStrength() > order.getStrength())
             .findAny();
-        dislodgeOrder.ifPresent(o -> dislodgedUnitLocations.put(order.getCurrentLocation(), o));
+//        dislodgeOrder.ifPresent(o -> dislodgedUnitLocations.put(order.getCurrentLocation(), o));
         return dislodgeOrder.isPresent();
     }
 
@@ -636,14 +651,27 @@ public class Phase {
             .stream()
             .collect(Collectors.toMap(Order::getCurrentLocation, Function.identity()));
         if (phaseName.isOrderPhase()) {
+            dislodgedUnitLocations.clear();
             startingUnitLocations.keySet().forEach(location -> {
-                if (getPhaseName().isOrderPhase() && locationToOrderMap.get(location) == null) {
+                if (locationToOrderMap.get(location) == null) {
                     addOrder(new Order(startingUnitLocations.get(location), location));
                 }
             });
         }
+
+        if (phaseName.isRetreatPhase()) {
+            dislodgedUnitLocations.keySet().forEach(location -> {
+                if (locationToOrderMap.get(location) == null) {
+                    addOrder(new Order(dislodgedUnitLocations.get(location).getUnit(), location, OrderType.DISBAND));
+                }
+            });
+        }
+
         if (getPhaseName().isRetreatPhase()) {
-            orders.removeAll(orders.stream().filter(o -> !o.getOrderType().isRetreat()).collect(Collectors.toList()));
+            orders.removeAll(orders.stream()
+                                   .filter(o -> !Set.of(OrderType.RETREAT, OrderType.DISBAND)
+                                                    .contains(o.getOrderType()))
+                                   .collect(Collectors.toList()));
         }
         orders.forEach(this::resolveOrder);
         orders.forEach(this::updateLocations);

@@ -1,50 +1,50 @@
-Spring 1837 Retreat Status
+Winter 1836 Build Status
 --------------------------------
 
 ARGENTINA
 (AKFD)
 3 army units
 2 fleet units
-5 centers
+4 centers
 
 BOLIVIA
 (FloridaMan)
-4 army units
+2 army units
 2 fleet units
-6 centers
+5 centers
 
 BRASIL
 (VGhost)
 3 army units
-1 fleet units
-4 centers
+2 fleet units
+6 centers
 
 CHILE
 (Jordan767)
-3 army units
+2 army units
 2 fleet units
 5 centers
 
 COLOMBIA
 (Antigonos)
 4 army units
-1 fleet units
+2 fleet units
 6 centers
 
 PARAGUAY
 (RolynTrotter)
-4 army units
+3 army units
 0 fleet units
-5 centers
+4 centers
 
 PERU
 (Don Juan of Austria)
 2 army units
 1 fleet units
-4 centers
+3 centers
 
 VENEZUELA
 (bratsffl)
-2 army units
+1 army units
 3 fleet units
-5 centers
+4 centers

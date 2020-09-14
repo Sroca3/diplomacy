@@ -20,7 +20,7 @@ BRASIL (VGhost):
 Army Maranhao MOVE Goias -> Resolved
 Army Rio de Janeiro SUPPORT Sao Paulo to Minas Gerais -> Resolved
 Fleet Salvador HOLD -> Resolved
-Army Sao Paulo MOVE Minas Gerais -> Dislodged
+Army Sao Paulo MOVE Minas Gerais -> Resolved
 
 CHILE (Jordan767):
 Fleet Drake Passage MOVE Straits of Magellan -> Resolved
@@ -32,14 +32,14 @@ Army Santiago MOVE Mendoza -> Resolved
 COLOMBIA (Antigonos):
 Army Canelos MOVE Popayan -> Resolved
 Army Cartagena MOVE Bogota -> Resolved
-Fleet Golfo de Darien CONVOY Maracaibo to Para -> Processing
+Fleet Golfo de Darien CONVOY Maracaibo to Para -> Dislodged
 Army Guayaquil MOVE Canelos -> Resolved
 Fleet Islas Galapagos MOVE Bahia Sechura -> Resolved
 Army Popayan MOVE Amazonas -> Resolved
 
 PARAGUAY (RolynTrotter):
 Army Concepcion MOVE Pantanal -> Resolved
-Army Minas Gerais MOVE Rio de Janeiro -> Bounced
+Army Minas Gerais MOVE Rio de Janeiro -> Dislodged
 Army Misiones SUPPORT Rio Grande do Sul to hold -> Resolved
 Army Parana MOVE Sao Paulo -> Resolved
 Army Rio Grande do Sul SUPPORT Parana to Sao Paulo -> Resolved
