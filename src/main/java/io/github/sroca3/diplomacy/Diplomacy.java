@@ -275,7 +275,7 @@ public class Diplomacy {
                                    .orElseThrow(() -> new LocationNotFoundException(parts[1], orderInput));
             if (parts.length > 2) {
                 toLocation = Optional.ofNullable(parseLocation(parts[2]))
-                                     .orElseThrow(() -> new LocationNotFoundException(parts[2], orderInput));
+                                     .orElse(null);
             } else {
                 toLocation = fromLocation;
             }

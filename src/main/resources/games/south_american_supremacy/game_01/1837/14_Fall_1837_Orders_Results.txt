@@ -1,0 +1,56 @@
+Fall 1837 Orders Results
+--------------------------------
+
+ARGENTINA (AKFD):
+Army Buenos Aires HOLD -> Resolved
+Army Cordoba HOLD -> Resolved
+Fleet Islas Malvinas MOVE Golfo de San Jorge -> Bounced
+Fleet Montevideo SUPPORT Buenos Aires to hold -> Resolved
+Army San Miguel de Tucuman SUPPORT Cordoba to hold -> Resolved
+
+BOLIVIA (FloridaMan):
+Army Copiapo MOVE Valparaiso -> Resolved
+Army Cusco SUPPORT Iquitos to hold -> Resolved
+Fleet Nazca Sea SUPPORT Piura to Bahia Sechura -> Resolved
+Fleet Piura MOVE Bahia Sechura -> Resolved
+Army Salta HOLD -> Resolved
+Army Santa Cruz HOLD -> Resolved
+
+BRASIL (VGhost):
+Army Goias MOVE Sao Paulo -> Bounced
+Army Minas Gerais SUPPORT Goias to Sao Paulo -> Support failed
+Army Rio de Janeiro SUPPORT Goias to Sao Paulo -> Support failed
+Fleet Salvador MOVE Bahia de Todos os Santos -> Resolved
+
+CHILE (Jordan767):
+Army Bahia Blanca SUPPORT Rosario to Buenos Aires -> Support failed
+Army Mendoza MOVE Santiago -> Resolved
+Fleet Punta Arenas MOVE Golfo de San Jorge -> Resolved
+Army Rosario MOVE Buenos Aires -> Bounced
+Fleet Straits of Magellan SUPPORT Punta Arenas to Golfo de San Jorge -> Resolved
+
+COLOMBIA (Antigonos):
+Army Amazonas MOVE Aquiris -> Resolved
+Fleet Bahia Sechura MOVE Islas Galapagos -> Dislodged
+Army Bogota MOVE Cartagena -> Bounced
+Army Canelos MOVE Iquitos -> Bounced
+Fleet Panama nc MOVE Cartagena -> Bounced
+Army Popayan SUPPORT Canelos to Iquitos -> Support failed
+
+PARAGUAY (RolynTrotter):
+Army Misiones MOVE Santa fe -> Resolved
+Army Pantanal SUPPORT Sao Paulo to hold -> Resolved
+Army Rio Grande do Sul SUPPORT Sao Paulo to hold -> Resolved
+Army Sao Paulo SUPPORT Pantanal to hold -> Support cut
+
+PERU (Don Juan of Austria):
+Army Iquitos SUPPORT Trujillo to hold -> Support cut
+Fleet Lima SUPPORT Trujillo to hold -> Resolved
+Army Trujillo SUPPORT Iquitos to hold -> Resolved
+
+VENEZUELA (bratsffl):
+Fleet Caracas MOVE Golfo de Darien -> Bounced
+Fleet Golfo de Darien MOVE Cartagena -> Bounced
+Army Maracaibo MOVE Barinas -> Resolved
+Army Mato Grosso MOVE Amazonas -> Resolved
+Fleet Para MOVE Manaus -> Resolved

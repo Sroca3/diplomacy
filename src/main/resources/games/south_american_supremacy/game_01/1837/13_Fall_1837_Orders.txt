@@ -1,0 +1,52 @@
+Argentina:
+A Cordoba H
+A San Miguel de Tucuman S A Cordoba H
+A Buenos Aires H
+F Montevideo S A Buenos Aires H
+F Islas Malvinas - Golfo de San Jorge
+
+Bolivia:
+Piura to Bahia Sechura
+Nazca Sea supports Piura to Bahia Sechura
+Copiapo to Valparaiso
+Salta holds
+Cusco supports Iquitos to hold
+
+Brasil:
+A Goias -> Sao Paulo
+A Minas Gerais S A Goias -> Sao Paulo
+A Rio de Janeiro S A Goias -> Sao Paulo
+F Salvador -> Bahia de Todos os Santos
+
+Chile:
+Ros - BAs
+BhB S Ros - BAs
+Men - San
+PAs - GSJ
+SoM S PAs - GSJ
+
+Colombia:
+Fleet Panama(NC) Move to Cartagena
+Army Bogota Move to  Cartagena
+Army Amazonas Move to Aquiris
+Army Popayan Support Army Canelos  Move to Iquitos
+Army Canelos Move to Iquitos
+Fleet Bahia Sechura Move to Islas Galapagos
+
+Paraguay:
+Pantanal support Sao Paulo hold
+Rio Grande do Sul support Sao Paulo hold
+Sao Paulo support Pantanal hold
+Misiones move Santa Fe
+
+Peru:
+Trujillo supports Iquitos to hold
+Lima supports Trujillo to Hold
+Iquitos supports Trujillo to hold
+
+Venezuela:
+Army Maracaibo move Barinas
+Army Mato Grosso move Amazonas
+Fleet Para move Manaus
+Fleet Caracas move Golfo de Darien
+Fleet Golfo de Darien move Cartagena

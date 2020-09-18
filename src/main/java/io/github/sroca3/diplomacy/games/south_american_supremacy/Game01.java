@@ -7,27 +7,37 @@ import com.helger.css.writer.CSSWriterSettings;
 import io.github.sroca3.diplomacy.Country;
 import io.github.sroca3.diplomacy.Diplomacy;
 import io.github.sroca3.diplomacy.Order;
+import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyLocation;
 import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyMapVariant;
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
-import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
-import org.apache.batik.svggen.SVGGraphics2DIOException;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -42,7 +52,7 @@ public class Game01 {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Game01.class);
 
-    public static void main(String... args) throws IOException {
+    public static void main(String... args) throws IOException, ParserConfigurationException, SAXException, TransformerException {
         Diplomacy diplomacy = new Diplomacy(SouthAmericanSupremacyMapVariant.getInstance());
         Map<Country, String> assignments = diplomacy.assignCountries(List.of(
             "AKFD",
@@ -56,26 +66,40 @@ public class Game01 {
         ));
 
         File countryAssignments =
-            Paths.get("src/main/resources/games/south_american_supremacy/game_01/country_assignments.txt").toFile()
-        ;
+            Paths.get("src/main/resources/games/south_american_supremacy/game_01/country_assignments.txt").toFile();
 //        String parser = XMLResourceDescriptor.getXMLParserClassName();
-//        SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory( parser );
-//        Document document = factory.createDocument( "src/main/resources/games/south_american_supremacy/game_01/latest.svg" );
-//        var x =CSSReaderDeclarationList.readFromString(document.getElementById("path1306").getAttribute("style"), ECSSVersion.CSS30);
+//        SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory(parser);
+//        Document document = factory.createDocument(
+//            "src/main/resources/games/south_american_supremacy/game_01/latest.svg");
+//        var x = CSSReaderDeclarationList.readFromString(
+//            document.getElementById(SouthAmericanSupremacyLocation.PATAGONIA.getName()).getAttribute("style"),
+//            ECSSVersion.CSS30
+//        );
 //        x.getDeclarationOfPropertyName("fill").setExpression(CSSExpression.createSimple("url(#Peru)"));
-//        document.getElementById("path1306").setAttribute("style", x.getAsCSSString(new CSSWriterSettings(ECSSVersion.CSS30, true)));
+//        document.getElementById(SouthAmericanSupremacyLocation.PATAGONIA.getName())
+//                .setAttribute("style", x.getAsCSSString(new CSSWriterSettings(ECSSVersion.CSS30, true)));
 //        LOGGER.error(x.getAsCSSString(new CSSWriterSettings(ECSSVersion.CSS30, true)));
-//        SVGGraphics2D graphics = new SVGGraphics2D(document);
-//
-//        try (Writer out = new OutputStreamWriter(new FileOutputStream("src/main/resources/games/south_american_supremacy/game_01/latest.svg"), "UTF-8")) {
-//            graphics.stream(document.getDocumentElement(), out, true, false);
-//        } catch (UnsupportedEncodingException | FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (SVGGraphics2DIOException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
+//        NodeList nodeList = document.getElementsByTagName("path");
+//        for (int i = 0; i < nodeList.getLength(); i++) {
+//            Element element = (Element) nodeList.item(i);
+//            String attribute = element.getAttributeNS("http://www.inkscape.org/namespaces/inkscape", "label");
+//            element.setAttribute("id", attribute.toUpperCase().replace(" ", "_"));
 //        }
+//
+//        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+//        Transformer transformer = transformerFactory.newTransformer();
+//        //for pretty print
+//        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+//
+//        DOMSource source = new DOMSource(svgGraphics2D.getDOMFactory());
+//
+//        //write to console or file
+//        StreamResult console = new StreamResult(System.out);
+//        StreamResult file = new StreamResult(new File("src/main/resources/games/south_american_supremacy/game_01/latest.svg"));
+//
+//        //write data
+//        transformer.transform(source, console);
+//        transformer.transform(source, file);
         boolean assign = countryAssignments.createNewFile();
         if (assign) {
             try (FileWriter writer = new FileWriter(countryAssignments)) {
