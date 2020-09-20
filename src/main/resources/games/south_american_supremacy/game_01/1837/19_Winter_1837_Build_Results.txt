@@ -1,0 +1,18 @@
+Winter 1837 Build Results
+--------------------------------
+
+BOLIVIA (FloridaMan):
+BUILD Fleet Antofagasta -> Resolved
+
+BRASIL (VGhost):
+DISBAND Army Goias -> Resolved
+
+CHILE (Jordan767):
+DISBAND Army Rosario -> Resolved
+
+COLOMBIA (Antigonos):
+BUILD Army Cartagena -> Resolved
+
+PARAGUAY (RolynTrotter):
+BUILD Fleet Asuncion -> Resolved
+BUILD Army Concepcion -> Resolved

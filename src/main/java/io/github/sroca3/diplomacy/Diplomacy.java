@@ -13,6 +13,7 @@ import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class Diplomacy {
     private static final Pattern UNIT_TYPE_REGEX = Pattern.compile(UNIT_TYPE_REGEX_STRING);
     private static final String UNIT_TYPE_REGEX_FOR_BUILD_STRING = " (ARMY|FLEET|A|F) ";
     private static final Pattern UNIT_TYPE_FOR_BUILD_REGEX = Pattern.compile(UNIT_TYPE_REGEX_FOR_BUILD_STRING);
-    private static final String ORDER_TYPE_REGEX_STRING = "( R |^BUILD |^DISBAND |^DESTROY |^REMOVE | MOVE TO | MOVES TO | HOLD$| HOLDS$| -> | - | TO | MOVE | RETREAT TO | RETREAT | SUPPORT | CONVOY | CONVOYS | SUPPORTS | S | H$)";
+    private static final String ORDER_TYPE_REGEX_STRING = "( R |^BUILD |^DISBAND|^DESTROY |^REMOVE | MOVE TO | MOVES TO | HOLD$| HOLDS$| -> | - | TO | MOVE | RETREAT TO | RETREAT | SUPPORT | CONVOY | CONVOYS | SUPPORTS | S | H$)";
     private static final Pattern ORDER_TYPE_REGEX = Pattern.compile(ORDER_TYPE_REGEX_STRING);
     private final MapVariant mapVariant;
     private final Set<RuleVariant> ruleVariants;
@@ -251,8 +252,15 @@ public class Diplomacy {
         } else {
             throw new OrderTypeParseException();
         }
-        Location currentLocation = Optional.ofNullable(parseLocation(parts[orderType.isDisband() ? 1 : 0]))
-                                           .orElseThrow(() -> new LocationNotFoundException(parts[0], orderInput));
+        Location currentLocation;
+        try {
+            currentLocation = Optional.ofNullable(parseLocation(parts[orderType.isDisband() ? 1 : 0]))
+                                               .orElseThrow(() -> new LocationNotFoundException(parts[0], orderInput));
+        }catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(orderInput);
+            System.out.println(Arrays.asList(parts));
+            throw e;
+        }
         UnitType unitType;
         if (unitTypeMatcher.find()) {
             unitType = UnitType.from(unitTypeMatcher.group().trim());

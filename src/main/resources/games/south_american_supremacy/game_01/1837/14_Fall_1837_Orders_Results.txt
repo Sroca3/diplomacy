@@ -31,7 +31,7 @@ Fleet Straits of Magellan SUPPORT Punta Arenas to Golfo de San Jorge -> Resolved
 
 COLOMBIA (Antigonos):
 Army Amazonas MOVE Aquiris -> Resolved
-Fleet Bahia Sechura MOVE Islas Galapagos -> Dislodged
+Fleet Bahia Sechura MOVE Islas Galapagos -> Resolved
 Army Bogota MOVE Cartagena -> Bounced
 Army Canelos MOVE Iquitos -> Bounced
 Fleet Panama nc MOVE Cartagena -> Bounced

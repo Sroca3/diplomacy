@@ -419,8 +419,12 @@ public class Phase {
                 bounce(order);
             }
         } else if (isDislodged(order)) {
-            order.dislodge();
-            dislodgedUnitLocations.put(order.getCurrentLocation(), order);
+            if (!competingMovesExist(order)) {
+                order.resolve();
+            } else {
+                order.dislodge();
+                dislodgedUnitLocations.put(order.getCurrentLocation(), order);
+            }
         } else if (competingMovesExist(order)){
             calculateStrengthForOrder(order);
             getConflictingOrders(order)
