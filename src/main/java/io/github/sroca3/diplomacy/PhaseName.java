@@ -26,4 +26,8 @@ public enum PhaseName {
     public boolean isFallRetreat() {
         return FALL_RETREAT.equals(this);
     }
+
+    public boolean isSpringOrders() {
+        return SPRING_ORDERS.equals(this);
+    }
 }

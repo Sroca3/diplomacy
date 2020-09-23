@@ -2,6 +2,7 @@ package io.github.sroca3.diplomacy.maps;
 
 import io.github.sroca3.diplomacy.Army;
 import io.github.sroca3.diplomacy.Country;
+import io.github.sroca3.diplomacy.CountryEnum;
 import io.github.sroca3.diplomacy.Fleet;
 import io.github.sroca3.diplomacy.Location;
 import io.github.sroca3.diplomacy.MapVariant;
@@ -32,34 +33,34 @@ public class StandardMapVariant implements MapVariant {
     private static final Map<Location, Unit> startingUnits = new HashMap<>();
 
     static {
-        startingUnits.put(StandardVariantLocation.MOSCOW, new Army(Country.RUSSIA));
-        startingUnits.put(StandardVariantLocation.WARSAW, new Army(Country.RUSSIA));
-        startingUnits.put(StandardVariantLocation.SEVASTOPOL, new Fleet(Country.RUSSIA));
-        startingUnits.put(StandardVariantLocation.ST_PETERSBURG_SC, new Fleet(Country.RUSSIA));
+        startingUnits.put(StandardVariantLocation.MOSCOW, new Army(CountryEnum.RUSSIA));
+        startingUnits.put(StandardVariantLocation.WARSAW, new Army(CountryEnum.RUSSIA));
+        startingUnits.put(StandardVariantLocation.SEVASTOPOL, new Fleet(CountryEnum.RUSSIA));
+        startingUnits.put(StandardVariantLocation.ST_PETERSBURG_SC, new Fleet(CountryEnum.RUSSIA));
 
-        startingUnits.put(StandardVariantLocation.ANKARA, new Fleet(Country.TURKEY));
-        startingUnits.put(StandardVariantLocation.CONSTANTINOPLE, new Army(Country.TURKEY));
-        startingUnits.put(StandardVariantLocation.SMYRNA, new Army(Country.TURKEY));
+        startingUnits.put(StandardVariantLocation.ANKARA, new Fleet(CountryEnum.TURKEY));
+        startingUnits.put(StandardVariantLocation.CONSTANTINOPLE, new Army(CountryEnum.TURKEY));
+        startingUnits.put(StandardVariantLocation.SMYRNA, new Army(CountryEnum.TURKEY));
 
-        startingUnits.put(StandardVariantLocation.EDINBURGH, new Fleet(Country.ENGLAND));
-        startingUnits.put(StandardVariantLocation.LIVERPOOL, new Army(Country.ENGLAND));
-        startingUnits.put(StandardVariantLocation.LONDON, new Fleet(Country.ENGLAND));
+        startingUnits.put(StandardVariantLocation.EDINBURGH, new Fleet(CountryEnum.ENGLAND));
+        startingUnits.put(StandardVariantLocation.LIVERPOOL, new Army(CountryEnum.ENGLAND));
+        startingUnits.put(StandardVariantLocation.LONDON, new Fleet(CountryEnum.ENGLAND));
 
-        startingUnits.put(StandardVariantLocation.BREST, new Fleet(Country.FRANCE));
-        startingUnits.put(StandardVariantLocation.PARIS, new Army(Country.FRANCE));
-        startingUnits.put(StandardVariantLocation.MARSEILLES, new Army(Country.FRANCE));
+        startingUnits.put(StandardVariantLocation.BREST, new Fleet(CountryEnum.FRANCE));
+        startingUnits.put(StandardVariantLocation.PARIS, new Army(CountryEnum.FRANCE));
+        startingUnits.put(StandardVariantLocation.MARSEILLES, new Army(CountryEnum.FRANCE));
 
-        startingUnits.put(StandardVariantLocation.KIEL, new Fleet(Country.GERMANY));
-        startingUnits.put(StandardVariantLocation.BERLIN, new Army(Country.GERMANY));
-        startingUnits.put(StandardVariantLocation.MUNICH, new Army(Country.GERMANY));
+        startingUnits.put(StandardVariantLocation.KIEL, new Fleet(CountryEnum.GERMANY));
+        startingUnits.put(StandardVariantLocation.BERLIN, new Army(CountryEnum.GERMANY));
+        startingUnits.put(StandardVariantLocation.MUNICH, new Army(CountryEnum.GERMANY));
 
-        startingUnits.put(StandardVariantLocation.VENICE, new Army(Country.ITALY));
-        startingUnits.put(StandardVariantLocation.ROME, new Army(Country.ITALY));
-        startingUnits.put(StandardVariantLocation.NAPLES, new Fleet(Country.ITALY));
+        startingUnits.put(StandardVariantLocation.VENICE, new Army(CountryEnum.ITALY));
+        startingUnits.put(StandardVariantLocation.ROME, new Army(CountryEnum.ITALY));
+        startingUnits.put(StandardVariantLocation.NAPLES, new Fleet(CountryEnum.ITALY));
 
-        startingUnits.put(StandardVariantLocation.VIENNA, new Army(Country.AUSTRIA));
-        startingUnits.put(StandardVariantLocation.BUDAPEST, new Army(Country.AUSTRIA));
-        startingUnits.put(StandardVariantLocation.TRIESTE, new Fleet(Country.AUSTRIA));
+        startingUnits.put(StandardVariantLocation.VIENNA, new Army(CountryEnum.AUSTRIA));
+        startingUnits.put(StandardVariantLocation.BUDAPEST, new Army(CountryEnum.AUSTRIA));
+        startingUnits.put(StandardVariantLocation.TRIESTE, new Fleet(CountryEnum.AUSTRIA));
     }
 
     public StandardMapVariant() {
@@ -432,13 +433,13 @@ public class StandardMapVariant implements MapVariant {
     @Override
     public SortedSet<Country> getCountries() {
         return new TreeSet<>(Set.of(
-            Country.FRANCE,
-            Country.RUSSIA,
-            Country.TURKEY,
-            Country.AUSTRIA,
-            Country.ENGLAND,
-            Country.ITALY,
-            Country.GERMANY
+            CountryEnum.FRANCE,
+            CountryEnum.RUSSIA,
+            CountryEnum.TURKEY,
+            CountryEnum.AUSTRIA,
+            CountryEnum.ENGLAND,
+            CountryEnum.ITALY,
+            CountryEnum.GERMANY
         ));
     }
 

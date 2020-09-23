@@ -8,7 +8,6 @@ import io.github.sroca3.diplomacy.maps.TestVariantLocation;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DiplomacyTest {
 
-    private static final Army ENGLISH_ARMY = new Army(Country.ENGLAND);
-    private static final Fleet ENGLISH_FLEET = new Fleet(Country.ENGLAND);
-    private static final Army FRENCH_ARMY = new Army(Country.FRANCE);
-    private static final Fleet FRENCH_FLEET = new Fleet(Country.FRANCE);
+    private static final Army ENGLISH_ARMY = new Army(CountryEnum.ENGLAND);
+    private static final Fleet ENGLISH_FLEET = new Fleet(CountryEnum.ENGLAND);
+    private static final Army FRENCH_ARMY = new Army(CountryEnum.FRANCE);
+    private static final Fleet FRENCH_FLEET = new Fleet(CountryEnum.FRANCE);
 
     @Test
     public void executeOrderExpectUnitOwnershipException() {
@@ -88,7 +87,7 @@ public class DiplomacyTest {
         game.adjudicate();
         Phase phase = game.getPreviousPhase();
         assertTrue(phase.getOrderById(order.getId()).getStatus().isBounced());
-        assertTrue(phase.getOrdersByCountry(Country.FRANCE).get(0).getStatus().isResolved());
+        assertTrue(phase.getOrdersByCountry(CountryEnum.FRANCE).get(0).getStatus().isResolved());
     }
 
     @Test
@@ -325,11 +324,11 @@ public class DiplomacyTest {
     @Test
     public void parseOrder() {
         Diplomacy game = new Diplomacy(SouthAmericanSupremacyMapVariant.getInstance());
-        game.addUnit(SouthAmericanSupremacyLocation.CONCEPCION, new Army(Country.PARAGUAY));
+        game.addUnit(SouthAmericanSupremacyLocation.CONCEPCION, new Army(CountryEnum.PARAGUAY));
         String orderString = "A " + SouthAmericanSupremacyLocation.CONCEPCION.getShortName() + " MOVE " + SouthAmericanSupremacyLocation.ASUNCION.name();
         Order order = game.parseOrder(orderString);
         assertEquals(UnitType.ARMY, order.getUnit().getType());
-        assertEquals(Country.PARAGUAY, order.getUnit().getCountry());
+        assertEquals(CountryEnum.PARAGUAY, order.getUnit().getCountry());
         assertEquals(SouthAmericanSupremacyLocation.CONCEPCION, order.getCurrentLocation());
         assertEquals(SouthAmericanSupremacyLocation.CONCEPCION, order.getFromLocation());
         assertEquals(SouthAmericanSupremacyLocation.ASUNCION, order.getToLocation());

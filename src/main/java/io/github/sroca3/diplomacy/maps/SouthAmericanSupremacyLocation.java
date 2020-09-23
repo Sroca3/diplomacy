@@ -1,6 +1,7 @@
 package io.github.sroca3.diplomacy.maps;
 
 import io.github.sroca3.diplomacy.Location;
+import io.github.sroca3.diplomacy.SvgLocation;
 import io.github.sroca3.diplomacy.UnitType;
 
 import javax.annotation.Nonnull;
@@ -14,7 +15,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public enum SouthAmericanSupremacyLocation implements Location {
+public enum SouthAmericanSupremacyLocation implements SvgLocation {
 
     AMAZONAS(LocationType.COASTAL_LAND, "Ama"),
     ANGOSTURA(LocationType.COASTAL_LAND, "Ang", true),
@@ -45,7 +46,7 @@ public enum SouthAmericanSupremacyLocation implements Location {
     CHACO(LocationType.LAND, "Cha"),
     CONCEPCION(LocationType.COASTAL_LAND, "Con", true),
     COPIAPO(LocationType.COASTAL_LAND, "Cop"),
-    CORDOBA(LocationType.LAND, "Cor", true),
+    CORDOBA(LocationType.LAND, "Cor", true, false, Collections.emptyList(), 294, 648),
     CORRIENTES(LocationType.COASTAL_LAND, "Crt", true),
     CUMANA(LocationType.COASTAL_LAND, "Cum", true),
     CUSCO(LocationType.LAND, "Cus"),
@@ -140,6 +141,8 @@ public enum SouthAmericanSupremacyLocation implements Location {
     private final boolean supportsConvoy;
     private final boolean isSupplyCenter;
     private final List<Location> coasts;
+    private int x;
+    private int y;
 
     SouthAmericanSupremacyLocation(LocationType locationType, String shortName) {
         this(
@@ -176,6 +179,22 @@ public enum SouthAmericanSupremacyLocation implements Location {
         this.isSupplyCenter = isSupplyCenter;
         this.supportsConvoy = supportsConvoy;
         this.coasts = coasts;
+    }
+
+    SouthAmericanSupremacyLocation(
+        LocationType locationType,
+        String shortName,
+        boolean isSupplyCenter,
+        boolean supportsConvoy,
+        List<Location> coasts, int x, int y
+    ) {
+        this.locationType = locationType;
+        this.shortName = shortName;
+        this.isSupplyCenter = isSupplyCenter;
+        this.supportsConvoy = supportsConvoy;
+        this.coasts = coasts;
+        this.x = x;
+        this.y = y;
     }
 
     public static Location findByName(String name) {
@@ -227,5 +246,15 @@ public enum SouthAmericanSupremacyLocation implements Location {
         } else  {
             return this;
         }
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }

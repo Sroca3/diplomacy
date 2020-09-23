@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.10.1'
+    implementation 'com.fasterxml.woodstox:woodstox-core:5.1.0'
     implementation 'com.helger:ph-css:6.2.3'
     implementation 'org.apache.xmlgraphics:batik-all:1.13'
     implementation 'org.slf4j:slf4j-api:1.7.30'

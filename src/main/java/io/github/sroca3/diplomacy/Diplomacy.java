@@ -15,7 +15,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -63,7 +62,7 @@ public class Diplomacy {
             throw new IllegalArgumentException("Not enough or too many players for variant. " +
                 "Need " + mapVariant.getCountries().size() + " players.");
         }
-        Map<Country, String> assignments = new EnumMap<>(Country.class);
+        Map<Country, String> assignments = new HashMap<>();
         while (!countries.isEmpty()) {
             assignments.put(
                 countries.remove(new Random().nextInt(countries.size())),
@@ -76,6 +75,10 @@ public class Diplomacy {
 
     public void setPlayerAssignments(Map<Country, String> playerAssignments) {
         this.playerAssignments = playerAssignments;
+    }
+
+    public void replaceCountry(CountryEnum country, String player) {
+        this.playerAssignments.put(country, player);
     }
 
     public String getPlayer(Country country) {
@@ -217,7 +220,7 @@ public class Diplomacy {
                        .orElse(null);
     }
 
-    public Order parseOrder(final String orderInput, @Nonnull final Country country) {
+    public Order parseOrder(final String orderInput, @Nonnull final CountryEnum country) {
         String order = orderInput.toUpperCase(Locale.ENGLISH);
         if (order.startsWith("BUILD")) {
             Matcher unitTypeMatcher = UNIT_TYPE_FOR_BUILD_REGEX.matcher(String.copyValueOf(order.toCharArray()));
@@ -334,11 +337,11 @@ public class Diplomacy {
     public List<Order> parseOrders(String filename) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(filename));
         List<Order> orders = new LinkedList<>();
-        Country country = null;
+        CountryEnum country = null;
         for (String line : lines) {
             if (!StringUtils.isBlank(line)) {
                 if (line.contains(":")) {
-                    country = Country.valueOf(line.replaceAll(":", "").trim().toUpperCase(Locale.ENGLISH));
+                    country = CountryEnum.valueOf(line.replaceAll(":", "").trim().toUpperCase(Locale.ENGLISH));
                 } else {
                     orders.add(this.parseOrder(line, Objects.requireNonNull(country)));
                 }
