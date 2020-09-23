@@ -1,0 +1,58 @@
+Spring 1838 Orders Results
+--------------------------------
+
+ARGENTINA (haroonriaz):
+Army Buenos Aires SUPPORT Montevideo to hold -> Support cut
+Army Cordoba MOVE Santa fe -> Resolved
+Fleet Islas Malvinas HOLD -> Resolved
+Fleet Montevideo SUPPORT Buenos Aires to hold -> Dislodged
+Army San Miguel de Tucuman SUPPORT Cordoba to Santa fe -> Resolved
+
+BOLIVIA (FloridaMan):
+Fleet Antofagasta MOVE Golfo de Guafo -> Resolved
+Fleet Bahia Sechura MOVE Islas Galapagos -> Resolved
+Army Cusco SUPPORT Canelos to Iquitos -> Resolved
+Fleet Nazca Sea SUPPORT Bahia Sechura to Islas Galapagos -> Resolved
+Army Salta MOVE Chaco -> Bounced
+Army Santa Cruz MOVE Chaco -> Bounced
+Army Valparaiso MOVE Santiago -> Bounced
+
+BRASIL (VGhost):
+Fleet Bahia de Todos os Santos MOVE Rio de Janeiro -> Resolved
+Army Minas Gerais MOVE Goias -> Resolved
+Army Rio de Janeiro MOVE Minas Gerais -> Resolved
+
+CHILE (Jordan767):
+Army Bahia Blanca MOVE Buenos Aires -> Bounced
+Fleet Golfo de San Jorge MOVE Rio de la Plata -> Resolved
+Army Santiago MOVE Valparaiso -> Bounced
+Fleet Straits of Magellan MOVE Drake Passage -> Resolved
+
+COLOMBIA (Antigonos):
+Army Aquiris SUPPORT Canelos to Iquitos -> Resolved
+Army Bogota SUPPORT Cartagena to Santa Marta -> Resolved
+Army Canelos MOVE Iquitos -> Resolved
+Army Cartagena MOVE Santa Marta -> Resolved
+Fleet Islas Galapagos MOVE Bahia Sechura -> Dislodged
+Fleet Panama nc MOVE Golfo de Darien -> Bounced
+Army Popayan SUPPORT Canelos to Iquitos -> Resolved
+
+PARAGUAY (RolynTrotter):
+Fleet Asuncion MOVE Misiones -> Resolved
+Army Concepcion MOVE Pantanal -> Resolved
+Army Pantanal MOVE Mato Grosso -> Resolved
+Army Rio Grande do Sul SUPPORT Santa fe to Montevideo -> Resolved
+Army Santa fe MOVE Montevideo -> Resolved
+Army Sao Paulo SUPPORT Concepcion to Pantanal -> Resolved
+
+PERU (Don Juan of Austria):
+Army Iquitos MOVE Aquiris -> Dislodged
+Fleet Lima MOVE Trujillo -> Bounced
+Army Trujillo MOVE Quito -> Illegal order replaced with Hold
+
+VENEZUELA (bratsffl):
+Army Amazonas MOVE Aquiris -> Bounced
+Army Barinas MOVE Llanos -> Resolved
+Fleet Caracas MOVE Golfo de Darien -> Bounced
+Fleet Golfo de Darien MOVE Santa Marta -> Bounced
+Fleet Manaus MOVE Para -> Resolved

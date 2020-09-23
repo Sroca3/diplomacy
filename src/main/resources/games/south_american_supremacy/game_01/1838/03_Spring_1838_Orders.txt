@@ -1,0 +1,54 @@
+Argentina:
+F Montevideo s A Buenos Aires H
+A Buenos Aires s F Montevideo H
+A Cordoba - Santa Fe
+A San Miguel de Tucuman s A Cordoba - Santa Fe
+
+Bolivia:
+Nazca Sea supports Bahia Sechura to Islas Galapagos
+Bahia Sechura moves to Islas Galapagos
+Antofagasta to Golfo de Guafo
+Cusco supports Canelos to Iquitos
+Santa Cruz to Chaco
+Salta to Chaco
+Valparaiso to Santiago
+
+Brasil:
+A Minas Gerais -> Goias
+A Rio de Janeiro -> Minas Gerais
+F Bahia de Todos os Santos -> Rio de Janeiro
+
+Chile:
+F SoM - DrP
+F GSJ - RdP
+A BhB - BAs
+A San - Val
+
+Colombia:
+Fleet  Panama(NC) Move to  Golfo de Darien
+Army Cartagena Move to Santa Marta
+Army Bogota Support  Army Cartagena Move to Santa Marta
+Army Popayan Support Army Canelos  Move to Iquitos
+Army Canelos Move to Iquitos
+Army Aquiris  Support Army Canelos Move to Iquitos
+Fleet Islas Galapagos  Move to Bahia Sechura
+
+Paraguay:
+Pantanal move Mato Grosso
+Concepcion move Pantanal
+Asuncion move Misiones
+Rio Grande do Sul support Santa Fe move Montevideo
+Santa Fe move Montevideo
+Sao Paulo support Concepcion move Pantanal
+
+Peru:
+Lima moves to Trujillo
+Trujillo moves to Quito
+Iquitos moves to Aquiris
+
+Venezuela:
+Army Barinas move Llanos
+Army Amazonas move Aquiris
+Fleet Manaus move Para
+Fleet Caracas move Golfo de Darien
+Fleet Golfo de Darien move Santa Marta
