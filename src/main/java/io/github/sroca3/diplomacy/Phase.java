@@ -337,14 +337,14 @@ public class Phase {
             order.dislodge();
             dislodgedUnitLocations.put(order.getCurrentLocation(), order);
         } else {
-            findBy(OrderType.MOVE, order.getCurrentLocation()).ifPresent(o -> {
-                if (o.getCurrentLocation().equals(order.getToLocation())) {
-                    findBy(OrderType.MOVE, order.getToLocation()).ifPresent(o2 -> addSupport(o2, order));
-                    order.resolve();
-                } else {
-                    order.cut();
-                }
-            });
+            boolean cutOrderExists = findAllBy(OrderType.MOVE, order.getCurrentLocation())
+                .stream().anyMatch(o -> !o.getCurrentLocation().equals(order.getToLocation()));
+            if (cutOrderExists) {
+                order.cut();
+            } else {
+                findBy(OrderType.MOVE, order.getToLocation()).ifPresent(o2 -> addSupport(o2, order));
+                order.resolve();
+            }
         }
 
         if (order.getStatus().isProcessing()) {

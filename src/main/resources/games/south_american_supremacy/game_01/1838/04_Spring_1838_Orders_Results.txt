@@ -29,7 +29,7 @@ Army Santiago MOVE Valparaiso -> Bounced
 Fleet Straits of Magellan MOVE Drake Passage -> Resolved
 
 COLOMBIA (Antigonos):
-Army Aquiris SUPPORT Canelos to Iquitos -> Resolved
+Army Aquiris SUPPORT Canelos to Iquitos -> Support cut
 Army Bogota SUPPORT Cartagena to Santa Marta -> Resolved
 Army Canelos MOVE Iquitos -> Resolved
 Army Cartagena MOVE Santa Marta -> Resolved
