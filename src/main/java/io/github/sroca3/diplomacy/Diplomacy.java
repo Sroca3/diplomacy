@@ -244,8 +244,17 @@ public class Diplomacy {
         return o;
     }
 
+    private String preProcessOrderInput(String orderInput) {
+        String order = orderInput.toUpperCase().replaceAll("\\s+", " ");
+        for(var coast: Set.of("NC", "SC", "EC", "WC")) {
+            order = order.replaceAll("[\\s]*\\([" + coast + "]{2}\\)", "_" + coast);
+        }
+        order = order.replaceAll("[()]", "");
+        return order;
+    }
+
     public Order parseOrder(final String orderInput) {
-        String order = orderInput.toUpperCase(Locale.ENGLISH);
+        String order = preProcessOrderInput(orderInput);
         Matcher orderTypeMatcher = ORDER_TYPE_REGEX.matcher(String.copyValueOf(order.toCharArray()));
         Matcher unitTypeMatcher = UNIT_TYPE_REGEX.matcher(String.copyValueOf(order.toCharArray()));
         String[] parts = RegExUtils.removeFirst(order, UNIT_TYPE_REGEX_STRING).split(ORDER_TYPE_REGEX_STRING);
