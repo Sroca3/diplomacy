@@ -104,7 +104,6 @@ public class Phase {
             order.convertIllegalMoveToHold();
             if (isDislodged(order)) {
                 order.dislodge();
-                dislodgedUnitLocations.put(order.getCurrentLocation(), order);
             }
         }
         if (order.getStatus().isProcessing()) {
@@ -211,7 +210,6 @@ public class Phase {
             order.convertIllegalMoveToHold();
             if (isDislodged(order)) {
                 order.dislodge();
-                dislodgedUnitLocations.put(order.getCurrentLocation(), order);
             }
         }
     }
@@ -335,7 +333,6 @@ public class Phase {
                 });
         } else if (isDislodged(order)) {
             order.dislodge();
-            dislodgedUnitLocations.put(order.getCurrentLocation(), order);
         } else {
             boolean cutOrderExists = findAllBy(OrderType.MOVE, order.getCurrentLocation())
                 .stream().anyMatch(o -> !o.getCurrentLocation().equals(order.getToLocation()));
@@ -355,7 +352,6 @@ public class Phase {
     private void resolveHoldOrder(Order order) {
         if (isDislodged(order)) {
             order.dislodge();
-            dislodgedUnitLocations.put(order.getCurrentLocation(), order);
         } else {
             order.resolve();
         }
@@ -414,7 +410,6 @@ public class Phase {
                 order.resolve();
             } else if (isDislodged(order)) {
                 order.dislodge();
-                dislodgedUnitLocations.put(order.getCurrentLocation(), order);
             } else {
                 bounce(order);
             }
@@ -423,7 +418,6 @@ public class Phase {
                 order.resolve();
             } else {
                 order.dislodge();
-                dislodgedUnitLocations.put(order.getCurrentLocation(), order);
             }
         } else if (competingMovesExist(order)){
             calculateStrengthForOrder(order);
@@ -590,7 +584,7 @@ public class Phase {
             .filter(o -> !o.getCountry().equals(order.getCountry()))
             .filter(o -> o.getStrength() > order.getStrength())
             .findAny();
-//        dislodgeOrder.ifPresent(o -> dislodgedUnitLocations.put(order.getCurrentLocation(), o));
+        dislodgeOrder.ifPresent(o -> dislodgedUnitLocations.put(order.getCurrentLocation(), o));
         return dislodgeOrder.isPresent();
     }
 
