@@ -6,8 +6,6 @@ import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyLocation;
 import io.github.sroca3.diplomacy.svg.ArmySvg;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-
 public class SerializationTest {
 
     @Test

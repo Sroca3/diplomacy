@@ -33,6 +33,13 @@ public class ArmySvg {
         this.transform = String.format("translate(%s, %s)", location.getX(), location.getY());
     }
 
+    public ArmySvg(Army army, double x, double y) {
+        paths.add(new ArmyColor(new Color(124, 104, 188)));
+        paths.add(new ArmyOutline());
+        this.id = army.getId();
+        this.transform = String.format("translate(%s, %s)", x, y);
+    }
+
     public List<Object> getPaths() {
         return paths;
     }

@@ -3,6 +3,8 @@ package io.github.sroca3.diplomacy.maps;
 import io.github.sroca3.diplomacy.Location;
 import io.github.sroca3.diplomacy.SvgLocation;
 import io.github.sroca3.diplomacy.UnitType;
+import org.apache.commons.text.similarity.FuzzyScore;
+import org.apache.commons.text.similarity.JaroWinklerDistance;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;
@@ -130,7 +132,7 @@ public enum SouthAmericanSupremacyLocation implements SvgLocation {
 
     private static final Map<String, SouthAmericanSupremacyLocation> FULL_NAMES_MAPPING =
         EnumSet.allOf(SouthAmericanSupremacyLocation.class).stream()
-               .collect(Collectors.toMap(s -> s.name(), Function.identity()));
+               .collect(Collectors.toMap(SouthAmericanSupremacyLocation::getName, Function.identity()));
 
     private static final Map<String, SouthAmericanSupremacyLocation> SHORT_NAME_MAPPINGS =
         EnumSet.allOf(SouthAmericanSupremacyLocation.class).stream()
@@ -200,9 +202,26 @@ public enum SouthAmericanSupremacyLocation implements SvgLocation {
     public static Location findByName(String name) {
         Location l = FULL_NAMES_MAPPING.get(Optional.ofNullable(name).orElse("").toUpperCase(Locale.ENGLISH));
         if (l == null) {
-            return findByShortName(name);
+            l = findByShortName(name);
+        }
+        if (l == null) {
+            l = findByJaroWinklerDistance(name);
         }
         return l;
+    }
+
+    private static Location findByJaroWinklerDistance(String name) {
+        FuzzyScore fuzzyScore = new FuzzyScore(Locale.ENGLISH);
+        Location location = null;
+        int currentScore = 0;
+        for (String fullName : FULL_NAMES_MAPPING.keySet()) {
+            int score = fuzzyScore.fuzzyScore(fullName, name);
+            if (score > 10 && score > currentScore) {
+                currentScore = score;
+                location = FULL_NAMES_MAPPING.get(fullName);
+            }
+        }
+        return location;
     }
 
     public static Location findByShortName(String name) {

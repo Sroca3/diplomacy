@@ -447,6 +447,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.DRAKE_PASSAGE, SouthAmericanSupremacyLocation.SANTIAGO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.DRAKE_PASSAGE, SouthAmericanSupremacyLocation.ARAUNCANIAN);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.DRAKE_PASSAGE, SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.DRAKE_PASSAGE, SouthAmericanSupremacyLocation.VALPARAISO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.DRAKE_PASSAGE, SouthAmericanSupremacyLocation.PUNTA_ARENAS);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.STRAITS_OF_MAGELLAN, SouthAmericanSupremacyLocation.DRAKE_PASSAGE);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.STRAITS_OF_MAGELLAN, SouthAmericanSupremacyLocation.PUNTA_ARENAS);

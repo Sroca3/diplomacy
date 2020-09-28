@@ -65,56 +65,6 @@ public class Game01 {
 
         File countryAssignments =
             Paths.get("src/main/resources/games/south_american_supremacy/game_01/country_assignments.txt").toFile();
-//        String parser = XMLResourceDescriptor.getXMLParserClassName();
-//        SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory(parser);
-//        Document document = factory.createDocument(
-//            "src/main/resources/games/south_american_supremacy/game_01/latest.svg");
-//        Element element = document.getElementById("layer13");
-//        DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
-//        DocumentBuilder builder;
-//        try {
-//            builder = f.newDocumentBuilder();
-//            ArmySvg armySvg = new ArmySvg(
-//                new Army(SouthAmericanSupremacyCountry.ARGENTINA),
-//                SouthAmericanSupremacyLocation.CORDOBA
-//            );
-//            ObjectMapper objectMapper = new XmlMapper();
-//            String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(armySvg);
-//            Document d = builder.parse(new InputSource(new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" +x)));
-//            element.appendChild(document.importNode(d.getFirstChild(), true));
-////        element.appendChild(d.getFirstChild());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-////        var x = CSSReaderDeclarationList.readFromString(
-////            document.getElementById(SouthAmericanSupremacyLocation.PATAGONIA.getName()).getAttribute("style"),
-////            ECSSVersion.CSS30
-////        );
-////        x.getDeclarationOfPropertyName("fill").setExpression(CSSExpression.createSimple("url(#Peru)"));
-////        document.getElementById(SouthAmericanSupremacyLocation.PATAGONIA.getName())
-////                .setAttribute("style", x.getAsCSSString(new CSSWriterSettings(ECSSVersion.CSS30, true)));
-////        LOGGER.error(x.getAsCSSString(new CSSWriterSettings(ECSSVersion.CSS30, true)));
-////        NodeList nodeList = document.getElementsByTagName("path");
-////        for (int i = 0; i < nodeList.getLength(); i++) {
-////            Element element = (Element) nodeList.item(i);
-////            String attribute = element.getAttributeNS("http://www.inkscape.org/namespaces/inkscape", "label");
-////            element.setAttribute("id", attribute.toUpperCase().replace(" ", "_"));
-////        }
-////
-//        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-//        Transformer transformer = transformerFactory.newTransformer();
-//        //for pretty print
-//        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-//
-//        DOMSource source = new DOMSource(document);
-//
-//        //write to console or file
-//        StreamResult console = new StreamResult(System.out);
-//        StreamResult file = new StreamResult(new File("src/main/resources/games/south_american_supremacy/game_01/latest.svg"));
-//
-//        //write data
-////        transformer.transform(source, console);
-//        transformer.transform(source, file);
         boolean assign = countryAssignments.createNewFile();
         if (assign) {
             try (FileWriter writer = new FileWriter(countryAssignments)) {
