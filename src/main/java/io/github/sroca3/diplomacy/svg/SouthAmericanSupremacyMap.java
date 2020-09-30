@@ -2,11 +2,16 @@ package io.github.sroca3.diplomacy.svg;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.helger.css.ECSSVersion;
+import com.helger.css.decl.CSSExpression;
+import com.helger.css.reader.CSSReaderDeclarationList;
+import com.helger.css.writer.CSSWriterSettings;
 import io.github.sroca3.diplomacy.Army;
 import io.github.sroca3.diplomacy.SouthAmericanSupremacyCountry;
 import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyLocation;
+import javafx.geometry.Bounds;
+import javafx.scene.shape.SVGPath;
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
-import org.apache.batik.anim.dom.SVGOMAnimatedPathData;
 import org.apache.batik.anim.dom.SVGOMGElement;
 import org.apache.batik.anim.dom.SVGOMPathElement;
 import org.apache.batik.bridge.BridgeContext;
@@ -17,6 +22,7 @@ import org.apache.batik.gvt.GraphicsNode;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.svg.SVGDocument;
 import org.w3c.dom.svg.SVGPathSeg;
 import org.w3c.dom.svg.SVGPathSegList;
@@ -31,9 +37,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.awt.*;
 import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
@@ -51,24 +55,24 @@ public class SouthAmericanSupremacyMap {
         String parser = XMLResourceDescriptor.getXMLParserClassName();
         SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory(parser);
         Document document = factory.createDocument(
-            "src/main/resources/games/south_american_supremacy/game_01/latest.svg");
-        Element element = document.getElementById("layer13");
-        DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder;
-        try {
-            builder = f.newDocumentBuilder();
-            ArmySvg armySvg = new ArmySvg(
-                new Army(SouthAmericanSupremacyCountry.ARGENTINA),
-                SouthAmericanSupremacyLocation.CORDOBA
-            );
-            ObjectMapper objectMapper = new XmlMapper();
-            String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(armySvg);
-            Document d = builder.parse(new InputSource(new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + x)));
-            element.appendChild(document.importNode(d.getFirstChild(), true));
-//        element.appendChild(d.getFirstChild());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            "src/main/resources/maps/south_american_supremacy.svg");
+//        Element element = document.getElementById("layer13");
+//        DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
+//        DocumentBuilder builder;
+//        try {
+//            builder = f.newDocumentBuilder();
+//            ArmySvg armySvg = new ArmySvg(
+//                new Army(SouthAmericanSupremacyCountry.ARGENTINA),
+//                SouthAmericanSupremacyLocation.CORDOBA
+//            );
+//            ObjectMapper objectMapper = new XmlMapper();
+//            String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(armySvg);
+//            Document d = builder.parse(new InputSource(new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + x)));
+//            element.appendChild(document.importNode(d.getFirstChild(), true));
+////        element.appendChild(d.getFirstChild());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 //        var x = CSSReaderDeclarationList.readFromString(
 //            document.getElementById(SouthAmericanSupremacyLocation.PATAGONIA.getName()).getAttribute("style"),
 //            ECSSVersion.CSS30
@@ -77,12 +81,12 @@ public class SouthAmericanSupremacyMap {
 //        document.getElementById(SouthAmericanSupremacyLocation.PATAGONIA.getName())
 //                .setAttribute("style", x.getAsCSSString(new CSSWriterSettings(ECSSVersion.CSS30, true)));
 //        LOGGER.error(x.getAsCSSString(new CSSWriterSettings(ECSSVersion.CSS30, true)));
-//        NodeList nodeList = document.getElementsByTagName("path");
-//        for (int i = 0; i < nodeList.getLength(); i++) {
-//            Element element = (Element) nodeList.item(i);
-//            String attribute = element.getAttributeNS("http://www.inkscape.org/namespaces/inkscape", "label");
-//            element.setAttribute("id", attribute.toUpperCase().replace(" ", "_"));
-//        }
+        NodeList nodeList = document.getElementsByTagName("path");
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element element = (Element) nodeList.item(i);
+            String attribute = element.getAttributeNS("http://www.inkscape.org/namespaces/inkscape", "label");
+            element.setAttribute("id", attribute.toUpperCase().replace(" ", "_"));
+        }
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
@@ -94,7 +98,7 @@ public class SouthAmericanSupremacyMap {
         //write to console or file
         StreamResult console = new StreamResult(System.out);
         StreamResult file = new StreamResult(new File(
-            "src/main/resources/games/south_american_supremacy/game_01/latest.svg"));
+            "src/main/resources/maps/latest.svg"));
 
         //write data
 //        transformer.transform(source, console);
@@ -154,19 +158,35 @@ if (segment instanceof AbstractSVGPathSegList.SVGPathSegMovetoLinetoItem) {
 
         }
 
-        BridgeContext ctx = new BridgeContext(new UserAgentAdapter());
-        GraphicsNode gvtRoot = new GVTBuilder().build(ctx, element);
-//        Rectangle2D rectangle2D = gvtRoot.getBounds();
-        System.out.println(minX);
-        System.out.println(minY);
-        System.out.println(maxX);
-        System.out.println(maxY);
-        return new Point2D.Double(minX + (maxX - minX), minY + (maxY - minY));
+        SVGPath svgPath = new SVGPath();
+        svgPath.setContent(element.getAttribute("d"));
+//        BridgeContext ctx = new BridgeContext(new UserAgentAdapter());
+//        GraphicsNode gvtRoot = new GVTBuilder().build(ctx, element);
+////        Rectangle2D rectangle2D = gvtRoot.getBounds();
+//        System.out.println(minX);
+//        System.out.println(minY);
+//        System.out.println(maxX);
+//        System.out.println(maxY);
+        Bounds bounds = svgPath.getBoundsInParent();
+        System.out.println(bounds.getMinX());
+        System.out.println(bounds.getMinY());
+        System.out.println(bounds.getCenterX());
+        System.out.println(bounds.getCenterY());
+        System.out.println(bounds.getMaxX());
+        System.out.println(bounds.getMaxY());
+        System.out.println(bounds.getMaxX() - bounds.getMinX());
+        System.out.println(bounds.getMaxY() - bounds.getMinY());
+        return new Point2D.Double(bounds.getCenterX(), bounds.getCenterY());
     }
 
     public void drawUnits() {
+        try {
+            dummy();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         SVGDocument document = getDocument();
-        SVGOMGElement element = (SVGOMGElement) document.getElementById("layer13");
+        SVGOMGElement element = (SVGOMGElement) document.getElementById("units");
         Element element1 = document.getElementById(SouthAmericanSupremacyLocation.CORDOBA.name());
         Point2D point = calculateCenterPoint(element1);
         DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
@@ -207,10 +227,10 @@ if (segment instanceof AbstractSVGPathSegList.SVGPathSegMovetoLinetoItem) {
 
         DOMSource source = new DOMSource(document);
         StreamResult file = new StreamResult(new File("src/main/resources/maps/latest.svg"));
-        try {
-            transformer.transform(source, file);
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            transformer.transform(source, file);
+//        } catch (TransformerException e) {
+//            e.printStackTrace();
+//        }
     }
 }

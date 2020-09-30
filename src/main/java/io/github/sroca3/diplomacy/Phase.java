@@ -415,6 +415,7 @@ public class Phase {
             }
         } else if (isDislodged(order)) {
             if (!competingMovesExist(order)) {
+                dislodgedUnitLocations.remove(order.getCurrentLocation());
                 order.resolve();
             } else {
                 order.dislodge();

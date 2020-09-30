@@ -4,7 +4,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import io.github.sroca3.diplomacy.Army;
-import io.github.sroca3.diplomacy.Location;
 import io.github.sroca3.diplomacy.SvgLocation;
 
 import java.awt.*;
@@ -26,6 +25,9 @@ public class ArmySvg {
     @JacksonXmlProperty(isAttribute = true)
     private String transform;
 
+    private static final double HEIGHT = 20;
+    private static final double WIDTH = 40;
+
     public ArmySvg(Army army, SvgLocation location) {
         paths.add(new ArmyColor(new Color(124, 104, 188)));
         paths.add(new ArmyOutline());
@@ -37,7 +39,7 @@ public class ArmySvg {
         paths.add(new ArmyColor(new Color(124, 104, 188)));
         paths.add(new ArmyOutline());
         this.id = army.getId();
-        this.transform = String.format("translate(%s, %s)", x, y);
+        this.transform = String.format("translate(%s, %s)", x - (WIDTH/2), y - (HEIGHT/2));
     }
 
     public List<Object> getPaths() {
