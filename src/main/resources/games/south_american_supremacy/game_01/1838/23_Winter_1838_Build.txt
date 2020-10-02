@@ -1,0 +1,22 @@
+Argentina:
+
+Bolivia:
+Build army La Paz
+Build army Antofagasta
+
+Brasil:
+Disband A Minas Gerais
+
+Chile:
+build A Santiago
+
+Colombia:
+Build Fleet Cartagena
+
+Paraguay:
+Build army Asuncion
+
+Peru:
+Destroy Army Piura
+
+Venezuela:

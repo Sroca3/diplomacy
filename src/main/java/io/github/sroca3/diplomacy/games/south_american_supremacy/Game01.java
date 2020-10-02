@@ -227,6 +227,10 @@ public class Game01 {
         if (statusFile.exists()) {
             Files.delete(statusFile.toPath());
         }
+        File parentDirectory = statusFile.getParentFile();
+        if (!parentDirectory.exists()) {
+            Files.createDirectory(parentDirectory.toPath());
+        }
         statusFile.createNewFile();
         try (FileWriter writer = new FileWriter(statusFile)) {
             writer.write(diplomacy.getPhaseDescription() + " Status\n");

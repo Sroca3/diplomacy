@@ -122,87 +122,39 @@ public class SouthAmericanSupremacyMap {
     }
 
     private Point2D calculateCenterPoint(Element element) {
-        String d = element.getAttribute("d").replaceAll("[A-Za-z]", "").replaceAll("\\s+", " ");
-        String[] points = d.split(" ");
-        SVGPathSegList pathSegList = ((SVGOMPathElement)document.getElementById(SouthAmericanSupremacyLocation.CORDOBA.name())).getPathSegList();
-        document.getElementById(SouthAmericanSupremacyLocation.CORDOBA.name());
-        double minX = 0;
-        double minY = 0;
-        double maxX = 0;
-        double maxY = 0;
-
-//        for (String point : points) {
-//            String[] pt = point.split(",");
-//            double x = Double.parseDouble(pt[0]);
-//            double y = Double.parseDouble(pt[1]);
-//            minX = Math.min(minX, x);
-//            minY = Math.min(minY, y);
-//            maxX = Math.max(maxX, x);
-//            maxY = Math.max(maxY, y);
-////            Point2D p = new Point2D.Double(x, y);
-//        }
-
-double x = 0;
-double y = 0;
-        for (int i = 0; i < pathSegList.getNumberOfItems(); i++) {
-SVGPathSeg segment = pathSegList.getItem(i);
-if (segment instanceof AbstractSVGPathSegList.SVGPathSegMovetoLinetoItem) {
-    AbstractSVGPathSegList.SVGPathSegMovetoLinetoItem svgomAnimatedPathData = (AbstractSVGPathSegList.SVGPathSegMovetoLinetoItem) segment;
-    x = svgomAnimatedPathData.getX() + x;
-    y = svgomAnimatedPathData.getY() + y;
-    minX = Math.min(minX, x);
-    minY = Math.min(minY, y);
-    maxX = Math.max(maxX, x);
-    maxY = Math.max(maxY, y);
-}
-
-        }
-
         SVGPath svgPath = new SVGPath();
+        if (element == null) {
+            return new Point2D.Double(0,0);
+        }
         svgPath.setContent(element.getAttribute("d"));
-//        BridgeContext ctx = new BridgeContext(new UserAgentAdapter());
-//        GraphicsNode gvtRoot = new GVTBuilder().build(ctx, element);
-////        Rectangle2D rectangle2D = gvtRoot.getBounds();
-//        System.out.println(minX);
-//        System.out.println(minY);
-//        System.out.println(maxX);
-//        System.out.println(maxY);
         Bounds bounds = svgPath.getBoundsInParent();
-        System.out.println(bounds.getMinX());
-        System.out.println(bounds.getMinY());
-        System.out.println(bounds.getCenterX());
-        System.out.println(bounds.getCenterY());
-        System.out.println(bounds.getMaxX());
-        System.out.println(bounds.getMaxY());
-        System.out.println(bounds.getMaxX() - bounds.getMinX());
-        System.out.println(bounds.getMaxY() - bounds.getMinY());
         return new Point2D.Double(bounds.getCenterX(), bounds.getCenterY());
     }
 
     public void drawUnits() {
-        try {
-            dummy();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         SVGDocument document = getDocument();
         SVGOMGElement element = (SVGOMGElement) document.getElementById("units");
-        Element element1 = document.getElementById(SouthAmericanSupremacyLocation.CORDOBA.name());
-        Point2D point = calculateCenterPoint(element1);
-        DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder;
-        try {
-            builder = f.newDocumentBuilder();
-            ArmySvg armySvg = new ArmySvg(
-                new Army(SouthAmericanSupremacyCountry.ARGENTINA),
-                point.getX(), point.getY()
-            );
-            ObjectMapper objectMapper = new XmlMapper();
-            String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(armySvg);
-            Document d = builder.parse(new InputSource(new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + x)));
-            element.appendChild(document.importNode(d.getFirstChild(), true));
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (SouthAmericanSupremacyLocation territory : SouthAmericanSupremacyLocation.values()) {
+            Element element1 = document.getElementById(territory.name());
+            if (element1 == null) {
+                System.out.println(territory.name());
+            }
+            Point2D point = calculateCenterPoint(element1);
+            DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder;
+            try {
+                builder = f.newDocumentBuilder();
+                ArmySvg armySvg = new ArmySvg(
+                    new Army(SouthAmericanSupremacyCountry.ARGENTINA),
+                    point.getX(), point.getY()
+                );
+                ObjectMapper objectMapper = new XmlMapper();
+                String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(armySvg);
+                Document d = builder.parse(new InputSource(new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + x)));
+                element.appendChild(document.importNode(d.getFirstChild(), true));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -227,10 +179,10 @@ if (segment instanceof AbstractSVGPathSegList.SVGPathSegMovetoLinetoItem) {
 
         DOMSource source = new DOMSource(document);
         StreamResult file = new StreamResult(new File("src/main/resources/maps/latest.svg"));
-//        try {
-//            transformer.transform(source, file);
-//        } catch (TransformerException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            transformer.transform(source, file);
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 }

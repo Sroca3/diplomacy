@@ -1,0 +1,21 @@
+Winter 1838 Build Results
+--------------------------------
+
+BOLIVIA (FloridaMan):
+BUILD Army Antofagasta -> Resolved
+BUILD Army La Paz -> Resolved
+
+BRASIL (VGhost):
+DISBAND Army Minas Gerais -> Resolved
+
+CHILE (Jordan767):
+BUILD Army Santiago -> Resolved
+
+COLOMBIA (Antigonos):
+BUILD Fleet Cartagena -> Resolved
+
+PARAGUAY (RolynTrotter):
+BUILD Army Asuncion -> Resolved
+
+PERU (Don Juan of Austria):
+DISBAND Army Piura -> Resolved

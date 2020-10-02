@@ -414,6 +414,7 @@ public class Phase {
                 bounce(order);
             }
         } else if (isDislodged(order)) {
+            Map<String, String> x = new HashMap<>();
             if (!competingMovesExist(order)) {
                 dislodgedUnitLocations.remove(order.getCurrentLocation());
                 order.resolve();
