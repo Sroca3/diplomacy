@@ -1,0 +1,53 @@
+Argentina:
+A (San Miguel) s A (Santa Fe) - Corrientes
+A (Santa Fe) - Corrientes
+F (Golfo de San Jorez) - Punta Arenas
+
+Bolivia:
+Islas Galapagos to Nazca Sea
+Cusco to Lima
+Trujillo supports Cusco to Lima
+Antofagasta to Atacama
+Islas Juan Fernandez to Drake Passage
+Salta to San Miguel de Tucuman
+Santa Cruz holds
+La Paz to Potosi
+
+Brasil:
+F Rio de Janeiro -> Sao Paolo
+A Goias -> Minas Gerais
+
+Chile:
+A Val H
+A San - Men
+F DrP - PAs
+F BAs S Mon - SaF
+A BhB - Ros
+
+Colombia:
+Fleet  Panama (NC) Support Fleet  Cartagena Move to Golfo de Darien
+Fleet  Cartagena Move to Golfo de Darien
+Army  Santa Marta Support Army Popayan Move to Llanos
+Army Bogota  Move to Cali
+Army Popayan Move to  Llanos
+Army Iquitos Move to Aquiris
+Army  Amazonas Move to Manaus
+
+Paraguay:
+Mato Grosso move Maranhao
+Pantanal move Chaco
+Asuncion move Formosa
+Misiones move Corrientes
+Montevideo move Santa Fe
+Sao Paulo move Minas Gerais
+Rio Grande do Sul move Sao Paulo
+
+Peru:
+Fleet Lima moves to Bahia de Arica
+
+Venezuela:
+Army Manaus move Rio Branco
+Army Maracaibo Hold
+Fleet Caracas support Maracaibo
+Fleet Golfo de Darien move Santa Marta
+Fleet Maranhao move Boca de Navios

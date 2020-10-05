@@ -1,0 +1,56 @@
+Spring 1839 Orders Results
+--------------------------------
+
+ARGENTINA (haroonriaz):
+Fleet Golfo de San Jorge MOVE Punta Arenas -> Bounced
+Army Santa fe MOVE Corrientes -> Dislodged
+Army San Miguel de Tucuman SUPPORT Santa fe to Corrientes -> Support cut
+
+BOLIVIA (FloridaMan):
+Army Antofagasta MOVE Atacama -> Resolved
+Army Cusco MOVE Lima -> Resolved
+Fleet Islas Galapagos MOVE Nazca Sea -> Resolved
+Fleet Islas Juan Fernandez MOVE Drake Passage -> Bounced
+Army La Paz MOVE Potosi -> Resolved
+Army Salta MOVE San Miguel de Tucuman -> Bounced
+Army Santa Cruz HOLD -> Resolved
+Fleet Trujillo SUPPORT Cusco to Lima -> Resolved
+
+BRASIL (VGhost):
+Army Goias MOVE Minas Gerais -> Bounced
+Fleet Rio de Janeiro MOVE Sao Paulo -> Bounced
+
+CHILE (Jordan767):
+Army Bahia Blanca MOVE Rosario -> Resolved
+Fleet Buenos Aires SUPPORT Montevideo to Santa fe -> Resolved
+Fleet Drake Passage MOVE Punta Arenas -> Bounced
+Army Santiago MOVE Mendoza -> Resolved
+Army Valparaiso HOLD -> Resolved
+
+COLOMBIA (Antigonos):
+Army Amazonas MOVE Manaus -> Resolved
+Army Bogota MOVE Cali -> Resolved
+Fleet Cartagena MOVE Golfo de Darien -> Resolved
+Army Iquitos MOVE Aquiris -> Resolved
+Fleet Panama nc SUPPORT Cartagena to Golfo de Darien -> Resolved
+Army Popayan MOVE Llanos -> Resolved
+Army Santa Marta SUPPORT Popayan to Llanos -> Support cut
+
+PARAGUAY (RolynTrotter):
+Army Asuncion MOVE Formosa -> Resolved
+Army Mato Grosso MOVE Maranhao -> Resolved
+Fleet Misiones MOVE Corrientes -> Bounced
+Army Montevideo MOVE Santa fe -> Resolved
+Army Pantanal MOVE Chaco -> Resolved
+Army Rio Grande do Sul MOVE Sao Paulo -> Bounced
+Army Sao Paulo MOVE Minas Gerais -> Bounced
+
+PERU (Don Juan of Austria):
+Fleet Lima MOVE Bahia de Arica -> Resolved
+
+VENEZUELA (bratsffl):
+Fleet Caracas SUPPORT Maracaibo to hold -> Resolved
+Fleet Golfo de Darien MOVE Santa Marta -> Dislodged
+Army Manaus MOVE Rio Branco -> Resolved
+Army Maracaibo HOLD -> Resolved
+Fleet Maranhao MOVE Boca de Navios -> Resolved

@@ -101,7 +101,7 @@ public enum SouthAmericanSupremacyLocation implements SvgLocation {
     RIO_DE_JANEIRO(LocationType.COASTAL_LAND, "Rio", true),
     RIO_GRANDE_DO_SUL(LocationType.COASTAL_LAND, "RGS", true),
     ROSARIO(LocationType.LAND, "Ros"),
-    SANTA_FE(LocationType.LAND, "SaF"),
+    SANTA_FE(LocationType.COASTAL_LAND, "SaF"),
     SALTA(LocationType.LAND, "Sal", true),
     SANTA_MARTA(LocationType.COASTAL_LAND, "SaM"),
     SANTIAGO(LocationType.COASTAL_LAND, "San", true),
