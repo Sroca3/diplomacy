@@ -586,7 +586,7 @@ public class Phase {
             .filter(o -> !o.getCountry().equals(order.getCountry()))
             .filter(o -> o.getStrength() > order.getStrength())
             .findAny();
-        dislodgeOrder.ifPresent(o -> dislodgedUnitLocations.put(order.getCurrentLocation(), o));
+        dislodgeOrder.ifPresent(o -> dislodgedUnitLocations.put(order.getCurrentLocation(), order));
         return dislodgeOrder.isPresent();
     }
 

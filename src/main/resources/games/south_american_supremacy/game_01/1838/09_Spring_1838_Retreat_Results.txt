@@ -1,9 +1,11 @@
 Spring 1838 Retreat Results
 --------------------------------
 
+ARGENTINA (haroonriaz):
+DISBAND Fleet Montevideo -> Resolved
+
 COLOMBIA (Antigonos):
-DISBAND Army Iquitos -> Resolved
 DISBAND Fleet Islas Galapagos -> Resolved
 
-PARAGUAY (RolynTrotter):
-DISBAND Army Montevideo -> Resolved
+PERU (Don Juan of Austria):
+DISBAND Army Iquitos -> Resolved
