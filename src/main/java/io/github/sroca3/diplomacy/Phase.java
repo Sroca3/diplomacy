@@ -29,7 +29,7 @@ public class Phase {
     private final List<Order> orders = new LinkedList<>();
     private final PhaseName phaseName;
     private final Map<Location, Country> locationOwnership = new HashMap<>();
-    private final Map<Location, Order> dislodgedUnitLocations = new HashMap<>();
+    private final Map<Location, Dislodgement> dislodgedUnitLocations = new HashMap<>();
     private final Set<Location> contestedLocations = new HashSet<>();
     private final long year;
     public Phase(
@@ -58,7 +58,7 @@ public class Phase {
         final Map<Location, Set<Location>> adjacencies,
         final PhaseName phaseName,
         final Map<Location, Country> locationOwnership,
-        final Map<Location, Order> dislodgedUnitLocations,
+        final Map<Location, Dislodgement> dislodgedUnitLocations,
         final Set<Location> contestedLocations,
         final long year
     ) {
@@ -175,6 +175,7 @@ public class Phase {
 
     private boolean unitRetreatingTowardsAttacker(Order order) {
         return Optional.ofNullable(dislodgedUnitLocations.get(order.getCurrentLocation()))
+                       .map(Dislodgement::getAttackingOrder)
                 .filter(o -> Objects.equals(order.getToLocation(), o.getFromLocation()))
                 .isPresent();
     }
@@ -586,7 +587,7 @@ public class Phase {
             .filter(o -> !o.getCountry().equals(order.getCountry()))
             .filter(o -> o.getStrength() > order.getStrength())
             .findAny();
-        dislodgeOrder.ifPresent(o -> dislodgedUnitLocations.put(order.getCurrentLocation(), order));
+        dislodgeOrder.ifPresent(o -> dislodgedUnitLocations.put(order.getCurrentLocation(), new Dislodgement(o, order)));
         return dislodgeOrder.isPresent();
     }
 
@@ -662,7 +663,7 @@ public class Phase {
         if (phaseName.isRetreatPhase()) {
             dislodgedUnitLocations.keySet().forEach(location -> {
                 if (locationToOrderMap.get(location) == null) {
-                    addOrder(new Order(dislodgedUnitLocations.get(location).getUnit(), location, OrderType.DISBAND));
+                    addOrder(new Order(dislodgedUnitLocations.get(location).getDislodgedOrder().getUnit(), location, OrderType.DISBAND));
                 }
             });
         }
@@ -719,7 +720,7 @@ public class Phase {
         return this.phaseName;
     }
 
-    public Map<Location, Order> getDislodgedInfo() {
+    public Map<Location, Dislodgement> getDislodgedInfo() {
         return dislodgedUnitLocations;
     }
 
