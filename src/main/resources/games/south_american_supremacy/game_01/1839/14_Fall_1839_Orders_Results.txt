@@ -1,0 +1,54 @@
+Fall 1839 Orders Results
+--------------------------------
+
+ARGENTINA (haroonriaz):
+Fleet Golfo de San Jorge MOVE Punta Arenas -> Bounced
+Army San Miguel de Tucuman HOLD -> Dislodged
+
+BOLIVIA (FloridaMan):
+Army Atacama MOVE Arica -> Bounced
+Fleet Islas Juan Fernandez MOVE Drake Passage -> Bounced
+Army Lima MOVE Cusco -> Resolved
+Fleet Nazca Sea SUPPORT Trujillo to Lima -> Resolved
+Army Potosi MOVE Antofagasta -> Resolved
+Army Salta MOVE San Miguel de Tucuman -> Bounced
+Army Santa Cruz MOVE Pantanal -> Resolved
+Fleet Trujillo MOVE Lima -> Resolved
+
+BRASIL (VGhost):
+Army Goias MOVE Maranhao -> Dislodged
+Fleet Rio de Janeiro HOLD -> Resolved
+
+CHILE (Jordan767):
+Fleet Buenos Aires MOVE Bahia Blanca -> Resolved
+Fleet Drake Passage MOVE Punta Arenas -> Bounced
+Army Mendoza SUPPORT Rosario to Cordoba -> Resolved
+Army Rosario MOVE Cordoba -> Resolved
+Army Valparaiso HOLD -> Resolved
+
+COLOMBIA (Antigonos):
+Army Aquiris MOVE Amazonas -> Resolved
+Army Cali MOVE Canelos -> Resolved
+Fleet Golfo de Darien MOVE Caracas -> Bounced
+Army Llanos SUPPORT Santa Marta to Maracaibo -> Resolved
+Army Manaus SUPPORT Aquiris to Amazonas -> Resolved
+Fleet Panama nc MOVE Golfo de Darien -> Bounced
+Army Santa Marta MOVE Maracaibo -> Resolved
+
+PARAGUAY (RolynTrotter):
+Army Chaco MOVE Salta -> Bounced
+Army Formosa SUPPORT Santa fe to San Miguel de Tucuman -> Resolved
+Army Maranhao SUPPORT Sao Paulo to Goias -> Resolved
+Fleet Misiones MOVE Corrientes -> Resolved
+Army Rio Grande do Sul MOVE Sao Paulo -> Resolved
+Army Santa fe MOVE San Miguel de Tucuman -> Resolved
+Army Sao Paulo MOVE Goias -> Resolved
+
+PERU (Don Juan of Austria):
+Fleet Bahia de Arica MOVE Arica -> Bounced
+
+VENEZUELA (bratsffl):
+Fleet Boca de Navios MOVE Para -> Resolved
+Fleet Caracas MOVE Cumana -> Resolved
+Army Maracaibo MOVE Caracas -> Dislodged
+Army Rio Branco SUPPORT Boca de Navios to Para -> Resolved
