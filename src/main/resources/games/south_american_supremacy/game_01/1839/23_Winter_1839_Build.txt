@@ -1,0 +1,23 @@
+Argentina:
+
+Bolivia:
+Build Army La Paz
+
+Brasil:
+
+Chile:
+Build F Santiago
+
+Colombia:
+Build Army Bogota
+Build Army Cali
+
+Paraguay:
+Build army Concepcion
+Build army Asuncion
+
+Peru:
+Disband Bahia de Arica
+
+Venezuela:
+Destroy PAra

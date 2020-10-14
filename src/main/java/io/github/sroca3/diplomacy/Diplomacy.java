@@ -269,8 +269,6 @@ public class Diplomacy {
             currentLocation = Optional.ofNullable(parseLocation(parts[orderType.isDisband() ? 1 : 0]))
                                                .orElseThrow(() -> new LocationNotFoundException(parts[0], orderInput));
         }catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(orderInput);
-            System.out.println(Arrays.asList(parts));
             throw e;
         }
         UnitType unitType;

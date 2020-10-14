@@ -144,12 +144,12 @@ public class SouthAmericanSupremacyMap {
             DocumentBuilder builder;
             try {
                 builder = f.newDocumentBuilder();
-                ArmySvg armySvg = new ArmySvg(
+                FleetSvg unit = new FleetSvg(
                     new Army(SouthAmericanSupremacyCountry.ARGENTINA),
                     point.getX(), point.getY()
                 );
                 ObjectMapper objectMapper = new XmlMapper();
-                String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(armySvg);
+                String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(unit);
                 Document d = builder.parse(new InputSource(new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + x)));
                 element.appendChild(document.importNode(d.getFirstChild(), true));
             } catch (Exception e) {

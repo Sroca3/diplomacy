@@ -1,0 +1,22 @@
+Winter 1839 Build Results
+--------------------------------
+
+BOLIVIA (FloridaMan):
+BUILD Army La Paz -> Resolved
+
+CHILE (Jordan767):
+BUILD Fleet Santiago -> Resolved
+
+COLOMBIA (Antigonos):
+BUILD Army Bogota -> Resolved
+BUILD Army Cali -> Resolved
+
+PARAGUAY (RolynTrotter):
+BUILD Army Asuncion -> Resolved
+BUILD Army Concepcion -> Resolved
+
+PERU (Don Juan of Austria):
+DISBAND Fleet Bahia de Arica -> Resolved
+
+VENEZUELA (bratsffl):
+DISBAND Fleet Para -> Resolved

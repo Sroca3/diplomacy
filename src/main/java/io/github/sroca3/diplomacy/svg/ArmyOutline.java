@@ -3,7 +3,6 @@ package io.github.sroca3.diplomacy.svg;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-import java.awt.*;
 import java.util.UUID;
 
 @JacksonXmlRootElement(localName = "path")
