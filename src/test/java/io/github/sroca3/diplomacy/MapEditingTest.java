@@ -9,6 +9,7 @@ public class MapEditingTest {
     public void addUnitToMap() {
         SouthAmericanSupremacyMap southAmericanSupremacyMap = new SouthAmericanSupremacyMap();
         southAmericanSupremacyMap.drawUnits();
+        southAmericanSupremacyMap.drawArrows();
         southAmericanSupremacyMap.generateMap();
     }
 }

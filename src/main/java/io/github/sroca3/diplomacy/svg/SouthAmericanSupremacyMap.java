@@ -2,30 +2,19 @@ package io.github.sroca3.diplomacy.svg;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.helger.css.ECSSVersion;
-import com.helger.css.decl.CSSExpression;
-import com.helger.css.reader.CSSReaderDeclarationList;
-import com.helger.css.writer.CSSWriterSettings;
 import io.github.sroca3.diplomacy.Army;
+import io.github.sroca3.diplomacy.Location;
 import io.github.sroca3.diplomacy.SouthAmericanSupremacyCountry;
 import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyLocation;
 import javafx.geometry.Bounds;
 import javafx.scene.shape.SVGPath;
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
 import org.apache.batik.anim.dom.SVGOMGElement;
-import org.apache.batik.anim.dom.SVGOMPathElement;
-import org.apache.batik.bridge.BridgeContext;
-import org.apache.batik.bridge.GVTBuilder;
-import org.apache.batik.bridge.UserAgentAdapter;
-import org.apache.batik.dom.svg.AbstractSVGPathSegList;
-import org.apache.batik.gvt.GraphicsNode;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.svg.SVGDocument;
-import org.w3c.dom.svg.SVGPathSeg;
-import org.w3c.dom.svg.SVGPathSegList;
 import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -41,6 +30,9 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class SouthAmericanSupremacyMap {
 
@@ -48,61 +40,15 @@ public class SouthAmericanSupremacyMap {
     SVGDocument document;
     private File file;
 
-    public SouthAmericanSupremacyMap() {
+    private static Map<Location, Point2D> additionalPoints = new HashMap<>();
+    static {
+        additionalPoints.put(SouthAmericanSupremacyLocation.ISLAS_JUAN_FERNANDEZ, new Point2D.Double(94, 760));
+        additionalPoints.put(SouthAmericanSupremacyLocation.ISLAS_GALAPAGOS, new Point2D.Double(20, 202));
+        additionalPoints.put(SouthAmericanSupremacyLocation.ISLAS_MALVINAS, new Point2D.Double(402, 947));
     }
 
-    private void dummy() throws Exception {
-        String parser = XMLResourceDescriptor.getXMLParserClassName();
-        SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory(parser);
-        Document document = factory.createDocument(
-            "src/main/resources/maps/south_american_supremacy.svg");
-//        Element element = document.getElementById("layer13");
-//        DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
-//        DocumentBuilder builder;
-//        try {
-//            builder = f.newDocumentBuilder();
-//            ArmySvg armySvg = new ArmySvg(
-//                new Army(SouthAmericanSupremacyCountry.ARGENTINA),
-//                SouthAmericanSupremacyLocation.CORDOBA
-//            );
-//            ObjectMapper objectMapper = new XmlMapper();
-//            String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(armySvg);
-//            Document d = builder.parse(new InputSource(new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + x)));
-//            element.appendChild(document.importNode(d.getFirstChild(), true));
-////        element.appendChild(d.getFirstChild());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        var x = CSSReaderDeclarationList.readFromString(
-//            document.getElementById(SouthAmericanSupremacyLocation.PATAGONIA.getName()).getAttribute("style"),
-//            ECSSVersion.CSS30
-//        );
-//        x.getDeclarationOfPropertyName("fill").setExpression(CSSExpression.createSimple("url(#Peru)"));
-//        document.getElementById(SouthAmericanSupremacyLocation.PATAGONIA.getName())
-//                .setAttribute("style", x.getAsCSSString(new CSSWriterSettings(ECSSVersion.CSS30, true)));
-//        LOGGER.error(x.getAsCSSString(new CSSWriterSettings(ECSSVersion.CSS30, true)));
-        NodeList nodeList = document.getElementsByTagName("path");
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Element element = (Element) nodeList.item(i);
-            String attribute = element.getAttributeNS("http://www.inkscape.org/namespaces/inkscape", "label");
-            element.setAttribute("id", attribute.toUpperCase().replace(" ", "_"));
-        }
 
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = transformerFactory.newTransformer();
-        //for pretty print
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-
-        DOMSource source = new DOMSource(document);
-
-        //write to console or file
-        StreamResult console = new StreamResult(System.out);
-        StreamResult file = new StreamResult(new File(
-            "src/main/resources/maps/latest.svg"));
-
-        //write data
-//        transformer.transform(source, console);
-        transformer.transform(source, file);
+    public SouthAmericanSupremacyMap() {
     }
 
     private SVGDocument getDocument() {
@@ -118,7 +64,7 @@ public class SouthAmericanSupremacyMap {
             e.printStackTrace();
         }
         this.document = document;
-        return document;
+        return Objects.requireNonNull(document);
     }
 
     private Point2D calculateCenterPoint(Element element) {
@@ -132,7 +78,7 @@ public class SouthAmericanSupremacyMap {
     }
 
     public void drawUnits() {
-        SVGDocument document = getDocument();
+        getDocument();
         SVGOMGElement element = (SVGOMGElement) document.getElementById("units");
         for (SouthAmericanSupremacyLocation territory : SouthAmericanSupremacyLocation.values()) {
             Element element1 = document.getElementById(territory.name());
@@ -140,6 +86,9 @@ public class SouthAmericanSupremacyMap {
                 System.out.println(territory.name());
             }
             Point2D point = calculateCenterPoint(element1);
+            if (0 == point.getX()) {
+                point = additionalPoints.getOrDefault(territory, new Point2D.Double(0,0));
+            }
             DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder;
             try {
@@ -163,6 +112,29 @@ public class SouthAmericanSupremacyMap {
     }
 
     public void drawArrows() {
+        getDocument();
+        Element element =  document.getElementById("arrows");
+        var territory = SouthAmericanSupremacyLocation.CORDOBA;
+        Element element1 = document.getElementById(territory.name());
+
+        Point2D point = calculateCenterPoint(element1);
+        var territory1 = SouthAmericanSupremacyLocation.MARANHAO;
+        Element element2 = document.getElementById(territory1.name());
+
+        Point2D point2 = calculateCenterPoint(element2);
+        DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder;
+        try {
+            builder = f.newDocumentBuilder();
+            var arrow = new Arrow(point, point2);
+
+            ObjectMapper objectMapper = new XmlMapper();
+            String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrow);
+            Document d = builder.parse(new InputSource(new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + x)));
+            element.appendChild(document.importNode(d.getFirstChild(), true));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
