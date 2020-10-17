@@ -179,6 +179,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(armyGraph, SouthAmericanSupremacyLocation.RIO_BRANCO, SouthAmericanSupremacyLocation.AMAZONAS);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.RIO_BRANCO, SouthAmericanSupremacyLocation.MANAUS);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.RIO_BRANCO, SouthAmericanSupremacyLocation.ANGOSTURA);
+        addEdge(armyGraph, SouthAmericanSupremacyLocation.RIO_BRANCO, SouthAmericanSupremacyLocation.ORINOCO);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.FORMOSA, SouthAmericanSupremacyLocation.ASUNCION);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.FORMOSA, SouthAmericanSupremacyLocation.CONCEPCION);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.FORMOSA, SouthAmericanSupremacyLocation.SALTA);
@@ -265,6 +266,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(armyGraph, SouthAmericanSupremacyLocation.GOIAS, SouthAmericanSupremacyLocation.PERNAMBUCO);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.GOIAS, SouthAmericanSupremacyLocation.SAO_PAULO);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.GOIAS, SouthAmericanSupremacyLocation.MATO_GROSSO);
+        addEdge(armyGraph, SouthAmericanSupremacyLocation.GOIAS, SouthAmericanSupremacyLocation.PANTANAL);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.ISLAS_MALVINAS, SouthAmericanSupremacyLocation.SCOTIA_SEA);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.LLANOS, SouthAmericanSupremacyLocation.BOGOTA);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.LLANOS, SouthAmericanSupremacyLocation.MARACAIBO);
@@ -280,6 +282,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(armyGraph, SouthAmericanSupremacyLocation.MENDOZA, SouthAmericanSupremacyLocation.SANTIAGO);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.MENDOZA, SouthAmericanSupremacyLocation.BAHIA_BLANCA);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.MENDOZA, SouthAmericanSupremacyLocation.ROSARIO);
+        addEdge(armyGraph, SouthAmericanSupremacyLocation.MENDOZA, SouthAmericanSupremacyLocation.PATAGONIA);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.CUMANA, SouthAmericanSupremacyLocation.CARACAS);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.CUMANA, SouthAmericanSupremacyLocation.ANGOSTURA);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.PARA, SouthAmericanSupremacyLocation.RIO_BRANCO);
@@ -523,11 +526,14 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.BAHIA_BLANCA, SouthAmericanSupremacyLocation.GOLFO_DE_SAN_JORGE);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.BAHIA_BLANCA, SouthAmericanSupremacyLocation.RIO_DE_LA_PLATA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.NAZCA_SEA, SouthAmericanSupremacyLocation.TRUJILLO);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.NAZCA_SEA, SouthAmericanSupremacyLocation.SOUTH_PACIFIC_OCEAN);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.NAZCA_SEA, SouthAmericanSupremacyLocation.BAHIA_SECHURA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.NAZCA_SEA, SouthAmericanSupremacyLocation.ISLAS_GALAPAGOS);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.NAZCA_SEA, SouthAmericanSupremacyLocation.LIMA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.NAZCA_SEA, SouthAmericanSupremacyLocation.PIURA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.NAZCA_SEA, SouthAmericanSupremacyLocation.BAHIA_DE_ARICA);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.SOUTH_PACIFIC_OCEAN, SouthAmericanSupremacyLocation.BAHIA_DE_ARICA);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.SOUTH_PACIFIC_OCEAN, SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.PIURA, SouthAmericanSupremacyLocation.BAHIA_SECHURA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.PUNTA_ARENAS, SouthAmericanSupremacyLocation.ARAUNCANIAN);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.ARICA, SouthAmericanSupremacyLocation.AREQUIPA);

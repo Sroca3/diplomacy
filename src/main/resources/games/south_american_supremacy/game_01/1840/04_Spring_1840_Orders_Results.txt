@@ -1,0 +1,55 @@
+Spring 1840 Orders Results
+--------------------------------
+
+ARGENTINA (haroonriaz):
+Fleet Golfo de San Jorge HOLD -> Resolved
+
+BOLIVIA (FloridaMan):
+Army Antofagasta MOVE Potosi -> Resolved
+Army Atacama MOVE Antofagasta -> Resolved
+Army Cusco MOVE Riberalta -> Resolved
+Fleet Islas Juan Fernandez MOVE Golfo de Guafo -> Bounced
+Army La Paz MOVE Santa Cruz -> Bounced
+Fleet Lima MOVE Bahia de Arica -> Resolved
+Fleet Nazca Sea MOVE South Pacific Ocean -> Resolved
+Army Pantanal MOVE Sao Paulo -> Resolved
+Army Salta SUPPORT Antofagasta to Potosi -> Dislodged
+
+BRASIL (VGhost):
+Fleet Rio de Janeiro SUPPORT Pantanal to Sao Paulo -> Resolved
+Army Salvador MOVE Goias -> Bounced
+
+CHILE (Jordan767):
+Fleet Bahia Blanca MOVE Golfo de San Jorge -> Bounced
+Army Cordoba HOLD -> Resolved
+Fleet Drake Passage MOVE Golfo de Guafo -> Bounced
+Army Mendoza MOVE Patagonia -> Resolved
+Fleet Santiago MOVE Drake Passage -> Bounced
+Army Valparaiso MOVE Copiapo -> Resolved
+
+COLOMBIA (Antigonos):
+Army Amazonas MOVE Mato Grosso -> Bounced
+Army Bogota MOVE Llanos -> Resolved
+Army Cali MOVE Canelos -> Resolved
+Army Canelos MOVE Iquitos -> Resolved
+Fleet Golfo de Darien MOVE Golfo de Paria -> Resolved
+Army Llanos MOVE Barinas -> Resolved
+Army Manaus MOVE Rio Branco -> Resolved
+Army Maracaibo SUPPORT Llanos to Barinas -> Resolved
+Fleet Panama nc MOVE Golfo de Darien -> Resolved
+
+PARAGUAY (RolynTrotter):
+Army Asuncion MOVE Parana -> Resolved
+Army Chaco MOVE Santa Cruz -> Bounced
+Army Concepcion MOVE Pantanal -> Resolved
+Fleet Corrientes MOVE Misiones -> Resolved
+Army Formosa SUPPORT San Miguel de Tucuman to Salta -> Resolved
+Army Goias SUPPORT Concepcion to Pantanal -> Support cut
+Army Maranhao MOVE Mato Grosso -> Bounced
+Army San Miguel de Tucuman MOVE Salta -> Resolved
+Army Sao Paulo SUPPORT Concepcion to Pantanal -> Dislodged
+
+VENEZUELA (bratsffl):
+Army Barinas MOVE Maracaibo -> Dislodged
+Fleet Cumana MOVE Caracas -> Resolved
+Army Rio Branco MOVE Orinoco -> Resolved

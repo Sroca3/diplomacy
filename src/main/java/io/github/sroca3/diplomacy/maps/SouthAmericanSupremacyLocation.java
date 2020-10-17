@@ -111,7 +111,7 @@ public enum SouthAmericanSupremacyLocation implements SvgLocation {
     SALVADOR(LocationType.COASTAL_LAND, "Slv", true),
     STRAITS_OF_MAGELLAN(LocationType.SEA, "SoM"),
     SOUTH_ATLANTIC_OCEAN(LocationType.SEA, "SAO"),
-    SOUTH_PACIFIC_OCEAN(LocationType.LAND, "SPO"),
+    SOUTH_PACIFIC_OCEAN(LocationType.SEA, "SPO"),
     TIERRA_DEL_FUEGO(LocationType.IMPASSABLE, "TdF"),
     TRUJILLO(LocationType.COASTAL_LAND, "Tru", true),
     SAN_MIGUEL_DE_TUCUMAN(LocationType.LAND, "Tuc", true),

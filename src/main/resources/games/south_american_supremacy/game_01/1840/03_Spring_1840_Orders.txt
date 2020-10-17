@@ -1,0 +1,54 @@
+Argentina:
+F (Golfo de San Jorez) H
+
+Bolivia:
+Nazca Sea to South Pacific Ocean
+Lima to Bahia de Arica
+Islas Juan Fernandez to Golfo de Guafo
+Antofagasta to Potosi
+Salta supports Antofagasta to Potosi
+La Paz to Santa Cruz
+Pantanal to Sao Paulo
+Cusco to Riberalta
+Atacama to Antofagasta
+
+Brasil:
+A Salvador -> Goias
+F Rio de Janeiro S A Pantanal -> Sao Paolo
+
+Chile:
+A Val - Cop
+F DrP - GdG
+F San - DrP
+A Men - Pat
+F BhB - GSJ
+A Cor H
+
+Colombia:
+Fleet  Panama (NC) Move to Golfo de Darien
+Fleet  Golfo de Darien Move to Golfo de Paria
+Army  Maracaibo Support Army Llanos Move to Barinas
+Army Llanos Move to Barinas
+Army Bogota Move to  Llanos
+Army  Cali Move to Canelos
+Army Canelos Move to Iquitos
+Army Amazonas Move to Mato Grosso
+Army  Manaus Move to Rio Branco
+
+Paraguay:
+Formosa support San Miguel de Tucuman move Salta
+San Miguel de Tucuman move Salta
+Chaco move Santa Cruz
+Goias support Concepcion move Pantanal
+Sao Paulo support Concepcion move Pantanal
+Concepcion move Pantanal
+Asuncion move Parana
+Corrientes move Misiones
+Maranhao move Mato Grosso
+
+Peru:
+
+Venezuela:
+Army Rio Branco move Orinoco
+Army Barinas move Maracaibo
+Fleet Cumana move Caracas
