@@ -26,6 +26,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
@@ -108,6 +109,10 @@ public class SouthAmericanSupremacyMap {
     }
 
     public void colorTerritories() {
+        getDocument();
+        Element element = document.getElementById(SouthAmericanSupremacyLocation.CORDOBA.name());
+        Color color = Color.RED;
+        element.setAttribute("fill", String.format("rgb(%s,%s,%s)", color.getRed(), color.getGreen(), color.getBlue()));
 
     }
 

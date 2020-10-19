@@ -10,6 +10,7 @@ public class MapEditingTest {
         SouthAmericanSupremacyMap southAmericanSupremacyMap = new SouthAmericanSupremacyMap();
         southAmericanSupremacyMap.drawUnits();
         southAmericanSupremacyMap.drawArrows();
+        southAmericanSupremacyMap.colorTerritories();
         southAmericanSupremacyMap.generateMap();
     }
 }
