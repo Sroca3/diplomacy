@@ -55,6 +55,10 @@ public class Diplomacy {
         this.ruleVariants = Set.copyOf(ruleVariants);
     }
 
+    public Map<Location, Country> getLocationOwnership() {
+        return locationOwnership;
+    }
+
     public Map<Country, String> assignCountries(List<String> playersArg) {
         List<String> players = new LinkedList<>(playersArg);
         List<Country> countries = new LinkedList<>(getMapVariant().getCountries());
@@ -77,7 +81,7 @@ public class Diplomacy {
         this.playerAssignments = playerAssignments;
     }
 
-    public void replaceCountry(CountryEnum country, String player) {
+    public void replaceCountry(Country country, String player) {
         this.playerAssignments.put(country, player);
     }
 

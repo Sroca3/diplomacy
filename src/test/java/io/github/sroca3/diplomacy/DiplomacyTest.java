@@ -324,11 +324,11 @@ public class DiplomacyTest {
     @Test
     public void parseOrder() {
         Diplomacy game = new Diplomacy(SouthAmericanSupremacyMapVariant.getInstance());
-        game.addUnit(SouthAmericanSupremacyLocation.CONCEPCION, new Army(CountryEnum.PARAGUAY));
+        game.addUnit(SouthAmericanSupremacyLocation.CONCEPCION, new Army(SouthAmericanSupremacyCountry.PARAGUAY));
         String orderString = "A " + SouthAmericanSupremacyLocation.CONCEPCION.getShortName() + " MOVE " + SouthAmericanSupremacyLocation.ASUNCION.name();
         Order order = game.parseOrder(orderString);
         assertEquals(UnitType.ARMY, order.getUnit().getType());
-        assertEquals(CountryEnum.PARAGUAY, order.getUnit().getCountry());
+        assertEquals(SouthAmericanSupremacyCountry.PARAGUAY, order.getUnit().getCountry());
         assertEquals(SouthAmericanSupremacyLocation.CONCEPCION, order.getCurrentLocation());
         assertEquals(SouthAmericanSupremacyLocation.CONCEPCION, order.getFromLocation());
         assertEquals(SouthAmericanSupremacyLocation.ASUNCION, order.getToLocation());

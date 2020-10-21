@@ -2,10 +2,11 @@ package io.github.sroca3.diplomacy.maps;
 
 import io.github.sroca3.diplomacy.Army;
 import io.github.sroca3.diplomacy.Country;
-import io.github.sroca3.diplomacy.CountryEnum;
+import io.github.sroca3.diplomacy.SouthAmericanSupremacyCountry;
 import io.github.sroca3.diplomacy.Fleet;
 import io.github.sroca3.diplomacy.Location;
 import io.github.sroca3.diplomacy.MapVariant;
+import io.github.sroca3.diplomacy.SouthAmericanSupremacyCountry;
 import io.github.sroca3.diplomacy.Unit;
 import io.github.sroca3.diplomacy.UnitType;
 
@@ -636,14 +637,14 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
     @Override
     public SortedSet<Country> getCountries() {
         return new TreeSet<>(Set.of(
-            CountryEnum.ARGENTINA,
-            CountryEnum.BOLIVIA,
-            CountryEnum.BRASIL,
-            CountryEnum.CHILE,
-            CountryEnum.COLOMBIA,
-            CountryEnum.PARAGUAY,
-            CountryEnum.PERU,
-            CountryEnum.VENEZUELA
+            SouthAmericanSupremacyCountry.ARGENTINA,
+            SouthAmericanSupremacyCountry.BOLIVIA,
+            SouthAmericanSupremacyCountry.BRASIL,
+            SouthAmericanSupremacyCountry.CHILE,
+            SouthAmericanSupremacyCountry.COLOMBIA,
+            SouthAmericanSupremacyCountry.PARAGUAY,
+            SouthAmericanSupremacyCountry.PERU,
+            SouthAmericanSupremacyCountry.VENEZUELA
         ));
     }
 
@@ -669,33 +670,33 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
     @Override
     public Map<Location, Unit> getStartingUnits() {
         Map<Location, Unit> startingUnits = new HashMap<>();
-        startingUnits.put(SouthAmericanSupremacyLocation.SALTA, new Army(CountryEnum.ARGENTINA));
-        startingUnits.put(SouthAmericanSupremacyLocation.CORDOBA, new Army(CountryEnum.ARGENTINA));
-        startingUnits.put(SouthAmericanSupremacyLocation.BUENOS_AIRES, new Fleet(CountryEnum.ARGENTINA));
+        startingUnits.put(SouthAmericanSupremacyLocation.SALTA, new Army(SouthAmericanSupremacyCountry.ARGENTINA));
+        startingUnits.put(SouthAmericanSupremacyLocation.CORDOBA, new Army(SouthAmericanSupremacyCountry.ARGENTINA));
+        startingUnits.put(SouthAmericanSupremacyLocation.BUENOS_AIRES, new Fleet(SouthAmericanSupremacyCountry.ARGENTINA));
 
-        startingUnits.put(SouthAmericanSupremacyLocation.ANTOFAGASTA, new Fleet(CountryEnum.BOLIVIA));
-        startingUnits.put(SouthAmericanSupremacyLocation.LA_PAZ, new Army(CountryEnum.BOLIVIA));
+        startingUnits.put(SouthAmericanSupremacyLocation.ANTOFAGASTA, new Fleet(SouthAmericanSupremacyCountry.BOLIVIA));
+        startingUnits.put(SouthAmericanSupremacyLocation.LA_PAZ, new Army(SouthAmericanSupremacyCountry.BOLIVIA));
 
-        startingUnits.put(SouthAmericanSupremacyLocation.SALVADOR, new Fleet(CountryEnum.BRASIL));
-        startingUnits.put(SouthAmericanSupremacyLocation.SAO_PAULO, new Fleet(CountryEnum.BRASIL));
-        startingUnits.put(SouthAmericanSupremacyLocation.RIO_DE_JANEIRO, new Army(CountryEnum.BRASIL));
-        startingUnits.put(SouthAmericanSupremacyLocation.MANAUS, new Army(CountryEnum.BRASIL));
+        startingUnits.put(SouthAmericanSupremacyLocation.SALVADOR, new Fleet(SouthAmericanSupremacyCountry.BRASIL));
+        startingUnits.put(SouthAmericanSupremacyLocation.SAO_PAULO, new Fleet(SouthAmericanSupremacyCountry.BRASIL));
+        startingUnits.put(SouthAmericanSupremacyLocation.RIO_DE_JANEIRO, new Army(SouthAmericanSupremacyCountry.BRASIL));
+        startingUnits.put(SouthAmericanSupremacyLocation.MANAUS, new Army(SouthAmericanSupremacyCountry.BRASIL));
 
-        startingUnits.put(SouthAmericanSupremacyLocation.VALPARAISO, new Fleet(CountryEnum.CHILE));
-        startingUnits.put(SouthAmericanSupremacyLocation.SANTIAGO, new Army(CountryEnum.CHILE));
+        startingUnits.put(SouthAmericanSupremacyLocation.VALPARAISO, new Fleet(SouthAmericanSupremacyCountry.CHILE));
+        startingUnits.put(SouthAmericanSupremacyLocation.SANTIAGO, new Army(SouthAmericanSupremacyCountry.CHILE));
 
-        startingUnits.put(SouthAmericanSupremacyLocation.CARTAGENA, new Fleet(CountryEnum.COLOMBIA));
-        startingUnits.put(SouthAmericanSupremacyLocation.CALI, new Fleet(CountryEnum.COLOMBIA));
-        startingUnits.put(SouthAmericanSupremacyLocation.BOGOTA, new Army(CountryEnum.COLOMBIA));
+        startingUnits.put(SouthAmericanSupremacyLocation.CARTAGENA, new Fleet(SouthAmericanSupremacyCountry.COLOMBIA));
+        startingUnits.put(SouthAmericanSupremacyLocation.CALI, new Fleet(SouthAmericanSupremacyCountry.COLOMBIA));
+        startingUnits.put(SouthAmericanSupremacyLocation.BOGOTA, new Army(SouthAmericanSupremacyCountry.COLOMBIA));
 
-        startingUnits.put(SouthAmericanSupremacyLocation.ASUNCION, new Army(CountryEnum.PARAGUAY));
-        startingUnits.put(SouthAmericanSupremacyLocation.CONCEPCION, new Army(CountryEnum.PARAGUAY));
+        startingUnits.put(SouthAmericanSupremacyLocation.ASUNCION, new Army(SouthAmericanSupremacyCountry.PARAGUAY));
+        startingUnits.put(SouthAmericanSupremacyLocation.CONCEPCION, new Army(SouthAmericanSupremacyCountry.PARAGUAY));
 
-        startingUnits.put(SouthAmericanSupremacyLocation.LIMA, new Fleet(CountryEnum.PERU));
-        startingUnits.put(SouthAmericanSupremacyLocation.TRUJILLO, new Army(CountryEnum.PERU));
+        startingUnits.put(SouthAmericanSupremacyLocation.LIMA, new Fleet(SouthAmericanSupremacyCountry.PERU));
+        startingUnits.put(SouthAmericanSupremacyLocation.TRUJILLO, new Army(SouthAmericanSupremacyCountry.PERU));
 
-        startingUnits.put(SouthAmericanSupremacyLocation.CARACAS, new Fleet(CountryEnum.VENEZUELA));
-        startingUnits.put(SouthAmericanSupremacyLocation.MARACAIBO, new Army(CountryEnum.VENEZUELA));
+        startingUnits.put(SouthAmericanSupremacyLocation.CARACAS, new Fleet(SouthAmericanSupremacyCountry.VENEZUELA));
+        startingUnits.put(SouthAmericanSupremacyLocation.MARACAIBO, new Army(SouthAmericanSupremacyCountry.VENEZUELA));
         return startingUnits;
     }
 

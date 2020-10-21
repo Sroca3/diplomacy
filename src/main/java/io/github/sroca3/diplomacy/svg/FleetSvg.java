@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import io.github.sroca3.diplomacy.Army;
 import io.github.sroca3.diplomacy.SvgLocation;
+import io.github.sroca3.diplomacy.Unit;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -28,14 +29,14 @@ public class FleetSvg {
     private static final double HEIGHT = 16;
     private static final double WIDTH = 40;
 
-    public FleetSvg(Army army, SvgLocation location) {
-        this(army, location.getX(), location.getY());
+    public FleetSvg(Unit unit, SvgLocation location) {
+        this(unit, location.getX(), location.getY());
     }
 
-    public FleetSvg(Army army, double x, double y) {
-        paths.add(new FleetColor(new Color(124, 104, 188)));
+    public FleetSvg(Unit unit, double x, double y) {
+        paths.add(new FleetColor(unit.getCountry().getColor()));
         paths.add(new FleetOutline());
-        this.id = army.getId();
+        this.id = unit.getId();
         this.transform = String.format("translate(%s, %s)", x - (WIDTH/2), y - (HEIGHT/2)) + " scale(3.7795276,3.7914889)";
     }
 

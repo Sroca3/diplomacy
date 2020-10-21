@@ -5,7 +5,7 @@ import java.util.UUID;
 public class Fleet extends AbstractUnit {
 
     private final UUID id = UUID.randomUUID();
-    public Fleet(CountryEnum country) {
+    public Fleet(Country country) {
         super(country);
     }
 

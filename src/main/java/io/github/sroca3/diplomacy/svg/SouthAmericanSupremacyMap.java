@@ -2,9 +2,10 @@ package io.github.sroca3.diplomacy.svg;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import io.github.sroca3.diplomacy.Army;
+import io.github.sroca3.diplomacy.Country;
 import io.github.sroca3.diplomacy.Location;
-import io.github.sroca3.diplomacy.SouthAmericanSupremacyCountry;
+import io.github.sroca3.diplomacy.Order;
+import io.github.sroca3.diplomacy.Unit;
 import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyLocation;
 import javafx.geometry.Bounds;
 import javafx.scene.shape.SVGPath;
@@ -13,7 +14,6 @@ import org.apache.batik.anim.dom.SVGOMGElement;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.svg.SVGDocument;
 import org.xml.sax.InputSource;
 
@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -78,26 +79,34 @@ public class SouthAmericanSupremacyMap {
         return new Point2D.Double(bounds.getCenterX(), bounds.getCenterY());
     }
 
-    public void drawUnits() {
+    public void drawUnits(Map<Location, Unit> unitLocations) {
         getDocument();
         SVGOMGElement element = (SVGOMGElement) document.getElementById("units");
-        for (SouthAmericanSupremacyLocation territory : SouthAmericanSupremacyLocation.values()) {
-            Element element1 = document.getElementById(territory.name());
+        for (Location territory : unitLocations.keySet()) {
+            Element element1 = document.getElementById(territory.getName());
             if (element1 == null) {
-                System.out.println(territory.name());
+                System.out.println(territory.getName());
             }
             Point2D point = calculateCenterPoint(element1);
             if (0 == point.getX()) {
-                point = additionalPoints.getOrDefault(territory, new Point2D.Double(0,0));
+                point = additionalPoints.getOrDefault(territory, new Point2D.Double(0, 0));
             }
             DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder;
             try {
                 builder = f.newDocumentBuilder();
-                FleetSvg unit = new FleetSvg(
-                    new Army(SouthAmericanSupremacyCountry.ARGENTINA),
-                    point.getX(), point.getY()
-                );
+                Object unit;
+                if (unitLocations.get(territory).getType().isFleet()) {
+                    unit = new FleetSvg(
+                        unitLocations.get(territory),
+                        point.getX(), point.getY()
+                    );
+                } else {
+                    unit = new ArmySvg(
+                        unitLocations.get(territory),
+                        point.getX(), point.getY()
+                    );
+                }
                 ObjectMapper objectMapper = new XmlMapper();
                 String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(unit);
                 Document d = builder.parse(new InputSource(new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + x)));
@@ -108,17 +117,22 @@ public class SouthAmericanSupremacyMap {
         }
     }
 
-    public void colorTerritories() {
+    public void colorTerritories(Map<Location, Country> locationOwnership) {
         getDocument();
-        Element element = document.getElementById(SouthAmericanSupremacyLocation.CORDOBA.name());
-        Color color = Color.RED;
-        element.setAttribute("fill", String.format("rgb(%s,%s,%s)", color.getRed(), color.getGreen(), color.getBlue()));
+        for (Map.Entry<Location, Country> entry : locationOwnership.entrySet()) {
+            Element element = document.getElementById(entry.getKey().getName());
+            Color color = entry.getValue().getColor();
+            element.setAttribute(
+                "fill",
+                String.format("rgb(%s,%s,%s)", color.getRed(), color.getGreen(), color.getBlue())
+            );
+        }
 
     }
 
-    public void drawArrows() {
+    public void drawArrows(List<Order> orders) {
         getDocument();
-        Element element =  document.getElementById("arrows");
+        Element element = document.getElementById("arrows");
         var territory = SouthAmericanSupremacyLocation.CORDOBA;
         Element element1 = document.getElementById(territory.name());
 

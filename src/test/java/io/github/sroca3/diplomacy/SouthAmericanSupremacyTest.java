@@ -13,9 +13,9 @@ public class SouthAmericanSupremacyTest {
         Diplomacy diplomacy = new Diplomacy(SouthAmericanSupremacyMapVariant.getInstance());
         diplomacy.addStandardStartingUnits();
         assertEquals(UnitType.ARMY, diplomacy.getUnitLocations().get(SouthAmericanSupremacyLocation.SALTA).getType());
-        assertEquals(CountryEnum.ARGENTINA, diplomacy.getUnitLocations().get(SouthAmericanSupremacyLocation.SALTA).getCountry());
+        assertEquals(SouthAmericanSupremacyCountry.ARGENTINA, diplomacy.getUnitLocations().get(SouthAmericanSupremacyLocation.SALTA).getCountry());
         assertEquals(UnitType.FLEET, diplomacy.getUnitLocations().get(SouthAmericanSupremacyLocation.SALVADOR).getType());
-        assertEquals(CountryEnum.BRASIL, diplomacy.getUnitLocations().get(SouthAmericanSupremacyLocation.SALVADOR).getCountry());
+        assertEquals(SouthAmericanSupremacyCountry.BRASIL, diplomacy.getUnitLocations().get(SouthAmericanSupremacyLocation.SALVADOR).getCountry());
         diplomacy.beginFirstPhase();
         diplomacy.addOrder(diplomacy.parseOrder("F Salvador move Bahia de Todos os Santos"));
         diplomacy.adjudicate();
@@ -27,9 +27,9 @@ public class SouthAmericanSupremacyTest {
         Diplomacy diplomacy = new Diplomacy(SouthAmericanSupremacyMapVariant.getInstance());
         diplomacy.addStandardStartingUnits();
         diplomacy.beginFirstPhase();
-        assertEquals(2L, diplomacy.getSupplyCenterCount(CountryEnum.VENEZUELA));
-        assertEquals(4L, diplomacy.getSupplyCenterCount(CountryEnum.BRASIL));
-        assertEquals(2L, diplomacy.getUnitCount(CountryEnum.VENEZUELA));
+        assertEquals(2L, diplomacy.getSupplyCenterCount(SouthAmericanSupremacyCountry.VENEZUELA));
+        assertEquals(4L, diplomacy.getSupplyCenterCount(SouthAmericanSupremacyCountry.BRASIL));
+        assertEquals(2L, diplomacy.getUnitCount(SouthAmericanSupremacyCountry.VENEZUELA));
         assertEquals(1835L, diplomacy.getYear());
         assertEquals("SPRING", diplomacy.getPhaseName());
     }
@@ -41,8 +41,8 @@ public class SouthAmericanSupremacyTest {
         diplomacy.beginFirstPhase();
         diplomacy.addOrder(diplomacy.parseOrder("A Asuncion MOVE Corrientes"));
         diplomacy.adjudicate();
-        assertEquals(2L, diplomacy.getSupplyCenterCount(CountryEnum.PARAGUAY));
+        assertEquals(2L, diplomacy.getSupplyCenterCount(SouthAmericanSupremacyCountry.PARAGUAY));
         diplomacy.adjudicate();
-        assertEquals(3L, diplomacy.getSupplyCenterCount(CountryEnum.PARAGUAY));
+        assertEquals(3L, diplomacy.getSupplyCenterCount(SouthAmericanSupremacyCountry.PARAGUAY));
     }
 }

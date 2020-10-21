@@ -142,7 +142,7 @@ public class Game01 {
 
         while (Paths.get(fileWithPath).toFile().exists()) {
             if (diplomacy.getCurrentPhase().getPhaseName().isSpringOrders() && diplomacy.getYear() == 1838) {
-                diplomacy.replaceCountry(CountryEnum.ARGENTINA, "haroonriaz");
+                diplomacy.replaceCountry(SouthAmericanSupremacyCountry.ARGENTINA, "haroonriaz");
             }
             parseOrders(diplomacy, getFileName(diplomacy, counter));
             diplomacy.adjudicate();
