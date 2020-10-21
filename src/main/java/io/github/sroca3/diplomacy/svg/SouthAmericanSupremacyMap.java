@@ -131,28 +131,33 @@ public class SouthAmericanSupremacyMap {
     }
 
     public void drawArrows(List<Order> orders) {
-        getDocument();
-        Element element = document.getElementById("arrows");
-        var territory = SouthAmericanSupremacyLocation.CORDOBA;
-        Element element1 = document.getElementById(territory.name());
+        for (Order order : orders) {
+            if (order.getOrderType().isMove()) {
+                getDocument();
+                Element element = document.getElementById("arrows");
+                var territory = order.getFromLocation();
+                Element element1 = document.getElementById(territory.getName());
 
-        Point2D point = calculateCenterPoint(element1);
-        var territory1 = SouthAmericanSupremacyLocation.MARANHAO;
-        Element element2 = document.getElementById(territory1.name());
+                Point2D point = calculateCenterPoint(element1);
+                var territory1 = order.getToLocation();
+                Element element2 = document.getElementById(territory1.getName());
 
-        Point2D point2 = calculateCenterPoint(element2);
-        DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder;
-        try {
-            builder = f.newDocumentBuilder();
-            var arrow = new Arrow(point, point2);
+                Point2D point2 = calculateCenterPoint(element2);
+                DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
+                DocumentBuilder builder;
+                try {
+                    builder = f.newDocumentBuilder();
+                    var arrow = new Arrow(point, point2);
 
-            ObjectMapper objectMapper = new XmlMapper();
-            String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrow);
-            Document d = builder.parse(new InputSource(new StringReader("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + x)));
-            element.appendChild(document.importNode(d.getFirstChild(), true));
-        } catch (Exception e) {
-            e.printStackTrace();
+                    ObjectMapper objectMapper = new XmlMapper();
+                    String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrow);
+                    Document d = builder.parse(new InputSource(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + x)));
+                    element.appendChild(document.importNode(d.getFirstChild(), true));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
