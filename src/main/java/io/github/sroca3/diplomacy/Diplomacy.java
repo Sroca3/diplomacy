@@ -224,7 +224,7 @@ public class Diplomacy {
                        .orElse(null);
     }
 
-    public Order parseOrder(final String orderInput, @Nonnull final CountryEnum country) {
+    public Order parseOrder(final String orderInput, @Nonnull final Country country) {
         String order = orderInput.toUpperCase(Locale.ENGLISH);
         if (order.startsWith("BUILD")) {
             Matcher unitTypeMatcher = UNIT_TYPE_FOR_BUILD_REGEX.matcher(String.copyValueOf(order.toCharArray()));
@@ -348,11 +348,11 @@ public class Diplomacy {
     public List<Order> parseOrders(String filename) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(filename));
         List<Order> orders = new LinkedList<>();
-        CountryEnum country = null;
+        Country country = null;
         for (String line : lines) {
             if (!StringUtils.isBlank(line)) {
                 if (line.contains(":")) {
-                    country = CountryEnum.valueOf(line.replaceAll(":", "").trim().toUpperCase(Locale.ENGLISH));
+                    country = SouthAmericanSupremacyCountry.valueOf(line.replaceAll(":", "").trim().toUpperCase(Locale.ENGLISH));
                 } else {
                     orders.add(this.parseOrder(line, Objects.requireNonNull(country)));
                 }

@@ -22,6 +22,34 @@ public class MapEditingTest {
             SouthAmericanSupremacyLocation.CORDOBA,
             SouthAmericanSupremacyLocation.MENDOZA
         ));
+        diplomacy.addOrder(new Order(
+            diplomacy.getUnitLocations().get(SouthAmericanSupremacyLocation.SANTIAGO),
+            SouthAmericanSupremacyLocation.SANTIAGO,
+            OrderType.MOVE,
+            SouthAmericanSupremacyLocation.SANTIAGO,
+            SouthAmericanSupremacyLocation.MENDOZA
+        ));
+        diplomacy.addOrder(new Order(
+            diplomacy.getUnitLocations().get(SouthAmericanSupremacyLocation.CONCEPCION),
+            SouthAmericanSupremacyLocation.CONCEPCION,
+            OrderType.MOVE,
+            SouthAmericanSupremacyLocation.CONCEPCION,
+            SouthAmericanSupremacyLocation.FORMOSA
+        ));
+        diplomacy.addOrder(new Order(
+            diplomacy.getUnitLocations().get(SouthAmericanSupremacyLocation.ASUNCION),
+            SouthAmericanSupremacyLocation.ASUNCION,
+            OrderType.SUPPORT,
+            SouthAmericanSupremacyLocation.CONCEPCION,
+            SouthAmericanSupremacyLocation.FORMOSA
+        ));
+        diplomacy.addOrder(new Order(
+            diplomacy.getUnitLocations().get(SouthAmericanSupremacyLocation.SALTA),
+            SouthAmericanSupremacyLocation.SALTA,
+            OrderType.MOVE,
+            SouthAmericanSupremacyLocation.SALTA,
+            SouthAmericanSupremacyLocation.FORMOSA
+        ));
         diplomacy.adjudicate();
         SouthAmericanSupremacyMap southAmericanSupremacyMap = new SouthAmericanSupremacyMap();
         assertDoesNotThrow(() -> southAmericanSupremacyMap.drawUnits(diplomacy.getUnitLocations()));

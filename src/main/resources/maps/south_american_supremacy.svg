@@ -41,15 +41,75 @@
        refY="0.0"
        orient="auto"
        style="overflow:visible;"
-       id="arrow"
+       id="bounce-arrow"
        stroke="black"
-       fill="green">
+       fill="red">
       <path
          d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
          transform="rotate(180)"
          stroke="black"
-         fill="green"
+         fill="red"
          id="path1525" />
+    </marker>
+    <marker
+          refX="0.0"
+          refY="0.0"
+          orient="auto"
+          style="overflow:visible;"
+          id="move-arrow"
+          stroke="black"
+          fill="black">
+      <path
+              d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+              transform="rotate(180)"
+              stroke="black"
+              fill="black"
+              id="path1525" />
+    </marker>
+    <marker
+          refX="0.0"
+          refY="0.0"
+          orient="auto"
+          style="overflow:visible;"
+          id="source-arrow"
+          stroke="black"
+          fill="white">
+      <path
+              d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+              transform="rotate(180)"
+              stroke="black"
+              fill="white"
+              id="path1525" />
+    </marker>
+    <marker
+          refX="0.0"
+          refY="0.0"
+          orient="auto"
+          style="overflow:visible;"
+          id="support-arrow"
+          stroke="black"
+          fill="green">
+      <path
+              d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+              transform="rotate(180)"
+              stroke="black"
+              fill="green"
+              id="path1525" />
+    </marker>
+    <marker
+          refX="0.0"
+          refY="0.0"
+          orient="auto"
+          style="overflow:visible;"
+          id="support-cut-arrow"
+          stroke="black"
+          fill="yellow">
+      <path
+              d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+              transform="rotate(180)"
+              stroke="black"
+              fill="yellow"
+              id="path1525" />
     </marker>
     <marker
        refX="0.0"

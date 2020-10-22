@@ -16,9 +16,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.svg.SVGDocument;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -130,33 +132,50 @@ public class SouthAmericanSupremacyMap {
 
     }
 
+    private Point2D getCenterPoint(Location location) {
+        Element element = document.getElementById(location.getName());
+        return calculateCenterPoint(element);
+    }
+
+    private void drawObject(Element element, Object object) {
+        DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = null;
+        try {
+            builder = f.newDocumentBuilder();
+            ObjectMapper objectMapper = new XmlMapper();
+            String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
+            Document d = builder.parse(new InputSource(new StringReader(
+                "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + x)));
+            element.appendChild(document.importNode(d.getFirstChild(), true));
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void drawArrows(List<Order> orders) {
+        getDocument();
+        Element element = document.getElementById("arrows");
         for (Order order : orders) {
-            if (order.getOrderType().isMove()) {
-                getDocument();
-                Element element = document.getElementById("arrows");
-                var territory = order.getFromLocation();
-                Element element1 = document.getElementById(territory.getName());
-
-                Point2D point = calculateCenterPoint(element1);
-                var territory1 = order.getToLocation();
-                Element element2 = document.getElementById(territory1.getName());
-
-                Point2D point2 = calculateCenterPoint(element2);
-                DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
-                DocumentBuilder builder;
-                try {
-                    builder = f.newDocumentBuilder();
-                    var arrow = new Arrow(point, point2);
-
-                    ObjectMapper objectMapper = new XmlMapper();
-                    String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrow);
-                    Document d = builder.parse(new InputSource(new StringReader(
-                        "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + x)));
-                    element.appendChild(document.importNode(d.getFirstChild(), true));
-                } catch (Exception e) {
-                    e.printStackTrace();
+            if (order.getOrderType().isMove() || order.getOrderType().isSupport()) {
+                var arrow = new Arrow(
+                    getCenterPoint(order.getCurrentLocation()),
+                    getCenterPoint(order.getToLocation()),
+                    ArrowType.from(order)
+                );
+                if (order.getOrderType().isSupport()) {
+                    drawObject(
+                        element,
+                        new Arrow(
+                            getCenterPoint(order.getCurrentLocation()),
+                            getCenterPoint(order.getFromLocation()),
+                            ArrowType.SOURCE
+                        )
+                    );
                 }
+                drawObject(element, arrow);
+            }
+            if (order.getOrderType().isHold()) {
+                drawObject(element, new Circle(getCenterPoint(order.getCurrentLocation())));
             }
         }
 

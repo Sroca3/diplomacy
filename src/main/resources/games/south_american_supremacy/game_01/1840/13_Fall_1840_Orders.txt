@@ -1,0 +1,52 @@
+Argentina:
+
+Bolivia:
+South Pacific Ocean to Golfo de Guafo
+Bahia de Arica supports South Pacific Ocean to Golfo de Guafo
+Sao Paolo to Pantanal
+Islas Juan Fernandez to Drake Passage
+Riberalta supports La Paz to Santa Cruz
+La Paz to Santa Cruz
+Antofagasta supports Potosi to hold
+Potosi supports La Paz to Santa Cruz
+
+Brasil:
+A Salvador -> Goias
+F Rio de Janeiro S A Sao Paolo H
+
+Chile:
+A Cop H
+F DrP - PAs
+F San - Val
+A Pat S DrP - PAs
+F BhB - GSJ
+A Cor - Tuc
+
+Colombia:
+Fleet  Golfo de Darien Support Army  Maracaibo Move to Caracas
+Fleet  Golfo de Paria Move to Cumana
+Army  Maracaibo Move to Caracas
+Army Barinas Move to Angostura
+Army  Llanos Move to Orinoco
+Army Canelos Move to Iquitos
+Army Iquitos Move to Aquiris
+Army Amazonas Move to Mato Grosso
+Army Rio Branco Support Army  Llanos Move to Orinoco
+
+Paraguay:
+Maranhao move Goias
+Goias move Minas Gerais
+Pantanal support Rio Grande do Sul move Sao Paulo
+Parana support Rio Grande do Sul move Sao Paulo
+Rio Grande do Sul move Sao Paulo
+Misiones move Montevideo
+Salta support Chaco move Potosi
+Chaco move Potosi
+Formosa move Concepcion
+
+Peru:
+
+Venezuela:
+Army Angostura Move Caracas
+Fleet Caracas Move Cumana
+Army Orinoco Move Rio Branco

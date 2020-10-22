@@ -1,0 +1,54 @@
+Fall 1840 Orders Results
+--------------------------------
+
+ARGENTINA (haroonriaz):
+Fleet Golfo de San Jorge HOLD -> Resolved
+
+BOLIVIA (FloridaMan):
+Army Antofagasta SUPPORT Potosi to hold -> Resolved
+Fleet Bahia de Arica SUPPORT South Pacific Ocean to Golfo de Guafo -> Resolved
+Fleet Islas Juan Fernandez MOVE Drake Passage -> Resolved
+Army La Paz MOVE Santa Cruz -> Resolved
+Army Potosi SUPPORT La Paz to Santa Cruz -> Support cut
+Army Riberalta SUPPORT La Paz to Santa Cruz -> Resolved
+Army Sao Paulo MOVE Pantanal -> Dislodged
+Fleet South Pacific Ocean MOVE Golfo de Guafo -> Resolved
+
+BRASIL (VGhost):
+Fleet Rio de Janeiro SUPPORT Sao Paulo to hold -> Illegal order replaced with Hold
+Army Salvador MOVE Goias -> Bounced
+
+CHILE (Jordan767):
+Fleet Bahia Blanca MOVE Golfo de San Jorge -> Bounced
+Army Copiapo HOLD -> Resolved
+Army Cordoba MOVE San Miguel de Tucuman -> Resolved
+Fleet Drake Passage MOVE Punta Arenas -> Resolved
+Army Patagonia SUPPORT Drake Passage to Punta Arenas -> Resolved
+Fleet Santiago MOVE Valparaiso -> Resolved
+
+COLOMBIA (Antigonos):
+Army Amazonas MOVE Mato Grosso -> Resolved
+Army Barinas MOVE Angostura -> Bounced
+Army Canelos MOVE Iquitos -> Resolved
+Fleet Golfo de Darien SUPPORT Maracaibo to Caracas -> Resolved
+Fleet Golfo de Paria MOVE Cumana -> Bounced
+Army Iquitos MOVE Aquiris -> Resolved
+Army Llanos MOVE Orinoco -> Resolved
+Army Maracaibo MOVE Caracas -> Resolved
+Army Rio Branco SUPPORT Llanos to Orinoco -> Resolved
+
+PARAGUAY (RolynTrotter):
+Army Chaco MOVE Potosi -> Bounced
+Army Formosa MOVE Concepcion -> Resolved
+Army Goias MOVE Minas Gerais -> Resolved
+Army Maranhao MOVE Goias -> Bounced
+Fleet Misiones MOVE Montevideo -> Resolved
+Army Pantanal SUPPORT Rio Grande do Sul to Sao Paulo -> Resolved
+Army Parana SUPPORT Rio Grande do Sul to Sao Paulo -> Resolved
+Army Rio Grande do Sul MOVE Sao Paulo -> Resolved
+Army Salta SUPPORT Chaco to Potosi -> Support failed
+
+VENEZUELA (bratsffl):
+Army Angostura MOVE Caracas -> Bounced
+Fleet Caracas MOVE Cumana -> Dislodged
+Army Orinoco MOVE Rio Branco -> Dislodged
