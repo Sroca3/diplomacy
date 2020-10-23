@@ -11,7 +11,7 @@ public enum OrderType {
     HOLD(Set.of("h", "holds")),
     MOVE(Set.of("-", "->", "to", "move to", "moves to")),
     SUPPORT(Set.of("supports", "s")),
-    RETREAT(Set.of("r", "retreat to")),
+    RETREAT(Set.of("r", "retreat to", "retreats to")),
     BUILD,
     DISBAND(Set.of("destroy", "remove"));
 

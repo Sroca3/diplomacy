@@ -35,7 +35,7 @@ public class Diplomacy {
     private static final Pattern UNIT_TYPE_REGEX = Pattern.compile(UNIT_TYPE_REGEX_STRING);
     private static final String UNIT_TYPE_REGEX_FOR_BUILD_STRING = " (ARMY|FLEET|A|F) ";
     private static final Pattern UNIT_TYPE_FOR_BUILD_REGEX = Pattern.compile(UNIT_TYPE_REGEX_FOR_BUILD_STRING);
-    private static final String ORDER_TYPE_REGEX_STRING = "( R |^BUILD |^DISBAND|^DESTROY |^REMOVE | MOVE TO | MOVES TO | HOLD$| HOLDS$| -> | - | TO | MOVE | RETREAT TO | RETREAT | SUPPORT | CONVOY | CONVOYS | SUPPORTS | S | H$)";
+    private static final String ORDER_TYPE_REGEX_STRING = "( R |^BUILD |^DISBAND|^DESTROY |^REMOVE | MOVE TO | MOVES TO | HOLD$| HOLDS$| -> | - | TO | MOVE | RETREAT TO | RETREAT | RETREATS TO | SUPPORT | CONVOY | CONVOYS | SUPPORTS | S | H$)";
     private static final Pattern ORDER_TYPE_REGEX = Pattern.compile(ORDER_TYPE_REGEX_STRING);
     private final MapVariant mapVariant;
     private final Set<RuleVariant> ruleVariants;
@@ -153,9 +153,8 @@ public class Diplomacy {
         currentPhase.resolve();
         PhaseName nextPhaseName = getNextPhaseName();
         currentPhase.getResultingUnitLocations().forEach(((location, unit) -> {
-            if (nextPhaseName == PhaseName.FALL_ORDERS && !location.isSupplyCenter()) {
-                locationOwnership.put(location.getTerritory(), unit.getCountry());
-            } else if (nextPhaseName == PhaseName.WINTER_BUILD) {
+            if ((nextPhaseName == PhaseName.FALL_ORDERS && !location.isSupplyCenter())
+                || nextPhaseName == PhaseName.WINTER_BUILD) {
                 locationOwnership.put(location.getTerritory(), unit.getCountry());
             }
         }));
@@ -266,7 +265,7 @@ public class Diplomacy {
         if (orderTypeMatcher.find()) {
             orderType = OrderType.from(orderTypeMatcher.group().trim(), currentPhase.getPhaseName());
         } else {
-            throw new OrderTypeParseException();
+            throw new OrderTypeParseException(orderInput);
         }
         Location currentLocation;
         try {
