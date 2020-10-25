@@ -1,0 +1,50 @@
+Spring 1841 Orders Status
+--------------------------------
+
+ARGENTINA
+(haroonriaz)
+0 army units
+1 fleet units
+1 centers
+
+BOLIVIA
+(FloridaMan)
+5 army units
+3 fleet units
+9 centers
+
+BRASIL
+(VGhost)
+1 army units
+1 fleet units
+2 centers
+
+CHILE
+(Jordan767)
+4 army units
+3 fleet units
+7 centers
+
+COLOMBIA
+(Antigonos)
+8 army units
+2 fleet units
+10 centers
+
+PARAGUAY
+(RolynTrotter)
+8 army units
+1 fleet units
+9 centers
+
+PERU
+(Don Juan of Austria)
+0 army units
+0 fleet units
+0 centers
+
+VENEZUELA
+(bratsffl)
+2 army units
+0 fleet units
+2 centers

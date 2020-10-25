@@ -11,6 +11,10 @@ import javafx.geometry.Bounds;
 import javafx.scene.shape.SVGPath;
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
 import org.apache.batik.anim.dom.SVGOMGElement;
+import org.apache.batik.transcoder.TranscoderException;
+import org.apache.batik.transcoder.TranscoderInput;
+import org.apache.batik.transcoder.TranscoderOutput;
+import org.apache.batik.transcoder.image.PNGTranscoder;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -31,7 +35,10 @@ import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.List;
@@ -193,10 +200,22 @@ public class SouthAmericanSupremacyMap {
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
         DOMSource source = new DOMSource(document);
-        StreamResult file = new StreamResult(new File("src/main/resources/maps/latest.svg"));
+        TranscoderInput transcoderInput = new TranscoderInput(document);
+        OutputStream png_ostream = null;
+        try {
+            png_ostream = new FileOutputStream("chessboard.png");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        TranscoderOutput output_png_image = new TranscoderOutput(png_ostream);
+        PNGTranscoder pngTranscoder = new PNGTranscoder();
+        StreamResult file = new StreamResult(new File("src/main/resources/maps/latest.png"));
         try {
             transformer.transform(source, file);
-        } catch (TransformerException e) {
+            pngTranscoder.transcode(transcoderInput, output_png_image);
+png_ostream.flush();
+png_ostream.close();
+        } catch (TransformerException | TranscoderException | IOException e) {
             e.printStackTrace();
         }
     }
