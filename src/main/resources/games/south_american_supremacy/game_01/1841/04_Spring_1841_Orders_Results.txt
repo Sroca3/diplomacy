@@ -24,7 +24,7 @@ Army Copiapo HOLD -> Resolved
 Army Patagonia MOVE Bahia Blanca -> Bounced
 Fleet Punta Arenas SUPPORT Drake Passage to Straits of Magellan -> Resolved
 Army Santiago MOVE Mendoza -> Resolved
-Army San Miguel de Tucuman SUPPORT Potosi to Salta -> Resolved
+Army San Miguel de Tucuman SUPPORT Potosi to Salta -> Illegal order replaced with Hold
 Fleet Valparaiso MOVE Santiago -> Resolved
 
 COLOMBIA (Antigonos):
