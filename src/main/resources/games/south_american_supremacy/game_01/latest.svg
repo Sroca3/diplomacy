@@ -10987,11 +10987,11 @@
        inkscape:collect="always" />
   </defs>
   <sodipodi:namedview
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer7"
      inkscape:window-maximized="1"
      inkscape:window-y="435"
      inkscape:window-x="-9"
-     inkscape:cy="329.6694"
+     inkscape:cy="297.30455"
      inkscape:cx="299.34231"
      inkscape:zoom="1.2359089"
      inkscape:snap-global="false"
@@ -11054,7 +11054,6 @@
        transform="matrix(3.4668013,0,0,2.2683531,1495.5633,-7.5536274)" />
   </g>
   <g
-     sodipodi:insensitive="true"
      style="display:inline;opacity:0.8;mix-blend-mode:normal"
      inkscape:label="Territories"
      id="layer5"
@@ -11136,7 +11135,7 @@
          sodipodi:nodetypes="ccccccccccccccccccccccccccccccccccccccc"
          id="path15452"
          d="m 618.80236,290.89435 8.4295,-11.27519 h 13.55616 l 20.04794,7.17512 26.38343,3.17466 21.57408,17.09789 20.96064,19.13365 11.84622,2.39171 7.1767,2.61949 1.70837,3.07505 5.35444,28.70047 -2.69349,15.50018 -11.61053,17.32089 -12.00158,10.57131 -25.80891,-24.6004 -12.64188,-8.6557 -19.35826,11.50297 -21.09194,0.11072 -30.58339,10.20675 -6.85807,18.55712 -23.39811,4.03416 -14.11954,11.29563 -3.22733,-12.50588 4.43757,-5.2444 -4.84098,-4.84099 -1.61367,-8.87515 -6.47478,-7.56363 12.2661,-7.70197 8.84299,-1.9968 2.85258,-14.54816 8.27248,-8.27248 3.99361,-11.41032 -4.27887,-2.56732 0.28526,-4.56412 5.99042,-2.56733 15.11867,-16.83021 -0.57052,-8.27248 5.70516,-7.13145 z"
-         style="fill:none;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+         style="fill:url(#Paraguay);fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
          inkscape:label="Guapore"
          id="path15448"
