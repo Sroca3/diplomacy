@@ -34,7 +34,10 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -145,10 +148,9 @@ public class SouthAmericanSupremacyMap {
     }
 
     private void drawObject(Element element, Object object) {
-        DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = null;
         try {
-            builder = f.newDocumentBuilder();
+            DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = f.newDocumentBuilder();
             ObjectMapper objectMapper = new XmlMapper();
             String x = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
             Document d = builder.parse(new InputSource(new StringReader(
@@ -188,7 +190,8 @@ public class SouthAmericanSupremacyMap {
 
     }
 
-    public void generateMap() {
+    public void generateMap(String path) {
+        document.normalizeDocument();
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = null;
         try {
@@ -200,21 +203,22 @@ public class SouthAmericanSupremacyMap {
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
         DOMSource source = new DOMSource(document);
-        TranscoderInput transcoderInput = new TranscoderInput(document);
         OutputStream png_ostream = null;
         try {
-            png_ostream = new FileOutputStream("chessboard.png");
+            png_ostream = new FileOutputStream("src/main/resources/" + path + ".png");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         TranscoderOutput output_png_image = new TranscoderOutput(png_ostream);
         PNGTranscoder pngTranscoder = new PNGTranscoder();
-        StreamResult file = new StreamResult(new File("src/main/resources/maps/latest.png"));
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        StreamResult streamResult = new StreamResult(byteArrayOutputStream);
         try {
-            transformer.transform(source, file);
+            transformer.transform(source, streamResult);
+        TranscoderInput transcoderInput = new TranscoderInput(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
             pngTranscoder.transcode(transcoderInput, output_png_image);
-png_ostream.flush();
-png_ostream.close();
+            png_ostream.flush();
+            png_ostream.close();
         } catch (TransformerException | TranscoderException | IOException e) {
             e.printStackTrace();
         }

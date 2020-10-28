@@ -1,0 +1,55 @@
+Spring 1841 Orders Results
+--------------------------------
+
+ARGENTINA (haroonriaz):
+Fleet Golfo de San Jorge HOLD -> Resolved
+
+BOLIVIA (FloridaMan):
+Army Antofagasta MOVE Potosi -> Bounced
+Fleet Bahia de Arica HOLD -> Resolved
+Fleet Drake Passage MOVE Straits of Magellan -> Resolved
+Fleet Golfo de Guafo MOVE Islas Juan Fernandez -> Resolved
+Army La Paz HOLD -> Resolved
+Army Potosi SUPPORT Riberalta to Santa Cruz -> Support cut
+Army Riberalta MOVE Santa Cruz -> Bounced
+Army Santa Cruz MOVE Chaco -> Bounced
+
+BRASIL (VGhost):
+Fleet Rio de Janeiro HOLD -> Resolved
+Army Salvador SUPPORT Rio de Janeiro to hold -> Resolved
+
+CHILE (Jordan767):
+Fleet Bahia Blanca MOVE Buenos Aires -> Bounced
+Army Copiapo HOLD -> Resolved
+Army Patagonia MOVE Bahia Blanca -> Bounced
+Fleet Punta Arenas SUPPORT Drake Passage to Straits of Magellan -> Resolved
+Army Santiago MOVE Mendoza -> Resolved
+Army San Miguel de Tucuman SUPPORT Potosi to Salta -> Resolved
+Fleet Valparaiso MOVE Santiago -> Resolved
+
+COLOMBIA (Antigonos):
+Army Aquiris SUPPORT Orinoco to Amazonas -> Resolved
+Army Barinas MOVE Angostura -> Resolved
+Army Bogota MOVE Llanos -> Resolved
+Army Caracas SUPPORT Barinas to Angostura -> Resolved
+Fleet Golfo de Darien MOVE Golfo de Paria -> Resolved
+Fleet Golfo de Paria MOVE Boca de Navios -> Resolved
+Army Iquitos SUPPORT Orinoco to Amazonas -> Resolved
+Army Mato Grosso MOVE Manaus -> Bounced
+Army Orinoco MOVE Amazonas -> Resolved
+Army Rio Branco MOVE Manaus -> Bounced
+
+PARAGUAY (RolynTrotter):
+Army Chaco MOVE Potosi -> Bounced
+Army Concepcion MOVE Asuncion -> Resolved
+Army Maranhao MOVE Pernambuco -> Resolved
+Army Minas Gerais SUPPORT Pantanal to Goias -> Resolved
+Fleet Montevideo MOVE Buenos Aires -> Bounced
+Army Pantanal MOVE Goias -> Resolved
+Army Parana MOVE Misiones -> Resolved
+Army Salta MOVE San Miguel de Tucuman -> Bounced
+Army Sao Paulo MOVE Rio de Janeiro -> Bounced
+
+VENEZUELA (bratsffl):
+Army Amazonas HOLD -> Dislodged
+Army Angostura HOLD -> Dislodged

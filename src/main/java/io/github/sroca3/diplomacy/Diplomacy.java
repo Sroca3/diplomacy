@@ -1,3 +1,4 @@
+
 package io.github.sroca3.diplomacy;
 
 import io.github.sroca3.diplomacy.exceptions.CountryOrderMismatchException;
@@ -10,11 +11,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,6 +50,7 @@ public class Diplomacy {
     private Phase previousPhase;
     Map<Country, String> playerAssignments;
     private long gameYearCounter;
+    private String baseDirectory;
 
     public Diplomacy(MapVariant mapVariant) {
         this(mapVariant, Collections.emptySet());
@@ -53,6 +59,71 @@ public class Diplomacy {
     public Diplomacy(MapVariant mapVariant, Set<RuleVariant> ruleVariants) {
         this.mapVariant = mapVariant;
         this.ruleVariants = Set.copyOf(ruleVariants);
+    }
+
+    public void setBaseDirectory(String baseDirectory) {
+        this.baseDirectory = baseDirectory;
+    }
+
+    public Map<Country, String> assignAndSaveCountries(List<String> players) throws IOException {
+        if (StringUtils.isBlank(baseDirectory)) {
+            throw new IllegalArgumentException("base directory not set.");
+        }
+        Map<Country, String> assignments = assignCountries(List.of(
+            "AKFD",
+            "Jordan767",
+            "FloridaMan",
+            "Don Juan of Austria",
+            "VGhost",
+            "bratsffl",
+            "Antigonos",
+            "RolynTrotter"
+        ));
+
+        File countryAssignments =
+            Paths.get(baseDirectory + "/country_assignments.txt").toFile();
+        boolean assign = countryAssignments.createNewFile();
+        if (assign) {
+            try (FileWriter writer = new FileWriter(countryAssignments)) {
+                writer.write("Country Assignments:\n");
+                assignments.entrySet()
+                           .stream()
+                           .sorted(Comparator.comparing(entry -> entry.getKey().getName()))
+                           .forEach(entry -> {
+                               try {
+                                   writer.write(entry.getKey().getName() + " assigned to " + entry.getValue() + "\n");
+                               } catch (IOException e) {
+                                   e.printStackTrace();
+                               }
+                           });
+            }
+        } else {
+            Map<Country, String> playerAssignments;
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(countryAssignments))) {
+                // Skip preamble
+                bufferedReader.readLine();
+                playerAssignments = new HashMap<>();
+                for (Country country : getMapVariant().getCountries()) {
+                    String line = bufferedReader.readLine();
+                    String player = line.substring(line.lastIndexOf(" to ") + 4);
+                    playerAssignments.put(country, player);
+                }
+            }
+            setPlayerAssignments(playerAssignments);
+        }
+        return playerAssignments;
+    }
+
+    public String getFileName(int counter) {
+        String fileNumber = StringUtils.leftPad(String.valueOf(counter), 2, '0');
+        String filePhaseName = getPhaseDescription().replace(" ", "_");
+        return String.join("_", fileNumber, filePhaseName);
+    }
+
+    public String getFileNameForPreviousPhase(int counter) {
+        String fileNumber = StringUtils.leftPad(String.valueOf(counter), 2, '0');
+        String filePhaseName = getPreviousPhase().getPhaseDescription().replace(" ", "_");
+        return String.join("_", fileNumber, filePhaseName);
     }
 
     public Map<Location, Country> getLocationOwnership() {

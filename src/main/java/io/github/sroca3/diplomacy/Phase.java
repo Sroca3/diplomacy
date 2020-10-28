@@ -340,8 +340,11 @@ public class Phase {
             if (cutOrderExists) {
                 order.cut();
             } else {
-                findBy(OrderType.MOVE, order.getToLocation()).ifPresent(o2 -> addSupport(o2, order));
-                order.resolve();
+                findBy(OrderType.MOVE, order.getToLocation())
+                    .ifPresent(o2 -> {
+                        addSupport(o2, order);
+                        order.resolve();
+                    });
             }
         }
 

@@ -1,0 +1,53 @@
+Argentina:
+F (Golfo de San Jorez) H
+
+Bolivia:
+Drake Passage to Straits of Magellan
+Golfo de Guafo to Islas Juan Fernandez
+Bahia de Arica holds
+Riberalta to Santa Cruz
+Santa Cruz to Chaco
+Antofagasta to Potosi
+Potosi supports Riberalta to Santa Cruz
+
+Brasil:
+A Salvador S F Rio de Janeiro H
+F Rio de Janeiro H
+
+Chile:
+A Cop H
+F Val - San
+A San - Men
+F PAs S DrP - SoM
+F BhB - BAs
+A Pat - BhB
+A Tuc S Pot - Sal
+
+Colombia:
+Fleet  Golfo de Darien Move to Golfo de Paria
+Fleet  Golfo de Paria Move to Boca de Navios
+Army Bogota Move to Llanos
+Army  Caracas Support Army Barinas Move to Angostura
+Army Barinas Move to Angostura
+Army  Orinoco Move to Amazonas
+Army Iquitos Support Army  Orinoco Move to Amazonas
+Army Aquiris Support Army  Orinoco Move to Amazonas
+Army  Mato Grosso Move to Manaus
+Army Rio Branco Move to Manaus
+
+Paraguay:
+Montevideo move Buenos Aires
+Pantanal move Goias
+Maranhao move Pernambuco
+Minas Gerais support Pantanal move Goias
+Sao Paulo move Rio de Janeiro
+Parana move Misiones
+Concepcion move Asuncion
+Chaco move Potosi
+Salta move San Miguel de Tucuman
+
+Peru:
+
+Venezuela:
+Army Angostura Hold
+Army Amazonas Hold

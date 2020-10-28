@@ -55,6 +55,6 @@ public class MapEditingTest {
         assertDoesNotThrow(() -> southAmericanSupremacyMap.drawUnits(diplomacy.getUnitLocations()));
         assertDoesNotThrow(() -> southAmericanSupremacyMap.drawArrows(diplomacy.getPreviousPhase().getOrders()));
         assertDoesNotThrow(() -> southAmericanSupremacyMap.colorTerritories(diplomacy.getLocationOwnership()));
-        assertDoesNotThrow(southAmericanSupremacyMap::generateMap);
+        assertDoesNotThrow(() -> southAmericanSupremacyMap.generateMap("/maps/" + diplomacy.getPhaseName()));
     }
 }
