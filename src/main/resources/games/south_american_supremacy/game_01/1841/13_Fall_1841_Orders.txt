@@ -1,0 +1,51 @@
+Argentina:
+
+Bolivia:
+Potosi to Salta
+La Paz to Potosi
+Antofagasta supports La Paz to Potosi
+Bahia de Arica to Lima
+Santa Cruz to Chaco
+Straits of Magellan supports Punta Arenas to Golfo de San Jorge
+Riberalta holds
+Islas Juan Fernandez holds
+
+Brasil:
+A Salvador -> Minas Gerais
+F Rio de Janeiro -> Sao Paolo
+
+Chile:
+A Cop - Val
+F San - DrP
+A Men - Cor
+A Pat H
+F BhB - BAs
+A Tuc S Pot - Sal
+F PAs - GSJ
+
+Colombia:
+Fleet  Golfo de Paria Move to Boca de Navios
+Fleet  Boca de Navios Move to Bahia Sao Marcos
+Army Llanos Move to Amazonas
+Army  Caracas Move to Cumana
+Army Angostura Support Army  Caracas Move to Cumana
+Army Amazonas Move to Guapore
+Army Iquitos Support Army Aquiris  to Hold
+Army Aquiris  Support Army Amazonas Move to Guapore
+Army  Mato Grosso Support Army Amazonas Move to Guapore
+Army Rio Branco Move to Para
+
+Paraguay:
+Salta support Chaco move Potosi
+Chaco move Potosi
+Asuncion move Corrientes
+Misiones move Montevideo
+Montevideo move Rio de la Plata
+Goias support Pernambuco move Salvador
+Pernambuco move Salvador
+Sao Paulo support Minas Gerais move Rio de Janeiro
+Minas Gerais move Rio de Janeiro
+
+Peru:
+
+Venezuela:

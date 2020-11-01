@@ -33,6 +33,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(armyGraph, SouthAmericanSupremacyLocation.AMAZONAS, SouthAmericanSupremacyLocation.IQUITOS);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.AMAZONAS, SouthAmericanSupremacyLocation.MANAUS);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.AMAZONAS, SouthAmericanSupremacyLocation.AQUIRIS);
+        addEdge(armyGraph, SouthAmericanSupremacyLocation.AMAZONAS, SouthAmericanSupremacyLocation.GUAPORE);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.AMAZONAS, SouthAmericanSupremacyLocation.LLANOS);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.AMAZONAS, SouthAmericanSupremacyLocation.ORINOCO);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.AMAZONAS, SouthAmericanSupremacyLocation.MATO_GROSSO);
@@ -418,6 +419,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.BOCA_DE_NAVIOS, SouthAmericanSupremacyLocation.ANGOSTURA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.BOCA_DE_NAVIOS, SouthAmericanSupremacyLocation.PARA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.BOCA_DE_NAVIOS, SouthAmericanSupremacyLocation.MARANHAO);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.BOCA_DE_NAVIOS, SouthAmericanSupremacyLocation.BAHIA_SAO_MARCOS);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.MONTEVIDEO, SouthAmericanSupremacyLocation.RIO_GRANDE_DO_SUL);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.MONTEVIDEO, SouthAmericanSupremacyLocation.RIO_DE_LA_PLATA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.MONTEVIDEO, SouthAmericanSupremacyLocation.MISIONES);
