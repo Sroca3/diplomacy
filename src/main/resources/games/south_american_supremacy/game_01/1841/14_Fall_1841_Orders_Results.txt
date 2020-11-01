@@ -5,10 +5,10 @@ ARGENTINA (haroonriaz):
 Fleet Golfo de San Jorge HOLD -> Dislodged
 
 BOLIVIA (FloridaMan):
-Army Antofagasta SUPPORT La Paz to Potosi -> Support failed
+Army Antofagasta SUPPORT La Paz to Potosi -> Resolved
 Fleet Bahia de Arica MOVE Lima -> Resolved
 Fleet Islas Juan Fernandez HOLD -> Resolved
-Army La Paz MOVE Potosi -> Bounced
+Army La Paz MOVE Potosi -> Resolved
 Army Potosi MOVE Salta -> Resolved
 Army Riberalta HOLD -> Resolved
 Army Santa Cruz MOVE Chaco -> Bounced
@@ -47,5 +47,5 @@ Army Minas Gerais MOVE Rio de Janeiro -> Resolved
 Army Misiones MOVE Montevideo -> Resolved
 Fleet Montevideo MOVE Rio de la Plata -> Resolved
 Army Pernambuco MOVE Salvador -> Resolved
-Army Salta SUPPORT Chaco to Potosi -> Support failed
+Army Salta SUPPORT Chaco to Potosi -> Dislodged
 Army Sao Paulo SUPPORT Minas Gerais to Rio de Janeiro -> Resolved

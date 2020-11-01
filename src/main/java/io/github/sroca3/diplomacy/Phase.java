@@ -291,7 +291,7 @@ public class Phase {
     private void addSupport(Order order, Order supportOrder) {
         findByCurrentLocation(order.getToLocation())
             .ifPresentOrElse(o -> {
-                if (!(order.getOrderType().isMove() && o.getCountry().equals(supportOrder.getCountry()))) {
+                if (!(order.getOrderType().isMove() && o.getCountry().equals(supportOrder.getCountry()) && !isDestinationLocationBeingVacated(order))) {
                     order.addSupport();
                 }
             }, order::addSupport);
@@ -418,7 +418,6 @@ public class Phase {
                 bounce(order);
             }
         } else if (isDislodged(order)) {
-            Map<String, String> x = new HashMap<>();
             if (!competingMovesExist(order)) {
                 dislodgedUnitLocations.remove(order.getCurrentLocation());
                 order.resolve();
@@ -547,7 +546,7 @@ public class Phase {
 
     private void markSupportingUnitsAsFailed(Order order) {
         findAllBy(OrderType.SUPPORT, order.getCurrentLocation(), order.getToLocation()).forEach(o -> {
-            if (!o.getStatus().isCut() && !o.getStatus().isIllegal()) {
+            if (!o.getStatus().isCut() && !o.getStatus().isIllegal() && !o.getStatus().isDislodged()) {
                 o.failed();
             }
         });
