@@ -56,7 +56,7 @@ public class Game01 {
         LOGGER.debug("Skip number for map.");
         if (diplomacy.isFirstPhase()) {
             counter++;
-            generateStatus(diplomacy, counter);
+            diplomacy.generateStatus(counter);
         }
         counter++;
         String fileWithPath = String.join(
@@ -87,7 +87,7 @@ public class Game01 {
             }
             LOGGER.debug("Skip next phase map.");
             counter++;
-            generateStatus(diplomacy, counter);
+            diplomacy.generateStatus(counter);
             counter++;
             fileWithPath = String.join(
                 File.separator,
@@ -140,39 +140,6 @@ public class Game01 {
                         e.printStackTrace();
                     }
 
-                }
-            );
-        }
-    }
-
-    private static void generateStatus(Diplomacy diplomacy, int counter) throws IOException {
-        String filePrefix = diplomacy.getYear() + File.separator + diplomacy.getFileName(counter);
-        SortedSet<Country> countries = diplomacy.getMapVariant().getCountries();
-        File statusFile = Paths.get("src/main/resources/games/south_american_supremacy/game_01/" + filePrefix + "_Status.txt")
-                               .toFile();
-        if (statusFile.exists()) {
-            Files.delete(statusFile.toPath());
-        }
-        File parentDirectory = statusFile.getParentFile();
-        if (!parentDirectory.exists()) {
-            Files.createDirectory(parentDirectory.toPath());
-        }
-        statusFile.createNewFile();
-        try (FileWriter writer = new FileWriter(statusFile)) {
-            writer.write(diplomacy.getPhaseDescription() + " Status\n");
-            writer.write("--------------------------------\n");
-            countries.forEach(
-                country -> {
-                    try {
-                        writer.write("\n");
-                        writer.write(country.getName() + "\n");
-                        writer.write("(" + diplomacy.getPlayer(country) + ")\n");
-                        writer.write(diplomacy.getArmyCount(country) + " army units\n");
-                        writer.write(diplomacy.getFleetCount(country) + " fleet units\n");
-                        writer.write(diplomacy.getSupplyCenterCount(country) + " centers\n");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
             );
         }
