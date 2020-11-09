@@ -203,4 +203,9 @@ public enum StandardVariantLocation implements Location {
             return this;
         }
     }
+
+    @Override
+    public boolean isSea() {
+        return this.locationType.isSea();
+    }
 }

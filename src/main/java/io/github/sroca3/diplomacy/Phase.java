@@ -534,7 +534,7 @@ public class Phase {
                     break;
                 }
             }
-            for (Location adjacentLocation : adjacencies.get(current)) {
+            for (Location adjacentLocation : this.mapVariant.getMovementGraph(UnitType.FLEET).get(current)) {
                 if (convoyLocations.contains(adjacentLocation) && !visitedLocations.contains(adjacentLocation)) {
                     locationQueue.add(adjacentLocation);
                     visitedLocations.add(adjacentLocation);

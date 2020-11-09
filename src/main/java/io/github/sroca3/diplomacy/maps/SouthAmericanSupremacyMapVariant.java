@@ -141,6 +141,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(armyGraph, SouthAmericanSupremacyLocation.ANGOSTURA, SouthAmericanSupremacyLocation.CUMANA);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.ANGOSTURA, SouthAmericanSupremacyLocation.CARACAS);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.ANGOSTURA, SouthAmericanSupremacyLocation.RIO_BRANCO);
+        addEdge(armyGraph, SouthAmericanSupremacyLocation.ANGOSTURA, SouthAmericanSupremacyLocation.ORINOCO);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.SAO_PAULO, SouthAmericanSupremacyLocation.MINAS_GERAIS);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.SAO_PAULO, SouthAmericanSupremacyLocation.GOIAS);
         addEdge(armyGraph, SouthAmericanSupremacyLocation.SAO_PAULO, SouthAmericanSupremacyLocation.RIO_GRANDE_DO_SUL);

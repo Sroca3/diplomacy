@@ -132,12 +132,14 @@ public class SouthAmericanSupremacyMap {
     public void colorTerritories(Map<Location, Country> locationOwnership) {
         getDocument();
         for (Map.Entry<Location, Country> entry : locationOwnership.entrySet()) {
-            Element element = document.getElementById(entry.getKey().getName());
-            Color color = entry.getValue().getColor();
-            element.setAttribute(
-                "fill",
-                String.format("rgb(%s,%s,%s)", color.getRed(), color.getGreen(), color.getBlue())
-            );
+            if (!(entry.getKey().isCoast() || entry.getKey().isSea())) {
+                Element element = document.getElementById(entry.getKey().getName());
+                Color color = entry.getValue().getColor();
+                element.setAttribute(
+                    "fill",
+                    String.format("rgb(%s,%s,%s)", color.getRed(), color.getGreen(), color.getBlue())
+                );
+            }
         }
 
     }
@@ -203,22 +205,22 @@ public class SouthAmericanSupremacyMap {
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
         DOMSource source = new DOMSource(document);
-        OutputStream png_ostream = null;
+        OutputStream pngOutputStream = null;
         try {
-            png_ostream = new FileOutputStream("src/main/resources/" + path + ".png");
+            pngOutputStream = new FileOutputStream("src/main/resources/" + path + ".png");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        TranscoderOutput output_png_image = new TranscoderOutput(png_ostream);
+        TranscoderOutput outputPngImage = new TranscoderOutput(pngOutputStream);
         PNGTranscoder pngTranscoder = new PNGTranscoder();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         StreamResult streamResult = new StreamResult(byteArrayOutputStream);
         try {
             transformer.transform(source, streamResult);
         TranscoderInput transcoderInput = new TranscoderInput(new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
-            pngTranscoder.transcode(transcoderInput, output_png_image);
-            png_ostream.flush();
-            png_ostream.close();
+            pngTranscoder.transcode(transcoderInput, outputPngImage);
+            pngOutputStream.flush();
+            pngOutputStream.close();
         } catch (TransformerException | TranscoderException | IOException e) {
             e.printStackTrace();
         }

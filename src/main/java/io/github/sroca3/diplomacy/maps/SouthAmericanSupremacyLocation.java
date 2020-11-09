@@ -106,7 +106,7 @@ public enum SouthAmericanSupremacyLocation implements SvgLocation {
     SANTA_MARTA(LocationType.COASTAL_LAND, "SaM"),
     SANTIAGO(LocationType.COASTAL_LAND, "San", true),
     SAO_PAULO(LocationType.COASTAL_LAND, "SaP", true),
-    SCOTIA_SEA(LocationType.LAND, "ScS"),
+    SCOTIA_SEA(LocationType.SEA, "ScS"),
     SANTA_CRUZ(LocationType.LAND, "SCz", true),
     SALVADOR(LocationType.COASTAL_LAND, "Slv", true),
     STRAITS_OF_MAGELLAN(LocationType.SEA, "SoM"),
@@ -265,6 +265,11 @@ public enum SouthAmericanSupremacyLocation implements SvgLocation {
         } else  {
             return this;
         }
+    }
+
+    @Override
+    public boolean isSea() {
+        return this.locationType.isSea();
     }
 
     @Override

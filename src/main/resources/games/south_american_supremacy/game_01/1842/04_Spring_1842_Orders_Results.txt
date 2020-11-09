@@ -1,0 +1,48 @@
+Spring 1842 Orders Results
+--------------------------------
+
+BOLIVIA (FloridaMan):
+Army Antofagasta MOVE Atacama -> Resolved
+Fleet Islas Juan Fernandez MOVE Golfo de Guafo -> Resolved
+Army La Paz SUPPORT Santa Cruz to hold -> Resolved
+Fleet Lima MOVE Trujillo -> Resolved
+Army Potosi SUPPORT Santa Cruz to hold -> Resolved
+Army Riberalta SUPPORT Santa Cruz to hold -> Dislodged
+Army Salta HOLD -> Resolved
+Army Santa Cruz SUPPORT Riberalta to hold -> Support cut
+Fleet Straits of Magellan MOVE Scotia Sea -> Resolved
+
+CHILE (Jordan767):
+Fleet Buenos Aires MOVE Rio de la Plata -> Resolved
+Army Cordoba SUPPORT San Miguel de Tucuman to hold -> Resolved
+Fleet Drake Passage HOLD -> Resolved
+Fleet Golfo de San Jorge MOVE Islas Malvinas -> Resolved
+Army Patagonia MOVE Bahia Blanca -> Resolved
+Army San Miguel de Tucuman SUPPORT Cordoba to hold -> Support cut
+Army Valparaiso HOLD -> Resolved
+
+COLOMBIA (Antigonos):
+Army Amazonas MOVE Guapore -> Resolved
+Army Angostura MOVE Orinoco -> Resolved
+Army Aquiris SUPPORT Guapore to Riberalta -> Resolved
+Fleet Bahia Sao Marcos MOVE Bahia de Todos os Santos -> Resolved
+Fleet Boca de Navios CONVOY Cumana to Maranhao -> Resolved
+Army Bogota MOVE Popayan -> Resolved
+Fleet Cali MOVE Bahia Sechura -> Resolved
+Army Cumana MOVE Maranhao -> Resolved
+Army Guapore MOVE Riberalta -> Resolved
+Army Iquitos MOVE Cusco -> Resolved
+Army Mato Grosso MOVE Santa Cruz -> Bounced
+Army Para SUPPORT Cumana to Maranhao -> Resolved
+
+PARAGUAY (RolynTrotter):
+Fleet Asuncion MOVE Misiones -> Resolved
+Army Chaco SUPPORT Concepcion to Pantanal -> Resolved
+Army Concepcion MOVE Pantanal -> Resolved
+Army Corrientes MOVE San Miguel de Tucuman -> Bounced
+Army Goias MOVE Maranhao -> Bounced
+Army Montevideo MOVE Rio Grande do Sul -> Resolved
+Army Rio de Janeiro MOVE Salvador -> Resolved
+Fleet Rio de la Plata MOVE Bahia de Paranagua -> Resolved
+Army Salvador MOVE Pernambuco -> Resolved
+Army Sao Paulo MOVE Rio de Janeiro -> Resolved

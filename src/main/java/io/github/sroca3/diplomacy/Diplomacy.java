@@ -5,6 +5,7 @@ import io.github.sroca3.diplomacy.exceptions.CountryOrderMismatchException;
 import io.github.sroca3.diplomacy.exceptions.LocationNotFoundException;
 import io.github.sroca3.diplomacy.exceptions.OrderTypeParseException;
 import io.github.sroca3.diplomacy.exceptions.UnitTypeMismatchException;
+import io.github.sroca3.diplomacy.svg.SouthAmericanSupremacyMap;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -50,8 +51,10 @@ public class Diplomacy {
     private Phase currentPhase;
     private Phase previousPhase;
     Map<Country, String> playerAssignments;
+    Map<String, Map<Country, String>> replacementPlayers = new HashMap<>();
     private long gameYearCounter;
     private String baseDirectory;
+    private boolean autoGenerateMaps;
 
     public Diplomacy(MapVariant mapVariant) {
         this(mapVariant, Collections.emptySet());
@@ -187,6 +190,16 @@ public class Diplomacy {
 
     public void replaceCountry(Country country, String player) {
         this.playerAssignments.put(country, player);
+    }
+
+    public void replaceCountry(PhaseName phase, int year, Country country, String player) {
+        String key = String.valueOf(phase) + year;
+
+        if (!this.replacementPlayers.containsKey(key)) {
+            this.replacementPlayers.put(key, new HashMap<>());
+        }
+
+        this.replacementPlayers.get(phase.name() + year).put(country, player);
     }
 
     public String getPlayer(Country country) {
@@ -502,5 +515,124 @@ public class Diplomacy {
 
     public String getPhaseName() {
         return currentPhase.getPhaseName().name();
+    }
+
+    public void generateResults(int counter) throws IOException {
+        String filePrefix = getFileNameForPreviousPhase(counter);
+        SortedSet<Country> countries = this.mapVariant.getCountries();
+        if (getPreviousPhase() != null && getPreviousPhase().getPhaseName().isBuildPhase()) {
+            filePrefix = (getYear() - 1) + "/" + filePrefix;
+        } else {
+            filePrefix = getYear() + "/" + filePrefix;
+        }
+        File resultsFile = Paths.get(this.baseDirectory + filePrefix + "_Results.txt")
+                                .toFile();
+        if (resultsFile.exists()) {
+            Files.delete(resultsFile.toPath());
+        }
+        resultsFile.createNewFile();
+        try (FileWriter writer = new FileWriter(resultsFile)) {
+            writer.write(getPreviousPhase().getPhaseDescription() + " Results\n");
+            writer.write("--------------------------------\n");
+            countries.forEach(
+                country -> {
+                    try {
+                        if (!getPreviousPhase().getOrdersByCountry(country).isEmpty()) {
+                            writer.write("\n");
+                            writer.write(country.getName() + " (" + getPlayer(country) + "):\n");
+                            for (Order order : getPreviousPhase()
+                                .getOrdersByCountry(country)
+                                .stream()
+                                .sorted(Comparator.comparing(o -> o.getCurrentLocation()
+                                                                   .getName()))
+                                .collect(
+                                    Collectors.toList())) {
+                                writer.write(order.getDescription() + "\n");
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            );
+        }
+    }
+
+    public void parseOrders(int counter) {
+        String filename = getFileName(counter);
+        try {
+            addOrders(parseOrders(this.baseDirectory + getYear() + "/" + filename + ".txt"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void processOrdersAndGenerateArtifacts() throws IOException {
+        int counter = 1;
+        LOGGER.debug("Skip number for map.");
+        if (isFirstPhase()) {
+            if (autoGenerateMaps) {
+                SouthAmericanSupremacyMap southAmericanSupremacyMap = new SouthAmericanSupremacyMap();
+                southAmericanSupremacyMap.drawUnits(getUnitLocations());
+                southAmericanSupremacyMap.colorTerritories(getLocationOwnership());
+                southAmericanSupremacyMap.generateMap("/games/south_american_supremacy/game_02/" + getYear() + "/" + getFileName(counter));
+            }
+            counter++;
+            generateStatus(counter);
+        }
+        counter++;
+        String fileWithPath = String.join(
+            File.separator,
+            this.baseDirectory,
+            String.valueOf(getYear()),
+            getFileName(counter) + ".txt"
+        );
+
+        while (Paths.get(fileWithPath).toFile().exists()) {
+            String key = String.valueOf(getCurrentPhase().getPhaseName()) + getYear();
+            if (this.replacementPlayers.containsKey(key)) {
+                for (Map.Entry<Country, String> replacement : this.replacementPlayers.get(key).entrySet()) {
+                    replaceCountry(replacement.getKey(), replacement.getValue());
+                }
+            }
+            parseOrders(counter);
+            adjudicate();
+            counter++;
+            generateResults(counter);
+            counter++;
+            if (autoGenerateMaps) {
+                SouthAmericanSupremacyMap southAmericanSupremacyMap = new SouthAmericanSupremacyMap();
+                southAmericanSupremacyMap.drawUnits(getUnitLocations());
+                southAmericanSupremacyMap.drawArrows(getPreviousPhase().getOrders());
+                southAmericanSupremacyMap.colorTerritories(getLocationOwnership());
+                southAmericanSupremacyMap.generateMap("/games/south_american_supremacy/game_02/" + getYear() + "/" + getFileNameForPreviousPhase(counter) + "_Results");
+            }
+            LOGGER.debug("Skip results map.");
+            counter++;
+            if (getPreviousPhase().getPhaseName().isBuildPhase()) {
+                counter = 1;
+            }
+            if (autoGenerateMaps) {
+                SouthAmericanSupremacyMap southAmericanSupremacyMap = new SouthAmericanSupremacyMap();
+                southAmericanSupremacyMap.drawUnits(getUnitLocations());
+                southAmericanSupremacyMap.colorTerritories(getLocationOwnership());
+                southAmericanSupremacyMap.generateMap("/games/south_american_supremacy/game_02/" + getYear() + "/" + getFileName(counter));
+            }
+            LOGGER.debug("Skip next phase map.");
+            counter++;
+            generateStatus(counter);
+            counter++;
+            fileWithPath = String.join(
+                File.separator,
+                this.baseDirectory,
+                String.valueOf(getYear()),
+                getFileName(counter) + ".txt"
+            );
+        }
+    }
+
+    public void setAutoGenerateMaps() {
+        this.autoGenerateMaps = true;
     }
 }

@@ -1,0 +1,53 @@
+Argentina:
+
+Bolivia:
+Santa Cruz supports Riberalta to hold
+La Paz supports Santa Cruz to hold
+Lima to Trujillo
+Islas Juan Fernandez to Golfo de Guafo
+Antofagasta to Atacama
+Salta holds
+Potosi supports Santa Cruz to hold
+Straits of Magellan to Scotia Sea
+Riberalta supports Santa Cruz to hold
+
+Brasil:
+
+Chile:
+A Val H
+F DrP H
+F GSJ - Mal
+A Pat - BhB
+F BAs - RdP
+A Cor S Tuc H
+A Tuc S Cor H
+
+Colombia:
+Fleet Boca de Navios Convoy Army Cumana to Maranhao
+Fleet Bahia Sao Marcos Move to Bahia de Todos os Santos
+Fleet Cali Move to Bahia Sechura
+Army Bogota Move to Popayan
+Army Cumana Move to Maranhao
+Army Angostura Move to Orinoco
+Army Para Support Army Cumana Move to Maranhao
+Army Amazonas Move to Guapore
+Army Guapore Move to Riberalta
+Army Iquitos Move to Cusco
+Army Aquiris Support Army Guapore Move to Riberalta
+Army  Mato Grosso Move to Santa Cruz
+
+Paraguay:
+Salvador move Pernambuco
+Goias move Maranhao
+Rio de Janeiro move Salvador
+Sao Paulo move Rio de Janeiro
+Montevideo move Rio Grande do Sul
+Ri de la Plata move Bahia de Paranagua
+Asuncion move Misiones
+Corrientes move San Miguel de Tucuman
+Chaco support Concepcion move Pantanal
+Concepcion move Pantanal
+
+Peru:
+
+Venezuela:

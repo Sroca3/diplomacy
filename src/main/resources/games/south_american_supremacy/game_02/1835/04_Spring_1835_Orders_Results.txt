@@ -1,0 +1,38 @@
+Spring 1835 Orders Results
+--------------------------------
+
+ARGENTINA (AKFD):
+Fleet Buenos Aires MOVE Bahia Blanca -> Resolved
+Army Cordoba MOVE San Miguel de Tucuman -> Resolved
+Army Salta HOLD -> Resolved
+
+BOLIVIA (Antigonos):
+Fleet Antofagasta MOVE Bahia de Arica -> Resolved
+Army La Paz MOVE Potosi -> Resolved
+
+BRASIL (FloridaMan):
+Army Manaus MOVE Mato Grosso -> Resolved
+Army Rio de Janeiro MOVE Sao Paulo -> Resolved
+Fleet Salvador MOVE Bahia Sao Marcos -> Resolved
+Fleet Sao Paulo MOVE Bahia de Sao Sebastao -> Resolved
+
+CHILE (VGhost):
+Army Santiago MOVE Arauncanian -> Resolved
+Fleet Valparaiso MOVE Golfo de Guafo -> Resolved
+
+COLOMBIA (Jordan767):
+Army Bogota MOVE Cali -> Resolved
+Fleet Cali MOVE Bahia Sechura -> Resolved
+Fleet Cartagena MOVE Golfo de Darien -> Resolved
+
+PARAGUAY (bratsffl):
+Army Asuncion MOVE Corrientes -> Resolved
+Army Concepcion MOVE Parana -> Resolved
+
+PERU (RolynTrotter):
+Fleet Lima MOVE Nazca Sea -> Resolved
+Army Trujillo MOVE Iquitos -> Resolved
+
+VENEZUELA (Don Juan of Austria):
+Fleet Caracas MOVE Cumana -> Resolved
+Army Maracaibo MOVE Barinas -> Resolved

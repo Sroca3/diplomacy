@@ -1,0 +1,50 @@
+Fall 1842 Orders Status
+--------------------------------
+
+ARGENTINA
+(haroonriaz)
+0 army units
+0 fleet units
+1 centers
+
+BOLIVIA
+(FloridaMan)
+5 army units
+3 fleet units
+10 centers
+
+BRASIL
+(VGhost)
+0 army units
+0 fleet units
+0 centers
+
+CHILE
+(Jordan767)
+4 army units
+3 fleet units
+7 centers
+
+COLOMBIA
+(Antigonos)
+9 army units
+3 fleet units
+12 centers
+
+PARAGUAY
+(RolynTrotter)
+8 army units
+2 fleet units
+10 centers
+
+PERU
+(Don Juan of Austria)
+0 army units
+0 fleet units
+0 centers
+
+VENEZUELA
+(bratsffl)
+0 army units
+0 fleet units
+0 centers

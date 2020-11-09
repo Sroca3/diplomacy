@@ -23,4 +23,8 @@ public enum LocationType {
                 return false;
         }
     }
+
+    public boolean isSea() {
+        return SEA.equals(this);
+    }
 }

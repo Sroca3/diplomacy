@@ -31,4 +31,6 @@ public interface Location {
     @Nonnull default Location getTerritory() {
         return this;
     }
+
+    boolean isSea();
 }

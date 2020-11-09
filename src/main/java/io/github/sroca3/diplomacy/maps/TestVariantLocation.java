@@ -29,4 +29,9 @@ public enum TestVariantLocation implements Location {
     public boolean isSupplyCenter() {
         return false;
     }
+
+    @Override
+    public boolean isSea() {
+        return false;
+    }
 }

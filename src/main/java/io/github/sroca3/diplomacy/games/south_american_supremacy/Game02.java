@@ -8,11 +8,12 @@ import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyMapVariant;
 import java.io.IOException;
 import java.util.List;
 
-public class Game01 {
+public class Game02 {
 
     public static void main(String... args) throws IOException {
         Diplomacy diplomacy = new Diplomacy(SouthAmericanSupremacyMapVariant.getInstance());
-        diplomacy.setBaseDirectory("src/main/resources/games/south_american_supremacy/game_01/");
+        diplomacy.setBaseDirectory("src/main/resources/games/south_american_supremacy/game_02/");
+        diplomacy.setAutoGenerateMaps();
         diplomacy.assignAndSaveCountries(List.of(
             "AKFD",
             "Jordan767",
