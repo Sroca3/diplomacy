@@ -1,0 +1,54 @@
+Argentina:
+
+Bolivia:
+South Atlantic Ocean supports Rio de la Plata to Bahia de Paranagua
+Bahia de Arica to Nazca Sea
+Trujillo supports Bahia de Arica to Nazca Sea
+Arica to Arequipa
+Salta holds
+Antofagasta to Bahia de Arica
+Potosi supports La Paz to hold
+La Paz supports Santa Cruz to hold
+Santa Cruz supports La Paz to hold
+
+Brasil:
+
+Chile:
+F San - DrP
+F GdG - SPO
+A Val H
+A Cor S Tuc H
+A Tuc S Cor H
+A BAs H
+F Mal - GSJ
+F RdP - BdP
+
+Colombia:
+Fleet Boca de Navios Support Army Maranhao to Hold
+Fleet Bahia de Todos os Santos Hold
+Fleet Cali Move to Bahia Sechura
+Fleet Islas Galapagos Move to Nazca Sea
+Army Iquitos Move to Trujillo
+Army Maranhao Support Army Mato Grosso to Hold
+Army Amazonas Move to Iquitos
+Army Para Support Army Mato Grosso to Hold
+Army Guapore  Support Army Riberalta to Hold
+Army Riberalta Support Army Aquiris Move to Cusco
+Army Cusco Move to Lima
+Army Aquiris Move to Cusco
+Army  Mato Grosso Support  Army Pantanal Move to Santa Cruz
+
+Paraguay:
+Bahia de Paranagua move Bahia de Todos os Santos
+Montevideo move Rio Grande do Sul
+Corrientes move San Miguel de Tucuman
+Chaco support Santa Cruz hold
+Pantanal support Santa Cruz hold
+Goias support Pantanal hold
+Salvador move Pernambuco
+Rio de Janeiro support Salvador hold
+Sao Paulo support Goias hold
+
+Peru:
+
+Venezuela:

@@ -1,0 +1,49 @@
+Spring 1843 Orders Results
+--------------------------------
+
+BOLIVIA (FloridaMan):
+Fleet Antofagasta MOVE Bahia de Arica -> Bounced
+Army Arica MOVE Arequipa -> Resolved
+Fleet Bahia de Arica MOVE Nazca Sea -> Bounced
+Army La Paz SUPPORT Santa Cruz to hold -> Resolved
+Army Potosi SUPPORT La Paz to hold -> Resolved
+Army Salta HOLD -> Resolved
+Army Santa Cruz SUPPORT La Paz to hold -> Resolved
+Fleet South Atlantic Ocean SUPPORT Rio de la Plata to Bahia de Paranagua -> Resolved
+Fleet Trujillo SUPPORT Bahia de Arica to Nazca Sea -> Support cut
+
+CHILE (Jordan767):
+Army Buenos Aires HOLD -> Resolved
+Army Cordoba SUPPORT San Miguel de Tucuman to hold -> Resolved
+Fleet Golfo de Guafo MOVE South Pacific Ocean -> Resolved
+Fleet Islas Malvinas MOVE Golfo de San Jorge -> Resolved
+Fleet Rio de la Plata MOVE Bahia de Paranagua -> Resolved
+Fleet Santiago MOVE Drake Passage -> Resolved
+Army San Miguel de Tucuman SUPPORT Cordoba to hold -> Support cut
+Army Valparaiso HOLD -> Resolved
+
+COLOMBIA (Antigonos):
+Army Amazonas MOVE Iquitos -> Bounced
+Army Aquiris MOVE Cusco -> Resolved
+Fleet Bahia de Todos os Santos HOLD -> Resolved
+Fleet Boca de Navios SUPPORT Maranhao to hold -> Resolved
+Fleet Cali MOVE Bahia Sechura -> Resolved
+Army Cusco MOVE Lima -> Resolved
+Army Guapore SUPPORT Riberalta to hold -> Resolved
+Army Iquitos MOVE Trujillo -> Bounced
+Fleet Islas Galapagos MOVE Nazca Sea -> Bounced
+Army Maranhao SUPPORT Mato Grosso to hold -> Resolved
+Army Mato Grosso SUPPORT Pantanal to Santa Cruz -> Illegal order replaced with Hold
+Army Para SUPPORT Mato Grosso to hold -> Resolved
+Army Riberalta SUPPORT Aquiris to Cusco -> Resolved
+
+PARAGUAY (RolynTrotter):
+Fleet Bahia de Paranagua MOVE Bahia de Todos os Santos -> Dislodged
+Army Chaco SUPPORT Santa Cruz to hold -> Resolved
+Army Corrientes MOVE San Miguel de Tucuman -> Bounced
+Army Goias SUPPORT Pantanal to hold -> Resolved
+Fleet Montevideo MOVE Rio Grande do Sul -> Resolved
+Army Pantanal SUPPORT Santa Cruz to hold -> Resolved
+Army Rio de Janeiro SUPPORT Salvador to hold -> Illegal order replaced with Hold
+Army Salvador MOVE Pernambuco -> Resolved
+Army Sao Paulo SUPPORT Goias to hold -> Resolved

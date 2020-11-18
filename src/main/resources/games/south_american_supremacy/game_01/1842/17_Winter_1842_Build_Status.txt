@@ -1,32 +1,26 @@
-Fall 1842 Orders Status
+Winter 1842 Build Status
 --------------------------------
-
-ARGENTINA
-(haroonriaz)
-0 army units
-0 fleet units
-1 centers
 
 BOLIVIA
 (FloridaMan)
 5 army units
 3 fleet units
-10 centers
+9 centers
 
 CHILE
 (Jordan767)
 4 army units
 3 fleet units
-7 centers
+8 centers
 
 COLOMBIA
 (Antigonos)
 9 army units
 3 fleet units
-12 centers
+14 centers
 
 PARAGUAY
 (RolynTrotter)
 8 army units
 2 fleet units
-10 centers
+9 centers

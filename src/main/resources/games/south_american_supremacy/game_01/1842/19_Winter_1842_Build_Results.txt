@@ -1,0 +1,14 @@
+Winter 1842 Build Results
+--------------------------------
+
+BOLIVIA (FloridaMan):
+BUILD Fleet Antofagasta -> Resolved
+
+CHILE (Jordan767):
+BUILD Fleet Santiago -> Resolved
+
+COLOMBIA (Antigonos):
+BUILD Fleet Cali -> Resolved
+
+PARAGUAY (RolynTrotter):
+DISBAND Army Pernambuco -> Resolved

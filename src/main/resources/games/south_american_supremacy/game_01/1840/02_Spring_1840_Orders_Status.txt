@@ -37,12 +37,6 @@ PARAGUAY
 1 fleet units
 9 centers
 
-PERU
-(Don Juan of Austria)
-0 army units
-0 fleet units
-0 centers
-
 VENEZUELA
 (bratsffl)
 2 army units

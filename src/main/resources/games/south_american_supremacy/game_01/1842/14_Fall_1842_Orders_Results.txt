@@ -1,0 +1,47 @@
+Fall 1842 Orders Results
+--------------------------------
+
+BOLIVIA (FloridaMan):
+Army Atacama MOVE Arica -> Resolved
+Fleet Golfo de Guafo MOVE Bahia de Arica -> Resolved
+Army La Paz SUPPORT Santa Cruz to hold -> Resolved
+Army Potosi SUPPORT La Paz to hold -> Resolved
+Army Salta HOLD -> Resolved
+Army Santa Cruz SUPPORT La Paz to hold -> Resolved
+Fleet Scotia Sea MOVE South Atlantic Ocean -> Resolved
+Fleet Trujillo MOVE Lima -> Bounced
+
+CHILE (Jordan767):
+Army Bahia Blanca MOVE Buenos Aires -> Resolved
+Army Cordoba SUPPORT San Miguel de Tucuman to hold -> Resolved
+Fleet Drake Passage MOVE Golfo de Guafo -> Resolved
+Fleet Islas Malvinas HOLD -> Resolved
+Fleet Rio de la Plata MOVE Bahia de Paranagua -> Bounced
+Army San Miguel de Tucuman SUPPORT Cordoba to hold -> Support cut
+Army Valparaiso HOLD -> Resolved
+
+COLOMBIA (Antigonos):
+Army Aquiris MOVE Cusco -> Bounced
+Fleet Bahia de Todos os Santos HOLD -> Resolved
+Fleet Bahia Sechura MOVE Islas Galapagos -> Resolved
+Fleet Boca de Navios SUPPORT Maranhao to hold -> Resolved
+Army Cusco MOVE Lima -> Bounced
+Army Guapore SUPPORT Riberalta to hold -> Resolved
+Army Maranhao SUPPORT Mato Grosso to hold -> Support cut
+Army Mato Grosso HOLD -> Resolved
+Army Orinoco MOVE Amazonas -> Resolved
+Army Para SUPPORT Maranhao to hold -> Resolved
+Army Popayan MOVE Iquitos -> Resolved
+Army Riberalta SUPPORT Aquiris to Cusco -> Support failed
+
+PARAGUAY (RolynTrotter):
+Fleet Bahia de Paranagua MOVE Bahia de Todos os Santos -> Bounced
+Army Chaco SUPPORT Santa Cruz to hold -> Resolved
+Army Corrientes MOVE San Miguel de Tucuman -> Bounced
+Army Goias SUPPORT Pernambuco to Maranhao -> Support failed
+Fleet Misiones MOVE Montevideo -> Resolved
+Army Pantanal SUPPORT Santa Cruz to hold -> Resolved
+Army Pernambuco MOVE Maranhao -> Bounced
+Army Rio de Janeiro SUPPORT Salvador to hold -> Resolved
+Army Rio Grande do Sul MOVE Sao Paulo -> Resolved
+Army Salvador SUPPORT Goias to hold -> Resolved

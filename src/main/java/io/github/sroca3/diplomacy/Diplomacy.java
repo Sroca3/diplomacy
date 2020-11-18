@@ -135,15 +135,17 @@ public class Diplomacy {
             writer.write("--------------------------------\n");
             countries.forEach(
                 country -> {
-                    try {
-                        writer.write("\n");
-                        writer.write(country.getName() + "\n");
-                        writer.write("(" + getPlayer(country) + ")\n");
-                        writer.write(getArmyCount(country) + " army units\n");
-                        writer.write(getFleetCount(country) + " fleet units\n");
-                        writer.write(getSupplyCenterCount(country) + " centers\n");
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    if (getSupplyCenterCount(country) > 0 || getUnitCount(country) > 0) {
+                        try {
+                            writer.write("\n");
+                            writer.write(country.getName() + "\n");
+                            writer.write("(" + getPlayer(country) + ")\n");
+                            writer.write(getArmyCount(country) + " army units\n");
+                            writer.write(getFleetCount(country) + " fleet units\n");
+                            writer.write(getSupplyCenterCount(country) + " centers\n");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             );
