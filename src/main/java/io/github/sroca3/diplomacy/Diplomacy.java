@@ -470,7 +470,7 @@ public class Diplomacy {
         for (String line : lines) {
             if (!StringUtils.isBlank(line)) {
                 if (line.contains(":")) {
-                    country = SouthAmericanSupremacyCountry.valueOf(line.replaceAll(":", "").trim().toUpperCase(Locale.ENGLISH));
+                    country = this.getMapVariant().getCountry(line.replaceAll(":", "").trim().toUpperCase(Locale.ENGLISH));
                 } else {
                     orders.add(this.parseOrder(line, Objects.requireNonNull(country)));
                 }

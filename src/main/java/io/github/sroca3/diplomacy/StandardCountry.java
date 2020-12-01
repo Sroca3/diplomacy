@@ -2,7 +2,7 @@ package io.github.sroca3.diplomacy;
 
 import java.awt.*;
 
-public enum CountryEnum implements Country {
+public enum StandardCountry implements Country {
     AUSTRIA,
     ENGLAND,
     FRANCE,

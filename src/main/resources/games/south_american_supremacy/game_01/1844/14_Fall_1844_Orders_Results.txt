@@ -1,0 +1,48 @@
+Fall 1844 Orders Results
+--------------------------------
+
+BOLIVIA (FloridaMan):
+Army Arequipa MOVE Arica -> Resolved
+Fleet Bahia de Arica HOLD -> Resolved
+Army La Paz SUPPORT Potosi to hold -> Dislodged
+Fleet Lima SUPPORT Bahia de Arica to hold -> Resolved
+Fleet Piura HOLD -> Resolved
+Army Potosi MOVE Santa Cruz -> Dislodged
+
+CHILE (Jordan767):
+Army Antofagasta SUPPORT Salta to Potosi -> Resolved
+Army Bahia Blanca HOLD -> Resolved
+Fleet Bahia de Paranagua HOLD -> Resolved
+Fleet Golfo de Guafo MOVE Bahia de Arica -> Bounced
+Fleet Golfo de San Jorge MOVE Straits of Magellan -> Resolved
+Army Salta MOVE Potosi -> Resolved
+Army San Miguel de Tucuman HOLD -> Resolved
+Fleet South Pacific Ocean SUPPORT Golfo de Guafo to Bahia de Arica -> Support failed
+
+COLOMBIA (Antigonos):
+Army Aquiris MOVE Riberalta -> Resolved
+Fleet Bahia Sao Marcos HOLD -> Resolved
+Fleet Bahia Sechura SUPPORT Islas Galapagos to Nazca Sea -> Resolved
+Fleet Boca de Navios SUPPORT Bahia Sao Marcos to hold -> Resolved
+Army Cusco SUPPORT Riberalta to La Paz -> Resolved
+Army Guapore SUPPORT Mato Grosso to hold -> Resolved
+Army Iquitos SUPPORT Trujillo to hold -> Resolved
+Fleet Islas Galapagos MOVE Nazca Sea -> Resolved
+Army Maranhao SUPPORT Mato Grosso to hold -> Resolved
+Army Mato Grosso HOLD -> Resolved
+Army Para SUPPORT Mato Grosso to hold -> Resolved
+Army Popayan MOVE Amazonas -> Resolved
+Fleet Quito MOVE Guayaquil -> Resolved
+Army Riberalta MOVE La Paz -> Resolved
+Army Trujillo HOLD -> Resolved
+
+PARAGUAY (RolynTrotter):
+Fleet Bahia de Sao Sebastao HOLD -> Resolved
+Fleet Bahia de Todos os Santos SUPPORT Salvador to hold -> Resolved
+Army Chaco SUPPORT Santa Cruz to hold -> Resolved
+Army Formosa MOVE Salta -> Resolved
+Army Goias MOVE Mato Grosso -> Bounced
+Army Minas Gerais MOVE Goias -> Bounced
+Army Pantanal SUPPORT Santa Cruz to hold -> Resolved
+Army Salvador SUPPORT Minas Gerais to Goias -> Support failed
+Army Santa Cruz SUPPORT Salta to Potosi -> Resolved

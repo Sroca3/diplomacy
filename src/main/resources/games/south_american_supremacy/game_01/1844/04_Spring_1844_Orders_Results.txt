@@ -1,0 +1,50 @@
+Spring 1844 Orders Results
+--------------------------------
+
+BOLIVIA (FloridaMan):
+Army Arequipa SUPPORT Lima to hold -> Resolved
+Fleet Bahia de Arica SUPPORT Lima to hold -> Support cut
+Army La Paz SUPPORT Santa Cruz to hold -> Resolved
+Fleet Lima SUPPORT South Pacific Ocean to Nazca Sea -> Support cut
+Fleet Piura SUPPORT South Pacific Ocean to Nazca Sea -> Illegal order replaced with Hold
+Army Potosi SUPPORT La Paz to hold -> Resolved
+Army Salta HOLD -> Dislodged
+Army Santa Cruz SUPPORT La Paz to hold -> Dislodged
+
+CHILE (Jordan767):
+Army Bahia Blanca HOLD -> Resolved
+Fleet Bahia de Paranagua HOLD -> Resolved
+Army Cordoba MOVE San Miguel de Tucuman -> Resolved
+Fleet Golfo de Guafo CONVOY Valparaiso to Antofagasta -> Resolved
+Fleet Rio de la Plata MOVE Golfo de San Jorge -> Resolved
+Army San Miguel de Tucuman MOVE Salta -> Resolved
+Fleet South Pacific Ocean MOVE Bahia de Arica -> Bounced
+Army Valparaiso MOVE Antofagasta -> Resolved
+
+COLOMBIA (Antigonos):
+Army Aquiris SUPPORT Riberalta to hold -> Resolved
+Fleet Bahia Sao Marcos HOLD -> Resolved
+Fleet Boca de Navios SUPPORT Maranhao to hold -> Resolved
+Army Bogota MOVE Popayan -> Resolved
+Fleet Cali MOVE Quito -> Resolved
+Army Cusco MOVE Lima -> Bounced
+Army Guapore SUPPORT Mato Grosso to hold -> Resolved
+Army Iquitos SUPPORT Trujillo to hold -> Resolved
+Fleet Islas Galapagos SUPPORT Nazca Sea to Bahia Sechura -> Resolved
+Army Maranhao SUPPORT Mato Grosso to hold -> Resolved
+Army Mato Grosso SUPPORT Pantanal to Santa Cruz -> Resolved
+Fleet Nazca Sea MOVE Bahia Sechura -> Resolved
+Army Para SUPPORT Mato Grosso to hold -> Resolved
+Army Riberalta SUPPORT Pantanal to Santa Cruz -> Resolved
+Army Trujillo SUPPORT Cusco to Lima -> Support failed
+
+PARAGUAY (RolynTrotter):
+Fleet Bahia de Sao Sebastao MOVE Bahia de Todos os Santos -> Bounced
+Fleet Bahia de Todos os Santos MOVE Bahia Sao Marcos -> Bounced
+Army Chaco SUPPORT San Miguel de Tucuman to Salta -> Resolved
+Army Corrientes MOVE Formosa -> Resolved
+Army Goias SUPPORT Sao Paulo to Pantanal -> Resolved
+Army Pantanal MOVE Santa Cruz -> Resolved
+Army Pernambuco MOVE Salvador -> Resolved
+Army Rio de Janeiro MOVE Minas Gerais -> Resolved
+Army Sao Paulo MOVE Pantanal -> Resolved

@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.SortedSet;
 
 public interface MapVariant {
+
     SortedSet<Country> getCountries();
 
     Map<Location, Set<Location>> getMovementGraph();
@@ -23,4 +24,6 @@ public interface MapVariant {
     default Map<Location, Country> getHomeCenters() {
         return Collections.emptyMap();
     }
+
+    Country getCountry(String countryName);
 }

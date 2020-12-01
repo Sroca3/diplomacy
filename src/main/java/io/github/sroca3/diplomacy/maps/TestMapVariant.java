@@ -1,7 +1,7 @@
 package io.github.sroca3.diplomacy.maps;
 
 import io.github.sroca3.diplomacy.Country;
-import io.github.sroca3.diplomacy.CountryEnum;
+import io.github.sroca3.diplomacy.StandardCountry;
 import io.github.sroca3.diplomacy.Location;
 import io.github.sroca3.diplomacy.MapVariant;
 import io.github.sroca3.diplomacy.UnitType;
@@ -57,7 +57,7 @@ public class TestMapVariant implements MapVariant {
 
     @Override
     public SortedSet<Country> getCountries() {
-        return new TreeSet<>(Set.of(CountryEnum.FRANCE, CountryEnum.ENGLAND));
+        return new TreeSet<>(Set.of(StandardCountry.FRANCE, StandardCountry.ENGLAND));
     }
 
     @Override
@@ -78,5 +78,10 @@ public class TestMapVariant implements MapVariant {
     @Override
     public long getStartingYear() {
         return 0;
+    }
+
+    @Override
+    public Country getCountry(String countryName) {
+        return null;
     }
 }

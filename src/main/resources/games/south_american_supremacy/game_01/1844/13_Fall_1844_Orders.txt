@@ -1,0 +1,53 @@
+Argentina:
+
+Bolivia:
+Potosi - Santa Cruz
+La Paz supports Potosi-Santa Cruz
+Lima supports Bahia de Arica to hold
+Bahia de Arica holds
+Arequipa to Arica
+Piura holds
+
+Brasil:
+
+Chile:
+GdG - BdA
+SPO S GdG - BdA
+Sal - Pot
+Ant S Sal - Pot
+Tuc H
+BhB H
+BdP H
+GSJ - SoM
+
+Colombia:
+Fleet Boca de Navios Support Fleet Bahia Sao Marcos to Hold
+Fleet Bahia Sao Marcos Hold
+Fleet Quito Move to Guayaquil
+Fleet Bahia Sechura Support Fleet Islas Galapagos Move to Nazca Sea
+Fleet Islas Galapagos Move to Nazca Sea
+Army Popayan Move to Amazonas
+Army Iquitos  Support Army Trujillo to Hold
+Army Maranhao Support Army Mato Grosso to Hold
+Army Aquiris Move to Riberalta
+Army Para Support Army Mato Grosso to Hold
+Army Guapore  Support Army Mato Grosso to Hold
+Army Riberalta Move to La Paz
+Army Trujillo Hold
+Army  Cusco Support Army Riberalta Move to La Paz
+Army  Mato Grosso  Hold
+
+Paraguay:
+Chaco support Santa Cruz hold
+Pantanal support Santa Cruz hold
+Santa Cruz support Salta move Potosi
+Formosa move Salta
+Goias move Mato Grosso
+Salvador support Minas Gerais move Goias
+Minas Gerais move Goias
+Bahia de Todos os Santos support Salvador hold
+Bahia de Sao Sebastao suport Bahia de Todos os Santos hold
+
+Peru:
+
+Venezuela:

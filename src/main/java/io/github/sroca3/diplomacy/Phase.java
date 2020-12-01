@@ -291,9 +291,12 @@ public class Phase {
     private void addSupport(Order order, Order supportOrder) {
         findByCurrentLocation(order.getToLocation())
             .ifPresentOrElse(o -> {
-                if (!(order.getOrderType().isMove() && o.getCountry().equals(supportOrder.getCountry()) && !isDestinationLocationBeingVacated(order))) {
+                if (!(order.getOrderType().isMove() && o.getCountry().equals(supportOrder.getCountry())) || isDestinationLocationBeingVacated(order)) {
                     order.addSupport();
                 }
+                System.out.println(order);
+                System.out.println(supportOrder);
+                System.out.println(o);
             }, order::addSupport);
     }
 
@@ -417,6 +420,16 @@ public class Phase {
             } else {
                 bounce(order);
             }
+        } else if (competingMovesExist(order)){
+            calculateStrengthForOrder(order);
+            getConflictingOrders(order)
+                .stream()
+                .filter(o -> o.getStrength() >= order.getStrength())
+                .findAny()
+                .ifPresentOrElse(o -> bounce(order), order::resolve);
+            if (isDislodged(order)) {
+                order.dislodge();
+            }
         } else if (isDislodged(order)) {
             if (!competingMovesExist(order)) {
                 dislodgedUnitLocations.remove(order.getCurrentLocation());
@@ -424,15 +437,6 @@ public class Phase {
             } else {
                 order.dislodge();
             }
-        } else if (competingMovesExist(order)){
-            calculateStrengthForOrder(order);
-            getConflictingOrders(order)
-                .stream()
-                .filter(o -> o.getStrength() >= order.getStrength())
-                .findAny()
-                .ifPresentOrElse(o -> {
-                    bounce(order);
-                }, order::resolve);
         } else {
             order.resolve();
         }

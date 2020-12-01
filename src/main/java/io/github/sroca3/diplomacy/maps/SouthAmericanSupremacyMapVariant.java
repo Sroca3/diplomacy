@@ -388,6 +388,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.BAHIA_DE_SAO_SEBASTAO, SouthAmericanSupremacyLocation.SAO_PAULO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.BAHIA_DE_SAO_SEBASTAO, SouthAmericanSupremacyLocation.BAHIA_DE_PARANAGUA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.BAHIA_DE_SAO_SEBASTAO, SouthAmericanSupremacyLocation.RIO_DE_JANEIRO);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.BAHIA_DE_SAO_SEBASTAO, SouthAmericanSupremacyLocation.RIO_GRANDE_DO_SUL);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.GOLFO_DE_PANAMA, SouthAmericanSupremacyLocation.BAHIA_SECHURA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.GOLFO_DE_PANAMA, SouthAmericanSupremacyLocation.ISLAS_GALAPAGOS);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.GOLFO_DE_PANAMA, SouthAmericanSupremacyLocation.CALI);
@@ -540,6 +541,7 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.SOUTH_PACIFIC_OCEAN, SouthAmericanSupremacyLocation.BAHIA_DE_ARICA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.SOUTH_PACIFIC_OCEAN, SouthAmericanSupremacyLocation.GOLFO_DE_GUAFO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.PIURA, SouthAmericanSupremacyLocation.BAHIA_SECHURA);
+        addEdge(fleetGraph, SouthAmericanSupremacyLocation.PIURA, SouthAmericanSupremacyLocation.TRUJILLO);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.PUNTA_ARENAS, SouthAmericanSupremacyLocation.ARAUNCANIAN);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.ARICA, SouthAmericanSupremacyLocation.AREQUIPA);
         addEdge(fleetGraph, SouthAmericanSupremacyLocation.ARICA, SouthAmericanSupremacyLocation.ATACAMA);
@@ -707,6 +709,11 @@ public class SouthAmericanSupremacyMapVariant implements MapVariant {
     @Override
     public Map<Location, Country> getHomeCenters() {
         return getStartingUnits().entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().getCountry()));
+    }
+
+    @Override
+    public Country getCountry(String countryName) {
+        return SouthAmericanSupremacyCountry.valueOf(countryName);
     }
 
     @Override

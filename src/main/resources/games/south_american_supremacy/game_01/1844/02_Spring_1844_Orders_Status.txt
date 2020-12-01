@@ -1,0 +1,26 @@
+Spring 1844 Orders Status
+--------------------------------
+
+BOLIVIA
+(FloridaMan)
+5 army units
+3 fleet units
+8 centers
+
+CHILE
+(Jordan767)
+4 army units
+4 fleet units
+8 centers
+
+COLOMBIA
+(Antigonos)
+10 army units
+5 fleet units
+15 centers
+
+PARAGUAY
+(RolynTrotter)
+7 army units
+2 fleet units
+9 centers
