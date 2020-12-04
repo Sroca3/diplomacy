@@ -10,11 +10,16 @@ import io.github.sroca3.diplomacy.maps.SouthAmericanSupremacyLocation;
 import javafx.geometry.Bounds;
 import javafx.scene.shape.SVGPath;
 import org.apache.batik.anim.dom.SAXSVGDocumentFactory;
+import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.batik.anim.dom.SVGOMGElement;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
+import org.apache.batik.transcoder.TranscodingHints;
+import org.apache.batik.transcoder.image.ImageTranscoder;
 import org.apache.batik.transcoder.image.PNGTranscoder;
+import org.apache.batik.transcoder.wmf.tosvg.WMFTranscoder;
+import org.apache.batik.util.SVGConstants;
 import org.apache.batik.util.XMLResourceDescriptor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -212,7 +217,18 @@ public class SouthAmericanSupremacyMap {
             e.printStackTrace();
         }
         TranscoderOutput outputPngImage = new TranscoderOutput(pngOutputStream);
+        TranscodingHints hints = new TranscodingHints();
+hints.put(WMFTranscoder.KEY_INPUT_HEIGHT, 1000);
+hints.put(WMFTranscoder.KEY_INPUT_WIDTH, 8000);
+hints.put(WMFTranscoder.KEY_WIDTH, 800f);
+ hints.put(WMFTranscoder.KEY_HEIGHT, 600f);
+        hints.put(ImageTranscoder.KEY_DOM_IMPLEMENTATION, SVGDOMImplementation.getDOMImplementation());
+        hints.put(ImageTranscoder.KEY_DOCUMENT_ELEMENT_NAMESPACE_URI, SVGConstants.SVG_NAMESPACE_URI);
+        hints.put(ImageTranscoder.KEY_DOCUMENT_ELEMENT_NAMESPACE_URI,SVGConstants.SVG_NAMESPACE_URI);
+        hints.put(ImageTranscoder.KEY_DOCUMENT_ELEMENT, SVGConstants.SVG_SVG_TAG);
+        hints.put(ImageTranscoder.KEY_XML_PARSER_VALIDATING, false);
         PNGTranscoder pngTranscoder = new PNGTranscoder();
+pngTranscoder.setTranscodingHints(hints);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         StreamResult streamResult = new StreamResult(byteArrayOutputStream);
         try {

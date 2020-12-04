@@ -31,6 +31,7 @@ public class Phase {
     private final Map<Location, Country> locationOwnership = new HashMap<>();
     private final Map<Location, Dislodgement> dislodgedUnitLocations = new HashMap<>();
     private final Set<Location> contestedLocations = new HashSet<>();
+    private final Map<Location, Queue<Location>> convoys = new HashMap<>();
     private final long year;
     public Phase(
         Map<Location, Unit> startingUnitLocations,
@@ -524,17 +525,19 @@ public class Phase {
     private boolean pathExistsForConvoy(Location start, Location end, Set<Location> convoyLocations) {
         Queue<Location> locationQueue = new LinkedList<>();
         var pathExists = false;
-        Set<Location> visitedLocations = new HashSet<>();
+        Queue<Location> visitedLocations = new LinkedList<>();
         locationQueue.add(start);
         visitedLocations.add(start);
-        while (!locationQueue.isEmpty() && !pathExists) {
+        while (!locationQueue.isEmpty()) {
             var current = locationQueue.remove();
             if (current.hasCoasts()) {
-                current.getCoasts().forEach(locationQueue::add);
+                locationQueue.addAll(current.getCoasts());
                 current = locationQueue.remove();
             } else {
                 if (mapVariant.getMovementGraph(UnitType.FLEET).get(current).contains(end)) {
+                    visitedLocations.add(end);
                     pathExists = true;
+                    convoys.put(start, visitedLocations);
                     break;
                 }
             }
@@ -732,5 +735,9 @@ public class Phase {
 
     public Set<Location> getContestedLocations() {
         return contestedLocations;
+    }
+
+    public Map<Location, Queue<Location>> getConvoys() {
+        return convoys;
     }
 }
