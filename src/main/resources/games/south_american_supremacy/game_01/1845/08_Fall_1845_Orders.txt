@@ -1,0 +1,55 @@
+Argentina:
+
+Bolivia:
+Arica moves to Arequipa
+Lima holds
+Bahia de Arica holds
+
+Brasil:
+
+Chile:
+Pot S ScZ H
+Tuc H
+BhB - Ros
+BdP - BTS
+DrP - Jua
+Ant S Pot H
+Cop S Ant H
+Val - GdG
+GdG - BdA
+SPO S GdG - BdA
+
+Colombia:
+Fleet Golfo de Darien Move to Golfo de Paria
+Fleet Boca de Navios Support Fleet Bahia Sao Marcos to Hold
+Fleet Bahia Sao Marcos Hold
+Fleet Piura Move to Nazca Sea
+Fleet Bahia Sechura Support Fleet Piura Move to Nazca Sea
+Fleet Nazca Sea Move to Bahia de Arica
+Army Amazonas Support Army Mato Grosso to Hold
+Army Trujillo Support Army Cusco Move to Lima
+Army Maranhao Support Army Mato Grosso to Hold
+Army Riberalta Support Army La Paz to Hold
+Army Para Support Army Mato Grosso to Hold
+Army Guapore Support Army  Mato Grosso to Hold
+Army La Paz Hold
+Army Atacama Move to Arica
+Army  Cusco Move to Lima
+Army  Mato Grosso Hold
+
+Paraguay:
+Chaco support Santa Cruz hold
+Pantanal support Santa Cruz hold
+Minas Gerais support Goias hold
+Goias support Salvador move Pernambuco
+Salvador move Pernambuco
+Bahia de Todos os Santos move Salvador
+//NuclearSubmarine Corrientes move Arica
+//Parana support NuclearSubmarine Corrientes move Arica
+//Salta support NuclearSubmarine Corrientes move Arica
+//Sao Paulo support NuclearSubmarine Corrientes move Arica
+//Santa Cruz support NuclearSubmarine Corrientes move Arica
+
+Peru:
+
+Venezuela:

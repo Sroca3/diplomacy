@@ -86,7 +86,7 @@ public enum SouthAmericanSupremacyLocation implements SvgLocation {
     PARA(LocationType.COASTAL_LAND, "Par"),
     PUNTA_ARENAS(LocationType.COASTAL_LAND, "PAs", true),
     PATAGONIA(LocationType.COASTAL_LAND, "Pat", true),
-    PERNAMBUCO(LocationType.LAND, "Per"),
+    PERNAMBUCO(LocationType.COASTAL_LAND, "Per"),
     PIURA(LocationType.COASTAL_LAND, "Piu"),
     PANAMA_NC(LocationType.COAST, "Pnm NC"),
     PANAMA_SC(LocationType.COAST, "Pnm SC"),

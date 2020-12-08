@@ -295,9 +295,6 @@ public class Phase {
                 if (!(order.getOrderType().isMove() && o.getCountry().equals(supportOrder.getCountry())) || isDestinationLocationBeingVacated(order)) {
                     order.addSupport();
                 }
-                System.out.println(order);
-                System.out.println(supportOrder);
-                System.out.println(o);
             }, order::addSupport);
     }
 

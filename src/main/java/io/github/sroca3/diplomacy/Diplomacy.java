@@ -446,6 +446,7 @@ public class Diplomacy {
             unit = getPreviousPhase().getStartingUnitLocations().get(currentLocation);
         }
         if (unit.getType() != unitType && !orderType.isDisband()) {
+            LOGGER.error(orderInput);
             throw new UnitTypeMismatchException();
         }
 
@@ -468,7 +469,7 @@ public class Diplomacy {
         List<Order> orders = new LinkedList<>();
         Country country = null;
         for (String line : lines) {
-            if (!StringUtils.isBlank(line)) {
+            if (!StringUtils.isBlank(line) && !line.startsWith("//")) {
                 if (line.contains(":")) {
                     country = this.getMapVariant().getCountry(line.replaceAll(":", "").trim().toUpperCase(Locale.ENGLISH));
                 } else {

@@ -1,0 +1,55 @@
+Argentina:
+
+Bolivia:
+Fleet Bahia de Arica convoys Army Trujillo to Atacama
+Arica supports Trujillo to Atacama
+Lima support Bahia de Arica to hold
+
+Brasil:
+
+Chile:
+BhB H
+BdP H
+SoM - DrP
+GdG - BdA
+SPO S GdG - BdA
+Ant - Ata
+Val - Cop
+San - Val
+Pot S ScZ H
+Tuc H
+
+Colombia:
+Fleet Cartagena Move to Golfo de Darien
+Fleet Boca de Navios Support Fleet Bahia Sao Marcos to Hold
+Fleet Bahia Sao Marcos Hold
+Fleet Guayaquil Move to Piura
+Fleet Bahia Sechura Support Fleet Nazca Sea to Hold
+Fleet Nazca Sea Convoy Army Trujillo to Atacama
+Army Amazonas Support Army Mato Grosso to Hold
+Army Iquitos Move to Trujillo
+Army Maranhao Support Army Mato Grosso to Hold
+Army Riberalta Move to Santa Cruz
+Army Para Support Army Mato Grosso to Hold
+Army Guapore Support Army Riberalta Move to Santa Cruz
+Army La Paz Support Army Riberalta Move to Santa Cruz
+Army Trujillo Move to Atacama
+Army  Cusco Support Army La Paz to Hold
+Army  Mato Grosso Support Army Riberalta Move to Santa Cruz
+
+Paraguay:
+Goias move Sao Paulo
+Minas Gerais support Salvador move Goias
+Salvador move Goias
+Bahia de Todos os Santos move Salvador
+Bahia de Sao Sebastao move Bahia de Todos os Santos
+Pantanal support Santa Cruz hold
+Chaco support Santa Cruz hold
+Santa Cruz support Potosi hold
+Salta move San Miguel de Tucuman
+Concepcion move Parana
+Asuncion move Corrientes
+
+Peru:
+
+Venezuela:

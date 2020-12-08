@@ -1,0 +1,50 @@
+Fall 1845 Orders Results
+--------------------------------
+
+BOLIVIA (FloridaMan):
+Army Arica MOVE Arequipa -> Resolved
+Fleet Bahia de Arica HOLD -> Dislodged
+Fleet Lima HOLD -> Dislodged
+
+CHILE (Jordan767):
+Army Antofagasta SUPPORT Potosi to hold -> Resolved
+Army Bahia Blanca MOVE Rosario -> Resolved
+Fleet Bahia de Paranagua MOVE Bahia de Todos os Santos -> Resolved
+Fleet Copiapo SUPPORT Antofagasta to hold -> Resolved
+Fleet Drake Passage MOVE Islas Juan Fernandez -> Resolved
+Fleet Golfo de Guafo MOVE Bahia de Arica -> Resolved
+Army Potosi SUPPORT Santa Cruz to hold -> Resolved
+Army San Miguel de Tucuman HOLD -> Resolved
+Fleet South Pacific Ocean SUPPORT Golfo de Guafo to Bahia de Arica -> Resolved
+Fleet Valparaiso MOVE Golfo de Guafo -> Resolved
+
+COLOMBIA (Antigonos):
+Army Amazonas SUPPORT Mato Grosso to hold -> Resolved
+Army Atacama MOVE Arica -> Resolved
+Fleet Bahia Sao Marcos HOLD -> Resolved
+Fleet Bahia Sechura SUPPORT Piura to Nazca Sea -> Support failed
+Fleet Boca de Navios SUPPORT Bahia Sao Marcos to hold -> Resolved
+Army Cusco MOVE Lima -> Resolved
+Fleet Golfo de Darien MOVE Golfo de Paria -> Resolved
+Army Guapore SUPPORT Mato Grosso to hold -> Resolved
+Army La Paz HOLD -> Resolved
+Army Maranhao SUPPORT Mato Grosso to hold -> Resolved
+Army Mato Grosso HOLD -> Resolved
+Fleet Nazca Sea MOVE Bahia de Arica -> Bounced
+Army Para SUPPORT Mato Grosso to hold -> Resolved
+Fleet Piura MOVE Nazca Sea -> Bounced
+Army Riberalta SUPPORT La Paz to hold -> Resolved
+Army Trujillo SUPPORT Cusco to Lima -> Resolved
+
+PARAGUAY (RolynTrotter):
+Fleet Bahia de Todos os Santos MOVE Salvador -> Resolved
+Army Chaco SUPPORT Santa Cruz to hold -> Resolved
+Fleet Corrientes HOLD -> Resolved
+Army Goias SUPPORT Salvador to Pernambuco -> Resolved
+Army Minas Gerais SUPPORT Goias to hold -> Resolved
+Army Pantanal SUPPORT Santa Cruz to hold -> Resolved
+Army Parana HOLD -> Resolved
+Army Salta HOLD -> Resolved
+Fleet Salvador MOVE Pernambuco -> Resolved
+Army Santa Cruz HOLD -> Resolved
+Army Sao Paulo HOLD -> Resolved

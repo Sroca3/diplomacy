@@ -1,0 +1,50 @@
+Spring 1845 Orders Results
+--------------------------------
+
+BOLIVIA (FloridaMan):
+Army Arica SUPPORT Trujillo to Atacama -> Resolved
+Fleet Bahia de Arica CONVOY Trujillo to Atacama -> Resolved
+Fleet Lima SUPPORT Bahia de Arica to hold -> Resolved
+
+CHILE (Jordan767):
+Army Antofagasta MOVE Atacama -> Bounced
+Army Bahia Blanca HOLD -> Resolved
+Fleet Bahia de Paranagua HOLD -> Resolved
+Fleet Golfo de Guafo MOVE Bahia de Arica -> Bounced
+Army Potosi SUPPORT Santa Cruz to hold -> Resolved
+Fleet Santiago MOVE Valparaiso -> Resolved
+Army San Miguel de Tucuman HOLD -> Resolved
+Fleet South Pacific Ocean SUPPORT Golfo de Guafo to Bahia de Arica -> Support failed
+Fleet Straits of Magellan MOVE Drake Passage -> Resolved
+Fleet Valparaiso MOVE Copiapo -> Resolved
+
+COLOMBIA (Antigonos):
+Army Amazonas SUPPORT Mato Grosso to hold -> Resolved
+Fleet Bahia Sao Marcos HOLD -> Resolved
+Fleet Bahia Sechura SUPPORT Nazca Sea to hold -> Resolved
+Fleet Boca de Navios SUPPORT Bahia Sao Marcos to hold -> Resolved
+Fleet Cartagena MOVE Golfo de Darien -> Resolved
+Army Cusco SUPPORT La Paz to hold -> Resolved
+Army Guapore SUPPORT Riberalta to Santa Cruz -> Support failed
+Fleet Guayaquil MOVE Piura -> Resolved
+Army Iquitos MOVE Trujillo -> Resolved
+Army La Paz SUPPORT Riberalta to Santa Cruz -> Support failed
+Army Maranhao SUPPORT Mato Grosso to hold -> Resolved
+Army Mato Grosso SUPPORT Riberalta to Santa Cruz -> Support failed
+Fleet Nazca Sea CONVOY Trujillo to Atacama -> Resolved
+Army Para SUPPORT Mato Grosso to hold -> Resolved
+Army Riberalta MOVE Santa Cruz -> Bounced
+Army Trujillo MOVE Atacama -> Resolved
+
+PARAGUAY (RolynTrotter):
+Fleet Asuncion MOVE Corrientes -> Resolved
+Fleet Bahia de Sao Sebastao MOVE Bahia de Todos os Santos -> Resolved
+Fleet Bahia de Todos os Santos MOVE Salvador -> Resolved
+Army Chaco SUPPORT Santa Cruz to hold -> Resolved
+Army Concepcion MOVE Parana -> Resolved
+Army Goias MOVE Sao Paulo -> Resolved
+Army Minas Gerais SUPPORT Salvador to Goias -> Resolved
+Army Pantanal SUPPORT Santa Cruz to hold -> Resolved
+Army Salta MOVE San Miguel de Tucuman -> Bounced
+Army Salvador MOVE Goias -> Resolved
+Army Santa Cruz SUPPORT Potosi to hold -> Support cut
